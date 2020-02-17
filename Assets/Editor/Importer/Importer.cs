@@ -108,10 +108,12 @@ public class Importer : EditorWindow
         }
         else
         {
-            EditorGUILayout.Space();
-            EditorGUILayout.HelpBox("Destructibles is not supported at the moment!", MessageType.Error);
-            EditorGUILayout.Space();
-            return;
+            //EditorGUILayout.Space();
+            //EditorGUILayout.HelpBox("Destructibles is not supported at the moment!", MessageType.Error);
+            //EditorGUILayout.Space();
+            
+            
+
         }
 
 
