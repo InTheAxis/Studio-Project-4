@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9117360598193201937}
   - component: {fileID: 1474707115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ffe61d13b2051b54e8fd2e179394a208, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9117360599725467534}
   - component: {fileID: 206813750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 9117360599767537175}
   - component: {fileID: 9117360599767537173}
   - component: {fileID: 9117360599767537174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,8 +351,8 @@ GameObject:
   - component: {fileID: 9117360599836359460}
   - component: {fileID: 9117360599836359450}
   - component: {fileID: 9117360599836359451}
-  - component: {fileID: 152802925913283581}
-  - component: {fileID: 6674432667785094698}
+  - component: {fileID: 2355843241993043823}
+  - component: {fileID: 3389477406429164520}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -413,7 +413,7 @@ MonoBehaviour:
   airSpeed: 3
   crouchSpeed: 2
   jumpForce: 1.5
---- !u!114 &152802925913283581
+--- !u!114 &2355843241993043823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -431,11 +431,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 6674432667785094698}
+  - {fileID: 3389477406429164520}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6674432667785094698
+--- !u!114 &3389477406429164520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 9117360600064986960}
   - component: {fileID: 9117360600064986966}
   - component: {fileID: 9117360600064986967}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CrouchCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
