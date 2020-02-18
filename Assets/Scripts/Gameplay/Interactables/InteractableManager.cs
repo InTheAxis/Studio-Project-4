@@ -17,8 +17,14 @@ public class InteractableManager : MonoBehaviour
     private float lastCollidedTimer = 0.0f;
     private InteractableBase carryingInteractable = null;
 
+    private bool interactDown = false;
+
     private void Update()
     {
+        bool hasClickedInteract = !interactDown && Input.GetAxisRaw("Interact") > 0.5f;
+        interactDown = Input.GetAxisRaw("Interact") > 0.5f;
+
+
         // Detect if looking at an interactable
         
         lastCollidedTimer += Time.deltaTime;
@@ -44,13 +50,29 @@ public class InteractableManager : MonoBehaviour
 
         // Pickup/Use looked at interactable
 
-        if (lastCollidedInteractable != null && Input.GetAxisRaw("Interact") > 0.5f)
+        if (carryingInteractable == null && lastCollidedInteractable != null && hasClickedInteract) // Pickup the item currently looked at
         {
             carryingInteractable = lastCollidedInteractable.GetComponentInParent<InteractableBase>();
-            if (carryingInteractable.CanCarry)
-                Debug.Log("Carried");
-            else
+
+            if (!carryingInteractable.CanCarry) // Use the item if cannot carry
                 carryingInteractable.interact();
+            else // Can carry, attach to the player
+            {
+                Debug.Log("Started carrying");
+                carryingInteractable.transform.parent = GameManager.playerObj.transform;
+                carryingInteractable.transform.localPosition = carryingInteractable.PositionOffsetWhileCarry;
+            }
+        }
+        else if (carryingInteractable != null) // Is currently carrying the item
+        {
+            if (Input.GetAxisRaw("UseInteractable") > 0.5f) // Use the item
+                carryingInteractable.interact();
+            else if (hasClickedInteract) // Drop the item
+            {
+                Debug.Log("Dropped the item");
+                carryingInteractable.transform.parent = null;
+                carryingInteractable = null;
+            }
         }
     }
 

@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276ddfff5a665bc4da27b84fc08b13b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canCarry: 1
+  positionOffsetWhileCarry: {x: 1, y: 0, z: 0}
 --- !u!114 &-3715255290989037327
 MonoBehaviour:
   m_ObjectHideFlags: 0
