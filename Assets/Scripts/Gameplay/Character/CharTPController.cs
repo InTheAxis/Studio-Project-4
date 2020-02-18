@@ -5,14 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CharTPController : MonoBehaviour
 {
-    public CharTPCrouch crouch;
-    public CharTPJump jump;
+    public CharJumpCheck jumpChk;
+    public CharCrouchCheck crouchChk;
 
     public float moveSpeed = 5;
     public float mouseSens = 1;
     public float maxLookY = 0.6f;
     public float initialLookY = 0.8f;
 
+    public float airSpeed = 1;
     public float crouchSpeed = 2;
     public float jumpForce = 2;
 
@@ -24,10 +25,13 @@ public class CharTPController : MonoBehaviour
     private float currSpeed;
     private Vector3 moveAmt;
 
+    private string state;
+
     private struct InputData
     {
         public float vert, hori;
         public float mouseY, mouseX;
+        public bool jump, crouch;
     };
     private InputData inp;
 
@@ -43,6 +47,8 @@ public class CharTPController : MonoBehaviour
         currSpeed = moveSpeed;
 
         rb = GetComponent<Rigidbody>();
+
+        state = "idle";
     }
     private void Update()
     {
@@ -51,8 +57,8 @@ public class CharTPController : MonoBehaviour
         inp.hori = Input.GetAxis("Horizontal");
         inp.mouseX = Input.GetAxis("Mouse X");
         inp.mouseY = Input.GetAxis("Mouse Y");
-        crouch.SetInput(Input.GetAxis("Crouch") != 0);
-        jump.SetInput(Input.GetAxis("Jump") != 0);
+        inp.crouch = Input.GetAxis("Crouch") != 0;
+        inp.jump = Input.GetAxis("Jump") != 0;
     }
 
     private void FixedUpdate()
@@ -67,17 +73,56 @@ public class CharTPController : MonoBehaviour
         forward.Set(lookDir.x, 0, lookDir.z);
         forward.Normalize();
 
-        currSpeed = crouch.crouching ? crouchSpeed : moveSpeed;
+        crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
+        if (crouchChk.crouching)
+            currSpeed = crouchSpeed;
+        else if (jumpChk.airborne)
+            currSpeed = airSpeed;
+        else
+            currSpeed = moveSpeed;
 
         moveAmt = (forward * inp.vert + right * inp.hori).normalized;
 
-        if (jump.jumping)
+        if (inp.jump && !jumpChk.airborne)
+        {
+            jumpChk.Jumped();
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        }
 
         //move player
         right = Vector3.Cross(Vector3.up, forward);
         transform.position += moveAmt * Time.deltaTime * currSpeed;
         //rotate player
         transform.LookAt(transform.position + forward);
+
+        CalculateState();
+    }
+
+
+    private void CalculateState()
+    {
+        if (jumpChk.airborne)
+        {
+            if (rb.velocity.y > 0)
+            {
+                if (rb.velocity.y < jumpForce)
+                    state = "hang";
+                else
+                    state = "jump";
+            }
+            else
+                state = "fall";
+        }
+        else if (crouchChk.crouching)
+        {
+            state = "crouch";
+        }
+        else if (moveAmt.magnitude > 0)
+        {
+            state = "run";
+        }
+        else
+            state = "idle";
+
     }
 }

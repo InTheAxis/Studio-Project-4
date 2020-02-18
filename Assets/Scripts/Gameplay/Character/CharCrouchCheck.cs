@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharTPCrouch : MonoBehaviour
+public class CharCrouchCheck : MonoBehaviour
 {
     public Collider charTop;
     public bool crouching { private set; get; }
@@ -16,7 +16,7 @@ public class CharTPCrouch : MonoBehaviour
         crouching = false;
     }
 
-    public void SetInput(bool b)
+    public void Crouch(bool b)
     {
         keyPressed = b;
     }
@@ -35,11 +35,11 @@ public class CharTPCrouch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != charTop)
+        //if (other != charTop)
             canUnCrouch = false;
     }
     private void OnTriggerExit(Collider other)
     {
-            canUnCrouch = true;
+        canUnCrouch = true;
     }
 }
