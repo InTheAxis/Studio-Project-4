@@ -13,6 +13,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 42, y: 60.55, z: 20.15}
   m_Center: {x: 0, y: 28.7, z: 0}
+--- !u!114 &-3204787951046590755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377581856287323823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1001 &2533987734913876578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20,6 +35,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3337759790914851865}
     m_Modifications:
+    - target: {fileID: -6604420352693363009, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4246182842161864649, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
         type: 3}
       propertyPath: m_Name
@@ -100,6 +120,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3337759790914851865}
     m_Modifications:
+    - target: {fileID: -6604420352693363009, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4246182842161864649, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
         type: 3}
       propertyPath: m_Name
@@ -180,6 +205,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3337759790914851865}
     m_Modifications:
+    - target: {fileID: -6604420352693363009, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4246182842161864649, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
         type: 3}
       propertyPath: m_Name
@@ -260,6 +290,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3337759790914851865}
     m_Modifications:
+    - target: {fileID: -6604420352693363009, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4246182842161864649, guid: 2c7ec7a208e137049a1a62c3be9bfe15,
         type: 3}
       propertyPath: m_Name
@@ -340,6 +375,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4132647877644479072, guid: db952e03bb8c8ff40a6a98b7f5440b44,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4132647877644479072, guid: db952e03bb8c8ff40a6a98b7f5440b44,
+        type: 3}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: -3204787951046590755}
+    - target: {fileID: -4132647877644479072, guid: db952e03bb8c8ff40a6a98b7f5440b44,
+        type: 3}
+      propertyPath: Synchronization
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3680892085881043198, guid: db952e03bb8c8ff40a6a98b7f5440b44,
         type: 3}
       propertyPath: m_Mesh

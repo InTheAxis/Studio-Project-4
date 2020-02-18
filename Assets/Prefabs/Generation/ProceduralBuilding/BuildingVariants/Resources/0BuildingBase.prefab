@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6338421826290787504}
   - component: {fileID: 4985674206888800058}
+  - component: {fileID: -4132647877644479072}
   m_Layer: 0
   m_Name: 0BuildingBase
   m_TagString: Untagged
@@ -74,8 +75,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badde6b21c6abb94a8be148c04b76426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
   rootRef: {fileID: 3834460308087746795, guid: cfc7b986e29180c41891d4f345be2459, type: 3}
   attachmentBaseRef: {fileID: 7027303364290025776, guid: 65e8b4abb90499241aaaf98a29cdcfd5,
     type: 3}
   attachmentPositions: {fileID: 5833163332230538426}
+--- !u!114 &-4132647877644479072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725049969056834168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CityGenerator : MonoBehaviour
 {
@@ -18,13 +19,13 @@ public class CityGenerator : MonoBehaviour
     private PoissonGenerator poisson = new PoissonGenerator();
 
     public GameObject buildingRef;
-    public bool serverInstantiate = false;
+    // public bool serverInstantiate = false;
 
     public bool generateOnStart = false;
 
     private void Start()
     {
-        if (generateOnStart)
+        if (PhotonNetwork.IsMasterClient && generateOnStart)
             Generate();
     }
 
@@ -57,7 +58,7 @@ public class CityGenerator : MonoBehaviour
             generator.Generate();
         }
 
-        CreateBuildings();
+        // CreateBuildings();
     }
 
     private void OnDrawGizmos()

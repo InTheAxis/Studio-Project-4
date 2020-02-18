@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Photon.Pun;
 
 public class ProceduralBuilding : MonoBehaviour
 {
@@ -63,6 +64,8 @@ public class ProceduralBuilding : MonoBehaviour
             if (Random.value <= attachmentSlotScript.chance)
             {
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
+                //if (!meshRef.GetComponent<PhotonView>())
+                //    meshRef.AddComponent<PhotonView>();
                 GameObject attachment = InstantiateHandler.mInstantiate(meshRef, attachmentRoot.transform);
                 attachment.transform.position = slot.position;
                 attachment.transform.rotation = slot.rotation;

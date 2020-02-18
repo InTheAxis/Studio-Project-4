@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_DEBUG
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Animations;
@@ -15,8 +16,6 @@ public class AnimationTestTool : MonoBehaviour
     public string animationControllerName = "myAnimController";
 
     public string filePath = "Assets/";
-
-
 
     private Animator animator;
     private string completeFilePath;
@@ -63,3 +62,4 @@ public class AnimationTestTool : MonoBehaviour
         return controller;
     }
 }
+#endif
