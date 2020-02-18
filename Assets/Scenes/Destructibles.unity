@@ -521,7 +521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &27897838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1954,8 +1954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -2368,8 +2368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -3067,8 +3067,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -3671,8 +3671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -4275,8 +4275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -4689,8 +4689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -5008,8 +5008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -5704,8 +5704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -6308,8 +6308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -6439,6 +6439,101 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 206052349}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &208519391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 132201296837773144, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: breakForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 132201296837773144, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: destroyed
+      value: 
+      objectReference: {fileID: 1972964819705681957, guid: a3414559ceaedbb48938fe3d3b436250,
+        type: 3}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3543497416773258000, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576424394635024083, guid: a98084e15d1e88b409908e65dd6348ca,
+        type: 3}
+      propertyPath: m_Name
+      value: Cube
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a98084e15d1e88b409908e65dd6348ca, type: 3}
 --- !u!1001 &208601966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6532,8 +6627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -7063,7 +7158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &229442307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7261,8 +7356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -7390,8 +7485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -7709,8 +7804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -8218,8 +8313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -8727,8 +8822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -9521,8 +9616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -10125,8 +10220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -10444,8 +10539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -10573,8 +10668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -10702,8 +10797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -11591,8 +11686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -12376,8 +12471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -12432,7 +12527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &413629373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12630,8 +12725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -13810,8 +13905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -14129,8 +14224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -15018,8 +15113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -16207,8 +16302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -16431,8 +16526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -16946,8 +17041,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -17265,8 +17360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -17696,7 +17791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &611333517
 Transform:
   m_ObjectHideFlags: 0
@@ -18109,8 +18204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -19093,8 +19188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -20077,8 +20172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -22373,8 +22468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -22977,8 +23072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -23742,8 +23837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -23793,7 +23888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &819601044
 Transform:
   m_ObjectHideFlags: 0
@@ -24016,8 +24111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -24620,8 +24715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -25794,8 +25889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -25959,7 +26054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialVelocity: {x: 0, y: 0, z: 200}
-  delay: 5
+  delay: 2
 --- !u!54 &880112027
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26045,7 +26140,7 @@ Transform:
   m_GameObject: {fileID: 880112025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.3, y: 5.4, z: -79.4}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -26523,8 +26618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -27997,8 +28092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -28316,8 +28411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -28445,8 +28540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -29803,8 +29898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -30217,8 +30312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -30631,8 +30726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -31425,8 +31520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -32489,8 +32584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -32998,8 +33093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -33982,8 +34077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -34111,8 +34206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -35964,8 +36059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -36015,7 +36110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1246065991
 Transform:
   m_ObjectHideFlags: 0
@@ -36624,8 +36719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -36848,8 +36943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -37357,8 +37452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -40051,8 +40146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -41225,8 +41320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -41840,7 +41935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1485197653
 Transform:
   m_ObjectHideFlags: 0
@@ -42259,8 +42354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -42673,8 +42768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -42992,8 +43087,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -43406,8 +43501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -44200,8 +44295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -44418,8 +44513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -44553,8 +44648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -45172,8 +45267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -45586,8 +45681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -46285,8 +46380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -46509,8 +46604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -47396,8 +47491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -48190,8 +48285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -48319,8 +48414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -49398,8 +49493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -49812,8 +49907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -49941,8 +50036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -50165,8 +50260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -50294,8 +50389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -50423,8 +50518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -50474,7 +50569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1833044133
 Transform:
   m_ObjectHideFlags: 0
@@ -50602,8 +50697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -50826,8 +50921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -51050,8 +51145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -51749,8 +51844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -52068,8 +52163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -52314,7 +52409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1899095584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53367,8 +53462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -53591,8 +53686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -54575,8 +54670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -55384,8 +55479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -55798,8 +55893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -56117,8 +56212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -56246,8 +56341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -56850,8 +56945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -57074,8 +57169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -57298,8 +57393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -58012,8 +58107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -58141,8 +58236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -59125,8 +59220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -60020,8 +60115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -60339,8 +60434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -60468,8 +60563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -60692,8 +60787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
@@ -60821,8 +60916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed:
-  - {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc, type: 3}
+  destroyed: {fileID: 5169662623627527173, guid: b227e882167224a4ca59e07c77820ffc,
+    type: 3}
   breakForce: 4
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
