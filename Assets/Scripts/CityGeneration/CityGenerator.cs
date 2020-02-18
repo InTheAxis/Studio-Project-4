@@ -20,28 +20,19 @@ public class CityGenerator : MonoBehaviour
     public GameObject buildingRef;
     public bool serverInstantiate = false;
 
-    public static System.Func<Object, Object> instantiateFunction = Instantiate;
-    public static System.Func<Object, Transform, Object> instantiateAsChild = Instantiate;
-    public static System.Func<Object, Vector3, Quaternion, Object> instantiateAtPos = Instantiate;
-    public static System.Func<Object, Vector3, Quaternion, Transform, Object> instantiateAsChildPos = Instantiate;
+    public bool generateOnStart = false;
+
+    private void Start()
+    {
+        if (generateOnStart)
+            Generate();
+    }
 
     private void OnValidate()
     {
         foreach (Generator generator in generators)
         {
             generator.SetScale(scale);
-        }
-        if (serverInstantiate)
-        {
-            //instantiateFunction =
-            //instantiateAsChildFunction =
-        }
-        else
-        {
-            instantiateFunction = Instantiate;
-            instantiateAsChild = Instantiate;
-            instantiateAtPos = Instantiate;
-            instantiateAsChildPos = Instantiate;
         }
     }
 
@@ -85,7 +76,7 @@ public class CityGenerator : MonoBehaviour
         poisson.Scale(scale * 100 / 2);
         foreach (Vector3 pos in poisson.GetPoints())
         {
-            GameObject building = instantiateAsChild(buildingRef, buildingRoot.transform) as GameObject;
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, buildingRoot.transform);
             building.transform.position = pos;
             building.AddComponent<BuildingCollisionScript>();
             building.GetComponent<ProceduralBuilding>().GenerateRandom();

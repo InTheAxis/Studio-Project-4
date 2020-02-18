@@ -422,7 +422,7 @@ public class RoadGenerator : Generator
         {
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = CityGenerator.instantiateAsChildPos(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
             road.transform.localScale = new Vector3(2, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -430,7 +430,7 @@ public class RoadGenerator : Generator
         {
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = CityGenerator.instantiateAsChildPos(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
             road.transform.localScale = new Vector3(2, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -438,7 +438,7 @@ public class RoadGenerator : Generator
         {
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = CityGenerator.instantiateAsChildPos(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform);
             road.transform.localScale = new Vector3(1, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -446,7 +446,7 @@ public class RoadGenerator : Generator
         {
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = CityGenerator.instantiateAsChildPos(RoadRef, (path.start + path.end) / 2, rot, transform) as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform);
             road.transform.localScale = new Vector3(1, 1, path.Length() * length);
             roads.Add(road);
         }

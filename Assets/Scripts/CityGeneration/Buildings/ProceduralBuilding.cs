@@ -56,14 +56,14 @@ public class ProceduralBuilding : MonoBehaviour
     {
         // seed = Random.seed;
         Clear();
-        attachmentRoot = CityGenerator.instantiateAsChild(rootRef, transform) as GameObject;
+        attachmentRoot = InstantiateHandler.mInstantiate(rootRef, transform);
         foreach (Transform slot in attachmentPositions.transform)
         {
             AttachmentSlot attachmentSlotScript = slot.GetComponent<AttachmentSlot>();
             if (Random.value <= attachmentSlotScript.chance)
             {
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
-                GameObject attachment = CityGenerator.instantiateAsChild(meshRef, attachmentRoot.transform) as GameObject;
+                GameObject attachment = InstantiateHandler.mInstantiate(meshRef, attachmentRoot.transform);
                 attachment.transform.position = slot.position;
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
