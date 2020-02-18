@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CharTPCamera playerCamera;
 
+    public static GameObject playerObj = null;
+
     private void Awake()
     {
-        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        playerObj = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
         playerCamera.target = playerObj.GetComponent<CharTPController>();
     }
 }

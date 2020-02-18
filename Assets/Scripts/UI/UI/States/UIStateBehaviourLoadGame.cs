@@ -12,6 +12,7 @@ public class UIStateBehaviourLoadGame : UIStateBehaviourBase
         // PhotonNetwork.AutomaticallySyncScene, set in NetworkClient.cs, causes non-master clients to load scenes automatically
         // Therefore, do not load the level again if non-master client
         if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.LoadLevel("Character");
+            //PhotonNetwork.LoadLevel("Character");
+            PhotonNetwork.LoadLevel("Interactables");
     }
 }
