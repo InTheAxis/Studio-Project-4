@@ -5,14 +5,13 @@ using UnityEngine;
 public class BuildingGenerator : Generator
 {
     private PoissonGenerator poisson = new PoissonGenerator();
+    public CityScriptable cityScriptable;
 
-    [Range(0, 100)]
+    [Range(0, 1000)]
     public int density = 5;
 
     [Range(0, 1)]
     public float buffer = 0.1f;
-
-    public GameObject buildingRef;
 
     public override void Clear()
     {
@@ -30,6 +29,7 @@ public class BuildingGenerator : Generator
         poisson.Scale(scale * 100 / 2);
         foreach (Vector3 pos in poisson.GetPoints())
         {
+            GameObject buildingRef = cityScriptable.SelectMesh();
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform);
             building.transform.position = pos;
             building.AddComponent<BuildingCollisionScript>();

@@ -15,4 +15,7 @@ MonoBehaviour:
   meshList:
   - mesh: {fileID: 1377581856287323823, guid: cce8c51a441232047b831914d0dbb040, type: 3}
     weight: 100
-    chance: 1
+    chance: 0.5
+  - mesh: {fileID: 5144747831396539639, guid: 1608905c175216b4ab9c7763d4486769, type: 3}
+    weight: 100
+    chance: 0.5
