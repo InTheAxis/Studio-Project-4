@@ -17,7 +17,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     public System.Action<string> playerLeftCallback;
 
     private void Awake()
-    {
+    { // Singleton
         if (instance == null)
             instance = this;
         else
@@ -36,7 +36,6 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     }
     public override void OnConnectedToMaster()
     {
-        Debug.Log("PUN: Connected to master server");
         masterServerConnectedCallback?.Invoke();
     }
     public override void OnDisconnected(DisconnectCause cause)
@@ -46,6 +45,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
 
     public void Host(string password)
     {
+        // An empty password hosts a random room
         Debug.Log("Creating room with password " + password);
         setPlayerProperty("isHunter", true);
 
