@@ -8,6 +8,7 @@ public class CharTPController : MonoBehaviourPun
     public List<Transform> lookTargets; //places for cam to look
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
+    public PlayerHealth health;
     public Animator animator;
 
     public float moveSpeed = 5;
@@ -77,42 +78,47 @@ public class CharTPController : MonoBehaviourPun
         lookDir = Quaternion.Euler(0, inp.mouseX * mouseSens, 0) * lookDir;
         lookDir = Quaternion.AngleAxis(-inp.mouseY * mouseSens, right) * lookDir;
         lookDir.Normalize();
-        //remove y for movement
-        forward.Set(lookDir.x, 0, lookDir.z);
-        forward.Normalize();
-        right = Vector3.Cross(Vector3.up, forward);
 
-
-        crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
-        if (crouchChk.crouching)
-            currSpeed = crouchSpeed;
-        else if (jumpChk.airborne)
-            currSpeed = airSpeed;
-        else
-            currSpeed = moveSpeed;
-
-        moveAmt = (forward * inp.vert + right * inp.hori).normalized;
-
-        if (inp.jump && !jumpChk.airborne)
+        if (!health.dead)
         {
-            jumpChk.Jumped();
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            //remove y for movement
+            forward.Set(lookDir.x, 0, lookDir.z);
+            forward.Normalize();
+            right = Vector3.Cross(Vector3.up, forward);
+
+
+            crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
+            if (crouchChk.crouching)
+                currSpeed = crouchSpeed;
+            else if (jumpChk.airborne)
+                currSpeed = airSpeed;
+            else
+                currSpeed = moveSpeed;
+
+            moveAmt = (forward * inp.vert + right * inp.hori).normalized;
+
+            if (inp.jump && !jumpChk.airborne)
+            {
+                jumpChk.Jumped();
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            }
+
+            //move player
+            transform.position += moveAmt * Time.deltaTime * currSpeed;
+            //rotate player
+            transform.LookAt(transform.position + forward);
         }
 
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        
-        //move player
-        transform.position += moveAmt * Time.deltaTime * currSpeed;
-        //rotate player
-        transform.LookAt(transform.position + forward);
-
+        rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides
         CalculateState();
     }
 
 
     private void CalculateState()
     {
-        if (jumpChk.airborne)
+        if (health.dead)
+            StateChange("died");
+        else if (jumpChk.airborne)
         {
             if (rb.velocity.y > 0)
             {
