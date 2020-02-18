@@ -13,7 +13,6 @@ public class CharTPCamera : MonoBehaviour
     public float adjustOffset = 1;
 
     private float curCamDist;
-    private float timer;
     private float moveCloserDist;
     private Camera cam;
     private Vector3[] clipPoint;
@@ -23,7 +22,6 @@ public class CharTPCamera : MonoBehaviour
     {
         curCamDist = initialCamDist;
         moveCloserDist = targetCamDist;
-        timer = 0;
 
         cam = GetComponent<Camera>();
 

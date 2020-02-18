@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-[RequireComponent(typeof(Rigidbody))]
-public class CharTPController : MonoBehaviour
+public class CharTPController : MonoBehaviourPun
 {
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
@@ -52,6 +52,8 @@ public class CharTPController : MonoBehaviour
     }
     private void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
 
         inp.vert = Input.GetAxis("Vertical");
         inp.hori = Input.GetAxis("Horizontal");
@@ -63,6 +65,9 @@ public class CharTPController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
+
         //check y
         if ((lookDir.y > maxLookY && inp.mouseY > 0) || (lookDir.y < -maxLookY && inp.mouseY < 0))
             inp.mouseY = 0;
@@ -74,6 +79,7 @@ public class CharTPController : MonoBehaviour
         forward.Set(lookDir.x, 0, lookDir.z);
         forward.Normalize();
         right = Vector3.Cross(Vector3.up, forward);
+
 
         crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
         if (crouchChk.crouching)
@@ -92,7 +98,7 @@ public class CharTPController : MonoBehaviour
         }
 
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
-
+        
         //move player
         transform.position += moveAmt * Time.deltaTime * currSpeed;
         //rotate player
