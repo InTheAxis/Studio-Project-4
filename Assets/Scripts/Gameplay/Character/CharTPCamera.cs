@@ -28,7 +28,7 @@ public class CharTPCamera : MonoBehaviour
         clipPoint = new Vector3[5];
         UpdateCameraClipPoints();
     }   
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         //calculate if shld move closer
         CalculateObstruction();

@@ -55,12 +55,12 @@ public class CharTPController : MonoBehaviourPun
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
 
-        inp.vert = Input.GetAxis("Vertical");
-        inp.hori = Input.GetAxis("Horizontal");
+        inp.vert = Input.GetAxisRaw("Vertical");
+        inp.hori = Input.GetAxisRaw("Horizontal");
         inp.mouseX = Input.GetAxis("Mouse X");
         inp.mouseY = Input.GetAxis("Mouse Y");
-        inp.crouch = Input.GetAxis("Crouch") != 0;
-        inp.jump = Input.GetAxis("Jump") != 0;
+        inp.crouch = Input.GetAxisRaw("Crouch") != 0;
+        inp.jump = Input.GetAxisRaw("Jump") != 0;
     }
 
     private void FixedUpdate()
