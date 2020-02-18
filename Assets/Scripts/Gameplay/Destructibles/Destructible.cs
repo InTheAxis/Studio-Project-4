@@ -5,18 +5,17 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
 
+    public GameObject destroyed = null;
     [SerializeField]
-    private GameObject[] destroyed = null;
+    private float breakForce = 2.0f;
     [SerializeField]
-    private float breakForce = 5.0f;
+    private Vector3 minExplosionDir = new Vector3(-1.0f, -1.0f, -1.0f);
     [SerializeField]
-    private Vector3 minExplosionDir = Vector3.zero;
+    private Vector3 maxExplosionDir = new Vector3(1.0f, 1.0f, 1.0f);
     [SerializeField]
-    private Vector3 maxExplosionDir = Vector3.zero;
+    private Vector3 minExplosionForce = new Vector3(1.0f, 1.0f, 1.0f);
     [SerializeField]
-    private Vector3 minExplosionForce = Vector3.zero;
-    [SerializeField]
-    private Vector3 maxExplosionForce = Vector3.zero;
+    private Vector3 maxExplosionForce = new Vector3(2.0f, 2.0f, 2.0f);
 
     private float sqrBreakForce = 0.0f;
 
@@ -44,7 +43,7 @@ public class Destructible : MonoBehaviour
 
     private void Destruct()
     {
-        GameObject target = destroyed[Random.Range(0, destroyed.Length)];
+        GameObject target = destroyed;
         GameObject clone = Instantiate(target, transform.position, transform.rotation);
         clone.transform.localRotation = transform.localRotation;
         clone.transform.localScale = transform.localScale;
