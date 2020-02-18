@@ -182,9 +182,12 @@ public class Importer : EditorWindow
                 importFBX();
         }
 
+        if (GUILayout.Button("Export All"))
+            ExportAll();
 
+        EditorGUILayout.Space();
 
-        if (GUILayout.Button("Export"))
+        if (GUILayout.Button("Export Only Imported"))
             Export();
 
 
@@ -252,13 +255,7 @@ public class Importer : EditorWindow
     public void Export()
     {
         shouldExport = false;
-
-
-        DirectoryInfo dir = new DirectoryInfo("Assets/Prefabs/ProceduralBuilding/BuildingVariants");
-        FileInfo[] info = dir.GetFiles("*.*", SearchOption.AllDirectories);
-        foreach(FileInfo f in info)
-            if(!f.ToString().EndsWith(".meta"))
-                exportAssetNames.Add(getRelativePath(f.ToString()));
+        addDirToExport("Assets/Prefabs/ProceduralBuilding/BuildingVariants");
 
         string[] assetNames = exportAssetNames.ToArray();
 
@@ -271,6 +268,38 @@ public class Importer : EditorWindow
         exportAssetNames.Clear();
         AssetDatabase.ExportPackage(assetNames, outputFilePath, ExportPackageOptions.IncludeDependencies);
         Debug.Log("[Importer] Exported Package!");
+    }
+
+    public void ExportAll()
+    {
+        shouldExport = false;
+
+        addDirToExport("Assets/Prefabs/ProceduralBuilding/BuildingVariants");
+        for(int i = 0; i < mainCategory.Length; ++i)
+            for(int j = 0; j < subCategory.Length; ++j)
+                addDirToExport("Assets/" + mainCategory[i] + "/" + subCategory[j]);
+
+        string[] assetNames = exportAssetNames.ToArray();
+
+        if (assetNames.Length == 0)
+        {
+            Debug.LogError("[Importer] Nothing to export! Have you imported first and set output directory?");
+            return;
+        }
+
+        exportAssetNames.Clear();
+        AssetDatabase.ExportPackage(assetNames, outputFilePath, ExportPackageOptions.IncludeDependencies);
+        Debug.Log("[Importer] Exported Package!");
+    }
+
+    public void addDirToExport(string path)
+    {
+        if (!Directory.Exists(path)) return;
+        DirectoryInfo dir = new DirectoryInfo(path);
+        FileInfo[] info = dir.GetFiles("*.*", SearchOption.AllDirectories);
+        foreach (FileInfo f in info)
+            if (!f.ToString().EndsWith(".meta"))
+                exportAssetNames.Add(getRelativePath(f.ToString()));
     }
 
     public void importFBX()

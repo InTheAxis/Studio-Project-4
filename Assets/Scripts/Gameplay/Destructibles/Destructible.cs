@@ -5,7 +5,14 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
 
+    [Header("General")]
     public GameObject destroyed = null;
+    [SerializeField]
+    private GameObject hitParticle = null;
+    [SerializeField]
+    private float hitParticleSpawnChance = 0.65f;
+
+    [Header("Explosion")]
     [SerializeField]
     private float breakForce = 2.0f;
     [SerializeField]
@@ -27,7 +34,7 @@ public class Destructible : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude >= sqrBreakForce)
-            Destruct();
+            Destruct(collision);
 
     }
 
@@ -36,17 +43,24 @@ public class Destructible : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
-    {
-        Destruct();
-    }
 
-    private void Destruct()
+    private void Destruct(Collision collision)
     {
+
+        /* Instantiate shattered clone */
         GameObject target = destroyed;
         GameObject clone = Instantiate(target, transform.position, transform.rotation);
         clone.transform.localRotation = transform.localRotation;
         clone.transform.localScale = transform.localScale;
+
+        /* Instantiate particle hit */
+        if(hitParticle != null && Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
+        {
+            GameObject particle = Instantiate(hitParticle);
+            particle.transform.position = collision.GetContact(0).point;
+            particle.transform.forward = collision.GetContact(0).normal;
+            Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+        }
 
         Rigidbody[] rigidbodies = clone.GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody rb in rigidbodies)
