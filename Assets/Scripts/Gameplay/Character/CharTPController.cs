@@ -67,11 +67,13 @@ public class CharTPController : MonoBehaviour
         if ((lookDir.y > maxLookY && inp.mouseY > 0) || (lookDir.y < -maxLookY && inp.mouseY < 0))
             inp.mouseY = 0;
         //calculate where cam and player is facing  
-        lookDir = Quaternion.Euler(-inp.mouseY * mouseSens, inp.mouseX * mouseSens, 0) * lookDir;
+        lookDir = Quaternion.Euler(0, inp.mouseX * mouseSens, 0) * lookDir;
+        lookDir = Quaternion.AngleAxis(-inp.mouseY * mouseSens, right) * lookDir;
         lookDir.Normalize();
         //remove y for movement
         forward.Set(lookDir.x, 0, lookDir.z);
         forward.Normalize();
+        right = Vector3.Cross(Vector3.up, forward);
 
         crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
         if (crouchChk.crouching)
@@ -89,8 +91,9 @@ public class CharTPController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
 
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
         //move player
-        right = Vector3.Cross(Vector3.up, forward);
         transform.position += moveAmt * Time.deltaTime * currSpeed;
         //rotate player
         transform.LookAt(transform.position + forward);
