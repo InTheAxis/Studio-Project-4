@@ -68,6 +68,7 @@ public class CharTPCamera : MonoBehaviour
     }   
     private void LateUpdate()
     {
+        //TEMP ,DO THIS ELSEWHERE
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (IsLookingAt() == 0)

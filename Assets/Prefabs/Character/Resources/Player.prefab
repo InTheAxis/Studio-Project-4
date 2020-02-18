@@ -62,6 +62,7 @@ MonoBehaviour:
   ignore:
     serializedVersion: 2
     m_Bits: 43831
+  hitTime: 0.1
   triggered: 0
 --- !u!1 &6962912650225438955
 GameObject:
@@ -399,6 +400,7 @@ GameObject:
   - component: {fileID: 9117360599836359450}
   - component: {fileID: 9117360599836359451}
   - component: {fileID: 5071471449440821494}
+  - component: {fileID: 1132420858409432197}
   - component: {fileID: 2355843241993043823}
   - component: {fileID: 3389477406429164520}
   m_Layer: 8
@@ -458,8 +460,6 @@ MonoBehaviour:
   - {fileID: 1940343873033900241}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
-  health: {fileID: 5071471449440821494}
-  animator: {fileID: 5686387849276441822}
   moveSpeed: 5
   mouseSens: 1
   maxLookY: 0.7
@@ -467,6 +467,7 @@ MonoBehaviour:
   airSpeed: 3
   crouchSpeed: 2
   jumpForce: 1.5
+  disableMovement: 0
 --- !u!114 &5071471449440821494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,7 +480,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb2984555423d042ba07ad787137b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charControl: {fileID: 9117360599836359451}
   maxHp: 3
+  autoRespawnTime: 5
+  respawnInvulTime: 1
+--- !u!114 &1132420858409432197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2d4d5422c66b942b85b94f14f560b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5686387849276441822}
+  charControl: {fileID: 9117360599836359451}
+  health: {fileID: 5071471449440821494}
+  hitbox: {fileID: 1857612522257127535}
 --- !u!114 &2355843241993043823
 MonoBehaviour:
   m_ObjectHideFlags: 0

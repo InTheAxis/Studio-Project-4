@@ -6,6 +6,8 @@ public class PlayerHitBox : MonoBehaviour
 {
     public PlayerHealth health;
     public LayerMask ignore;
+    public float hitTime = 0.1f;
+    public bool hit { get { return triggered; } }
 
     [HideInInspector]
     public bool triggered; //in case you want override

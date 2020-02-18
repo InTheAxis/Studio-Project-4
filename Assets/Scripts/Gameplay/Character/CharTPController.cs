@@ -8,8 +8,6 @@ public class CharTPController : MonoBehaviourPun
     public List<Transform> lookTargets; //places for cam to look
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
-    public PlayerHealth health;
-    public Animator animator;
 
     public float moveSpeed = 5;
     public float mouseSens = 1;
@@ -20,6 +18,10 @@ public class CharTPController : MonoBehaviourPun
     public float crouchSpeed = 2;
     public float jumpForce = 2;
 
+    [HideInInspector]
+    public bool disableMovement;
+    public float velY { private set; get; }
+    public float displacement { private set; get; } //how fast im moving xz
     public Vector3 lookDir { private set; get; }
 
     //these are just to cache values
@@ -27,8 +29,6 @@ public class CharTPController : MonoBehaviourPun
     private Vector3 forward, right;
     private float currSpeed;
     private Vector3 moveAmt;
-
-    private string state;
 
     private struct InputData
     {
@@ -48,10 +48,8 @@ public class CharTPController : MonoBehaviourPun
         forward.Normalize();
 
         currSpeed = moveSpeed;
-
+        disableMovement = false;
         rb = GetComponent<Rigidbody>();
-
-        state = "idle";
     }
     private void Update()
     {
@@ -79,7 +77,7 @@ public class CharTPController : MonoBehaviourPun
         lookDir = Quaternion.AngleAxis(-inp.mouseY * mouseSens, right) * lookDir;
         lookDir.Normalize();
 
-        if (!health.dead)
+        if (!disableMovement)
         {
             //remove y for movement
             forward.Set(lookDir.x, 0, lookDir.z);
@@ -103,53 +101,15 @@ public class CharTPController : MonoBehaviourPun
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
             }
 
+            velY = rb.velocity.y;
+            displacement = moveAmt.magnitude * currSpeed;
+
             //move player
             transform.position += moveAmt * Time.deltaTime * currSpeed;
             //rotate player
             transform.LookAt(transform.position + forward);
         }
 
-        rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides
-        CalculateState();
-    }
-
-
-    private void CalculateState()
-    {
-        if (health.dead)
-            StateChange("died");
-        else if (jumpChk.airborne)
-        {
-            if (rb.velocity.y > 0)
-            {
-                if (rb.velocity.y < jumpForce)
-                    StateChange("hang");
-                else
-                    StateChange("jump");
-            }
-            else
-                StateChange("fall");
-        }
-        else if (crouchChk.crouching)
-        {
-            if (moveAmt.magnitude > 0)
-                StateChange("crouchWalk");
-            else
-                StateChange("crouch");
-        }
-        else if (moveAmt.magnitude > 0)
-        {
-            StateChange("walk");
-        }
-        else
-            StateChange("idle");
-    }
-
-    private void StateChange(string nextState)
-    {
-        if (state == nextState)
-            return;
-        state = nextState;
-        animator.SetTrigger(state);
+        rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides    
     }
 }
