@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CharTPCamera : MonoBehaviour
 {
-    public CharTPController target;    
+    public List<Transform> lookTargets;
+    public CharTPController charControl;    
+    
     public float targetCamDist;
     public float moveCloserDuration;
     public float initialCamDist;
@@ -12,25 +14,70 @@ public class CharTPCamera : MonoBehaviour
     public float camAdjustSpeed = 10;
     public float adjustOffset = 1;
 
+    private Transform target;
+    private Camera cam;
+    private int targetIdx;
+    private float defaultCamDist;
     private float curCamDist;
     private float moveCloserDist;
-    private Camera cam;
     private Vector3[] clipPoint;
     private Vector3 desiredPos;
 
+    #region Public Calls
+    //attach char controller for that look direction
+    public void GiveMeCharController(CharTPController cc)
+    {
+        charControl = cc;
+        lookTargets = cc.lookTargets;
+        target = lookTargets[0];
+    }
+
+    //use me to look at the transform at index of the target array
+    public void LookAt(int index, float distToTarget)
+    {
+        target = lookTargets[index];
+        targetCamDist = distToTarget;
+        targetIdx = index;
+    }
+
+    //returns the index of transform in target array
+    public int IsLookingAt() 
+    {
+        return targetIdx;
+    }
+
+    //use me to look at player (index 0 and default dist)
+    public void LookAtPlayer()
+    {
+        LookAt(0, defaultCamDist);
+    }
+    #endregion
+
     private void Start()
     {
-        curCamDist = initialCamDist;
+        defaultCamDist = targetCamDist;
         moveCloserDist = targetCamDist;
+        curCamDist = initialCamDist;
+
+        targetIdx = 0;
+        target = lookTargets[targetIdx];
 
         cam = GetComponent<Camera>();
 
         clipPoint = new Vector3[5];
-        UpdateCameraClipPoints();
     }   
     private void LateUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (IsLookingAt() == 0)
+                LookAt(1, 2);
+            else
+                LookAtPlayer();
+        }
+
         //calculate if shld move closer
+        UpdateCameraClipPoints();
         CalculateObstruction();
         curCamDist = Mathf.Lerp(curCamDist, moveCloserDist, Time.deltaTime * camAdjustSpeed);
 
@@ -38,8 +85,8 @@ public class CharTPCamera : MonoBehaviour
             Debug.Log("player shld become transluscent");
 
         //move cam
-        desiredPos = target.transform.position - (target.lookDir * targetCamDist);
-        transform.position = target.transform.position - (target.lookDir * curCamDist);
+        desiredPos = target.transform.position - (charControl.lookDir * targetCamDist);
+        transform.position = target.transform.position - (charControl.lookDir * curCamDist);
         //rotate cam
         transform.LookAt(target.transform);
     }
@@ -66,7 +113,6 @@ public class CharTPCamera : MonoBehaviour
 
     private void CalculateObstruction()
     {
-        UpdateCameraClipPoints();
         float minDist = targetCamDist + adjustOffset;
         Vector3 dir;
         float dist;

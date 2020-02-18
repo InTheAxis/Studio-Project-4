@@ -5,15 +5,19 @@ using UnityEditor;
 
 public class FBXCustomImporter : AssetPostprocessor
 {
-    public static bool convertMayaScale = false;
+    public static bool customImport = false;
+    public static bool autoScale = false;
 
     private void OnPostprocessModel(GameObject g)
     {
-        if (!convertMayaScale) return;
 
         ModelImporter importer = assetImporter as ModelImporter;
 
-        importer.globalScale = 100.0f;
+        if(autoScale)
+            importer.globalScale = 100.0f;
+
+
+        if (!customImport) return;
 
         string fullPath = assetImporter.assetPath;
         int posFirstSeparator = fullPath.IndexOf("/");

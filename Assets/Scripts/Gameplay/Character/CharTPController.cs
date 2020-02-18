@@ -5,8 +5,10 @@ using Photon.Pun;
 
 public class CharTPController : MonoBehaviourPun
 {
+    public List<Transform> lookTargets; //places for cam to look
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
+    public Animator animator;
 
     public float moveSpeed = 5;
     public float mouseSens = 1;
@@ -115,23 +117,33 @@ public class CharTPController : MonoBehaviourPun
             if (rb.velocity.y > 0)
             {
                 if (rb.velocity.y < jumpForce)
-                    state = "hang";
+                    StateChange("hang");
                 else
-                    state = "jump";
+                    StateChange("jump");
             }
             else
-                state = "fall";
+                StateChange("fall");
         }
         else if (crouchChk.crouching)
         {
-            state = "crouch";
+            if (moveAmt.magnitude > 0)
+                StateChange("crouchWalk");
+            else
+                StateChange("crouch");
         }
         else if (moveAmt.magnitude > 0)
         {
-            state = "run";
+            StateChange("walk");
         }
         else
-            state = "idle";
+            StateChange("idle");
+    }
 
+    private void StateChange(string nextState)
+    {
+        if (state == nextState)
+            return;
+        state = nextState;
+        animator.SetTrigger(state);
     }
 }
