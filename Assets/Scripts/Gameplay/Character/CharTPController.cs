@@ -9,13 +9,20 @@ public class CharTPController : MonoBehaviourPun
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+    [Tooltip("Vertical and Horizontal movement speed")]
     public float moveSpeed = 5;
+    [Tooltip("Mouse sensitivity, affects rotation speed")]
     public float mouseSens = 1;
+    [Tooltip("Clamps how far you can look up or down")]
     public float maxLookY = 0.6f;
+    [Tooltip("Starting y-axis look direction, from -1 to 1")]
     public float initialLookY = 0.8f;
 
+    [Tooltip("Higher means able to move more in air")]
     public float airSpeed = 1;
+    [Tooltip("Speed of crouch walk")]
     public float crouchSpeed = 2;
+    [Tooltip("Force applied to rigidbody to jump upwards")]
     public float jumpForce = 2;
 
     [HideInInspector]

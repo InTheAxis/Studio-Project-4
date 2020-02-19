@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharTPCamera : MonoBehaviour
-{
+{    
+    [Tooltip("Should be sett externally with a function...TEMP")]
+    public CharTPController charControl;
+    [Tooltip("What the camera should look at and follow")]
     public List<Transform> lookTargets;
-    public CharTPController charControl;    
     
+    [Tooltip("How far the camera should be away from look target")]
     public float targetCamDist;
-    public float moveCloserDuration;
+    [Tooltip("At what distance away should the camera start")]
     public float initialCamDist;
+    [Tooltip("What layers will trigger the collision")]
     public LayerMask mask;
+    [Tooltip("How fast the camera will lerp to targets")]
     public float camAdjustSpeed = 5;
+    [Tooltip("How fast the camera will lerp when occluded")]
     public float camOccludeSpeed = 50;
+    [Tooltip("Offsets where the rays are cast from, higher means the camera detects occlusions earlier")]
     public float adjustOffset = 0.3f;
 
     private Transform target;
@@ -45,6 +52,11 @@ public class CharTPCamera : MonoBehaviour
     {
         if (lookTargets.Count < 1)
             return;
+        var col = nextTarget.GetComponent<Collider>();
+        if (col) col.enabled = false;
+        col = lookTargets[index].GetComponent<Collider>();
+        if (col) col.enabled = true;
+
         nextTarget = lookTargets[index];
         targetCamDist = distToTarget;
         targetIdx = index;
