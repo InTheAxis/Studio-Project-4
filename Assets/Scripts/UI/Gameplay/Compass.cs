@@ -42,12 +42,18 @@ public class Compass : MonoBehaviour
      
         float angle = Vector3.SignedAngle(Vector3.forward, playerTransform.forward, Vector3.up);
         Rect rect = compassScale.uvRect;
+        //rect.x = Mathf.Lerp(rect.x, (angle / 15.0f) * 0.167f, Time.deltaTime * 8.0f);
         rect.x = (angle / 15.0f) * 0.167f;
+
         compassScale.uvRect = rect;
 
         Vector2 anchoredPos = scroll.anchoredPosition;
         float angleFactor = angle / 45.0f;
+        Debug.Log(angleFactor);
+        //if (angleFactor > 3.9f && angleFactor < -3.9f)
         anchoredPos.x = -angleFactor * distBetweenIndicator;
+        //else
+        //anchoredPos.x = Mathf.Lerp(anchoredPos.x, -angleFactor * distBetweenIndicator, Time.deltaTime * 8.0f);
         scroll.anchoredPosition = anchoredPos;
     }
 }

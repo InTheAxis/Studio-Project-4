@@ -9,6 +9,7 @@ public class CharTPController : MonoBehaviourPun
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+
     public float moveSpeed = 5;
     public float mouseSens = 1;
     public float maxLookY = 0.6f;

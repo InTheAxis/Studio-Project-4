@@ -103,8 +103,8 @@ public class CharTPCamera : MonoBehaviour
         CalculateObstruction();
         curCamDist = Mathf.Lerp(curCamDist, moveCloserDist, Time.deltaTime * (moveCloserDist == targetCamDist ? camAdjustSpeed : camOccludeSpeed));
 
-        if (moveCloserDist < 2)
-            Debug.Log("player shld become transluscent");
+        //if (moveCloserDist < 2)
+        //    Debug.Log("player shld become transluscent");
 
         //move cam
         desiredPos = target.transform.position - (charControl.lookDir * targetCamDist);
