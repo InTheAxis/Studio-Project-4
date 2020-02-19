@@ -8,8 +8,12 @@ public class Destructible : MonoBehaviour
 
     [Header("General")]
     public GameObject destroyed = null;
+
+    [Header("Visuals")]
     [SerializeField]
     private GameObject hitParticle = null;
+    [SerializeField]
+    private GameObject dustParticles = null;
     [SerializeField]
     private float hitParticleSpawnChance = 0.65f;
 
@@ -55,12 +59,25 @@ public class Destructible : MonoBehaviour
         clone.transform.localScale = transform.localScale;
 
         /* Instantiate particle hit */
-        if(hitParticle != null && Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
+        if(Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
         {
-            GameObject particle = Instantiate(hitParticle);
-            particle.transform.position = collision.GetContact(0).point;
-            particle.transform.forward = collision.GetContact(0).normal;
-            Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+            if (hitParticle != null)
+            {
+                GameObject particle = Instantiate(hitParticle);
+                particle.transform.position = collision.GetContact(0).point;
+                particle.transform.forward = collision.GetContact(0).normal;
+                particle.transform.localScale = transform.localScale;
+                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+            }
+
+            if (dustParticles != null)
+            {
+                GameObject particle = Instantiate(dustParticles);
+                particle.transform.position = collision.GetContact(0).point;
+                particle.transform.forward = collision.GetContact(0).normal;
+                particle.transform.localScale = transform.localScale;
+                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+            }
         }
 
         Rigidbody[] rigidbodies = clone.GetComponentsInChildren<Rigidbody>();
