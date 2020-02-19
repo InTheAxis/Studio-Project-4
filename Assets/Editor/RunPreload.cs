@@ -13,8 +13,8 @@ public class RunPreloadScene
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	static void InitLoadingScene()
 	{
-        if (SceneManager.GetSceneByName("Preload") != null)
-            SceneManager.LoadScene("Preload");
+        //if (SceneManager.GetSceneByName("Preload") != null)
+        //    SceneManager.LoadScene("Preload");
 
     }
 #endif

@@ -53,8 +53,8 @@ public class CharTPController : MonoBehaviour
     private void Update()
     {
 
-        inp.vert = Input.GetAxis("Vertical");
-        inp.hori = Input.GetAxis("Horizontal");
+        inp.vert = Input.GetAxisRaw("Vertical");
+        inp.hori = Input.GetAxisRaw("Horizontal");
         inp.mouseX = Input.GetAxis("Mouse X");
         inp.mouseY = Input.GetAxis("Mouse Y");
         inp.crouch = Input.GetAxis("Crouch") != 0;
