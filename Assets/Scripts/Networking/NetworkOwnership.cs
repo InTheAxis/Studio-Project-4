@@ -30,7 +30,7 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
     [PunRPC]
     public void destroy(PhotonView obj)
     {
-        if (obj.Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+        if ((obj.Owner == null && PhotonNetwork.IsMasterClient) || (obj.Owner != null && obj.Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber))
             PhotonNetwork.Destroy(obj);
         else
             photonView.RPC("destroy", obj.Owner, obj);

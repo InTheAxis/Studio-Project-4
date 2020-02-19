@@ -88,6 +88,18 @@ public class CharHealth : MonoBehaviour, IPunObservable
         Debug.Log("Took dmg, hp is " + hp);
     }
 
+    public void Heal(int amt)
+    {
+        if (dead)
+            return;
+
+        hp += amt;
+        if (hp > maxHp)
+            hp = maxHp;
+
+        Debug.Log("Healed by " + amt + " , current hp is " + hp);
+    }
+
     private void Die()
     {
         charControl.disableMovement = dead;
