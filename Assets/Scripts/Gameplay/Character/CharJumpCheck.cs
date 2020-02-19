@@ -7,7 +7,7 @@ public class CharJumpCheck : MonoBehaviour
     public LayerMask ignore;
     public bool airborne { private set; get; }
 
-    public void Jumped()
+    public void Jumping()
     {
         airborne = true;
     }
@@ -20,7 +20,7 @@ public class CharJumpCheck : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //if (other != charBot)
+        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
             airborne = false;
     }
 }

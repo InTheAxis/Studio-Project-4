@@ -95,14 +95,13 @@ public class CharTPController : MonoBehaviourPun
 
             moveAmt = (forward * inp.vert + right * inp.hori).normalized;
 
-            if (inp.jump && !jumpChk.airborne)
-            {
-                jumpChk.Jumped();
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-            }
-
             velY = rb.velocity.y;
             displacement = moveAmt.magnitude * currSpeed;
+
+            if (velY > 0)
+                jumpChk.Jumping();
+            if (inp.jump && !jumpChk.airborne)            
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);            
 
             //move player
             transform.position += moveAmt * Time.deltaTime * currSpeed;

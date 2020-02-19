@@ -110,7 +110,7 @@ public class CharTPCamera : MonoBehaviour
         desiredPos = target.transform.position - (charControl.lookDir * targetCamDist);
         transform.position = target.transform.position - (charControl.lookDir * curCamDist);
         //rotate cam
-        transform.rotation = Quaternion.LookRotation(charControl.lookDir, Vector3.up);//+ new Vector3(target.rotation.x, 0, target.rotation.z);
+        transform.rotation = Quaternion.LookRotation(charControl.lookDir + new Vector3(target.rotation.x, 0, target.rotation.z), Vector3.up);
     }
 
     private void UpdateCameraClipPoints()
