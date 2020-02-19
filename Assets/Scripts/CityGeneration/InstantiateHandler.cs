@@ -6,7 +6,7 @@ using Photon.Pun;
 public class InstantiateHandler : MonoBehaviour
 {
     public bool serverInstantiate;
-    public static bool sServerInstantiate;
+    public static bool sServerInstantiate = true;
 
     private void OnValidate()
     {
