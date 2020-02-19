@@ -29,6 +29,7 @@ public class UIStateBehaviourHostJoin : UIStateBehaviourBase
     }
     private void randomButtonClicked()
     {
+        UIStateBehaviourLobby.isHost = false;
         NetworkClient.instance.Join("");
         UIStateActiveManager.currentActiveManager.setNextState("StateLobby");
     }

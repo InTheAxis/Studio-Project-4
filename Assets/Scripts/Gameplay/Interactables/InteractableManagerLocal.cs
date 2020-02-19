@@ -72,7 +72,6 @@ public class InteractableManagerLocal : MonoBehaviour
     {
         interactable.interact();
         carryingInteractable = null;
-        NetworkOwnership.instance.destroy(PhotonView.Get(interactable));
     }
     private void carryInteractable(InteractableBase interactable)
     {

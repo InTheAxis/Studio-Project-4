@@ -10,6 +10,8 @@ public class UIStateBehaviourLoadGame : UIStateBehaviourBase
 
     public override void onEnter()
     {
+        NetworkClient.instance.setRoomVisibility(false);
+
         UIStateActiveManager.currentActiveManager.setToPrevState();
 
         // PhotonNetwork.AutomaticallySyncScene, set in NetworkClient.cs, causes non-master clients to load scenes automatically
