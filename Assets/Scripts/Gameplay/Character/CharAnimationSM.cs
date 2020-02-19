@@ -32,19 +32,20 @@ public class CharAnimationSM : MonoBehaviour
 
         if (health.dead)
             StateChange("died");
-        else if (hitbox.hit)
-            StateChange("hit");
+        //else if (hitbox.hit)
+        //    StateChange("hit");
         else if (charControl.jumpChk.airborne)
         {
             if (charControl.velY > 0)
             {
-                if (charControl.velY < charControl.jumpForce)
-                    StateChange("hang");
-                else
+                //if (charControl.velY < charControl.jumpForce)
+                //    StateChange("hang");
+                //else
                     StateChange("jump");
             }
             else
-                StateChange("fall");
+                //StateChange("fall");
+              StateChange("jump");
         }
         else if (charControl.crouchChk.crouching)
         {
@@ -65,6 +66,7 @@ public class CharAnimationSM : MonoBehaviour
     {
         if (curState == next)
             return;
+        animator.ResetTrigger(curState);
         curState = next;
         animator.SetTrigger(curState);
         Debug.Log("Anim State: " + curState);
