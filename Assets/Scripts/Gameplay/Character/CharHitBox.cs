@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHitBox : MonoBehaviour
+public class CharHitBox : MonoBehaviour
 {
-    public PlayerHealth health;
+    public CharHealth health;
     public LayerMask ignore;
     public float hitTime = 0.1f;
     public bool hit { get { return triggered; } }

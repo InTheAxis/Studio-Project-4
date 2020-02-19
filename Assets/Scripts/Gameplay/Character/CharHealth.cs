@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class PlayerHealth : MonoBehaviour, IPunObservable
+public class CharHealth : MonoBehaviour, IPunObservable
 {
     public CharTPController charControl;
     public int maxHp = 3;

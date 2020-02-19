@@ -6,8 +6,8 @@ public class CharAnimationSM : MonoBehaviour
 {
     public Animator animator;
     public CharTPController charControl;
-    public PlayerHealth health;
-    public PlayerHitBox hitbox;
+    public CharHealth health;
+    public CharHitBox hitbox;
 
     private string curState;
     
