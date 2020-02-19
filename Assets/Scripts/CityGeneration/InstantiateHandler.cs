@@ -36,7 +36,7 @@ public class InstantiateHandler : MonoBehaviour
         }
         else
         {
-            instantiated = Instantiate(go);
+            instantiated = Instantiate(go, pos, Quaternion.identity);
         }
         return instantiated;
     }
@@ -50,7 +50,7 @@ public class InstantiateHandler : MonoBehaviour
         }
         else
         {
-            instantiated = Instantiate(go);
+            instantiated = Instantiate(go, pos, rot);
         }
         return instantiated;
     }
