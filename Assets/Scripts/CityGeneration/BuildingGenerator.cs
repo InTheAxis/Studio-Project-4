@@ -43,9 +43,7 @@ public class BuildingGenerator : Generator
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + 1))
         {
             GameObject buildingRef = cityScriptable.SelectMesh();
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform, "Environment");
-            building.transform.position = pos.pos;
-            //building.AddComponent<BuildingCollisionScript>();
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos.pos, Quaternion.identity, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
             // check for road
