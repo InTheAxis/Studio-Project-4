@@ -107,7 +107,7 @@ public class CharTPController : MonoBehaviourPun
             //move player
             transform.position += moveAmt * Time.deltaTime * currSpeed;
             //rotate player
-            transform.LookAt(transform.position + forward);
+            transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
         }
 
         rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides    

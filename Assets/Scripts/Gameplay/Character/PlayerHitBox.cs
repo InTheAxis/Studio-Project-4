@@ -14,7 +14,7 @@ public class PlayerHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!triggered && CheckIfIgnored(other.gameObject.layer))
+        if (!triggered && !CheckIfIgnored(other.gameObject.layer))
         {
             DamageData ddata = other.GetComponent<DamageData>();
             if (ddata)
@@ -31,6 +31,6 @@ public class PlayerHitBox : MonoBehaviour
     { 
         //ignore bits AND (1 bit shifted to where layer bit is)
         //if 0 means none matched, which means ignored
-        return (ignore & (1 << layerToCheck)) == 0;
+        return (ignore & (1 << layerToCheck)) != 0;
     }
 }

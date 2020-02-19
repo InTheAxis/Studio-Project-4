@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharCrouchCheck : MonoBehaviour
 {
     public Collider charTop;
+    public LayerMask ignore;
     public bool crouching { private set; get; }
 
     private bool canUnCrouch;
@@ -35,11 +36,17 @@ public class CharCrouchCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other != charTop)
+        if (!CheckIfIgnored(other.gameObject.layer))
             canUnCrouch = false;
     }
     private void OnTriggerExit(Collider other)
     {
         canUnCrouch = true;
+    }
+    private bool CheckIfIgnored(int layerToCheck)
+    {
+        //ignore bits AND (1 bit shifted to where layer bit is)
+        //if 0 means none matched, which means ignored
+        return (ignore & (1 << layerToCheck)) != 0;
     }
 }
