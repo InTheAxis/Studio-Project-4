@@ -22,11 +22,23 @@ public class PlayerHealth : MonoBehaviour, IPunObservable
         {
             stream.SendNext(hp);
             stream.SendNext(invulnerable);
+            stream.SendNext(dead);
         }
         else 
         {
             hp =            (int)stream.ReceiveNext();
             invulnerable =  (bool)stream.ReceiveNext();
+            bool nextDead = (bool)stream.ReceiveNext();
+            if (dead && !nextDead)
+            {
+                Respawn();
+                dead = nextDead;
+            }
+            else if (!dead && nextDead)
+            {
+                Die();
+                dead = nextDead;
+            }
         }
     }
 
@@ -39,31 +51,9 @@ public class PlayerHealth : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if (!dead)
-            CheckHp();
-
         //TEMP ,DO THIS ELSEWHERE
         if (Input.GetKeyDown(KeyCode.R))
             Respawn(1);
-    }
-    private void CheckHp()
-    {
-        if (hp <= 0)
-        {
-            hp = 0;
-            dead = true;
-            charControl.disableMovement = dead;
-
-            if (autoRespawnTime > 0)
-            {
-                if (respawnCorr != null)
-                    StopCoroutine(respawnCorr);
-                respawnCorr = AutoRespawn(autoRespawnTime);
-                StartCoroutine(respawnCorr);
-            }
-
-            Debug.Log("Dieded");
-        }
     }
 
     public void Respawn(float invulTime)
@@ -88,8 +78,30 @@ public class PlayerHealth : MonoBehaviour, IPunObservable
 
         hp -= dmg;
 
+        if (hp <= 0)
+        {
+            hp = 0;
+            dead = true;
+            Die();
+        }
+
         Debug.Log("Took dmg, hp is " + hp);
     }
+
+    private void Die()
+    {
+        charControl.disableMovement = dead;
+
+        if (autoRespawnTime > 0)
+        {
+            if (respawnCorr != null)
+                StopCoroutine(respawnCorr);
+            respawnCorr = AutoRespawn(autoRespawnTime);
+            StartCoroutine(respawnCorr);
+        }
+
+        Debug.Log("Dieded");
+    } 
 
     public void SetInvulnerableTime(float dura) 
     {
