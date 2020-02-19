@@ -35,5 +35,15 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - goInGameRequestReceived
+  - carry
+  - interact
+  - requestAccepted
+  - requestRejected
+  - requestReceived
+  - destroy
+  - queryUse
+  - onRequestSuccess
+  - queryCarry
+  - queryDrop
   DisableAutoOpenWizard: 1
   ShowSettings: 0

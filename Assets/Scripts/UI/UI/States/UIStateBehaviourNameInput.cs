@@ -18,12 +18,14 @@ public class UIStateBehaviourNameInput : UIStateBehaviourBase
 
     private void confirmButtonClicked()
     {
+#if DEBUG == false
         if (nameInput.text.Length == 0)
         {
             UIStateBehaviourMessage.messageString = "Please input a username";
             UIStateActiveManager.currentActiveManager.setNextState("StateMessage");
         }
         else
+#endif
         {
             PlayerSettings.playerName = nameInput.text;
             PhotonNetwork.NickName = nameInput.text;

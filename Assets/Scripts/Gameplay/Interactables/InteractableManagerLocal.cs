@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class InteractableManager : MonoBehaviour
+public class InteractableManagerLocal : MonoBehaviour
 {
     [SerializeField]
     private Camera camera;
@@ -26,7 +27,7 @@ public class InteractableManager : MonoBehaviour
 
 
         // Detect if looking at an interactable
-        
+
         lastCollidedTimer += Time.deltaTime;
 
         Ray camRay = new Ray(camera.transform.position, camera.transform.forward);
@@ -52,28 +53,37 @@ public class InteractableManager : MonoBehaviour
 
         if (carryingInteractable == null && lastCollidedInteractable != null && hasClickedInteract) // Pickup the item currently looked at
         {
-            carryingInteractable = lastCollidedInteractable.GetComponentInParent<InteractableBase>();
-
-            if (!carryingInteractable.CanCarry) // Use the item if cannot carry
-                carryingInteractable.interact();
-            else // Can carry, attach to the player
-            {
-                Debug.Log("Started carrying");
-                carryingInteractable.transform.parent = GameManager.playerObj.transform;
-                carryingInteractable.transform.localPosition = carryingInteractable.PositionOffsetWhileCarry;
-            }
+            InteractableBase lastCollided = lastCollidedInteractable.GetComponentInParent<InteractableBase>();
+            if (lastCollided.CanCarry) // The interactable can be carried
+                InteractableManagerMaster.instance.carryInteractable(lastCollided, carryInteractable, null);
+            else // The interactable must be used immediately
+                InteractableManagerMaster.instance.useInteractable(lastCollided, useInteractable, null);
         }
         else if (carryingInteractable != null) // Is currently carrying the item
         {
             if (Input.GetAxisRaw("UseInteractable") > 0.5f) // Use the item
-                carryingInteractable.interact();
+                InteractableManagerMaster.instance.useInteractable(carryingInteractable, useInteractable, null);
             else if (hasClickedInteract) // Drop the item
-            {
-                Debug.Log("Dropped the item");
-                carryingInteractable.transform.parent = null;
-                carryingInteractable = null;
-            }
+                InteractableManagerMaster.instance.dropInteractable(carryingInteractable, dropInteractable, null);
         }
     }
 
+    private void useInteractable(InteractableBase interactable)
+    {
+        interactable.interact();
+        carryingInteractable = null;
+        NetworkOwnership.instance.destroy(PhotonView.Get(interactable));
+    }
+    private void carryInteractable(InteractableBase interactable)
+    {
+        carryingInteractable = interactable;
+        interactable.transform.parent = GameManager.playerObj.transform;
+        interactable.transform.localPosition = interactable.PositionOffsetWhileCarry;
+    }
+    private void dropInteractable(InteractableBase interactable)
+    {
+        NetworkOwnership.instance.releaseOwnership(PhotonView.Get(interactable), null, null);
+        interactable.transform.parent = null;
+        carryingInteractable = null;
+    }
 }
