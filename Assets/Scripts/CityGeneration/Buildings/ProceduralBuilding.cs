@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Photon.Pun;
 
 public class ProceduralBuilding : MonoBehaviour
 {
@@ -56,17 +57,21 @@ public class ProceduralBuilding : MonoBehaviour
     {
         // seed = Random.seed;
         Clear();
-        attachmentRoot = CityGenerator.instantiateAsChild(rootRef, transform) as GameObject;
+        attachmentRoot = InstantiateHandler.mInstantiate(rootRef, transform);
         foreach (Transform slot in attachmentPositions.transform)
         {
             AttachmentSlot attachmentSlotScript = slot.GetComponent<AttachmentSlot>();
             if (Random.value <= attachmentSlotScript.chance)
             {
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
-                GameObject attachment = CityGenerator.instantiateAsChild(meshRef, attachmentRoot.transform) as GameObject;
+                //if (!meshRef.GetComponent<PhotonView>())
+                //    meshRef.AddComponent<PhotonView>();
+                GameObject attachment = InstantiateHandler.mInstantiate(meshRef, attachmentRoot.transform, "Environment");
                 attachment.transform.position = slot.position;
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
+                if (attachment.GetComponent<ProceduralBuilding>())
+                    attachment.GetComponent<ProceduralBuilding>().Generate();
             }
         }
     }

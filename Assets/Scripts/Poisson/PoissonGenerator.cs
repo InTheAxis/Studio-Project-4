@@ -2,89 +2,104 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoissonGenerator
+public struct PoissonPoint
 {
-    public List<Vector3> points = new List<Vector3>();
-
-    //  private bool generated = false;
-    private int density = -1;
-
-    private float buffer = -1;
-
-    private bool threeDimensions = false;
-    private bool centered = false;
-
-    public PoissonGenerator()
+    public PoissonPoint(Vector3 pos, float r)
     {
+        radius = r;
+        this.pos = pos;
     }
 
-    //public PoissonGenerator(int density, float buffer, bool threeDimensions = false)
-    //{
-    //    this.threeDimensions = threeDimensions;
-    //    this.density = density;
-    //    this.buffer = buffer;
-    //    Generate();
-    //}
+    public float radius;
+    public Vector3 pos;
+}
+
+public class PoissonGenerator
+{
+    private List<PoissonPoint> points = new List<PoissonPoint>();
+    private List<PoissonPoint> xzPoints = new List<PoissonPoint>();
+    private List<PoissonPoint> injected = new List<PoissonPoint>();
+
+    public void Inject(PoissonPoint poissonPoint)
+    {
+        injected.Add(poissonPoint);
+    }
+
+    public void ClearInjected()
+    {
+        injected.Clear();
+    }
+
     public void Scale(float scale)
     {
         for (int i = 0; i < points.Count; ++i)
         {
-            points[i] = points[i] * scale;
+            PoissonPoint scaled = points[i];
+            scaled.pos = points[i].pos * scale;
+            scaled.radius *= scale;
+            points[i] = scaled;
         }
+        SetToXZ();
     }
 
-    public List<Vector3> GetPoints()
+    public List<PoissonPoint> GetPoints()
     {
-        return points;
+        return xzPoints;
     }
 
-    public void SetToXZ()
+    private void SetToXZ()
     {
+        xzPoints.Clear();
         for (int i = 0; i < points.Count; ++i)
         {
-            points[i] = new Vector3(points[i].x, 0, points[i].y);
+            PoissonPoint point = points[i];
+            Vector3 v3Point = new Vector3(point.pos.x, 0, point.pos.y);
+            point.pos = v3Point;
+            xzPoints.Add(point);
         }
     }
 
-    public void Set(int density, float buffer, bool threeDimensions = false, bool centered = false)
+    private void InjectIntoMain()
     {
-        this.threeDimensions = threeDimensions;
-        this.density = density;
-        this.buffer = buffer;
-        this.centered = centered;
+        foreach (PoissonPoint point in injected)
+        {
+            points.Add(point);
+        }
     }
 
-    public void Generate()
+    public bool Generate(int density, float radius)
     {
         points.Clear();
+        InjectIntoMain();
         int numGenerated = 0;
         int attempts = 0;
         int MAX_ATTEMPTS = density * 2;
-        if (centered)
-        {
-            points.Add(Vector3.zero);
-            ++numGenerated;
-        }
+
         while (numGenerated < density && attempts < MAX_ATTEMPTS)
         {
             ++attempts;
 
             Vector3 point;
-            if (threeDimensions)
-                point = Random.insideUnitSphere;
-            else
-                point = Random.insideUnitCircle;
+            point = Random.insideUnitCircle;
             bool add = true;
-            foreach (Vector3 checkPoint in points)
+            foreach (PoissonPoint checkPoint in points)
             {
-                if (Vector3.Distance(checkPoint, point) < buffer)
+                if (Vector3.Distance(checkPoint.pos, point) < radius + checkPoint.radius)
                 {
                     add = false;
                     break;
                 }
             }
             if (add)
-                points.Add(point);
+            {
+                attempts = 0;
+                ++numGenerated;
+                points.Add(new PoissonPoint(point, radius));
+            }
         }
+        SetToXZ();
+        if (numGenerated < density)
+            return false;
+        return true;
     }
 }

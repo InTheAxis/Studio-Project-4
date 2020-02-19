@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Road
   - Building
+  - Throwable
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - 
   - Damagable
   - 
-  - 
+  - Throwable
   - 
   - 
   - 
@@ -42,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2006396935
     locked: 0

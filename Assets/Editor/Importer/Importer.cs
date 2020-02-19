@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 
 
+
 public class Importer : EditorWindow
 {
     private ImportGeneral impGeneral = new ImportGeneral();
@@ -93,8 +94,6 @@ public class Importer : EditorWindow
         EditorGUILayout.Space();
 
         mainCategoryIndex = EditorGUILayout.Popup("Main Category", mainCategoryIndex, mainCategory);
-
-
         subCategoryIndex = EditorGUILayout.Popup("Sub Category", subCategoryIndex, subCategory);
 
 
@@ -300,6 +299,7 @@ public class Importer : EditorWindow
     public void addDirToExport(string path)
     {
         if (!Directory.Exists(path)) return;
+
         DirectoryInfo dir = new DirectoryInfo(path);
         FileInfo[] info = dir.GetFiles("*.*", SearchOption.AllDirectories);
         foreach (FileInfo f in info)
@@ -405,16 +405,16 @@ public class Importer : EditorWindow
             AssetDatabase.ImportAsset(item2, ImportAssetOptions.ForceUpdate);
         }
 
+        /* Set up prefab directory */
+        string prefabPath = "Assets/Prefabs/" + categoryPath + "/Resources";
+
+        if (!Directory.Exists(prefabPath))
+            Directory.CreateDirectory(prefabPath);
 
         if (isIncludeDestructible)
         {
             if(destinationPath.EndsWith("_Shattered"))
             {
-                /* Set up prefab directory */
-                string prefabPath = "Assets/Prefabs/" + categoryPath;
-
-                if (!Directory.Exists(prefabPath))
-                    Directory.CreateDirectory(prefabPath);
 
                 /* Instantiate shattered version */
                 string shatteredPrefabPath = prefabPath + "/" + rawName + ".prefab";
@@ -466,6 +466,23 @@ public class Importer : EditorWindow
                 exportAssetNames.Add(shatteredPrefabPath);
                 exportAssetNames.Add(nonShatteredPrefabPath);
             }
+        }
+
+
+        {
+            /* Instantiate clone in scene */
+            GameObject clone = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
+            PrefabUtility.UnpackPrefabInstance(clone, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+            Transform parent = clone.transform;
+            parent.position = Vector3.zero;
+
+            string prefabFilePath = prefabPath + "/" + rawName + ".prefab";
+
+            Debug.Log(prefabFilePath);
+            /* Save clone as prefab */
+            PrefabUtility.SaveAsPrefabAssetAndConnect(clone, prefabFilePath, InteractionMode.AutomatedAction);
+            DestroyImmediate(clone);
+            exportAssetNames.Add(prefabFilePath);
         }
 
 

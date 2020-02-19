@@ -9,17 +9,28 @@ public class CharTPController : MonoBehaviourPun
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+    [Tooltip("Vertical and Horizontal movement speed")]
     public float moveSpeed = 5;
+    [Tooltip("Mouse sensitivity, affects rotation speed")]
     public float mouseSens = 1;
+    [Tooltip("Clamps how far you can look up or down")]
     public float maxLookY = 0.6f;
+    [Tooltip("Starting y-axis look direction, from -1 to 1")]
     public float initialLookY = 0.8f;
 
+    [Tooltip("Higher means able to move more in air")]
     public float airSpeed = 1;
+    [Tooltip("Speed of crouch walk")]
     public float crouchSpeed = 2;
+    [Tooltip("Force applied to rigidbody to jump upwards")]
     public float jumpForce = 2;
 
     [HideInInspector]
     public bool disableMovement;
+    [HideInInspector]
+    public bool disableKeyInput;
+    [HideInInspector]
+    public bool disableMouseInput;
     public float velY { private set; get; }
     public float displacement { private set; get; } //how fast im moving xz
     public Vector3 lookDir { private set; get; }
@@ -55,13 +66,30 @@ public class CharTPController : MonoBehaviourPun
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
-
-        inp.vert = Input.GetAxisRaw("Vertical");
-        inp.hori = Input.GetAxisRaw("Horizontal");
-        inp.mouseX = Input.GetAxis("Mouse X");
-        inp.mouseY = Input.GetAxis("Mouse Y");
-        inp.crouch = Input.GetAxisRaw("Crouch") != 0;
-        inp.jump = Input.GetAxisRaw("Jump") != 0;
+        if (!disableKeyInput)
+        {
+            inp.vert = Input.GetAxisRaw("Vertical");
+            inp.hori = Input.GetAxisRaw("Horizontal");
+            inp.crouch = Input.GetAxisRaw("Crouch") != 0;
+            inp.jump = Input.GetAxisRaw("Jump") != 0;
+        }
+        else 
+        {
+            inp.vert = 0;
+            inp.hori = 0;
+            inp.crouch = false;
+            inp.jump = false;
+        }
+        if (!disableMouseInput)
+        {
+            inp.mouseY = Input.GetAxis("Mouse Y");
+            inp.mouseX = Input.GetAxis("Mouse X");
+        }
+        else 
+        {
+            inp.mouseY = 0;
+            inp.mouseX = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -95,14 +123,13 @@ public class CharTPController : MonoBehaviourPun
 
             moveAmt = (forward * inp.vert + right * inp.hori).normalized;
 
-            if (inp.jump && !jumpChk.airborne)
-            {
-                jumpChk.Jumped();
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-            }
-
             velY = rb.velocity.y;
             displacement = moveAmt.magnitude * currSpeed;
+
+            if (velY > 0)
+                jumpChk.Jumping();
+            if (inp.jump && !jumpChk.airborne)            
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);            
 
             //move player
             transform.position += moveAmt * Time.deltaTime * currSpeed;
