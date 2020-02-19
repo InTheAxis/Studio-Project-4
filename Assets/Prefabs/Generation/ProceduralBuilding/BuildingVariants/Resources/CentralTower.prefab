@@ -586,6 +586,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -2.1760736
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 15.302249
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 38.951973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 13.587277
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.6365619
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 19.687878
+      objectReference: {fileID: 0}
     - target: {fileID: 6338421826290787504, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,12 +671,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6804432949807160109, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 17.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804432949807160109, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 74.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804432949807160109, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804432949807160109, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 33.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8725049969056834168, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
       propertyPath: m_Name
       value: CentralTower
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6804432949807160109, guid: 737e7c27e0b0f014b8fafcabf93865a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 737e7c27e0b0f014b8fafcabf93865a7, type: 3}
 --- !u!4 &804796288489748120 stripped
 Transform:

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4985674206888800058}
   - component: {fileID: -4132647877644479072}
   - component: {fileID: 7636268139417055970}
+  - component: {fileID: 6217483007441088821}
   m_Layer: 0
   m_Name: 0BuildingBase
   m_TagString: Untagged
@@ -117,3 +118,16 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!65 &6217483007441088821
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725049969056834168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

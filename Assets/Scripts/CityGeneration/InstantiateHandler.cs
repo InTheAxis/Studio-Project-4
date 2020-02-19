@@ -62,6 +62,14 @@ public class InstantiateHandler : MonoBehaviour
         return instantiated;
     }
 
+    public static GameObject mInstantiate(GameObject go, Transform parent, string layer)
+    {
+        GameObject instantiated = mInstantiate(go);
+        instantiated.transform.parent = parent;
+        instantiated.layer = LayerMask.NameToLayer(layer);
+        return instantiated;
+    }
+
     public static GameObject mInstantiate(GameObject go, Vector3 localPos, Transform parent)
     {
         GameObject instantiated = mInstantiate(go);
@@ -74,6 +82,14 @@ public class InstantiateHandler : MonoBehaviour
     {
         GameObject instantiated = mInstantiate(go, pos, rot);
         instantiated.transform.parent = parent;
+        return instantiated;
+    }
+
+    public static GameObject mInstantiate(GameObject go, Vector3 pos, Quaternion rot, Transform parent, string layer)
+    {
+        GameObject instantiated = mInstantiate(go, pos, rot);
+        instantiated.transform.parent = parent;
+        instantiated.layer = LayerMask.NameToLayer(layer);
         return instantiated;
     }
 }

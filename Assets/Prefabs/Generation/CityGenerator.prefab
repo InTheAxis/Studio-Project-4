@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5890597338796914725}
   - component: {fileID: 5890597338796914724}
   - component: {fileID: 5809545488305829278}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CityGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5890597339044720972}
   - component: {fileID: 5890597339044720963}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RoadGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7976648869096780611}
   - component: {fileID: 5518757484286636409}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BuildingGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

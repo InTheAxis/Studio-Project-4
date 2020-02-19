@@ -30,7 +30,7 @@ public class BuildingGenerator : Generator
         foreach (Vector3 pos in poisson.GetPoints())
         {
             GameObject buildingRef = cityScriptable.SelectMesh();
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform);
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform, "Environment");
             building.transform.position = pos;
             building.AddComponent<BuildingCollisionScript>();
             building.GetComponent<ProceduralBuilding>().GenerateRandom();

@@ -66,7 +66,7 @@ public class ProceduralBuilding : MonoBehaviour
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
                 //if (!meshRef.GetComponent<PhotonView>())
                 //    meshRef.AddComponent<PhotonView>();
-                GameObject attachment = InstantiateHandler.mInstantiate(meshRef, attachmentRoot.transform);
+                GameObject attachment = InstantiateHandler.mInstantiate(meshRef, attachmentRoot.transform, "Environment");
                 attachment.transform.position = slot.position;
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
