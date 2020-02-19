@@ -41828,21 +41828,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6705662069046097736, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
-        type: 3}
-      propertyPath: initialCamDist
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6705662069046097736, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
-        type: 3}
-      propertyPath: targetCamDist
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6705662069046097736, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
-        type: 3}
-      propertyPath: adjustOffset
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6705662069046097741, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -49712,7 +49697,7 @@ GameObject:
   - component: {fileID: 1686342733}
   - component: {fileID: 1686342732}
   - component: {fileID: 1686342731}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55407,6 +55392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18e7df20976080a449f3929f71bdbd98, type: 3}

@@ -128,11 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd65fd6150696e429d4164765f67c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookTargets: []
   charControl: {fileID: 0}
-  targetCamDist: 5
-  moveCloserDuration: 1
-  initialCamDist: 3
+  lookTargets: []
+  targetCamDist: 1.4
+  initialCamDist: 1.5
   mask:
     serializedVersion: 2
     m_Bits: 10295

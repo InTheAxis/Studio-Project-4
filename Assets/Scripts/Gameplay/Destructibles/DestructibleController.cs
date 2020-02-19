@@ -61,7 +61,7 @@ public class DestructibleController : MonoBehaviour
                         holdPositions.Add(targetPos);
                     }
                     isPulling = true;
-                    playerController.disableMovement = true;
+                    playerController.disableKeyInput = true;
                 }
             }
         }
@@ -123,7 +123,7 @@ public class DestructibleController : MonoBehaviour
                     Debug.Log("Throw!");
                     canThrow = false;
                 }
-                playerController.disableMovement = false;
+                playerController.disableKeyInput = false;
 
             }
         }
