@@ -7,6 +7,8 @@ public class RoadGenerator : Generator
     //
     public SpriteRenderer sprite;
 
+    public float scaleMultiplier = 1.5f;
+
     //
     public int resolution = 100;
 
@@ -482,7 +484,7 @@ public class RoadGenerator : Generator
             float currentLength = 0;
             while (currentLength < pathLength)
             {
-                float distance = Random.Range(sub.minDist * scale, sub.maxDist);
+                float distance = Random.Range(sub.minDist, sub.maxDist) * scale * scaleMultiplier;
                 currentLength += distance;
                 if (currentLength > pathLength)
                     break;
@@ -490,7 +492,7 @@ public class RoadGenerator : Generator
                 //    break;
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
-                float subpathLength = Random.Range(sub.minLength, sub.maxLength) * scale;
+                float subpathLength = Random.Range(sub.minLength, sub.maxLength) * scale * scaleMultiplier;
                 roadSubPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2));
             }
         }
@@ -505,7 +507,7 @@ public class RoadGenerator : Generator
             float currentLength = 0;
             while (currentLength < pathLength)
             {
-                float distance = Random.Range(subdivision.minDist, subdivision.maxDist) * scale;
+                float distance = Random.Range(subdivision.minDist, subdivision.maxDist) * scale * scaleMultiplier;
                 currentLength += distance;
                 if (currentLength > pathLength)
                     break;
@@ -513,7 +515,7 @@ public class RoadGenerator : Generator
                 //    break;
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
-                float subpathLength = Random.Range(subdivision.minLength, subdivision.maxLength) * scale;
+                float subpathLength = Random.Range(subdivision.minLength, subdivision.maxLength) * scale * scaleMultiplier;
                 roadMinorPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2));
             }
         }
@@ -526,11 +528,11 @@ public class RoadGenerator : Generator
         if (sprite)
         {
             sprite.sprite = Sprite.Create(voronoi.GetVoronoiTexture(), new Rect(0, 0, resolution, resolution), Vector2.one * 0.5f);
-            sprite.GetComponent<Transform>().localScale = (Vector3.one * scale);
+            sprite.GetComponent<Transform>().localScale = (Vector3.one * scale * scaleMultiplier);
         }
         //
         // scale voronoi
-        voronoi.Scale(scale);
+        voronoi.Scale(scale * scaleMultiplier);
         //
         // Path central road
         Vector3 center = new Vector3();

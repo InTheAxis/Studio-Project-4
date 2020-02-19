@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4706646000120290610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4080677318420839248}
+  - component: {fileID: 899756740256859345}
+  m_Layer: 13
+  m_Name: TowerGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4080677318420839248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706646000120290610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5890597338796914725}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899756740256859345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706646000120290610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb44cacda2ee054996e568d11654c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerRef: {fileID: 7438366991310282751, guid: 2f474fe128ee42e4eaa2431f513be027,
+    type: 3}
 --- !u!1 &5890597338796914779
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +75,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5890597339044720972}
+  - {fileID: 4080677318420839248}
   - {fileID: 7976648869096780611}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,9 +95,11 @@ MonoBehaviour:
   generators:
   - generator: {fileID: 5890597339044720963}
     enabled: 1
+  - generator: {fileID: 899756740256859345}
+    enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  scale: 709.6
+  scale: 250
   generateOnStart: 0
 --- !u!114 &5809545488305829278
 MonoBehaviour:
@@ -110,22 +158,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
+  scaleMultiplier: 1
   resolution: 100
-  centerBuffer: 0.168
+  centerBuffer: 0.451
   cleanUp: 1
   RoadRef: {fileID: 3848365652827750180, guid: d69dd2ffe54851f459813e99f277bf16, type: 3}
-  density: 22
-  length: 145.01
+  density: 17
+  length: 139.3
   sub:
-    minDist: 0.27
-    maxDist: 0.633
-    minLength: 0.102
-    maxLength: 0.41
+    minDist: 0.184
+    maxDist: 0.534
+    minLength: 0.266
+    maxLength: 0.64
   minor:
-    minDist: 0.021
-    maxDist: 0.102
-    minLength: 0.108
-    maxLength: 0.292
+    minDist: 0.062
+    maxDist: 0.148
+    minLength: 0.219
+    maxLength: 0.442
 --- !u!1 &8648323486281425896
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5518757484286636409
 MonoBehaviour:
@@ -170,6 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityScriptable: {fileID: 11400000, guid: 34a27c6468b51724d895c1e1d36fdd82, type: 2}
-  density: 712
-  buffer: 0.016
+  towerGenerator: {fileID: 899756740256859345}
+  density: 426
+  buffer: 0.038
   centerBuffer: 0.152
+  towerBuffer: 0.254

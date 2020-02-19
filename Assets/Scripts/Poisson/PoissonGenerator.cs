@@ -7,6 +7,12 @@ public struct PoissonPoint
     public PoissonPoint(Vector3 pos, float r)
     {
         radius = r;
+        this.pos = new Vector3(pos.x, pos.z, 0);
+    }
+
+    public PoissonPoint(Vector2 pos, float r)
+    {
+        radius = r;
         this.pos = pos;
     }
 
@@ -19,6 +25,7 @@ public class PoissonGenerator
     private List<PoissonPoint> points = new List<PoissonPoint>();
     private List<PoissonPoint> xzPoints = new List<PoissonPoint>();
     private List<PoissonPoint> injected = new List<PoissonPoint>();
+    private float scale = 1;
 
     public void Inject(PoissonPoint poissonPoint)
     {
@@ -32,6 +39,7 @@ public class PoissonGenerator
 
     public void Scale(float scale)
     {
+        this.scale = scale;
         for (int i = 0; i < points.Count; ++i)
         {
             PoissonPoint scaled = points[i];
@@ -45,6 +53,15 @@ public class PoissonGenerator
     public List<PoissonPoint> GetPoints()
     {
         return xzPoints;
+    }
+
+    public List<PoissonPoint> GetPoints(int startIndex)
+    {
+        if (xzPoints.Count < startIndex)
+        {
+            return xzPoints;
+        }
+        return xzPoints.GetRange(startIndex, xzPoints.Count - startIndex);
     }
 
     private void SetToXZ()
@@ -67,6 +84,12 @@ public class PoissonGenerator
         }
     }
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="density"></param>
+    /// <param name="radius"></param>
+    /// <returns>return true if density was generated. false if less then the density was generated</returns>
     public bool Generate(int density, float radius)
     {
         points.Clear();
@@ -79,7 +102,7 @@ public class PoissonGenerator
         {
             ++attempts;
 
-            Vector3 point;
+            Vector2 point;
             point = Random.insideUnitCircle;
             bool add = true;
             foreach (PoissonPoint checkPoint in points)
@@ -101,5 +124,17 @@ public class PoissonGenerator
         if (numGenerated < density)
             return false;
         return true;
+    }
+
+    /// <summary>
+    /// Generate points based on density. Buffer between points are generated and multiplied by an optional multiplier.
+    /// </summary>
+    /// <param name="density"></param>
+    /// <param name="multiplier"></param>
+    /// <returns></returns>
+    public bool GenerateDensity(int density, float multiplier = 0.8f)
+    {
+        float radius = 2 / (float)density * multiplier;
+        return Generate(density, radius);
     }
 }

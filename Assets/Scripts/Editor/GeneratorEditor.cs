@@ -10,7 +10,7 @@ public class BuildingGeneratorEditor : Editor
     {
         base.OnInspectorGUI();
 
-        BuildingGenerator script = (BuildingGenerator)target;
+        Generator script = (Generator)target;
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Generate"))
@@ -19,7 +19,7 @@ public class BuildingGeneratorEditor : Editor
         }
         if (GUILayout.Button("Clear"))
         {
-            script.Generate();
+            script.Clear();
         }
         GUILayout.EndHorizontal();
     }
@@ -32,7 +32,7 @@ public class RoadGeneratorEditor : Editor
     {
         base.OnInspectorGUI();
 
-        RoadGenerator script = (RoadGenerator)target;
+        Generator script = (Generator)target;
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Generate"))
@@ -41,7 +41,29 @@ public class RoadGeneratorEditor : Editor
         }
         if (GUILayout.Button("Clear"))
         {
+            script.Clear();
+        }
+        GUILayout.EndHorizontal();
+    }
+}
+
+[CustomEditor(typeof(TowerGenerator))]
+public class TowerGeneratorEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        Generator script = (Generator)target;
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Generate"))
+        {
             script.Generate();
+        }
+        if (GUILayout.Button("Clear"))
+        {
+            script.Clear();
         }
         GUILayout.EndHorizontal();
     }

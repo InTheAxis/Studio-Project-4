@@ -6,6 +6,8 @@ public class BuildingGenerator : Generator
 {
     private PoissonGenerator poisson = new PoissonGenerator();
     public CityScriptable cityScriptable;
+    public TowerGenerator towerGenerator;
+    // public float roadSearchRange = 15;
 
     [Range(0, 1000)]
     public int density = 5;
@@ -15,6 +17,9 @@ public class BuildingGenerator : Generator
 
     [Range(0, 1)]
     public float centerBuffer = 0.1f;
+
+    [Range(0, 1)]
+    public float towerBuffer = 0.1f;
 
     public override void Clear()
     {
@@ -26,23 +31,33 @@ public class BuildingGenerator : Generator
 
     public override void Generate()
     {
+        Clear();
         poisson.ClearInjected();
         poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
-        poisson.Generate(density, buffer);
-        poisson.Scale(scale / 2);
-        int skipNum = 2;
-        int currentNum = 0;
-        foreach (PoissonPoint pos in poisson.GetPoints())
+        foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
-            ++currentNum;
-            if (currentNum <= skipNum)
-                continue;
+            poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer));
+        }
+        poisson.Generate(density, buffer);
+        poisson.Scale(scale);
+        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + 1))
+        {
             GameObject buildingRef = cityScriptable.SelectMesh();
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform, "Environment");
             building.transform.position = pos.pos;
-            building.AddComponent<BuildingCollisionScript>();
+            //building.AddComponent<BuildingCollisionScript>();
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
+            // check for road
+            Collider[] colls = Physics.OverlapSphere(new Vector3(building.transform.position.x, 0, building.transform.position.z), buffer * scale);
+            foreach (Collider col in colls)
+            {
+                if (col.tag == "Road")
+                {
+                    building.SetActive(false);
+                    break;
+                }
+            }
         }
     }
 
@@ -51,6 +66,12 @@ public class BuildingGenerator : Generator
         foreach (Transform trans in transform)
         {
             Gizmos.DrawWireSphere(trans.position, buffer * scale);
+        }
+        Gizmos.color = Color.red;
+        foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
+        {
+            // poisson.Inject(new PoissonPoint(point.pos, towerBuffer));
+            Gizmos.DrawWireSphere(point.pos, towerBuffer * scale);
         }
     }
 }

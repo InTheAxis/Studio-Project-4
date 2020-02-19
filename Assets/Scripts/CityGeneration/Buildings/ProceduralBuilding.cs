@@ -12,6 +12,7 @@ public class ProceduralBuilding : MonoBehaviour
     // references
     public GameObject rootRef;
 
+    public bool GenerateOnStart = false;
     public GameObject attachmentBaseRef;
 
     // owned by gameobject
@@ -29,6 +30,12 @@ public class ProceduralBuilding : MonoBehaviour
         //        instantiateFunction = PrefabUtility.InstantiatePrefab;
         //        instantiateAsChildFunction = PrefabUtility.InstantiatePrefab;
         //#endif
+    }
+
+    private void Start()
+    {
+        if (GenerateOnStart)
+            Generate();
     }
 
     // Remove all current attachments

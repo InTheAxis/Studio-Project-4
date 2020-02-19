@@ -40,6 +40,7 @@ public class Voronoi
     {
         return xzCentroids;
     }
+
     public PoissonGenerator GetPoisson()
     {
         return poisson;
@@ -104,7 +105,7 @@ public class Voronoi
         poisson.ClearInjected();
 
         poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
-        bool generatedPoisson = poisson.Generate(density, 0.00f);
+        bool generatedPoisson = poisson.GenerateDensity(density, 0.6f);
         List<PoissonPoint> poissonList = poisson.GetPoints();
         for (int i = 0; i < density; ++i)
         {
