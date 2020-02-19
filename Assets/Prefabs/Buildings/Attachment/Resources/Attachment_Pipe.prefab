@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4788666083655627547}
   - component: {fileID: 3706257196903965650}
   - component: {fileID: 4720902594042308758}
-  - component: {fileID: 5769388169302572699}
+  - component: {fileID: 5234126606939442950}
+  - component: {fileID: 8308539676104067535}
   m_Layer: 0
   m_Name: Attachment_Pipe
   m_TagString: Untagged
@@ -112,7 +113,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3712708847850170374, guid: 07e4cef9914524f4794e1b04d1c78df4, type: 3}
---- !u!114 &5769388169302572699
+--- !u!114 &5234126606939442950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +122,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 6505472073779054535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d4b8e5b8a2420c49bed9e050dedf33c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroyed: {fileID: 1984050211573911070, guid: 1a143aa8fc0cfa447ac8fcde7ba58ca3,
     type: 3}
+  hitParticle: {fileID: 0}
+  hitParticleSpawnChance: 0.65
   breakForce: 2
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
+--- !u!114 &8308539676104067535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6505472073779054535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

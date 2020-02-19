@@ -50,7 +50,7 @@ MonoBehaviour:
   - generator: {fileID: 5890597339044720963}
     enabled: 1
   - generator: {fileID: 5518757484286636409}
-    enabled: 0
+    enabled: 1
   scale: 10
   generateOnStart: 0
 --- !u!114 &5809545488305829278
@@ -112,7 +112,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   resolution: 100
   cleanUp: 1
-  RoadRef: {fileID: 3848365652827750180, guid: c87e9cc900e83a540a089e0d2abbdce1, type: 3}
+  RoadRef: {fileID: 3848365652827750180, guid: d69dd2ffe54851f459813e99f277bf16, type: 3}
   density: 37
   length: 160
   sub:
