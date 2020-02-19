@@ -27,6 +27,10 @@ public class CharTPController : MonoBehaviourPun
 
     [HideInInspector]
     public bool disableMovement;
+    [HideInInspector]
+    public bool disableKeyInput;
+    [HideInInspector]
+    public bool disableMouseInput;
     public float velY { private set; get; }
     public float displacement { private set; get; } //how fast im moving xz
     public Vector3 lookDir { private set; get; }
@@ -62,13 +66,30 @@ public class CharTPController : MonoBehaviourPun
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
             return;
-
-        inp.vert = Input.GetAxisRaw("Vertical");
-        inp.hori = Input.GetAxisRaw("Horizontal");
-        inp.mouseX = Input.GetAxis("Mouse X");
-        inp.mouseY = Input.GetAxis("Mouse Y");
-        inp.crouch = Input.GetAxisRaw("Crouch") != 0;
-        inp.jump = Input.GetAxisRaw("Jump") != 0;
+        if (!disableKeyInput)
+        {
+            inp.vert = Input.GetAxisRaw("Vertical");
+            inp.hori = Input.GetAxisRaw("Horizontal");
+            inp.crouch = Input.GetAxisRaw("Crouch") != 0;
+            inp.jump = Input.GetAxisRaw("Jump") != 0;
+        }
+        else 
+        {
+            inp.vert = 0;
+            inp.hori = 0;
+            inp.crouch = false;
+            inp.jump = false;
+        }
+        if (!disableMouseInput)
+        {
+            inp.mouseY = Input.GetAxis("Mouse Y");
+            inp.mouseX = Input.GetAxis("Mouse X");
+        }
+        else 
+        {
+            inp.mouseY = 0;
+            inp.mouseX = 0;
+        }
     }
 
     private void FixedUpdate()
