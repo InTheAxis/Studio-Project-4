@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3848365652827750184}
   - component: {fileID: 3848365652827750185}
   - component: {fileID: 1021593393384662259}
-  - component: {fileID: 1440215261379798767}
-  - component: {fileID: 3371604824242080494}
+  - component: {fileID: 5700699138536915955}
+  - component: {fileID: 7219924490620661449}
   m_Layer: 0
   m_Name: Road
   m_TagString: Road
@@ -95,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1440215261379798767
+--- !u!114 &5700699138536915955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,11 +113,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3371604824242080494}
+  - {fileID: 7219924490620661449}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3371604824242080494
+--- !u!114 &7219924490620661449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,4 +131,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1

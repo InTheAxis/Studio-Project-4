@@ -41,6 +41,20 @@ public class InstantiateHandler : MonoBehaviour
         return instantiated;
     }
 
+    public static GameObject mInstantiate(GameObject go, Vector3 pos, Quaternion rot)
+    {
+        GameObject instantiated = null;
+        if (sServerInstantiate)
+        {
+            instantiated = PhotonNetwork.Instantiate(go.name, pos, rot);
+        }
+        else
+        {
+            instantiated = Instantiate(go);
+        }
+        return instantiated;
+    }
+
     public static GameObject mInstantiate(GameObject go, Transform parent)
     {
         GameObject instantiated = mInstantiate(go);
@@ -56,12 +70,10 @@ public class InstantiateHandler : MonoBehaviour
         return instantiated;
     }
 
-    public static GameObject mInstantiate(GameObject go, Vector3 localPos, Quaternion localRot, Transform parent)
+    public static GameObject mInstantiate(GameObject go, Vector3 pos, Quaternion rot, Transform parent)
     {
-        GameObject instantiated = mInstantiate(go);
+        GameObject instantiated = mInstantiate(go, pos, rot);
         instantiated.transform.parent = parent;
-        instantiated.transform.position = localPos;
-        instantiated.transform.rotation = localRot;
         return instantiated;
     }
 }

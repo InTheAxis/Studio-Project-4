@@ -50,7 +50,7 @@ MonoBehaviour:
   - generator: {fileID: 5890597339044720963}
     enabled: 1
   - generator: {fileID: 5518757484286636409}
-    enabled: 1
+    enabled: 0
   scale: 10
   generateOnStart: 0
 --- !u!114 &5809545488305829278
@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae179f9963a1934a882b64c0267c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  density: 5
-  buffer: 0.1
-  buildingRef: {fileID: 1377581856287323823, guid: cce8c51a441232047b831914d0dbb040,
-    type: 3}
+  cityScriptable: {fileID: 11400000, guid: 34a27c6468b51724d895c1e1d36fdd82, type: 2}
+  density: 509
+  buffer: 0.069
