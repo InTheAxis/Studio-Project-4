@@ -26,6 +26,7 @@ public class CharTPCamera : MonoBehaviour
     private Transform nextTarget;
     private Camera cam;
     private int targetIdx;
+    private Vector3 rotatedLookDir;
     private float defaultCamDist;
     private float curCamDist;
     private float moveCloserDist;
@@ -107,7 +108,7 @@ public class CharTPCamera : MonoBehaviour
         if ((target.position - nextTarget.position).magnitude > 0)
         { 
             target.position = Vector3.Slerp(target.position, nextTarget.position, Time.deltaTime * camAdjustSpeed);
-           target.rotation = Quaternion.Slerp(target.rotation, nextTarget.rotation, Time.deltaTime * camAdjustSpeed);
+            target.rotation = Quaternion.Slerp(target.rotation, nextTarget.rotation, Time.deltaTime * camAdjustSpeed);
         }
 
         //calculate if shld move closer
@@ -118,11 +119,12 @@ public class CharTPCamera : MonoBehaviour
         if (moveCloserDist < 2)
             Debug.Log("player shld become transluscent");
 
+        rotatedLookDir = Quaternion.Euler(0, target.localEulerAngles.y, 0) * charControl.lookDir;
         //move cam
-        desiredPos = target.transform.position - (charControl.lookDir * targetCamDist);
-        transform.position = target.transform.position - (charControl.lookDir * curCamDist);
+        desiredPos = target.transform.position - (rotatedLookDir * targetCamDist);
+        transform.position = target.transform.position - (rotatedLookDir * curCamDist);
         //rotate cam
-        transform.rotation = Quaternion.LookRotation(charControl.lookDir + new Vector3(target.rotation.x, 0, target.rotation.z), Vector3.up);
+        transform.rotation = Quaternion.LookRotation(rotatedLookDir, Vector3.up);
     }
 
     private void UpdateCameraClipPoints()
