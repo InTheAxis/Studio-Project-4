@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharJumpCheck : MonoBehaviour
 {
-    //public Collider charBot;
+    public LayerMask ignore;
     public bool airborne { private set; get; }
 
     public void Jumped()
@@ -14,7 +14,7 @@ public class CharJumpCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other != charBot)
+        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
             airborne = false;        
     }
 

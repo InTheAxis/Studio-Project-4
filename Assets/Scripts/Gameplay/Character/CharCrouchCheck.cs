@@ -36,17 +36,11 @@ public class CharCrouchCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!CheckIfIgnored(other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
             canUnCrouch = false;
     }
     private void OnTriggerExit(Collider other)
     {
         canUnCrouch = true;
-    }
-    private bool CheckIfIgnored(int layerToCheck)
-    {
-        //ignore bits AND (1 bit shifted to where layer bit is)
-        //if 0 means none matched, which means ignored
-        return (ignore & (1 << layerToCheck)) != 0;
     }
 }
