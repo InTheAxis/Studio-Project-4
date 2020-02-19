@@ -13,6 +13,6 @@ public class UIStateBehaviourLoadGame : UIStateBehaviourBase
         // Therefore, do not load the level again if non-master client
         if (PhotonNetwork.IsMasterClient)
             //PhotonNetwork.LoadLevel("Character");
-            PhotonNetwork.LoadLevel("Interactables");
+            PhotonNetwork.LoadLevel("NetworkedMapGeneration");
     }
 }

@@ -1,59 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CityGenerator : MonoBehaviour
 {
-    public GameObject buildingRoot;
-    public List<Generator> generators;
+    //public List<Generator> generators;
+    public List<GeneratorData> generators;
 
     public float scale = 1;
 
-    [Range(0, 100)]
-    public int density = 5;
+    // public bool serverInstantiate = false;
 
-    [Range(0, 1)]
-    public float buffer = 0.1f;
+    public bool generateOnStart = false;
 
-    private PoissonGenerator poisson = new PoissonGenerator();
-
-    public GameObject buildingRef;
-    public bool serverInstantiate = false;
-
-    public static System.Func<Object, Object> instantiateFunction = Instantiate;
-    public static System.Func<Object, Transform, Object> instantiateAsChild = Instantiate;
-    public static System.Func<Object, Vector3, Quaternion, Object> instantiateAtPos = Instantiate;
-    public static System.Func<Object, Vector3, Quaternion, Transform, Object> instantiateAsChildPos = Instantiate;
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient && generateOnStart)
+            Generate();
+    }
 
     private void OnValidate()
     {
-        foreach (Generator generator in generators)
+        foreach (GeneratorData generator in generators)
         {
-            generator.SetScale(scale);
-        }
-        if (serverInstantiate)
-        {
-            //instantiateFunction =
-            //instantiateAsChildFunction =
-        }
-        else
-        {
-            instantiateFunction = Instantiate;
-            instantiateAsChild = Instantiate;
-            instantiateAtPos = Instantiate;
-            instantiateAsChildPos = Instantiate;
+            generator.generator.SetScale(scale);
         }
     }
 
     public void Clear()
     {
-        while (buildingRoot.transform.childCount > 0)
+        foreach (GeneratorData generator in generators)
         {
-            DestroyImmediate(buildingRoot.transform.GetChild(0).gameObject);
-        }
-        foreach (Generator generator in generators)
-        {
-            generator.Clear();
+            generator.generator.Clear();
         }
     }
 
@@ -61,35 +40,10 @@ public class CityGenerator : MonoBehaviour
     {
         Clear();
 
-        foreach (Generator generator in generators)
+        foreach (GeneratorData generator in generators)
         {
-            generator.Generate();
-        }
-
-        CreateBuildings();
-    }
-
-    private void OnDrawGizmos()
-    {
-        foreach (Transform trans in buildingRoot.transform)
-        {
-            Gizmos.DrawWireSphere(trans.position, buffer * scale * 50);
-        }
-    }
-
-    private void CreateBuildings()
-    {
-        poisson.Set(density, buffer);
-        poisson.Generate();
-        poisson.SetToXZ();
-        poisson.Scale(scale * 100 / 2);
-        foreach (Vector3 pos in poisson.GetPoints())
-        {
-            GameObject building = instantiateAsChild(buildingRef, buildingRoot.transform) as GameObject;
-            building.transform.position = pos;
-            building.AddComponent<BuildingCollisionScript>();
-            building.GetComponent<ProceduralBuilding>().GenerateRandom();
-            building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
+            if (generator.enabled)
+                generator.generator.Generate();
         }
     }
 }
