@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   meshList:
-  - mesh: {fileID: 1377581856287323823, guid: cce8c51a441232047b831914d0dbb040, type: 3}
+  - mesh: {fileID: 2722485745631932496, guid: 1608905c175216b4ab9c7763d4486769, type: 3}
     weight: 100
-    chance: 1
+    chance: 0.5
+  - mesh: {fileID: 2722485745631932496, guid: 1608905c175216b4ab9c7763d4486769, type: 3}
+    weight: 100
+    chance: 0.5

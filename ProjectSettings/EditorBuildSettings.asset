@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PreGameScene.unity
+    guid: d1d731dfda8f6ba489912bb9374f5079
+  - enabled: 1
     path: Assets/Scenes/UITest.unity
     guid: ff9a5136111bc6f4b8bab4e440d202dd
   - enabled: 1
@@ -21,12 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/UITest.unity
     guid: ff9a5136111bc6f4b8bab4e440d202dd
   - enabled: 1
-    path: Assets/Scenes/PreGameScene.unity
-    guid: d1d731dfda8f6ba489912bb9374f5079
-  - enabled: 1
     path: Assets/Scenes/Temp/Interactables.unity
     guid: b42775a300c4a3f42b2ddc1ea8729af4
   - enabled: 1
     path: Assets/Scenes/Generation/CityGenerationScene.unity
     guid: 4b9b417eb77b8664f8b645bfcee3ecb3
+  - enabled: 1
+    path: Assets/Scenes/Temp/NetworkedMapGeneration.unity
+    guid: 7706cdfb8c242a04d94ab57996e7d93f
   m_configObjects: {}
