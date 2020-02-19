@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerHealth : MonoBehaviour
+using Photon.Pun;
+public class PlayerHealth : MonoBehaviour, IPunObservable
 {
     public CharTPController charControl;
     public int maxHp = 3;
@@ -15,6 +15,22 @@ public class PlayerHealth : MonoBehaviour
     private bool invulnerable;
     private IEnumerator invulCorr;
     private IEnumerator respawnCorr;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(hp);
+            stream.SendNext(invulnerable);
+        }
+        else 
+        {
+            hp =            (int)stream.ReceiveNext();
+            invulnerable =  (bool)stream.ReceiveNext();
+        }
+    }
+
+
     private void Start()
     {
         invulCorr = respawnCorr = null;
@@ -23,9 +39,31 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        if (!dead)
+            CheckHp();
+
         //TEMP ,DO THIS ELSEWHERE
         if (Input.GetKeyDown(KeyCode.R))
             Respawn(1);
+    }
+    private void CheckHp()
+    {
+        if (hp <= 0)
+        {
+            hp = 0;
+            dead = true;
+            charControl.disableMovement = dead;
+
+            if (autoRespawnTime > 0)
+            {
+                if (respawnCorr != null)
+                    StopCoroutine(respawnCorr);
+                respawnCorr = AutoRespawn(autoRespawnTime);
+                StartCoroutine(respawnCorr);
+            }
+
+            Debug.Log("Dieded");
+        }
     }
 
     public void Respawn(float invulTime)
@@ -51,24 +89,6 @@ public class PlayerHealth : MonoBehaviour
         hp -= dmg;
 
         Debug.Log("Took dmg, hp is " + hp);
-
-        if (hp <= 0)
-        {
-            hp = 0;
-            dead = true;
-            charControl.disableMovement = dead;
-
-            if (autoRespawnTime > 0)
-            {
-                if (respawnCorr != null)
-                    StopCoroutine(respawnCorr);
-                respawnCorr = AutoRespawn(autoRespawnTime);
-                StartCoroutine(respawnCorr);
-            }
-
-            Debug.Log("Dieded");
-            //do dead tings?
-        }
     }
 
     public void SetInvulnerableTime(float dura) 
