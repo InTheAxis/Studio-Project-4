@@ -7,16 +7,19 @@ public class DestructibleController : MonoBehaviour
     [SerializeField]
     private Transform cameraTransform = null;
     [SerializeField]
+    private float pickUpMaxDistance = 6.0f;
+    [SerializeField]
     private float detectionRadius = 4.5f;
     [SerializeField]
     private LayerMask layerMask = 0;
+    
 
     [SerializeField]
     private Transform holdDestructibles = null;
 
     [SerializeField]
     private CharTPController playerController = null;
-    private Collider[] throwables;
+    private Collider[] throwables = null;
     private List<Vector3> holdPositions;
     private bool isPulling = false;
     private bool canThrow = false;
@@ -45,23 +48,39 @@ public class DestructibleController : MonoBehaviour
         {
             if (!isPulling)
             {
-                throwables = Physics.OverlapSphere(transform.position, detectionRadius, layerMask);
-                if (throwables.Length > 0)
-                {
-                    holdPositions.Clear();
-                    for(int i = 0; i < throwables.Length; ++i)
-                    {
-                        Collider collider = throwables[i];
-                        collider.attachedRigidbody.useGravity = false;
-                        //collider.attachedRigidbody.isKinematic = true;
+                RaycastHit hit;
+                bool hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, layerMask);
 
-                        Vector3 targetPos = holdDestructibles.position;
-                        targetPos += transform.right * Random.Range(-0.25f, 0.90f);
-                        targetPos.y += Random.Range(-0.10f, 0.80f);
-                        holdPositions.Add(targetPos);
+                if (hasTarget)
+                {
+
+                    throwables = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
+                    if (throwables.Length > 0)
+                    {
+                        holdPositions.Clear();
+                        for (int i = 0; i < throwables.Length; ++i)
+                        {
+                            Collider collider = throwables[i];
+                            collider.attachedRigidbody.useGravity = false;
+
+                            //Vector3 targetPos = holdDestructibles.position;
+                            //targetPos += transform.right * Random.Range(-0.25f, 0.90f);
+                            //targetPos.y += Random.Range(-0.10f, 0.80f);
+
+                            Vector3 targetPos = Vector3.zero;
+                            targetPos.x = Random.Range(-0.25f, 0.90f);
+                            targetPos.y = Random.Range(-0.10f, 0.80f);
+
+                            holdPositions.Add(targetPos);
+                        }
+                        isPulling = true;
+                        playerController.disableKeyInput = true;
                     }
-                    isPulling = true;
-                    playerController.disableKeyInput = true;
+
+                }
+                else
+                {
+                    throwables = null;
                 }
             }
         }
@@ -70,7 +89,7 @@ public class DestructibleController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
 
-            if (throwables.Length > 0)
+            if (throwables != null && throwables.Length > 0)
             {
                 if (!canThrow)
                 {
@@ -89,14 +108,14 @@ public class DestructibleController : MonoBehaviour
                 }
                 else
                 {
-                    RaycastHit hit;
-                    bool hasTarget = Physics.Raycast(cameraTransform.position + cameraTransform.forward * 5.0f, cameraTransform.forward, out hit, 100.0f);
+                    //RaycastHit hit;
+                    //bool hasTarget = Physics.Raycast(cameraTransform.position + cameraTransform.forward * 5.0f, cameraTransform.forward, out hit, 100.0f);
 
 
-                    if (hasTarget)
-                        Debug.Log("Found target");
-                    else
-                        Debug.Log("no target");
+                    //if (hasTarget)
+                    //    Debug.Log("Found target");
+                    //else
+                    //    Debug.Log("no target");
 
                     foreach (Collider collider in throwables)
                     {
@@ -108,14 +127,14 @@ public class DestructibleController : MonoBehaviour
 
                         Vector3 throwDir;
 
-                        if (hasTarget)
-                        {
-                            throwDir = (hit.point - collider.transform.position).normalized;
-                        }
-                        else
-                        {
+                        //if (hasTarget)
+                        //{
+                        //    throwDir = (hit.point - collider.transform.position).normalized;
+                        //}
+                        //else
+                        //{
                             throwDir = cameraTransform.forward;
-                        }
+                        //}
                         rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
                     }
 
@@ -128,7 +147,7 @@ public class DestructibleController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && throwables != null)
         {
             for (int i = 0; i < throwables.Length; ++i)
             {
@@ -141,16 +160,20 @@ public class DestructibleController : MonoBehaviour
                 //Vector3 offset = holdDestructibles.position - t.position;
                 //if(offset.sqrMagnitude > 2.0f)
                 ////    rb.AddForce(offset.normalized * 5.0f, ForceMode.Acceleration);
-                //Vector3 targetPos = transform.position;
-                //targetPos += transform.right * holdPositions[i].x;
-                //targetPos += transform.up * holdPositions[i].y;
-                t.position = Vector3.Slerp(t.position, holdPositions[i], Time.deltaTime * 5.0f);
+                ///
+                Vector3 targetPos = holdDestructibles.position;
+                targetPos += transform.right * holdPositions[i].x;
+                targetPos += transform.up * holdPositions[i].y;
+
+
+
+                t.position = Vector3.Slerp(t.position, targetPos, Time.deltaTime * 2.0f);
                 //else
                 //    rb.AddForce(offset.normalized * 5.0f, ForceMode.Acceleration);
                 //t.position = Vector3.Lerp(t.position, holdDestructibles.position, Time.deltaTime * 5.0f);
 
-                float sqrDistFromHolding = (holdPositions[i] - t.position).sqrMagnitude;
-                if(sqrDistFromHolding <= 2.0f)
+                float sqrDistFromHolding = (t.position - holdDestructibles.position).sqrMagnitude;
+                if(sqrDistFromHolding <= 1.5f)
                 {
                     isPulling = false;
                     canThrow = true;
