@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Road
+  - Building
   layers:
   - Default
   - TransparentFX
@@ -22,9 +24,7 @@ TagManager:
   - 
   - Interactable
   - 
-  - 
-  - 
-  - 
+  - Damagable
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2006396935
     locked: 0

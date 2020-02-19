@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharCrouchCheck : MonoBehaviour
 {
     public Collider charTop;
+    public LayerMask ignore;
     public bool crouching { private set; get; }
 
     private bool canUnCrouch;
@@ -35,7 +36,7 @@ public class CharCrouchCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other != charTop)
+        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
             canUnCrouch = false;
     }
     private void OnTriggerExit(Collider other)

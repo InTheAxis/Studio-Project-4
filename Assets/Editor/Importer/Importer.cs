@@ -43,7 +43,7 @@ public class Importer : EditorWindow
 
     private void OnEnable()
     {
-        FBXCustomImporter.convertMayaScale = true;
+        FBXCustomImporter.customImport = true;
 
 #if UNITY_EDITOR
         EditorApplication.update += OnEditorUpdate;
@@ -103,7 +103,8 @@ public class Importer : EditorWindow
         inputFileMethodIndex = EditorGUILayout.Popup("Number of Files", inputFileMethodIndex, inputFileMethod);
         EditorGUILayout.Space();
         isOverwrite = EditorGUILayout.Toggle("Overwrite Existing Assets", isOverwrite);
-        FBXCustomImporter.convertMayaScale = EditorGUILayout.Toggle("Custom FBX Import", FBXCustomImporter.convertMayaScale);
+        FBXCustomImporter.customImport = EditorGUILayout.Toggle("Custom FBX Import", FBXCustomImporter.customImport);
+        FBXCustomImporter.autoScale = EditorGUILayout.Toggle("Autoscale FBX (x100)", FBXCustomImporter.autoScale);
 
         if (inputFileMethod[inputFileMethodIndex] == "Directory")
             isIncludeDestructible = EditorGUILayout.Toggle("Include Shattered", isIncludeDestructible);
@@ -154,13 +155,36 @@ public class Importer : EditorWindow
 
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Import and Export"))
+
+        if (GUILayout.Button("Import"))
+        {
+            Import();
+            AssetDatabase.Refresh();
+            if (FBXCustomImporter.customImport)
+                importFBX();
+        }
+
+
+
+        if (GUILayout.Button("Export"))
+            ExportAll();
+
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Programmer's Only", GUILayout.MinWidth(150));
+
+        if (GUILayout.Button("Export Imported Files"))
+            Export();
+
+        if (GUILayout.Button("Package"))
         {
 
             Import();
             AssetDatabase.Refresh();
 
-            if (FBXCustomImporter.convertMayaScale)
+            if (FBXCustomImporter.customImport)
             {
                 importFBX();
                 shouldExport = true;
@@ -171,25 +195,6 @@ public class Importer : EditorWindow
             }
 
         }
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Import"))
-        {
-            Import();
-            AssetDatabase.Refresh();
-            if (FBXCustomImporter.convertMayaScale)
-                importFBX();
-        }
-
-        if (GUILayout.Button("Export All"))
-            ExportAll();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Export Only Imported"))
-            Export();
-
 
     }
 

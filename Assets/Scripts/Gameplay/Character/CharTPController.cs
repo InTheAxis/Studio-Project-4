@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class CharTPController : MonoBehaviourPun
 {
+    public List<Transform> lookTargets; //places for cam to look
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
@@ -17,6 +18,10 @@ public class CharTPController : MonoBehaviourPun
     public float crouchSpeed = 2;
     public float jumpForce = 2;
 
+    [HideInInspector]
+    public bool disableMovement;
+    public float velY { private set; get; }
+    public float displacement { private set; get; } //how fast im moving xz
     public Vector3 lookDir { private set; get; }
 
     //these are just to cache values
@@ -24,8 +29,6 @@ public class CharTPController : MonoBehaviourPun
     private Vector3 forward, right;
     private float currSpeed;
     private Vector3 moveAmt;
-
-    private string state;
 
     private struct InputData
     {
@@ -45,10 +48,8 @@ public class CharTPController : MonoBehaviourPun
         forward.Normalize();
 
         currSpeed = moveSpeed;
-
+        disableMovement = false;
         rb = GetComponent<Rigidbody>();
-
-        state = "idle";
     }
     private void Update()
     {
@@ -75,63 +76,40 @@ public class CharTPController : MonoBehaviourPun
         lookDir = Quaternion.Euler(0, inp.mouseX * mouseSens, 0) * lookDir;
         lookDir = Quaternion.AngleAxis(-inp.mouseY * mouseSens, right) * lookDir;
         lookDir.Normalize();
-        //remove y for movement
-        forward.Set(lookDir.x, 0, lookDir.z);
-        forward.Normalize();
-        right = Vector3.Cross(Vector3.up, forward);
 
-
-        crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
-        if (crouchChk.crouching)
-            currSpeed = crouchSpeed;
-        else if (jumpChk.airborne)
-            currSpeed = airSpeed;
-        else
-            currSpeed = moveSpeed;
-
-        moveAmt = (forward * inp.vert + right * inp.hori).normalized;
-
-        if (inp.jump && !jumpChk.airborne)
+        if (!disableMovement)
         {
-            jumpChk.Jumped();
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
-
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        
-        //move player
-        transform.position += moveAmt * Time.deltaTime * currSpeed;
-        //rotate player
-        transform.LookAt(transform.position + forward);
-
-        CalculateState();
-    }
+            //remove y for movement
+            forward.Set(lookDir.x, 0, lookDir.z);
+            forward.Normalize();
+            right = Vector3.Cross(Vector3.up, forward);
 
 
-    private void CalculateState()
-    {
-        if (jumpChk.airborne)
-        {
-            if (rb.velocity.y > 0)
-            {
-                if (rb.velocity.y < jumpForce)
-                    state = "hang";
-                else
-                    state = "jump";
-            }
+            crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
+            if (crouchChk.crouching)
+                currSpeed = crouchSpeed;
+            else if (jumpChk.airborne)
+                currSpeed = airSpeed;
             else
-                state = "fall";
-        }
-        else if (crouchChk.crouching)
-        {
-            state = "crouch";
-        }
-        else if (moveAmt.magnitude > 0)
-        {
-            state = "run";
-        }
-        else
-            state = "idle";
+                currSpeed = moveSpeed;
 
+            moveAmt = (forward * inp.vert + right * inp.hori).normalized;
+
+            if (inp.jump && !jumpChk.airborne)
+            {
+                jumpChk.Jumped();
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            }
+
+            velY = rb.velocity.y;
+            displacement = moveAmt.magnitude * currSpeed;
+
+            //move player
+            transform.position += moveAmt * Time.deltaTime * currSpeed;
+            //rotate player
+            transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+        }
+
+        rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides    
     }
 }
