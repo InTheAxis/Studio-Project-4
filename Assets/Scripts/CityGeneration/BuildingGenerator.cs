@@ -13,6 +13,9 @@ public class BuildingGenerator : Generator
     [Range(0, 1)]
     public float buffer = 0.1f;
 
+    [Range(0, 1)]
+    public float centerBuffer = 0.1f;
+
     public override void Clear()
     {
         while (transform.childCount > 0)
@@ -23,10 +26,17 @@ public class BuildingGenerator : Generator
 
     public override void Generate()
     {
+        poisson.ClearInjected();
+        poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
         poisson.Generate(density, buffer);
-        poisson.Scale(scale/2);
+        poisson.Scale(scale / 2);
+        int skipNum = 2;
+        int currentNum = 0;
         foreach (PoissonPoint pos in poisson.GetPoints())
         {
+            ++currentNum;
+            if (currentNum <= skipNum)
+                continue;
             GameObject buildingRef = cityScriptable.SelectMesh();
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, transform, "Environment");
             building.transform.position = pos.pos;

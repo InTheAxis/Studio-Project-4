@@ -70,6 +70,8 @@ public class ProceduralBuilding : MonoBehaviour
                 attachment.transform.position = slot.position;
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
+                if (attachment.GetComponent<ProceduralBuilding>())
+                    attachment.GetComponent<ProceduralBuilding>().Generate();
             }
         }
     }

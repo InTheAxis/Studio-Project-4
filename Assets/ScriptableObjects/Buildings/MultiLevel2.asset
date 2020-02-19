@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ebfe4f7bbf8c1544a0844e0b71c6bc8, type: 3}
-  m_Name: Default
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: MultiLevel2
   m_EditorClassIdentifier: 
   meshList:
-  - mesh: {fileID: 2722485745631932496, guid: 1608905c175216b4ab9c7763d4486769, type: 3}
-    weight: 100
-    chance: 0.86206895
+  - mesh: {fileID: 1588086149157137512, guid: 27875e263fca8a84aafd9cc3f1fde4db, type: 3}
+    weight: 32
+    chance: 0.25
   - mesh: {fileID: 3003538488365145778, guid: ce3b04768fb503d44b31b6ede2b956e7, type: 3}
-    weight: 16
-    chance: 0.13793103
+    weight: 96
+    chance: 0.75
