@@ -10,6 +10,9 @@ public class RoadGenerator : Generator
     //
     public int resolution = 100;
 
+    [Range(0, 0.5f)]
+    public float centerBuffer = 0.02f;
+
     public bool cleanUp;
 
     //
@@ -38,10 +41,19 @@ public class RoadGenerator : Generator
     [System.Serializable]
     public struct SubdivisionValue
     {
-        public float minOffset;
+        // [Range(0, 1)]
+        // public float minOffset;
+
+        [Range(0, 1)]
         public float minDist;
+
+        [Range(0, 1)]
         public float maxDist;
+
+        [Range(0, 1)]
         public float minLength;
+
+        [Range(0, 1)]
         public float maxLength;
     }
 
@@ -84,6 +96,16 @@ public class RoadGenerator : Generator
     {
         if (!voronoi.IsGenerated())
             return;
+        Gizmos.color = Color.red;
+        foreach (PoissonPoint poissonPoint in voronoi.GetPoisson().GetPoints())
+        {
+            Gizmos.DrawSphere(poissonPoint.pos, poissonPoint.radius);
+        }
+        Gizmos.color = Color.white;
+        foreach (VoronoiVertice vertice in voronoi.GetVoronoiPoints())
+        {
+            Gizmos.DrawSphere(vertice.pos, 1);
+        }
         Gizmos.color = Color.cyan;
         foreach (RoadPath path in roadInnerPaths)
         {
@@ -325,52 +347,52 @@ public class RoadGenerator : Generator
             }
         }
 
-        // remove deadend minor roads
-        for (int i = 0; i < roadMinorPaths.Count; ++i)
-        {
-            RoadPath path = roadMinorPaths[i];
-            Vector3 line1Point = path.start;
-            Vector3 line1Vec = path.dir;
-            bool hasIntersection = false;
-            //int index = -1;
-            for (int j = 0; j < roadMinorPaths.Count; ++j)
-            {
-                RoadPath path2 = roadMinorPaths[j];
-                //if (path.Equals(path2))
-                //    continue;
-                Vector3 line2Point = path2.start;
-                Vector3 line2Vec = path2.dir;
-                Vector3 intersection;
-                if (LineLineIntersection(out intersection, line1Point, line1Vec, line2Point, line2Vec))
-                {
-                    Vector3 dir = (intersection - path.start).normalized;
-                    float distIA = Vector3.Distance(intersection, path.start);
-                    float distIB = Vector3.Distance(intersection, path2.start);
-                    float lengthA = path.Length();
-                    float lengthB = path2.Length();
-                    if (distIA < lengthA && distIB < lengthB)
-                    {
-                        if (Vector3.Distance(intersection, (path.end)) < 0.5f || Vector3.Distance(intersection, (path.start)) < 0.5f)
-                        {
-                            if (Vector3.Distance(intersection, path.start) < Vector3.Distance(intersection, path.end))
-                            {
-                                path.start = intersection;
-                            }
-                            else
-                                path.end = intersection;
-                            roadMinorPaths[i] = path;
-                        }
-                        hasIntersection = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasIntersection)
-            {
-                roadMinorPaths.RemoveAt(i);
-                --i;
-            }
-        }
+        //// remove deadend minor roads
+        //for (int i = 0; i < roadMinorPaths.Count; ++i)
+        //{
+        //    RoadPath path = roadMinorPaths[i];
+        //    Vector3 line1Point = path.start;
+        //    Vector3 line1Vec = path.dir;
+        //    bool hasIntersection = false;
+        //    //int index = -1;
+        //    for (int j = 0; j < roadMinorPaths.Count; ++j)
+        //    {
+        //        RoadPath path2 = roadMinorPaths[j];
+        //        //if (path.Equals(path2))
+        //        //    continue;
+        //        Vector3 line2Point = path2.start;
+        //        Vector3 line2Vec = path2.dir;
+        //        Vector3 intersection;
+        //        if (LineLineIntersection(out intersection, line1Point, line1Vec, line2Point, line2Vec))
+        //        {
+        //            Vector3 dir = (intersection - path.start).normalized;
+        //            float distIA = Vector3.Distance(intersection, path.start);
+        //            float distIB = Vector3.Distance(intersection, path2.start);
+        //            float lengthA = path.Length();
+        //            float lengthB = path2.Length();
+        //            if (distIA < lengthA && distIB < lengthB)
+        //            {
+        //                if (Vector3.Distance(intersection, (path.end)) < 0.5f || Vector3.Distance(intersection, (path.start)) < 0.5f)
+        //                {
+        //                    if (Vector3.Distance(intersection, path.start) < Vector3.Distance(intersection, path.end))
+        //                    {
+        //                        path.start = intersection;
+        //                    }
+        //                    else
+        //                        path.end = intersection;
+        //                    roadMinorPaths[i] = path;
+        //                }
+        //                hasIntersection = true;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    if (!hasIntersection)
+        //    {
+        //        roadMinorPaths.RemoveAt(i);
+        //        --i;
+        //    }
+        //}
     }
 
     private List<GameObject> roads = new List<GameObject>();
@@ -460,12 +482,12 @@ public class RoadGenerator : Generator
             float currentLength = 0;
             while (currentLength < pathLength)
             {
-                float distance = Random.Range(sub.minDist, sub.maxDist) * scale;
+                float distance = Random.Range(sub.minDist * scale, sub.maxDist);
                 currentLength += distance;
                 if (currentLength > pathLength)
                     break;
-                if (currentLength < sub.minOffset)
-                    break;
+                //if (currentLength < sub.minOffset)
+                //    break;
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(sub.minLength, sub.maxLength) * scale;
@@ -487,8 +509,8 @@ public class RoadGenerator : Generator
                 currentLength += distance;
                 if (currentLength > pathLength)
                     break;
-                if (currentLength < subdivision.minOffset)
-                    break;
+                //if (currentLength < subdivision.minOffset)
+                //    break;
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(subdivision.minLength, subdivision.maxLength) * scale;
@@ -500,11 +522,11 @@ public class RoadGenerator : Generator
     public void GenerateMainRoads()
     {
         // generate voronoi
-        voronoi.Generate(new Vector2Int(resolution, resolution), density);
+        voronoi.Generate(new Vector2Int(resolution, resolution), density, centerBuffer);
         if (sprite)
         {
             sprite.sprite = Sprite.Create(voronoi.GetVoronoiTexture(), new Rect(0, 0, resolution, resolution), Vector2.one * 0.5f);
-            sprite.GetComponent<Transform>().localScale = (Vector3.one * 100 * scale);
+            sprite.GetComponent<Transform>().localScale = (Vector3.one * scale);
         }
         //
         // scale voronoi

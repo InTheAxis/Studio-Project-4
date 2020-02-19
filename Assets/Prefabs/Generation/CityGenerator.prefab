@@ -51,7 +51,7 @@ MonoBehaviour:
     enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  scale: 10
+  scale: 709.6
   generateOnStart: 0
 --- !u!114 &5809545488305829278
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b18d27c0e82ce4e8d18de10b718568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverInstantiate: 1
+  serverInstantiate: 0
 --- !u!1 &5890597339044720962
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,22 +111,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   resolution: 100
+  centerBuffer: 0.168
   cleanUp: 1
   RoadRef: {fileID: 3848365652827750180, guid: d69dd2ffe54851f459813e99f277bf16, type: 3}
-  density: 37
-  length: 160
+  density: 22
+  length: 145.01
   sub:
-    minOffset: 0
-    minDist: 5.3
-    maxDist: 18.6
-    minLength: 37
-    maxLength: 76.6
+    minDist: 0.27
+    maxDist: 0.633
+    minLength: 0.102
+    maxLength: 0.41
   minor:
-    minOffset: 0
-    minDist: 15.2
-    maxDist: 20.2
-    minLength: 38.9
-    maxLength: 38.2
+    minDist: 0.021
+    maxDist: 0.102
+    minLength: 0.108
+    maxLength: 0.292
 --- !u!1 &8648323486281425896
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,4 +171,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cityScriptable: {fileID: 11400000, guid: 34a27c6468b51724d895c1e1d36fdd82, type: 2}
   density: 509
-  buffer: 0.069
+  buffer: 0.035
