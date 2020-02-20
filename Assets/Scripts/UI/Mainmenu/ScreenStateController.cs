@@ -132,13 +132,22 @@ public class ScreenStateController : MonoBehaviour
         }
         else if (name == "Login")
         {
-            /* Integrate Playfab Login */
+            /* Integrate Playfab Login */ // Done //
             tmLoginStatus.text = "Connecting...";
 
-            setScene(ScreenStates.MAINMENU);
+            PlayfabAuthenticator playfabAuthenticator = (PlayfabAuthenticator)DoNotDestroySingleton<PlayfabAuthenticator>.instance;
+            playfabAuthenticator.Login(tmLoginUsername.text, tmLoginPassword.text,
+                playerName =>
+                {
+                    setScene(ScreenStates.MAINMENU);
+                }, (errorMsg, errorType) =>
+                {
+                    // TODO: Handle error
+                });
         }
         else if (name == "Register")
         {
+            // Elson TODO: Ensure all fields must be filled before allowing register
 
             /* Password mismatch */
             if (!tmRegisterPassword.text.Equals(tmRegisterConfirm.text))
@@ -148,14 +157,22 @@ public class ScreenStateController : MonoBehaviour
             else
             {
                 tmRegisterStatus.text = "Registering";
-                /* Integrate Playfab Register */
-
+                /* Integrate Playfab Register */ // Done //
+                PlayfabAuthenticator playfabAuthenticator = (PlayfabAuthenticator)DoNotDestroySingleton<PlayfabAuthenticator>.instance;
+                playfabAuthenticator.Register(tmRegisterUsername.text, tmRegisterPassword.text, tmRegisterEmail.text,
+                    playerName =>
+                    {
+                        setScene(ScreenStates.MAINMENU);
+                    }, (errorMsg, errorType) =>
+                    {
+                        // TODO: Handle error
+                    });
             }
 
         }
         else if (name == "Logout")
         {
-            /* Integrate Playfab Logout */
+            /* Integrate Playfab Logout */ // Not Required on playfab side, just requires interfacing with PlayfabAuthenticator login() / register() again //
 
             setScene(ScreenStates.LOGIN);
             buttonMask.Begin(buttonMaskStartY);
