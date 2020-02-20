@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     private GameObject humanPrefab;
     [SerializeField]
     private GameObject monsterPrefab;
-    [SerializeField]
-    private CharTPCamera playerCamera;
 
     public static GameObject playerObj = null;
 

@@ -220,13 +220,14 @@ MonoBehaviour:
   - {fileID: 725928543837572732}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
-  moveSpeed: 5
+  moveSpeed: 70
+  deccel: 10
+  airMoveSpeed: 25
+  crouchSpeed: 35
+  jumpSpeed: 6
   mouseSens: 2
   maxLookY: 0.9
   initialLookY: -0.5
-  airSpeed: 3
-  crouchSpeed: 2
-  jumpForce: 5
   disableMovement: 0
   disableKeyInput: 0
   disableMouseInput: 0
