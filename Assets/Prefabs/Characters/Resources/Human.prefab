@@ -86,7 +86,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!95 &5488716603191071706
 Animator:
   serializedVersion: 3
@@ -230,6 +230,7 @@ MonoBehaviour:
   disableMovement: 0
   disableKeyInput: 0
   disableMouseInput: 0
+  rb: {fileID: 0}
 --- !u!114 &2583123244670909703
 MonoBehaviour:
   m_ObjectHideFlags: 0

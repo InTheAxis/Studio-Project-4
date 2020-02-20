@@ -31,13 +31,15 @@ public class CharTPController : MonoBehaviourPun
     public bool disableKeyInput;
     [HideInInspector]
     public bool disableMouseInput;
+    public Vector3 position { get { return transform.position; } }
+    public Vector3 forward { get { return transform.forward; } }
     public float velY { private set; get; }
     public float displacement { private set; get; } //how fast im moving xz
     public Vector3 lookDir { private set; get; }
 
     //these are just to cache values
     private Rigidbody rb;
-    private Vector3 forward, right;
+    private Vector3 pforward, right;
     private float currSpeed;
     private Vector3 moveAmt;
 
@@ -53,10 +55,10 @@ public class CharTPController : MonoBehaviourPun
     {
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);
 
-        forward = transform.forward;
-        forward.y = 0;
-        lookDir = new Vector3(forward.x, initialLookY, forward.z).normalized;
-        forward.Normalize();
+        pforward = transform.forward;
+        pforward.y = 0;
+        lookDir = new Vector3(pforward.x, initialLookY, pforward.z).normalized;
+        pforward.Normalize();
 
         currSpeed = moveSpeed;
         disableMovement = false;
@@ -108,9 +110,9 @@ public class CharTPController : MonoBehaviourPun
         if (!disableMovement)
         {
             //remove y for movement
-            forward.Set(lookDir.x, 0, lookDir.z);
-            forward.Normalize();
-            right = Vector3.Cross(Vector3.up, forward);
+            pforward.Set(lookDir.x, 0, lookDir.z);
+            pforward.Normalize();
+            right = Vector3.Cross(Vector3.up, pforward);
 
 
             crouchChk.Crouch(inp.crouch && !jumpChk.airborne);
@@ -121,7 +123,7 @@ public class CharTPController : MonoBehaviourPun
             else
                 currSpeed = moveSpeed;
 
-            moveAmt = (forward * inp.vert + right * inp.hori).normalized;
+            moveAmt = (pforward * inp.vert + right * inp.hori).normalized;
 
             velY = rb.velocity.y;
             displacement = moveAmt.magnitude * currSpeed;
@@ -134,9 +136,14 @@ public class CharTPController : MonoBehaviourPun
             //move player
             transform.position += moveAmt * Time.deltaTime * currSpeed;
             //rotate player
-            transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(pforward, Vector3.up);
         }
 
         rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides    
+    }
+
+    public void Move(Vector3 pos)
+    {
+        rb.MovePosition(pos);
     }
 }

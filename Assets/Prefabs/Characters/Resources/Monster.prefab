@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3146806608644952389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 503732970861024143}
+  - component: {fileID: 8559563586247774976}
+  - component: {fileID: 2727105021364358267}
+  m_Layer: 8
+  m_Name: ChargeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &503732970861024143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146806608644952389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.097, z: 0.609}
+  m_LocalScale: {x: 0.37152028, y: 1.3633095, z: 0.08926941}
+  m_Children: []
+  m_Father: {fileID: 3402467719232319711}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8559563586247774976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146806608644952389}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2727105021364358267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146806608644952389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07996151e6e7fd741bfff32a0517ec48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignore:
+    serializedVersion: 2
+    m_Bits: 657975
 --- !u!1 &9117360599836359461
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,6 +80,7 @@ GameObject:
   - component: {fileID: 5071471449440821494}
   - component: {fileID: 6066984036327698655}
   - component: {fileID: 4943199071075631875}
+  - component: {fileID: 3023660623748070}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
@@ -57,7 +118,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!95 &5488716603191071706
 Animator:
   serializedVersion: 3
@@ -268,6 +329,26 @@ MonoBehaviour:
   health: {fileID: 5071471449440821494}
   maxEnergy: 100
   decayRate: 1
+--- !u!114 &3023660623748070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4988c8b5a29be149841b69e6d43de50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charControl: {fileID: 9117360599836359451}
+  ener: {fileID: 4943199071075631875}
+  chargeChk: {fileID: 2727105021364358267}
+  enerConsumption: 0
+  duration: 0.5
+  chargeDist: 70
+  delay: 0.5
+  acceleration: 2
 --- !u!1001 &8226840309704502532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,6 +480,12 @@ Transform:
 --- !u!4 &4587674632494762186 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226840309704502532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3402467719232319711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6709349633310481883, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 8226840309704502532}
   m_PrefabAsset: {fileID: 0}

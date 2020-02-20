@@ -14,7 +14,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
     private float autoRespawnTime = 3; //set to negative if dont want auto
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
-    
+
+    public System.Action OnRespawn;
     public bool dead { private set; get; }
     
     private int hp;
@@ -79,6 +80,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         respawnCorr = null;
         hp = maxHp;
         dead = false;
+        OnRespawn();
         charControl.disableMovement = dead;
         SetInvulnerableTime(invulTime);
     }

@@ -13,6 +13,16 @@ public class MonsterEnergy : MonoBehaviour
 
     private float energy;
 
+    private void OnEnable()
+    {
+        health.OnRespawn += RechargeFull;
+    }
+
+    private void OnDisable()
+    {
+        health.OnRespawn -= RechargeFull;
+    }
+
     private void Start()
     {
         RechargeFull();
@@ -28,13 +38,29 @@ public class MonsterEnergy : MonoBehaviour
             energy -= 1.0f;
             if (energy <= 0)
             {
-                health.SetInvulnerable(false);
-                Debug.Log("Lost all energy");
+                NoMoreEnergy();
             }
             Debug.Log("Energy at " +  energy);
         }
     }
 
+    private void NoMoreEnergy()
+    {
+        health.SetInvulnerable(false);
+        Debug.Log("Lost all energy");
+    }
+    public bool UseUp(float amt)
+    {
+        if (energy < amt)
+            return false;
+
+        energy -= amt;
+        if (energy <= 0)
+        {
+            NoMoreEnergy();
+        }
+        return true;
+    }
     public void Recharge(float amt)
     {
         energy += amt;
