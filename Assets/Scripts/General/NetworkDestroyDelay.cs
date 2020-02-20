@@ -13,7 +13,6 @@ public class NetworkDestroyDelay : MonoBehaviour
         delay -= Time.deltaTime;
         if (delay <= 0.0f && !destroyed)
         {
-            Debug.LogError(PhotonView.Get(this).ViewID);
             NetworkOwnership.instance.destroy(PhotonView.Get(this));
             destroyed = true;
         }
