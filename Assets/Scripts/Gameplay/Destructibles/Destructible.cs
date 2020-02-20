@@ -6,10 +6,9 @@ using Photon.Realtime;
 
 public class Destructible : MonoBehaviour
 {
-
-
     [Header("General")]
-    public GameObject destroyed = null;
+    [SerializeField]
+    public List<GameObject> destroyed = null;
 
     [Header("Visuals")]
     [SerializeField]
@@ -29,10 +28,12 @@ public class Destructible : MonoBehaviour
     [SerializeField]
     private Vector3 minExplosionForce = new Vector3(1.0f, 1.0f, 1.0f);
     [SerializeField]
-
     private Vector3 maxExplosionForce = new Vector3(2.0f, 2.0f, 2.0f);
 
     private float sqrBreakForce = 0.0f;
+
+    // To prevent multiple Destruct() calls before PhotonNetwork comes around to removing this gameobject
+    private bool isDestroyed = false;
 
     private void Start()
     {
@@ -41,12 +42,14 @@ public class Destructible : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        PhotonView thisView = PhotonView.Get(this);
-        if (!NetworkOwnership.objectIsOwned(thisView))
+        if (!PhotonNetwork.IsMasterClient)
             return;
 
-        if (collision.relativeVelocity.magnitude >= sqrBreakForce)
+        if (!isDestroyed && collision.relativeVelocity.magnitude >= sqrBreakForce)
+        {
+            isDestroyed = true;
             Destruct(collision);
+        }
 
     }
 
@@ -59,11 +62,26 @@ public class Destructible : MonoBehaviour
     private void Destruct(Collision collision)
     {
         /* Instantiate shattered clone */
-        GameObject target = destroyed;
+        //GameObject target = destroyed;
         //GameObject clone = Instantiate(target, transform.position, transform.rotation);
-        GameObject clone = PhotonNetwork.Instantiate(target.name, transform.position, transform.rotation);
-        clone.transform.localRotation = transform.localRotation;
-        clone.transform.localScale = transform.localScale;
+        foreach (GameObject target in destroyed)
+        {
+            GameObject clone = PhotonNetwork.InstantiateSceneObject(target.name, transform.position + target.transform.position, transform.rotation);
+            clone.transform.localRotation = transform.localRotation;
+            clone.transform.localScale = transform.localScale;
+
+            Rigidbody cloneRigidbody = clone.GetComponent<Rigidbody>();
+
+            Vector3 velocity;
+            velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
+            velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
+            velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
+            velocity.Normalize();
+            velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
+            velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
+            velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
+            cloneRigidbody.velocity = velocity;
+        }
 
         /* Instantiate particle hit */
         //if(Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
@@ -86,20 +104,6 @@ public class Destructible : MonoBehaviour
         //        Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
         //    }
         //}
-
-        Rigidbody[] rigidbodies = clone.GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rb in rigidbodies)
-        {
-            Vector3 velocity;
-            velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
-            velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
-            velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
-            velocity.Normalize();
-            velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
-            velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
-            velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
-            rb.velocity = velocity;
-        }
 
         //Destroy(gameObject);
         NetworkOwnership.instance.destroy(PhotonView.Get(gameObject));

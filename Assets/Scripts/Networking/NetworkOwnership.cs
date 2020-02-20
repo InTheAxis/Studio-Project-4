@@ -26,9 +26,10 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
         else
             Debug.LogError("NetworkOwnership instantiated more than once! This should not happen");
     }
-    
+
     public static bool objectIsOwned(PhotonView view)
     {
+        Debug.Log("Master ID " + PhotonNetwork.MasterClient.ActorNumber + " Local ID " + PhotonNetwork.LocalPlayer.ActorNumber + " View Owner ID " + view.Owner?.ActorNumber);
         return (view.Owner == null && PhotonNetwork.IsMasterClient) || (view.Owner?.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
@@ -38,7 +39,12 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
         if ((obj.Owner == null && PhotonNetwork.IsMasterClient) || (obj.Owner != null && obj.Owner.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber))
             PhotonNetwork.Destroy(obj);
         else
-            photonView.RPC("destroy", obj.Owner, obj);
+            photonView.RPC("rpcDestroy", obj.Owner, obj.ViewID);
+    }
+    [PunRPC]
+    private void rpcDestroy(int viewID)
+    {
+        PhotonNetwork.Destroy(PhotonView.Find(viewID));
     }
 
     // Never tested. No guarantees that this works lol
