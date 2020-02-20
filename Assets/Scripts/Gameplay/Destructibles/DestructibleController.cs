@@ -82,28 +82,6 @@ public class DestructibleController : MonoBehaviourPun
 
                 if (hasTarget)
                 {
-<<<<<<< HEAD
-
-                    throwables = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
-                    if (throwables.Length > 0)
-                    {
-                        holdPositions.Clear();
-                        for (int i = 0; i < throwables.Length; ++i)
-                        {
-                            Collider collider = throwables[i];
-                            collider.attachedRigidbody.useGravity = false;
-
-                            //Vector3 targetPos = holdDestructibles.position;
-                            //targetPos += transform.right * Random.Range(-0.25f, 0.90f);
-                            //targetPos.y += Random.Range(-0.10f, 0.80f);
-
-                            Vector3 targetPos = Vector3.zero;
-                            targetPos.x = Random.Range(-0.25f, 0.90f);
-                            targetPos.y = Random.Range(-0.10f, 0.80f);
-
-                            holdPositions.Add(targetPos);
-                        }
-=======
                     Collider[] collisions;
                     collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
                     throwables = new List<Collider>(collisions);
@@ -120,7 +98,6 @@ public class DestructibleController : MonoBehaviourPun
                         for (int i = 0; i < throwables.Count; ++i)
                             setupThrowable(throwables[i]);
 
->>>>>>> origin/Kendrick
                         isPulling = true;
                         playerController.disableKeyInput = true;
                     }
@@ -136,12 +113,7 @@ public class DestructibleController : MonoBehaviourPun
         // Release the destructibles
         if (Input.GetMouseButtonUp(0))
         {
-
-<<<<<<< HEAD
-            if (throwables != null && throwables.Length > 0)
-=======
             if (throwables != null && throwables.Count > 0)
->>>>>>> origin/Kendrick
             {
                 if (!canThrow)
                 {
@@ -209,10 +181,7 @@ public class DestructibleController : MonoBehaviourPun
             }
         }
 
-<<<<<<< HEAD
-=======
         // Updating positions/rotations
->>>>>>> origin/Kendrick
         if (Input.GetMouseButton(0) && throwables != null)
         {
             for (int i = 0; i < throwables.Count; ++i)
