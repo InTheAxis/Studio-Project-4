@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Destructible : MonoBehaviour
 {
@@ -39,6 +41,10 @@ public class Destructible : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        PhotonView thisView = PhotonView.Get(this);
+        if (!NetworkOwnership.objectIsOwned(thisView))
+            return;
+
         if (collision.relativeVelocity.magnitude >= sqrBreakForce)
             Destruct(collision);
 
@@ -54,31 +60,32 @@ public class Destructible : MonoBehaviour
     {
         /* Instantiate shattered clone */
         GameObject target = destroyed;
-        GameObject clone = Instantiate(target, transform.position, transform.rotation);
+        //GameObject clone = Instantiate(target, transform.position, transform.rotation);
+        GameObject clone = PhotonNetwork.Instantiate(target.name, transform.position, transform.rotation);
         clone.transform.localRotation = transform.localRotation;
         clone.transform.localScale = transform.localScale;
 
         /* Instantiate particle hit */
-        if(Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
-        {
-            if (hitParticle != null)
-            {
-                GameObject particle = Instantiate(hitParticle);
-                particle.transform.position = collision.GetContact(0).point;
-                particle.transform.forward = collision.GetContact(0).normal;
-                particle.transform.localScale = transform.localScale;
-                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
-            }
+        //if(Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
+        //{
+        //    if (hitParticle != null)
+        //    {
+        //        GameObject particle = Instantiate(hitParticle);
+        //        particle.transform.position = collision.GetContact(0).point;
+        //        particle.transform.forward = collision.GetContact(0).normal;
+        //        particle.transform.localScale = transform.localScale;
+        //        Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+        //    }
 
-            if (dustParticles != null)
-            {
-                GameObject particle = Instantiate(dustParticles);
-                particle.transform.position = collision.GetContact(0).point;
-                particle.transform.forward = collision.GetContact(0).normal;
-                particle.transform.localScale = transform.localScale;
-                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
-            }
-        }
+        //    if (dustParticles != null)
+        //    {
+        //        GameObject particle = Instantiate(dustParticles);
+        //        particle.transform.position = collision.GetContact(0).point;
+        //        particle.transform.forward = collision.GetContact(0).normal;
+        //        particle.transform.localScale = transform.localScale;
+        //        Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+        //    }
+        //}
 
         Rigidbody[] rigidbodies = clone.GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody rb in rigidbodies)
@@ -94,7 +101,8 @@ public class Destructible : MonoBehaviour
             rb.velocity = velocity;
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        NetworkOwnership.instance.destroy(PhotonView.Get(gameObject));
     }
 
 }

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class DestructibleController : MonoBehaviour
+public class DestructibleController : MonoBehaviourPun
 {
     [SerializeField]
     private Transform cameraTransform = null;
@@ -19,11 +21,10 @@ public class DestructibleController : MonoBehaviour
 
     [SerializeField]
     private CharTPController playerController = null;
-    private Collider[] throwables = null;
+    private List<Collider> throwables = null;
     private List<Vector3> holdPositions;
     private bool isPulling = false;
     private bool canThrow = false;
-
 
     private void Start()
     {
@@ -32,19 +33,47 @@ public class DestructibleController : MonoBehaviour
 
         cameraTransform = Camera.main.transform;
 
-        if (playerController == null)
-            playerController = GetComponent<CharTPController>();
+        //if (playerController == null)
+        //    playerController = GetComponent<CharTPController>();
         //if (throwCollider == null)
         //    throwCollider = transform.Find("ThrowCheck").GetComponent<SphereCollider>();
 
+        playerController = GameManager.playerObj.GetComponent<CharTPController>();
+        if (playerController != null)
+            holdDestructibles = playerController.transform.Find("LookTarget").Find("HoldDestructibles");
+
         //throwCollider.radius = detectionRadius;
-
-
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        // Remove any destructibles currently holding that are owned by another player (other player reached destructible before us)
+        if (throwables?.Count > 0)
+        {
+            for (int i = 0; i < throwables.Count; ++i)
+            {
+                if (throwables[i] == null)
+                    continue;
+
+                PhotonView view = PhotonView.Get(throwables[i]);
+                if (view.Owner != null && view.Owner.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                {
+                    // Requiring hold positions' to have the same index as throwables'
+                    holdPositions.RemoveAt(i);
+                    throwables.RemoveAt(i--);
+                }
+            }
+            if (throwables.Count == 0)
+            {
+                // Reset player states
+                isPulling = false;
+                playerController.disableKeyInput = false;
+                canThrow = false;
+            }
+        }
+
+        // Start pulling
+        if (Input.GetMouseButtonDown(0))
         {
             if (!isPulling)
             {
@@ -53,6 +82,7 @@ public class DestructibleController : MonoBehaviour
 
                 if (hasTarget)
                 {
+<<<<<<< HEAD
 
                     throwables = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
                     if (throwables.Length > 0)
@@ -73,6 +103,24 @@ public class DestructibleController : MonoBehaviour
 
                             holdPositions.Add(targetPos);
                         }
+=======
+                    Collider[] collisions;
+                    collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
+                    throwables = new List<Collider>(collisions);
+
+                    // Don't grab objects that are already owned by other players
+                    if (throwables.Count > 0)
+                        for (int i = 0; i < throwables.Count; ++i)
+                            if (PhotonView.Get(throwables[i]).Owner != null)
+                                throwables.RemoveAt(i--);
+
+                    if (throwables.Count > 0)
+                    {
+                        holdPositions.Clear();
+                        for (int i = 0; i < throwables.Count; ++i)
+                            setupThrowable(throwables[i]);
+
+>>>>>>> origin/Kendrick
                         isPulling = true;
                         playerController.disableKeyInput = true;
                     }
@@ -85,11 +133,15 @@ public class DestructibleController : MonoBehaviour
             }
         }
 
-
+        // Release the destructibles
         if (Input.GetMouseButtonUp(0))
         {
 
+<<<<<<< HEAD
             if (throwables != null && throwables.Length > 0)
+=======
+            if (throwables != null && throwables.Count > 0)
+>>>>>>> origin/Kendrick
             {
                 if (!canThrow)
                 {
@@ -100,6 +152,11 @@ public class DestructibleController : MonoBehaviour
 
                         collider.attachedRigidbody.useGravity = true;
                         collider.attachedRigidbody.isKinematic = false;
+
+                        // Tell master client to release ownership back to scene
+                        // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
+                        PhotonView colliderView = PhotonView.Get(collider);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID);
 
                     }
                     Debug.Log("Reset throwables");
@@ -136,6 +193,11 @@ public class DestructibleController : MonoBehaviour
                             throwDir = cameraTransform.forward;
                         //}
                         rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
+
+                        // Tell master client to release ownership back to scene
+                        // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
+                        PhotonView colliderView = PhotonView.Get(collider);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID);
                     }
 
 
@@ -147,9 +209,13 @@ public class DestructibleController : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
+=======
+        // Updating positions/rotations
+>>>>>>> origin/Kendrick
         if (Input.GetMouseButton(0) && throwables != null)
         {
-            for (int i = 0; i < throwables.Length; ++i)
+            for (int i = 0; i < throwables.Count; ++i)
             {
                 Collider collider = throwables[i];
                 if (collider == null) continue;
@@ -182,13 +248,47 @@ public class DestructibleController : MonoBehaviour
 
         }
 
-
-        
-
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+
+    private void setupThrowable(Collider collider)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            NetworkOwnership.instance.transferOwnerAsMaster(PhotonView.Get(collider), PhotonNetwork.LocalPlayer);
+        else
+            photonView.RPC("destructibleRequestOwner", RpcTarget.MasterClient, PhotonView.Get(collider).ViewID);
+
+        collider.attachedRigidbody.useGravity = false;
+
+        //Vector3 targetPos = holdDestructibles.position;
+        //targetPos += transform.right * Random.Range(-0.25f, 0.90f);
+        //targetPos.y += Random.Range(-0.10f, 0.80f);
+
+        Vector3 targetPos = Vector3.zero;
+        targetPos.x = Random.Range(-0.25f, 0.90f);
+        targetPos.y = Random.Range(-0.10f, 0.80f);
+
+        holdPositions.Add(targetPos);
+    }
+
+    [PunRPC]
+    private void destructibleRequestOwner(int viewID, PhotonMessageInfo messageInfo)
+    {
+        PhotonView view = PhotonView.Find(viewID);
+        if (view.Owner == null)
+            NetworkOwnership.instance.transferOwnerAsMaster(view, messageInfo.Sender);
+    }
+    [PunRPC]
+    private void destructibleReleaseOwner(int viewID, PhotonMessageInfo messageInfo)
+    {
+        Debug.Log("Received release request");
+        PhotonView view = PhotonView.Find(viewID);
+        if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+            view.TransferOwnership(0);
     }
 }
