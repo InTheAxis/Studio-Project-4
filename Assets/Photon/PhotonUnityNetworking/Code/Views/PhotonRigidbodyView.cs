@@ -34,6 +34,8 @@ namespace Photon.Pun
         public bool m_SynchronizeAngularVelocity = false;
 
         public bool m_TeleportEnabled = false;
+
+        public bool m_SyncState = true;
         public float m_TeleportIfDistanceGreaterThan = 3.0f;
 
         public void Awake()
@@ -70,6 +72,12 @@ namespace Photon.Pun
                 {
                     stream.SendNext(this.m_Body.angularVelocity);
                 }
+
+                if (m_SyncState)
+                {
+                    stream.SendNext(m_Body.useGravity);
+                    stream.SendNext(m_Body.isKinematic);
+                }
             }
             else
             {
@@ -105,6 +113,12 @@ namespace Photon.Pun
 
                         this.m_Angle = Quaternion.Angle(this.m_Body.rotation, this.m_NetworkRotation);
                     }
+                }
+
+                if (m_SyncState)
+                {
+                    m_Body.useGravity = (bool)stream.ReceiveNext();
+                    m_Body.isKinematic = (bool)stream.ReceiveNext();
                 }
             }
         }
