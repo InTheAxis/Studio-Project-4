@@ -40,7 +40,7 @@ public class DestructibleController : MonoBehaviourPun
 
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
-            holdDestructibles = playerController.transform.Find("LookTarget").Find("HoldDestructibles");
+            holdDestructibles = playerController.transform.Find("HoldDestructibles");
 
         //throwCollider.radius = detectionRadius;
     }
