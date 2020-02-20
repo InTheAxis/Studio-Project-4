@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenStateController : MonoBehaviour
 {
@@ -36,7 +37,31 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     private float buttonHeightGap = 120.0f;
 
+    [Header("Login")]
+    [SerializeField]
+    private TMP_InputField tmLoginUsername = null;
+    [SerializeField]
+    private TMP_InputField tmLoginPassword = null;
+    [SerializeField]
+    private TextMeshProUGUI tmLoginStatus = null;
+
+    [Header("Registration")]
+    [SerializeField]
+    private TMP_InputField tmRegisterEmail = null;
+    [SerializeField]
+    private TMP_InputField tmRegisterUsername = null;
+    [SerializeField]
+    private TMP_InputField tmRegisterPassword = null;
+    [SerializeField]
+    private TMP_InputField tmRegisterConfirm = null;
+    [SerializeField]
+    private TextMeshProUGUI tmRegisterStatus = null;
+
     [Header("Server Selection")]
+    [SerializeField]
+    private GameObject registerInput = null;
+    [SerializeField]
+    private GameObject loginInput = null;
     [SerializeField]
     private GameObject hostPasswordInput = null;
     [SerializeField]
@@ -87,55 +112,103 @@ public class ScreenStateController : MonoBehaviour
         EventSystem.current.RaycastAll(eventData, raycastResults);
     }
 
+    private void setScene(ScreenStates targetState)
+    {
+        screens[(int)targetState].SetActive(true);
+        screens[(int)currentScreen].SetActive(false);
+        history.Push(currentScreen);
+        currentScreen = targetState;
+    }
+
 
     public void onButtonClick(string name)
     {
-        if(name == "Back")
+        if (name == "Back")
         {
             screens[(int)currentScreen].SetActive(false);
             currentScreen = history.Pop();
             screens[(int)currentScreen].SetActive(true);
+            buttonMask.Begin(buttonMaskStartY);
         }
-        else if(name == "MainmenuPlay")
+        else if (name == "Login")
         {
-            screens[(int)ScreenStates.SERVERSELECT].SetActive(true);
-            screens[(int)ScreenStates.MAINMENU].SetActive(false);
-            history.Push(currentScreen);
-            currentScreen = ScreenStates.SERVERSELECT;
+            /* Integrate Playfab Login */
+            tmLoginStatus.text = "Connecting...";
+
+            setScene(ScreenStates.MAINMENU);
+        }
+        else if (name == "Register")
+        {
+
+            /* Password mismatch */
+            if (!tmRegisterPassword.text.Equals(tmRegisterConfirm.text))
+            {
+                tmRegisterStatus.text = "Password Mismatch";
+            }
+            else
+            {
+                tmRegisterStatus.text = "Registering";
+                /* Integrate Playfab Register */
+
+            }
+
+        }
+        else if (name == "Logout")
+        {
+            /* Integrate Playfab Logout */
+
+            setScene(ScreenStates.LOGIN);
+            buttonMask.Begin(buttonMaskStartY);
+            loginInput.SetActive(false);
+            registerInput.SetActive(false);
+        }
+        else if (name == "MainmenuLogin")
+        {
+            loginInput.SetActive(!loginInput.activeSelf);
+            registerInput.SetActive(false);
+        }
+        else if (name == "MainmenuRegister")
+        {
+            loginInput.SetActive(false);
+            registerInput.SetActive(!registerInput.activeSelf);
+        }
+        else if (name == "MainmenuPlay")
+        {
+            setScene(ScreenStates.SERVERSELECT);
             buttonMask.Begin(buttonMaskStartY + buttonHeightGap * 3);
 
             joinPasswordInput.SetActive(false);
             hostPasswordInput.SetActive(false);
         }
-        else if(name == "MainmenuOptions")
+        else if (name == "MainmenuOptions")
         {
             buttonMask.Begin(buttonMaskStartY + buttonHeightGap * 2);
         }
-        else if(name == "MainmenuCredits")
+        else if (name == "MainmenuCredits")
         {
             buttonMask.Begin(buttonMaskStartY + buttonHeightGap * 1);
         }
         else if (name == "Exit")
         {
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #else
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
                 Application.Quit();
-            #endif
+#endif
         }
-        else if(name == "ServerSelectHost")
+        else if (name == "ServerSelectHost")
         {
             hostPasswordInput.SetActive(true);
             joinPasswordInput.SetActive(false);
 
         }
-        else if(name == "ServerJoin")
+        else if (name == "ServerJoin")
         {
             joinPasswordInput.SetActive(true);
             hostPasswordInput.SetActive(false);
 
         }
-        else if(name == "ServerJoinRandom")
+        else if (name == "ServerJoinRandom")
         {
 
         }
