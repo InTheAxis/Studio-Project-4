@@ -13,6 +13,11 @@ public class InstantiateHandler : MonoBehaviour
         sServerInstantiate = serverInstantiate;
     }
 
+    private void Start()
+    {
+        sServerInstantiate = serverInstantiate;
+    }
+
     public static GameObject mInstantiate(GameObject go)
     {
         GameObject instantiated = null;
