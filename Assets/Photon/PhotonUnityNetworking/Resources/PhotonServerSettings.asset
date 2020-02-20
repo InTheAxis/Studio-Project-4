@@ -41,9 +41,10 @@ MonoBehaviour:
   - onRequestSuccess
   - queryCarry
   - queryDrop
-  - queryUse
-  - requestAccepted
-  - requestReceived
-  - requestRejected
+  - destructibleReleaseOwner
+  - destructibleRequestOwner
+  - rpcDestroy
+  - breakApart
+  - destructibleEnsureOwnerIsReleased
   DisableAutoOpenWizard: 1
   ShowSettings: 0

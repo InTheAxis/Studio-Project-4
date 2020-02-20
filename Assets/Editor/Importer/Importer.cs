@@ -452,8 +452,8 @@ public class Importer : EditorWindow
                 meshCollider.convex = true;
 
                 /* Link to the shattered prefab, not gameobject */
-                Destructible destructible = nonShattered.AddComponent<Destructible>();
-                destructible.destroyed = (GameObject)AssetDatabase.LoadMainAssetAtPath(shatteredPrefabPath);
+                //Destructible destructible = nonShattered.AddComponent<Destructible>();
+                //destructible.destroyed = (GameObject)AssetDatabase.LoadMainAssetAtPath(shatteredPrefabPath);
 
                 /* Save non-shattered prefab */
                 PrefabUtility.SaveAsPrefabAssetAndConnect(nonShattered, nonShatteredPrefabPath, InteractionMode.AutomatedAction);

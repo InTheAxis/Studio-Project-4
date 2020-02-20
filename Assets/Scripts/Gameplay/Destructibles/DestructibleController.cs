@@ -122,13 +122,13 @@ public class DestructibleController : MonoBehaviourPun
                     {
                         if (collider == null) continue;
 
-                        collider.attachedRigidbody.useGravity = true;
-                        collider.attachedRigidbody.isKinematic = false;
+                        //collider.attachedRigidbody.useGravity = true;
+                        //collider.attachedRigidbody.isKinematic = false;
 
                         // Tell master client to release ownership back to scene
                         // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
                         PhotonView colliderView = PhotonView.Get(collider);
-                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, Vector3.zero);
 
                     }
                     Debug.Log("Reset throwables");
@@ -150,11 +150,11 @@ public class DestructibleController : MonoBehaviourPun
                     {
                         if (collider == null) continue;
 
-                        Rigidbody rb = collider.attachedRigidbody;
-                        rb.useGravity = true;
-                        rb.isKinematic = false;
+                        //Rigidbody rb = collider.attachedRigidbody;
+                        //rb.useGravity = true;
+                        //rb.isKinematic = false;
 
-                        Vector3 throwDir;
+                        //Vector3 throwDir;
 
                         //if (hasTarget)
                         //{
@@ -162,14 +162,14 @@ public class DestructibleController : MonoBehaviourPun
                         //}
                         //else
                         //{
-                            throwDir = cameraTransform.forward;
+                            //throwDir = cameraTransform.forward;
                         //}
-                        rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
+                        //rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
 
                         // Tell master client to release ownership back to scene
-                        // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
                         PhotonView colliderView = PhotonView.Get(collider);
-                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID);
+                        NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, cameraTransform.forward * 40.0f);
                     }
 
 
@@ -253,11 +253,33 @@ public class DestructibleController : MonoBehaviourPun
             NetworkOwnership.instance.transferOwnerAsMaster(view, messageInfo.Sender);
     }
     [PunRPC]
-    private void destructibleReleaseOwner(int viewID, PhotonMessageInfo messageInfo)
+    private void destructibleReleaseOwner(int viewID, Vector3 force, PhotonMessageInfo messageInfo)
     {
         Debug.Log("Received release request");
         PhotonView view = PhotonView.Find(viewID);
-        if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+        if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+        {
             view.TransferOwnership(0);
+            Rigidbody rb = view.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.AddForce(force, ForceMode.Impulse);
+            rb.WakeUp();
+        }
+        photonView.RPC("destructibleEnsureOwnerIsReleased", messageInfo.Sender, viewID);
+    }
+    [PunRPC]
+    private void destructibleEnsureOwnerIsReleased(int viewID, PhotonMessageInfo messageInfo)
+    {
+        PhotonView view = PhotonView.Find(viewID);
+        Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
+        if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+        {
+            view.TransferOwnership(0);
+            Rigidbody rb = view.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.WakeUp();
+        }
     }
 }

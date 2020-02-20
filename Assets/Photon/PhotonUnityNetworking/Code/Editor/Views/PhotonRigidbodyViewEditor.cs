@@ -38,7 +38,9 @@ namespace Photon.Pun
 
             view.m_SynchronizeVelocity = PhotonGUI.ContainerHeaderToggle("Synchronize Velocity", view.m_SynchronizeVelocity);
             view.m_SynchronizeAngularVelocity = PhotonGUI.ContainerHeaderToggle("Synchronize Angular Velocity", view.m_SynchronizeAngularVelocity);
-            
+
+            view.m_SyncState = PhotonGUI.ContainerHeaderToggle("Synchronize State (Gravity, etc.)", view.m_SyncState);
+
             if (GUI.changed)
             {
                 EditorUtility.SetDirty(view);
