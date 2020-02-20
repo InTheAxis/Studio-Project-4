@@ -39,7 +39,8 @@ public class CharTPController : MonoBehaviourPun
 
     //these are just to cache values
     private Rigidbody rb;
-    private Vector3 pforward, right;
+    private Vector3 pPos, pforward;
+    private Vector3 right;
     private float currSpeed;
     private Vector3 moveAmt;
 
@@ -55,6 +56,7 @@ public class CharTPController : MonoBehaviourPun
     {
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);
 
+        pPos = transform.position;
         pforward = transform.forward;
         pforward.y = 0;
         lookDir = new Vector3(pforward.x, initialLookY, pforward.z).normalized;
@@ -124,6 +126,7 @@ public class CharTPController : MonoBehaviourPun
                 currSpeed = moveSpeed;
 
             moveAmt = (pforward * inp.vert + right * inp.hori).normalized;
+            moveAmt.y = 0;
 
             velY = rb.velocity.y;
             displacement = moveAmt.magnitude * currSpeed;
@@ -131,10 +134,12 @@ public class CharTPController : MonoBehaviourPun
             if (velY > 0)
                 jumpChk.Jumping();
             if (inp.jump && !jumpChk.airborne)            
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);            
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
 
             //move player
-            transform.position += moveAmt * Time.deltaTime * currSpeed;
+            pPos = rb.position;
+            pPos += moveAmt * Time.deltaTime * currSpeed;
+            Move(pPos);
             //rotate player
             transform.rotation = Quaternion.LookRotation(pforward, Vector3.up);
         }

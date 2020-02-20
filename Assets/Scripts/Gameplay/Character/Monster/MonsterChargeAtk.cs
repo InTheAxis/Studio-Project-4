@@ -30,7 +30,7 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw("ChargeAttack") != 0)
+        if (!charControl.disableKeyInput && Input.GetAxisRaw("ChargeAttack") != 0)
         {
             if (chargeCorr == null && !charControl.jumpChk.airborne)
             {
@@ -42,7 +42,7 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private IEnumerator Charge()
     {        
-        if (ener.UseUp(enerConsumption))
+        if (!chargeChk.collided && ener.UseUp(enerConsumption))
         {
             yield return new WaitForSeconds(delay);
             charControl.disableKeyInput = true;
