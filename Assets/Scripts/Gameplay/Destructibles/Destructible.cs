@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Destructible : MonoBehaviour
+public class Destructible : MonoBehaviourPun
 {
     [Header("General")]
     [SerializeField]
@@ -84,7 +84,12 @@ public class Destructible : MonoBehaviour
         }
 
         /* Instantiate particle hit */
-        //if(Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
+        bool shouldSpawnParticles = Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance;
+        Vector3 point = collision.GetContact(0).point;
+        Vector3 normal = collision.GetContact(0).normal;
+        photonView.RPC("breakApart", RpcTarget.Others, shouldSpawnParticles, point, normal);
+        breakApart(shouldSpawnParticles, point, normal);
+        //if (Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
         //{
         //    if (hitParticle != null)
         //    {
@@ -106,7 +111,34 @@ public class Destructible : MonoBehaviour
         //}
 
         //Destroy(gameObject);
-        NetworkOwnership.instance.destroy(PhotonView.Get(gameObject));
+        //NetworkOwnership.instance.destroy(PhotonView.Get(gameObject));
+    }
+
+    [PunRPC]
+    private void breakApart(bool spawnParticles, Vector3 point, Vector3 normal)
+    {
+        if (spawnParticles)
+        {
+            if (hitParticle != null)
+            {
+                GameObject particle = Instantiate(hitParticle);
+                particle.transform.position = point;
+                particle.transform.forward = normal;
+                particle.transform.localScale = transform.localScale;
+                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+            }
+
+            if (dustParticles != null)
+            {
+                GameObject particle = Instantiate(dustParticles);
+                particle.transform.position = point;
+                particle.transform.forward = normal;
+                particle.transform.localScale = transform.localScale;
+                Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
+            }
+        }
+
+        Destroy(this.gameObject);
     }
 
 }
