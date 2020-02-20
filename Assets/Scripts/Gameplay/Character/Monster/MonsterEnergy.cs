@@ -40,7 +40,7 @@ public class MonsterEnergy : MonoBehaviour
             {
                 NoMoreEnergy();
             }
-            Debug.Log("Energy at " +  energy);
+            //Debug.Log("Energy at " +  energy);
         }
     }
 

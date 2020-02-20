@@ -45,7 +45,10 @@ public class Destructible : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient)
             return;
 
-        if (!isDestroyed && collision.relativeVelocity.magnitude >= sqrBreakForce)
+        Debug.Log(collision.gameObject.layer);
+        Debug.Log(LayerMask.NameToLayer("Monster"));
+
+        if (!isDestroyed && (collision.relativeVelocity.magnitude >= sqrBreakForce || collision.gameObject.layer == LayerMask.NameToLayer("Monster")))
         {
             isDestroyed = true;
             Destruct(collision);
