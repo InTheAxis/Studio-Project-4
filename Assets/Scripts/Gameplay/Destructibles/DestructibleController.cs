@@ -168,8 +168,8 @@ public class DestructibleController : MonoBehaviourPun
                         //rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
 
                         // Tell master client to release ownership back to scene
-                        // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
                         PhotonView colliderView = PhotonView.Get(collider);
+                        NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, cameraTransform.forward * 40.0f);
                     }
 
@@ -258,13 +258,29 @@ public class DestructibleController : MonoBehaviourPun
     {
         Debug.Log("Received release request");
         PhotonView view = PhotonView.Find(viewID);
-        if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+        if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);
             Rigidbody rb = view.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.AddForce(force, ForceMode.Impulse);
+            rb.WakeUp();
+        }
+        photonView.RPC("destructibleEnsureOwnerIsReleased", messageInfo.Sender, viewID);
+    }
+    [PunRPC]
+    private void destructibleEnsureOwnerIsReleased(int viewID, PhotonMessageInfo messageInfo)
+    {
+        PhotonView view = PhotonView.Find(viewID);
+        Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
+        if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
+        {
+            view.TransferOwnership(0);
+            Rigidbody rb = view.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.WakeUp();
         }
     }
 }
