@@ -62,11 +62,33 @@ public class CharTPCamera : MonoBehaviour
         targetCamDist = distToTarget;
         targetIdx = index;
     }
+    public void LookAt(string _name, float distToTarget)
+    {
+        int idx = -1;
+        for (int i = 0; i < lookTargets.Count; ++i)
+        {
+            if (lookTargets[i].name == _name)
+            {
+                idx = i;
+                break;
+            } 
+        }
+        if (idx < 0)
+            return;
+
+        LookAt(idx, distToTarget);
+    }
 
     //returns the index of transform in target array
-    public int IsLookingAt() 
+    public int IsLookingAtIdx() 
     {
         return targetIdx;
+    }
+    
+    //returns name of target being looked at
+    public string IsLookingAt()
+    {
+        return nextTarget.name;
     }
 
     //use me to look at player (index 0 and default dist)
@@ -96,15 +118,6 @@ public class CharTPCamera : MonoBehaviour
     }   
     private void LateUpdate()
     {
-        //TEMP ,DO THIS ELSEWHERE
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (IsLookingAt() == 0)
-                LookAt(1, 2);
-            else
-                LookAtPlayer();
-        }
-
         if ((target.position - nextTarget.position).magnitude > 0)
         { 
             target.position = Vector3.Slerp(target.position, nextTarget.position, Time.deltaTime * camAdjustSpeed);
