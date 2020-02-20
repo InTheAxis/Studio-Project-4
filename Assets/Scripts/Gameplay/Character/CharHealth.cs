@@ -80,7 +80,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         respawnCorr = null;
         hp = maxHp;
         dead = false;
-        OnRespawn();
+        OnRespawn?.Invoke();
         charControl.disableMovement = dead;
         SetInvulnerableTime(invulTime);
     }

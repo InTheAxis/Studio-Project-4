@@ -22,7 +22,7 @@ public class CharHitBox : MonoBehaviour
         {
             DamageData ddata = other.GetComponent<DamageData>();
             if (ddata)
-                OnHit(ddata.dmg);
+                OnHit?.Invoke(ddata.dmg);
             triggered = true;
         }
     }

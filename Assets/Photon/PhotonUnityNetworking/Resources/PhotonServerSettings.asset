@@ -46,5 +46,9 @@ MonoBehaviour:
   - rpcDestroy
   - breakApart
   - destructibleEnsureOwnerIsReleased
+  - queryUse
+  - requestAccepted
+  - requestReceived
+  - requestRejected
   DisableAutoOpenWizard: 1
   ShowSettings: 0

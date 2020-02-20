@@ -18,6 +18,7 @@ public class DestructibleController : MonoBehaviourPun
 
     [SerializeField]
     private Transform holdDestructibles = null;
+    private const string holdDestructiblesTag = "HoldDestructibles";
 
     [SerializeField]
     private CharTPController playerController = null;
@@ -40,7 +41,7 @@ public class DestructibleController : MonoBehaviourPun
 
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
-            holdDestructibles = playerController.transform.Find("HoldDestructibles");
+            holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
 
         //throwCollider.radius = detectionRadius;
     }
