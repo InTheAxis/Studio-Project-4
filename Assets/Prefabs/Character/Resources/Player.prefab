@@ -421,7 +421,6 @@ GameObject:
   - component: {fileID: 3389477406429164520}
   - component: {fileID: 2524581013760567537}
   - component: {fileID: -8506752648660787036}
-  - component: {fileID: 2583123244670909703}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -635,25 +634,6 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 10
---- !u!114 &2583123244670909703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9117360599836359461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab70939786f2ba4cab2082bca6f0574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
-  detectionRadius: 4.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 524288
-  holdDestructibles: {fileID: 1164069025223204120}
-  playerController: {fileID: 9117360599836359451}
 --- !u!1 &9117360600064986961
 GameObject:
   m_ObjectHideFlags: 0

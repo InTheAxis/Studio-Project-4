@@ -45,5 +45,7 @@ MonoBehaviour:
   - onRequestSuccess
   - queryCarry
   - queryDrop
+  - destructibleReleaseOwner
+  - destructibleRequestOwner
   DisableAutoOpenWizard: 1
   ShowSettings: 0

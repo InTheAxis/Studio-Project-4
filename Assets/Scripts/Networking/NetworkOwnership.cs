@@ -26,6 +26,11 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
         else
             Debug.LogError("NetworkOwnership instantiated more than once! This should not happen");
     }
+    
+    public static bool objectIsOwned(PhotonView view)
+    {
+        return (view.Owner == null && PhotonNetwork.IsMasterClient) || (view.Owner?.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber);
+    }
 
     [PunRPC]
     public void destroy(PhotonView obj)

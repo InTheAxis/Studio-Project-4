@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Shard : MonoBehaviour
 {
@@ -20,8 +22,14 @@ public class Shard : MonoBehaviour
     private List<Rigidbody> smallShards = new List<Rigidbody>();
     private List<Rigidbody> sleepShards = new List<Rigidbody>();
 
+    private PhotonView thisView;
+
     private void Start()
     {
+        thisView = PhotonView.Get(this);
+        if (!NetworkOwnership.objectIsOwned(thisView))
+            return;
+
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody rb in rigidbodies)
         {
@@ -29,7 +37,12 @@ public class Shard : MonoBehaviour
             {
                 Debug.Log("Destroyed");
 
-                Destroy(rb.gameObject, timeBeforeDespawn);
+                //Destroy(rb.gameObject, timeBeforeDespawn);
+                //if (rb.GetComponent<NetworkDestroyDelay>() == null)
+                //{
+                //    NetworkDestroyDelay comp = rb.gameObject.AddComponent<NetworkDestroyDelay>();
+                //    comp.delay = timeBeforeDespawn;
+                //}
                 return;
             }
 
@@ -46,20 +59,23 @@ public class Shard : MonoBehaviour
 
     private void Update()
     {
-        foreach(Rigidbody rb in smallShards)
-        {
-            if(rb.velocity.sqrMagnitude <= shardSettleVelocityThreshold)
-                sleepShards.Add(rb);
-        }
+        //if (!NetworkOwnership.objectIsOwned(thisView))
+        //    return;
 
-        foreach(Rigidbody rb in sleepShards)
-        {
-            smallShards.Remove(rb);
-            GameObject go = rb.gameObject;
-            Destroy(rb);
-            Destroy(go.GetComponent<MeshCollider>());
-            Debug.Log("Useless");
-        }
-        sleepShards.Clear();
+        //foreach (Rigidbody rb in smallShards)
+        //{
+        //    if(rb.velocity.sqrMagnitude <= shardSettleVelocityThreshold)
+        //        sleepShards.Add(rb);
+        //}
+
+        //foreach(Rigidbody rb in sleepShards)
+        //{
+        //    smallShards.Remove(rb);
+        //    GameObject go = rb.gameObject;
+        //    Destroy(rb);
+        //    Destroy(go.GetComponent<MeshCollider>());
+        //    Debug.Log("Useless");
+        //}
+        //sleepShards.Clear();
     }
 }
