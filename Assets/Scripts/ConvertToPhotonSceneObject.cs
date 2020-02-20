@@ -10,7 +10,8 @@ public class ConvertToPhotonSceneObject : MonoBehaviour
 
     private void Awake()
     {
-        PhotonNetwork.InstantiateSceneObject(prefab.name, transform.position, transform.rotation);
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.InstantiateSceneObject(prefab.name, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 }

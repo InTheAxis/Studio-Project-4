@@ -103,6 +103,11 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         playerLeftCallback?.Invoke(otherPlayer.NickName);
     }
+    
+    public void setRoomVisibility(bool visible)
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = visible;
+    }
 
     public void goInGame()
     {

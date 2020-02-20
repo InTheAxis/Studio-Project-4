@@ -29,7 +29,7 @@ public class UIStateBehaviourLobby : UIStateBehaviourBase
         NetworkClient.instance.roomCreateFailedCallback = failedtoCreateLobby;
         NetworkClient.instance.playerJoinedCallback = playerJoined;
         NetworkClient.instance.playerLeftCallback = playerLeft;
-        startButton.interactable = true;
+        startButton.interactable = false;
         disconnectButton.interactable = true;
 
         foreach (var p in Photon.Pun.PhotonNetwork.PlayerList)
@@ -76,6 +76,7 @@ public class UIStateBehaviourLobby : UIStateBehaviourBase
     private void joinedLobby(List<string> players)
     {
         currentPlayerNames = players;
+        startButton.interactable = true;
     }
     private void failedToJoinLobby()
     {

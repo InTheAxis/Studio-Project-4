@@ -17,6 +17,7 @@ public abstract class InteractableBase : MonoBehaviour
 
     protected void destroyThis()
     {
-        PhotonNetwork.Destroy(PhotonView.Get(this));
+        //PhotonNetwork.Destroy(PhotonView.Get(this));
+        NetworkOwnership.instance.destroy(PhotonView.Get(this));
     }
 }
