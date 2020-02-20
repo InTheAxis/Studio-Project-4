@@ -23,6 +23,8 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("Stores a collection of different menu screens")]
     private GameObject[] screens = null;
+    [SerializeField]
+    private TextMeshProUGUI tmUsername = null;
 
     [Header("Models")]
     [SerializeField]
@@ -34,6 +36,12 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("The size of the button when hovered")]
     private float hoverGrowSize = 1.2f;
+    [SerializeField]
+    private Color busyColor = Color.yellow;
+    [SerializeField]
+    private Color failColor = Color.red;
+    [SerializeField]
+    private Color successColor = Color.green;
 
     [Header("Transitions")]
     [SerializeField]
@@ -96,6 +104,8 @@ public class ScreenStateController : MonoBehaviour
 
     private Stack<ScreenStates> history = null;
 
+    /* TODO: Player Usernames */
+    private Dictionary<string, GameObject> playerModels = null;
 
 
     private void Start()
@@ -112,6 +122,9 @@ public class ScreenStateController : MonoBehaviour
             else
                 screens[i].SetActive(false);
         }
+
+        mainmenuModel.SetActive(true);
+        lobbyModels.SetActive(false);
     }
 
     private void Update()
@@ -145,10 +158,18 @@ public class ScreenStateController : MonoBehaviour
             currentScreen = history.Pop();
             screens[(int)currentScreen].SetActive(true);
             buttonMask.Begin(buttonMaskStartY);
+
+            /* TODO: Might be wrong (Elson) */
+            if (currentScreen != ScreenStates.MATCHLOBBY && currentScreen != ScreenStates.OPTIONS)
+            {
+                mainmenuModel.SetActive(true);
+                lobbyModels.SetActive(false);
+            }
         }
         else if (name == "Login")
         {
-            /* Integrate Playfab Login */ // Done //
+            /* Playfab Login */
+            tmLoginStatus.color = busyColor;
             tmLoginStatus.text = "Connecting...";
 
             PlayfabAuthenticator playfabAuthenticator = (PlayfabAuthenticator)DoNotDestroySingleton<PlayfabAuthenticator>.instance;
@@ -156,40 +177,57 @@ public class ScreenStateController : MonoBehaviour
                 playerName =>
                 {
                     setScene(ScreenStates.MAINMENU);
+                    tmUsername.text = tmLoginUsername.text;
                 }, (errorMsg, errorType) =>
                 {
-                    // TODO: Handle error
+                    tmLoginStatus.color = failColor;
+                    tmLoginStatus.text = "Connection Failed";
                 });
         }
         else if (name == "Register")
         {
-            // Elson TODO: Ensure all fields must be filled before allowing register
 
-            /* Password mismatch */
-            if (!tmRegisterPassword.text.Equals(tmRegisterConfirm.text))
+            /* Invalid Email */
+            if(!tmRegisterEmail.text.Contains("@"))
             {
+                tmRegisterStatus.color = failColor;
+                tmRegisterStatus.text = "Invalid Email";
+            }
+            /* Empty Fields */
+            else if(tmRegisterEmail.text.Equals("") || tmRegisterUsername.text.Equals("") || tmRegisterPassword.text.Equals("") || tmRegisterConfirm.text.Equals("")) /*|| tmRegisterUsername.text == "" || tmRegisterPassword.text = "" || tmRegisterConfirm.text == "")*/
+            {
+                tmRegisterStatus.color = failColor;
+                tmRegisterStatus.text = "Invalid Fields";
+            }
+            /* Password mismatch */
+            else if (!tmRegisterPassword.text.Equals(tmRegisterConfirm.text))
+            {
+                tmRegisterStatus.color = failColor;
                 tmRegisterStatus.text = "Password Mismatch";
             }
             else
             {
+                tmLoginStatus.color = busyColor;
                 tmRegisterStatus.text = "Registering";
-                /* Integrate Playfab Register */ // Done //
+
+                /* Playfab Register */
                 PlayfabAuthenticator playfabAuthenticator = (PlayfabAuthenticator)DoNotDestroySingleton<PlayfabAuthenticator>.instance;
                 playfabAuthenticator.Register(tmRegisterUsername.text, tmRegisterPassword.text, tmRegisterEmail.text,
                     playerName =>
                     {
                         setScene(ScreenStates.MAINMENU);
+                        tmUsername.text = tmRegisterUsername.text;
                     }, (errorMsg, errorType) =>
                     {
-                        // TODO: Handle error
+                        tmRegisterStatus.color = failColor;
+                        tmRegisterStatus.text = "Failed to Register";
                     });
             }
 
         }
         else if (name == "Logout")
         {
-            /* Integrate Playfab Logout */ // Not Required on playfab side, just requires interfacing with PlayfabAuthenticator login() / register() again //
-
+            /* Playfab Logout */
             setScene(ScreenStates.LOGIN);
             buttonMask.Begin(buttonMaskStartY);
             loginInput.SetActive(false);
@@ -255,10 +293,50 @@ public class ScreenStateController : MonoBehaviour
         else if(name == "ServerHostCreate")
         {
             setScene(ScreenStates.MATCHLOBBY);
+            mainmenuModel.SetActive(false);
+            lobbyModels.SetActive(true);
+            /* TODO: Set player's name tag -> Get reference using Lobby Models -> Player -> Name */
         }
         else if(name == "ServerJoinRoom")
         {
             setScene(ScreenStates.MATCHLOBBY);
+            mainmenuModel.SetActive(false);
+            lobbyModels.SetActive(true);
+        }
+        else if(name == "LobbyStart")
+        {
+            /* TODO: Lobby Start */
+        }
+        else if(name == "LobbyReady")
+        {
+            /* TODO: Lobby Ready? */
+        }
+        else if(name == "LobbyCharacter")
+        {
+            
+        }
+        else if(name == "LobbySettings")
+        {
+
+        }
+        else if(name == "LobbyLeave")
+        {
+            /* TODO: Lobby Leave */
+
+
+
+            screens[(int)currentScreen].SetActive(false);
+            currentScreen = history.Pop();
+            screens[(int)currentScreen].SetActive(true);
+            buttonMask.Begin(buttonMaskStartY);
+
+            /* TODO: Might be wrong (Elson) */
+            if (currentScreen != ScreenStates.MATCHLOBBY && currentScreen != ScreenStates.OPTIONS)
+            {
+                mainmenuModel.SetActive(true);
+                lobbyModels.SetActive(false);
+            }
+
         }
     }
 
