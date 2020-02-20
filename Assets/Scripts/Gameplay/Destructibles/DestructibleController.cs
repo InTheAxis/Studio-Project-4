@@ -162,8 +162,8 @@ public class DestructibleController : MonoBehaviour
                 ////    rb.AddForce(offset.normalized * 5.0f, ForceMode.Acceleration);
                 ///
                 Vector3 targetPos = holdDestructibles.position;
-                targetPos += transform.right * holdPositions[i].x;
-                targetPos += transform.up * holdPositions[i].y;
+                targetPos += holdDestructibles.right * holdPositions[i].x;
+                targetPos += holdDestructibles.up * holdPositions[i].y;
 
 
 
