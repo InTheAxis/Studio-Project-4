@@ -12,27 +12,38 @@ public class VoronoiVertice
 
 public class Voronoi
 {
-    // public Vector3Int centralCentroid;
-    private Vector3Int[] mCentroids;
+    // to be get from the user
+    private List<Vector3> xzCentroids = new List<Vector3>();
+
+    private bool generated = false;
+
+    // only for use by generator
+    private Vector2Int[] mCentroids;
 
     private Color[] regionColors;
     private Vector2Int resolution;
     private int density;
     private List<VoronoiVertice> voronoiPoints = new List<VoronoiVertice>();
     private List<VoronoiVertice> centralPoints = new List<VoronoiVertice>();
-    private bool generated = false;
 
     public Color[] pixelColors;
     public int[] indexGrid;
+
+    private PoissonGenerator poisson = new PoissonGenerator();
 
     public bool IsGenerated()
     {
         return generated;
     }
 
-    public Vector3Int[] GetCentroids()
+    public List<Vector3> GetCentroids()
     {
-        return mCentroids;
+        return xzCentroids;
+    }
+
+    public PoissonGenerator GetPoisson()
+    {
+        return poisson;
     }
 
     public void Scale(float scale)
@@ -45,6 +56,26 @@ public class Voronoi
         {
             mCentroids[i] = mCentroids[i] * (int)scale;
         }
+        for (int i = 0; i < density; ++i)
+        {
+            xzCentroids[i] = xzCentroids[i] * (int)scale;
+        }
+    }
+
+    private void SetToXZ()
+    {
+        xzCentroids.Clear();
+        for (int i = 0; i < voronoiPoints.Count; ++i)
+        {
+            VoronoiVertice vertice = voronoiPoints[i];
+            vertice.pos = new Vector3(vertice.pos.x, 0, vertice.pos.y);
+            voronoiPoints[i] = vertice;
+        }
+
+        foreach (Vector2Int point in mCentroids)
+        {
+            xzCentroids.Add(new Vector3(point.x, 0, point.y));
+        }
     }
 
     public List<VoronoiVertice> GetCentral()
@@ -56,33 +87,30 @@ public class Voronoi
     {
         foreach (VoronoiVertice vertice in voronoiPoints)
         {
-            vertice.pos = new Vector3(vertice.pos.x - resolution.x / 2, 0, vertice.pos.y - resolution.y / 2);
+            vertice.pos = new Vector3(vertice.pos.x / resolution.x - 0.5f, vertice.pos.y / resolution.y - 0.5f, 0);
         }
-        //foreach (VoronoiVertice vertice in centralPoints)
-        //{
-        //    vertice.pos = new Vector3(vertice.pos.x - resolution.x / 2, 0, vertice.pos.y - resolution.y / 2);
-        //}
         for (int i = 0; i < density; ++i)
         {
-            mCentroids[i] = new Vector3Int(mCentroids[i].x - resolution.x / 2, 0, mCentroids[i].y - resolution.y / 2);
+            mCentroids[i] = new Vector2Int((int)(mCentroids[i].x / resolution.x - 0.5f), (int)(mCentroids[i].y / resolution.y - 0.5f));
         }
     }
 
-    public void Generate(Vector2Int resolution, int density)
+    public void Generate(Vector2Int resolution, int density, float centerBuffer)
     {
         generated = true;
         this.resolution = resolution;
         this.density = density;
-        mCentroids = new Vector3Int[density];
+        mCentroids = new Vector2Int[density];
         regionColors = new Color[density];
-        PoissonGenerator poissonGenerator = new PoissonGenerator();
-        poissonGenerator.Set(density, 3.5f / (float)density, false, true);
-        poissonGenerator.Generate();
-        List<Vector3> poissonList = poissonGenerator.GetPoints();
+        poisson.ClearInjected();
+
+        poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
+        bool generatedPoisson = poisson.GenerateDensity(density, 0.6f);
+        List<PoissonPoint> poissonList = poisson.GetPoints();
         for (int i = 0; i < density; ++i)
         {
             // centroids[i] = new Vector2Int(Random.Range(0, resolution.x), Random.Range(0, resolution.y));
-            mCentroids[i] = new Vector3Int((int)(poissonList[i].x * resolution.x / 2 + resolution.x / 2), (int)(poissonList[i].y * resolution.y / 2 + resolution.y / 2), 0);
+            mCentroids[i] = new Vector2Int((int)(poissonList[i].pos.x * resolution.x / 2 + resolution.x / 2), (int)(poissonList[i].pos.z * resolution.y / 2 + resolution.y / 2));
             regionColors[i] = Random.ColorHSV();
         }
         pixelColors = new Color[resolution.x * resolution.y];
@@ -98,8 +126,9 @@ public class Voronoi
         }
         // centralCentroid = mCentroids[0];
         SaveVoronoiPoints();
-        SaveCentralPoints();
         CenterPoints();
+        SetToXZ();
+        SaveCentralPoints();
     }
 
     private void SaveCentralPoints()
@@ -230,7 +259,7 @@ public class Voronoi
         return voronoiPoints;
     }
 
-    private int GetClosestCentroidIndex(Vector2Int pixelPos, Vector3Int[] centroids)
+    private int GetClosestCentroidIndex(Vector2Int pixelPos, Vector2Int[] centroids)
     {
         float smallestDist = float.MaxValue;
         int closestIndex = -1;
