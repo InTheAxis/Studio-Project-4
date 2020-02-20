@@ -54,7 +54,7 @@ public class Destructible : MonoBehaviourPun
             }
             if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
             { 
-                //TODO for elson :) , explode force based on velocity
+                //TODO for elson :) , explode force based on velocity, maybe based on mass too
                 isDestroyed = true;
                 Destruct(collision);
             }
