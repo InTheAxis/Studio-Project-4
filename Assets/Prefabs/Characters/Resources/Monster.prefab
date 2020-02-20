@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2583123244670909703}
   - component: {fileID: 5071471449440821494}
   - component: {fileID: 6066984036327698655}
+  - component: {fileID: 4943199071075631875}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
@@ -251,6 +252,21 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   health: {fileID: 5071471449440821494}
   hitbox: {fileID: 5221697039784025166}
+--- !u!114 &4943199071075631875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f45111c22b3b747b72b51801ac930d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 5071471449440821494}
+  maxEnergy: 100
+  decayRate: 1
 --- !u!1001 &8226840309704502532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +274,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9117360599836359460}
     m_Modifications:
+    - target: {fileID: 4205423508039414090, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 5071471449440821494}
     - target: {fileID: 4569173607537903378, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Name

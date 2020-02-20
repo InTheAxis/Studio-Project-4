@@ -126,6 +126,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
     public void SetInvulnerable(bool b)
     {
         invulnerable = b;
+        if (invulCorr != null)
+            StopCoroutine(invulCorr);
+        invulCorr = null;
     }
 
 
