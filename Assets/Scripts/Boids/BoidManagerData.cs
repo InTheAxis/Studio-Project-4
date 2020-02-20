@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+
 [Serializable]
 [GenerateAuthoringComponent]
 public struct BoidManagerData : IComponentData
@@ -19,20 +20,22 @@ public struct BoidManagerData : IComponentData
     //   structs; they cannot contain references to classes.
     //
     // * You should focus on the data structure that makes the most sense
-    //   for runtime use here. Authoring Components will be used for 
+    //   for runtime use here. Authoring Components will be used for
     //   authoring the data in the Editor.
-    [Range(0,0.1f)]
+    [Range(0, 1.0f)]
     public float speed;
-    [Range(0,0.1f)]
+
+    [Range(0, 0.1f)]
     public float alignRate;
-    [Range(0,0.1f)]
+
+    [Range(0, 0.1f)]
     public float coheseRate;
-    [Range(0,0.1f)]
+
+    [Range(0, 0.1f)]
     public float separateRate;
 
     public float viewRadius;
     public float separateRadius;
-
 
     public bool align;
     public bool cohese;
