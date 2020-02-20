@@ -24,6 +24,12 @@ public class ScreenStateController : MonoBehaviour
     [Tooltip("Stores a collection of different menu screens")]
     private GameObject[] screens = null;
 
+    [Header("Models")]
+    [SerializeField]
+    private GameObject mainmenuModel = null;
+    [SerializeField]
+    private GameObject lobbyModels = null;
+
     [Header("Interactions")]
     [SerializeField]
     [Tooltip("The size of the button when hovered")]
@@ -36,8 +42,12 @@ public class ScreenStateController : MonoBehaviour
     private float buttonMaskStartY = 78.0f;
     [SerializeField]
     private float buttonHeightGap = 120.0f;
+    [SerializeField]
+    private float canvasFadeSpeed = 2.0f;
 
     [Header("Login")]
+    [SerializeField]
+    private CanvasGroup cgLogin = null;
     [SerializeField]
     private TMP_InputField tmLoginUsername = null;
     [SerializeField]
@@ -46,6 +56,8 @@ public class ScreenStateController : MonoBehaviour
     private TextMeshProUGUI tmLoginStatus = null;
 
     [Header("Registration")]
+    [SerializeField]
+    private CanvasGroup cgRegister = null;
     [SerializeField]
     private TMP_InputField tmRegisterEmail = null;
     [SerializeField]
@@ -58,6 +70,10 @@ public class ScreenStateController : MonoBehaviour
     private TextMeshProUGUI tmRegisterStatus = null;
 
     [Header("Server Selection")]
+    [SerializeField]
+    private CanvasGroup cgHost = null;
+    [SerializeField]
+    private CanvasGroup cgJoin= null;
     [SerializeField]
     private GameObject registerInput = null;
     [SerializeField]
@@ -183,11 +199,15 @@ public class ScreenStateController : MonoBehaviour
         {
             loginInput.SetActive(!loginInput.activeSelf);
             registerInput.SetActive(false);
+            if(loginInput.activeSelf)
+                StartCoroutine(fadeCanvasGroup(cgLogin, true));
         }
         else if (name == "MainmenuRegister")
         {
             loginInput.SetActive(false);
             registerInput.SetActive(!registerInput.activeSelf);
+            if(registerInput.activeSelf)
+                StartCoroutine(fadeCanvasGroup(cgRegister, true));
         }
         else if (name == "MainmenuPlay")
         {
@@ -215,20 +235,44 @@ public class ScreenStateController : MonoBehaviour
         }
         else if (name == "ServerSelectHost")
         {
-            hostPasswordInput.SetActive(true);
+            hostPasswordInput.SetActive(!hostPasswordInput.activeSelf);
             joinPasswordInput.SetActive(false);
-
+            if (hostPasswordInput.activeSelf)
+                StartCoroutine(fadeCanvasGroup(cgHost, true));
         }
         else if (name == "ServerJoin")
         {
-            joinPasswordInput.SetActive(true);
+            joinPasswordInput.SetActive(!joinPasswordInput.activeSelf);
             hostPasswordInput.SetActive(false);
+            if (joinPasswordInput.activeSelf)
+                StartCoroutine(fadeCanvasGroup(cgJoin, true));
 
         }
         else if (name == "ServerJoinRandom")
         {
 
         }
+        else if(name == "ServerHostCreate")
+        {
+            setScene(ScreenStates.MATCHLOBBY);
+        }
+        else if(name == "ServerJoinRoom")
+        {
+            setScene(ScreenStates.MATCHLOBBY);
+        }
+    }
+
+    private IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn)
+    {
+        float targetAlpha = fadeIn ? 1.0f : 0.0f;
+        canvas.alpha = 1.0f - targetAlpha;
+        while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
+        {
+            canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        canvas.alpha = targetAlpha;
+        
     }
 
     public void onHoverEnterButton(GameObject go)
