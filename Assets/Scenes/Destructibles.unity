@@ -57978,6 +57978,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8506752648660787036, guid: 18e7df20976080a449f3929f71bdbd98,
+        type: 3}
+      propertyPath: m_SynchronizeAngularVelocity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2355843241993043823, guid: 18e7df20976080a449f3929f71bdbd98,
         type: 3}
       propertyPath: viewIdField
