@@ -4,17 +4,34 @@ using UnityEngine;
 using Photon.Pun;
 public class CharHealth : MonoBehaviour, IPunObservable
 {
-    public CharTPController charControl;
-    public int maxHp = 3;
-    public float autoRespawnTime = 3; //set to negative if dont want auto
-    public float respawnInvulTime = 1; //default invul time when respawn
-    
+    [SerializeField]
+    private CharTPController charControl;
+    [SerializeField]
+    private CharHitBox hitbox;
+    [SerializeField]
+    private int maxHp = 3;
+    [SerializeField]
+    private float autoRespawnTime = 3; //set to negative if dont want auto
+    [SerializeField]
+    private float respawnInvulTime = 1; //default invul time when respawn
+
+    public System.Action OnRespawn;
     public bool dead { private set; get; }
     
     private int hp;
     private bool invulnerable;
     private IEnumerator invulCorr;
     private IEnumerator respawnCorr;
+
+    private void OnEnable()
+    {
+        hitbox.OnHit += TakeDmg;
+    }
+
+    private void OnDisable()
+    {
+        hitbox.OnHit -= TakeDmg;        
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -63,6 +80,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         respawnCorr = null;
         hp = maxHp;
         dead = false;
+        OnRespawn?.Invoke();
         charControl.disableMovement = dead;
         SetInvulnerableTime(invulTime);
     }
@@ -126,6 +144,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
     public void SetInvulnerable(bool b)
     {
         invulnerable = b;
+        if (invulCorr != null)
+            StopCoroutine(invulCorr);
+        invulCorr = null;
     }
 
 

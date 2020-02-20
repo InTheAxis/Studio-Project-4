@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class CharHitBox : MonoBehaviour
 {
-    public CharHealth health;
-    public LayerMask ignore;
-    public float hitTime = 0.1f;
+    [SerializeField]
+    private LayerMask ignore;
+    [SerializeField]
+    private float hitTime = 0.1f;
+
+    public System.Action<int> OnHit;
+
     public bool hit { get { return triggered; } }
 
     [HideInInspector]
@@ -18,7 +22,7 @@ public class CharHitBox : MonoBehaviour
         {
             DamageData ddata = other.GetComponent<DamageData>();
             if (ddata)
-                health.TakeDmg(ddata.dmg);
+                OnHit?.Invoke(ddata.dmg);
             triggered = true;
         }
     }

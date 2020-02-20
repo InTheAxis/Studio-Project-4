@@ -27,34 +27,34 @@ public class Shard : MonoBehaviour
     private void Start()
     {
         thisView = PhotonView.Get(this);
-        if (!NetworkOwnership.objectIsOwned(thisView))
+        if (!PhotonNetwork.IsMasterClient)
             return;
 
-        rigidbodies = GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rb in rigidbodies)
-        {
+        //rigidbodies = GetComponentsInChildren<Rigidbody>();
+        //foreach (Rigidbody rb in rigidbodies)
+        //{
             if (Random.Range(0.0f, 1.0f) <= chanceToDespawn)
             {
                 Debug.Log("Destroyed");
 
                 //Destroy(rb.gameObject, timeBeforeDespawn);
-                //if (rb.GetComponent<NetworkDestroyDelay>() == null)
-                //{
-                //    NetworkDestroyDelay comp = rb.gameObject.AddComponent<NetworkDestroyDelay>();
-                //    comp.delay = timeBeforeDespawn;
-                //}
-                return;
+                if (GetComponent<NetworkDestroyDelay>() == null)
+                {
+                    NetworkDestroyDelay comp = this.gameObject.AddComponent<NetworkDestroyDelay>();
+                    comp.delay = timeBeforeDespawn;
+                }
+                //continue;
             }
 
-            Vector3 size = rb.GetComponent<MeshCollider>().bounds.size;
+            //Vector3 size = rb.GetComponent<MeshCollider>().bounds.size;
 
-            float scale = size.x * transform.localScale.x;
-            scale = Mathf.Max(scale, size.y * transform.localScale.y);
-            scale = Mathf.Max(scale, size.z * transform.localScale.z);
+            //float scale = size.x * transform.localScale.x;
+            //scale = Mathf.Max(scale, size.y * transform.localScale.y);
+            //scale = Mathf.Max(scale, size.z * transform.localScale.z);
 
-            if(scale <= smallShardScaleThreshold)
-                smallShards.Add(rb);
-        }
+            //if(scale <= smallShardScaleThreshold)
+            //    smallShards.Add(rb);
+        //}
     }
 
     private void Update()

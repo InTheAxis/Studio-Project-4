@@ -110,8 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed: {fileID: 1972964819705681957, guid: a3414559ceaedbb48938fe3d3b436250,
-    type: 3}
+  destroyed:
+  - {fileID: 1765446553972957676, guid: 7446a37329103fd49b0556ebae230da3, type: 3}
+  - {fileID: 6189665200211589965, guid: b18dea4cae8af2745a15c5bda683105d, type: 3}
+  - {fileID: 7872742615570538055, guid: 63cecbae39953ba43b92dc667b4a8757, type: 3}
+  - {fileID: 2392701750043172668, guid: b6265da0ccb13444ebd19bb534666ab9, type: 3}
+  - {fileID: 8451408733409254985, guid: 10eeac756b111e740928e0ec040cf70b, type: 3}
   hitParticle: {fileID: 9102254060579626214, guid: c5608d31d7574874f8be6de5454e26a1,
     type: 3}
   dustParticles: {fileID: 5512566975316411008, guid: 6f7ec1452d2d1384f80ad2230afeda8e,
@@ -175,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
 --- !u!114 &3696905656675496553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,4 +195,5 @@ MonoBehaviour:
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
+  m_SyncState: 1
   m_TeleportIfDistanceGreaterThan: 3
