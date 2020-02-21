@@ -2,12 +2,68 @@
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Collections;
-using Unity.Rendering;
 using Unity.Jobs;
 using Unity.Burst;
 
-//TODO change to jobs
+[BurstCompile]
+[UpdateBefore(typeof(BloodEmitterSystem))]
+public class BloodEmitterQueryJobSystem : JobComponentSystem
+{
+    [ReadOnly] private ComponentDataFromEntity<ParticleEmitTag> q;
+    private BloodEmitterSystem initSystem;
+    private NativeArray<bool> enabled;
+    private NativeArray<int> numPerUpdate;
+    private NativeArray<float> rate;
 
+    protected override void OnCreate()
+    {
+        initSystem = World.GetOrCreateSystem<BloodEmitterSystem>();
+        enabled = new NativeArray<bool>(1, Allocator.TempJob);
+        numPerUpdate = new NativeArray<int>(1, Allocator.TempJob);
+        rate = new NativeArray<float>(1, Allocator.TempJob);
+    }
+
+    protected override void OnDestroy()
+    {
+        enabled.Dispose();
+        numPerUpdate.Dispose();
+        rate.Dispose();
+    }
+    private struct SearchJob : IJobForEachWithEntity<BloodTag, ParticleSystemData>
+    {
+        public NativeArray<bool> enabled;
+        public NativeArray<int> numPerUpdate;
+        public NativeArray<float> rate;
+        [ReadOnly] public ComponentDataFromEntity<ParticleEmitTag> query;
+        public void Execute(Entity entity, int index, [ReadOnly] ref BloodTag tag, [ReadOnly] ref ParticleSystemData data)
+        {
+            if (query.HasComponent(entity))
+                enabled[0] = true;
+            numPerUpdate[0] = data.numPerUpdate;
+            rate[0] = data.rate;
+        }
+    }
+    protected override JobHandle OnUpdate(JobHandle inputDeps)
+    {
+        q = GetComponentDataFromEntity<ParticleEmitTag>(true);
+
+        SearchJob job = new SearchJob
+        {
+            enabled = enabled,
+            numPerUpdate = numPerUpdate,
+            rate = rate,
+            query = q,
+    };
+        var handle = job.Schedule(this, inputDeps);
+        handle.Complete();
+        initSystem.enabled = job.enabled[0];
+        initSystem.numPerUpdate = job.numPerUpdate[0];
+        initSystem.rate = job.rate[0];
+        return handle;
+    }
+}
+
+//TODO change to jobs
 [UpdateAfter(typeof(BloodEmitterQueryJobSystem))]
 public class BloodEmitterSystem : ComponentSystem
 {
@@ -86,63 +142,53 @@ public class BloodEmitterSystem : ComponentSystem
     }
 }
 
-[BurstCompile]
-[UpdateBefore(typeof(BloodEmitterSystem))]
-public class BloodEmitterQueryJobSystem : JobComponentSystem
-{
-    [ReadOnly] private ComponentDataFromEntity<ParticleEmitTag> q;
-    private BloodEmitterSystem initSystem;
-    private NativeArray<bool> enabled;
-    private NativeArray<int> numPerUpdate;
-    private NativeArray<float> rate;
+//[BurstCompile]
+//[UpdateAfter(typeof(BloodEmitterQueryJobSystem))]
+//public class BloodEmitterJobSystem : JobComponentSystem
+//{
+//    public bool enabled;
+//    public int numPerUpdate;
+//    public float rate;
 
-    protected override void OnCreate()
-    {
-        initSystem = World.GetOrCreateSystem<BloodEmitterSystem>();
-        enabled = new NativeArray<bool>(1, Allocator.TempJob);
-        numPerUpdate = new NativeArray<int>(1, Allocator.TempJob);
-        rate = new NativeArray<float>(1, Allocator.TempJob);
-    }
+//    private EndSimulationEntityCommandBufferSystem ecbs;
+//    private float timer;
+//    private Random rand;
+//    protected override void OnCreate()
+//    {
+//        ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+//        timer = 0;
+//        rand.InitState();
+//    }
 
-    protected override void OnDestroy()
-    {
-        enabled.Dispose();
-        numPerUpdate.Dispose();
-        rate.Dispose();
-    }
-    private struct SearchJob : IJobForEachWithEntity<BloodTag, ParticleSystemData>
-    {
-        public NativeArray<bool> enabled;
-        public NativeArray<int> numPerUpdate;
-        public NativeArray<float> rate;
-        [ReadOnly] public ComponentDataFromEntity<ParticleEmitTag> query;
-        public void Execute(Entity entity, int index, [ReadOnly] ref BloodTag tag, [ReadOnly] ref ParticleSystemData data)
-        {
-            if (query.HasComponent(entity))
-                enabled[0] = true;
-            numPerUpdate[0] = data.numPerUpdate;
-            rate[0] = data.rate;
-        }
-    }
-    protected override JobHandle OnUpdate(JobHandle inputDeps)
-    {
-        q = GetComponentDataFromEntity<ParticleEmitTag>(true);
+//    private struct EmitJob : IJobForEachWithEntity<BloodTag, Disabled, Translation, Rotation, Scale, ParticleEntityData>
+//    {
+//        [ReadOnly] public float dt;
+//        public EntityCommandBuffer.Concurrent ecb;
 
-        SearchJob job = new SearchJob
-        {
-            enabled = enabled,
-            numPerUpdate = numPerUpdate,
-            rate = rate,
-            query = q,
-    };
-        var handle = job.Schedule(this, inputDeps);
-        handle.Complete();
-        initSystem.enabled = job.enabled[0];
-        initSystem.numPerUpdate = job.numPerUpdate[0];
-        initSystem.rate = job.rate[0];
-        return handle;
-    }
-}
+//        public void Execute(Entity entity, int index, [ReadOnly] ref BloodTag tag1, [ReadOnly] ref Disabled tag2, ref Translation t, ref Rotation r, ref Scale s, ref ParticleEntityData data)
+//        {
+//        }
+//    }
+
+//    protected override JobHandle OnUpdate(JobHandle inputDeps)
+//    {
+//        if (!enabled)
+//            return new JobHandle();
+//        timer += Time.DeltaTime;
+//        if (timer > rate)
+//        {
+//            EmitJob job = new EmitJob
+//            {
+//                dt = Time.DeltaTime,
+//                ecb = ecbs.CreateCommandBuffer().ToConcurrent(),
+//            };
+//            var handle = job.Schedule(this, inputDeps);
+//            ecbs.AddJobHandleForProducer(handle);
+//            return handle;
+//        }        
+//        return new JobHandle();
+//    }
+//}
 
 [BurstCompile]
 [UpdateAfter(typeof(BloodEmitterSystem))]
@@ -153,7 +199,7 @@ public class BloodEmitterMoveJobSystem : JobComponentSystem
     {
         ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
-    private struct EmitJob : IJobForEachWithEntity<BloodTag, ParticleAliveTag, Translation, Rotation, Scale, ParticleEntityData>
+    private struct MoveJob : IJobForEachWithEntity<BloodTag, ParticleAliveTag, Translation, Rotation, Scale, ParticleEntityData>
     {
         [ReadOnly] public float dt;
         public EntityCommandBuffer.Concurrent ecb;
@@ -180,7 +226,7 @@ public class BloodEmitterMoveJobSystem : JobComponentSystem
     }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        EmitJob job = new EmitJob
+        MoveJob job = new MoveJob
         {
             dt = Time.DeltaTime,
             ecb = ecbs.CreateCommandBuffer().ToConcurrent(),
