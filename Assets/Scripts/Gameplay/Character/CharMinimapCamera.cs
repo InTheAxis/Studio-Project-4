@@ -9,7 +9,7 @@ public class CharMinimapCamera : MonoBehaviour
     [SerializeField]
     private float minimapY = 50.0f;
     [SerializeField]
-    private GameObject minimapCanvas = null;
+    private GameObject minimap = null;
 
     private CharTPController charControl = null;
 
@@ -36,11 +36,11 @@ public class CharMinimapCamera : MonoBehaviour
     public void SetCharController(CharTPController cc)
     {
         charControl = cc;
-        minimapCanvas = charControl.transform.Find("Canvas").gameObject;
+        minimap = charControl.transform.Find("Minimap").gameObject;
     }
 
     public GameObject getMinimap()
     {
-        return minimapCanvas;
+        return minimap;
     }
 }

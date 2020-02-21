@@ -83,6 +83,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
             PhotonNetwork.InstantiateSceneObject("NetworkLobbyManager", Vector3.zero, Quaternion.identity);
 
         List<string> players = new List<string>();
+        
         foreach (var p in PhotonNetwork.PlayerList)
             players.Add(p.NickName);
         roomJoinedCallback?.Invoke(players);
@@ -151,7 +152,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     }
     public bool areAllReady()
     {
-        return NetworkClientPView.instance.areAllReady(PhotonNetwork.CurrentRoom.PlayerCount);
+        return NetworkClientPView.instance.areAllReady(PhotonNetwork.CurrentRoom.PlayerCount - 1);
     }
     public void toggleReady(string playerName)
     {
