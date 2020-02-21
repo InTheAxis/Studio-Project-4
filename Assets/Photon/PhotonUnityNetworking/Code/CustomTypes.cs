@@ -29,6 +29,9 @@ namespace Photon.Pun
             PhotonPeer.RegisterType(typeof(Vector3), (byte) 'V', SerializeVector3, DeserializeVector3);
             PhotonPeer.RegisterType(typeof(Quaternion), (byte) 'Q', SerializeQuaternion, DeserializeQuaternion);
             PhotonPeer.RegisterType(typeof(Player), (byte) 'P', SerializePhotonPlayer, DeserializePhotonPlayer);
+
+            // Custom types
+
         }
 
 
