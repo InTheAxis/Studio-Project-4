@@ -4,22 +4,27 @@ using UnityEngine;
 
 public struct BuildingCell
 {
-    public BuildingCell(Vector3 pos, float size)
+    public BuildingCell(Vector3 pos, float size, Vector3 offSetDir, bool isLeft, Quaternion rot)
     {
         this.pos = pos;
         //this.min = min;
         //this.max = max;
         //this.minB = new Vector2(min.x)
         this.radius = size;
+        this.offSetDir = offSetDir;
+        this.isLeft = isLeft;
+        this.rot = rot;
     }
 
     public Vector3 pos;
+    public Vector3 offSetDir;
     //private Vector2 min;
 
     //private Vector2 minB;
     //private Vector2 max;
     //private Vector2 maxB;
-
+    public bool isLeft;
+    public Quaternion rot;
     public float radius;
 }
 
@@ -58,7 +63,13 @@ public class CellGenerator : Generator
 
     [SerializeField]
     private RoadGenerator roadGenerator;
+    [SerializeField]
+    private TowerGenerator towerGenerator;
 
+    public List<BuildingCell> GetCells()
+    {
+        return cells;
+    }
     public override void Clear()
     {
         cells.Clear();
@@ -70,26 +81,39 @@ public class CellGenerator : Generator
         Clear();
         foreach (RoadGenerator.RoadPath path in roadGenerator.GetRoadOuterPaths())
         {
-            float currDist = 0;
             Vector3 dir = path.dir;
-            Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
-            Vector3 startPos = path.start + pDir * path.width / 2;
-            Vector3 currPos = startPos;
-            currPos += dir * initialSpace;
-            currPos += dir * buffer.Get();
-            while (currDist < path.Length())
+             Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
+            Quaternion rot = Quaternion.LookRotation(pDir, Vector3.up);
+            for (int i = 0; i < 2; ++i)
             {
-                float currCellRadius = cellRadius.Get();
-                //float cellWidth = width.Get();
-                float spacing = buffer.Get();
-                currDist += currCellRadius;
-                currPos = currDist * dir + startPos;
-                //Vector3 end = currPos + dir * cellLength;
-                //Vector3 cellMax = end + pDir * cellWidth;
-
-                // create cell
-                cells.Add(new BuildingCell(currPos, currCellRadius));
-                currDist += spacing + currCellRadius;
+            bool isLeft = true;
+                // initial path values
+                 float currDist = 0;
+                if (i == 1)
+                {
+                    rot = Quaternion.LookRotation(-pDir, Vector3.up);
+                    pDir = -pDir;
+                    isLeft = false;
+                }
+                Vector3 startPos = path.start + pDir * path.width / 2;
+                Vector3 currPos = startPos;
+                currPos += dir * initialSpace;
+                currPos += dir * buffer.Get();
+                while (currDist < path.Length())    // main cell loop
+                {
+                    float currCellRadius = cellRadius.Get();
+                    //float cellWidth = width.Get();
+                    float spacing = buffer.Get();
+                    currDist += currCellRadius;
+                    currPos = currDist * dir + startPos;
+                    //Vector3 end = currPos + dir * cellLength;
+                    //Vector3 cellMax = end + pDir * cellWidth;
+                    // TODO: check for tower
+                    //
+                    // create cell
+                    cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot));
+                    currDist += spacing + currCellRadius;
+                }
             }
         }
         Debug.Log("Generated Cells.");
@@ -101,7 +125,11 @@ public class CellGenerator : Generator
             return;
         foreach (BuildingCell cell in cells)
         {
-            Gizmos.DrawWireSphere(cell.pos, cell.radius);
+            if (cell.isLeft)
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.green;
+            Gizmos.DrawSphere(cell.pos, 2);
         }
     }
 }

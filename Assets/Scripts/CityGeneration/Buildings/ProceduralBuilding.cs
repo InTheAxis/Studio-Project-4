@@ -8,7 +8,8 @@ public class ProceduralBuilding : MonoBehaviour
 {
     //public values
     // public int seed = 0;
-
+    [SerializeField]
+    private float buildingRadius = 10;
     // references
     public GameObject rootRef;
 
@@ -20,7 +21,14 @@ public class ProceduralBuilding : MonoBehaviour
 
     public GameObject attachmentPositions;
     // private variables
-
+    public float GetRadius()
+    {
+        return buildingRadius;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(Vector3.zero, buildingRadius);
+    }
     private void OnEnable()
     {
         //#if true
