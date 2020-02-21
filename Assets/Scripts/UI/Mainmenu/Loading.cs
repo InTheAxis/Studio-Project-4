@@ -43,7 +43,6 @@ public class Loading : MonoBehaviour
 
         while(!asyncOperation.isDone)
         {
-            tmDesc.text = "Loading: ";
 
             /* Status */
             int descIndex = Mathf.Clamp((int)(asyncOperation.progress * descriptions.Length), 0, descriptions.Length - 1);
@@ -72,7 +71,6 @@ public class Loading : MonoBehaviour
         loadTimer = 0.0f;
         while (loadTimer < pseudoLoadDuration)
         {
-            tmDesc.text = "Loading: ";
             float ratio = loadTimer / pseudoLoadDuration;
 
             /* Status */
