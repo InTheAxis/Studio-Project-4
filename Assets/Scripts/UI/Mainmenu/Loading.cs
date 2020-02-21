@@ -28,8 +28,11 @@ public class Loading : MonoBehaviour
     {
         indicator.SetActive(true);
         tmTips.text = tips[Random.Range(0, tips.Length)];
-        //StartCoroutine(loadScene(targetScene));
-        StartCoroutine(pseudoLoadScene(targetScene));
+
+        if(usePseudoLoading)
+            StartCoroutine(pseudoLoadScene(targetScene));
+        else
+            StartCoroutine(loadScene(targetScene));
     }
 
     private IEnumerator loadScene(string targetScene)
