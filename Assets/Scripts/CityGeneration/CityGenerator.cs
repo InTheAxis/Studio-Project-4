@@ -46,4 +46,9 @@ public class CityGenerator : MonoBehaviour
                 generator.generator.Generate();
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(Vector3.zero, scale);
+    }
 }

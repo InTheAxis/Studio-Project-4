@@ -42,8 +42,10 @@ public class BuildingGenerator : Generator
         poisson.Scale(scale);
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + 1))
         {
+            Vector3 vpos = pos.pos;
+            vpos.y += 0.1f;
             GameObject buildingRef = cityScriptable.SelectMesh();
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos.pos, Quaternion.identity, transform, "Environment");
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, vpos, Quaternion.identity, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
             // check for road
@@ -66,6 +68,7 @@ public class BuildingGenerator : Generator
             Gizmos.DrawWireSphere(trans.position, buffer * scale);
         }
         Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Vector3.zero, scale * centerBuffer);
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
             // poisson.Inject(new PoissonPoint(point.pos, towerBuffer));

@@ -444,33 +444,41 @@ public class RoadGenerator : Generator
         float length = 0.1f;
         foreach (RoadPath path in roadInnerPaths)
         {
+            Vector3 pos = (path.start + path.end) / 2;
+            pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform, "Environment") as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment") as GameObject;
             road.transform.localScale = new Vector3(2, 1, path.Length() * length);
             roads.Add(road);
         }
         foreach (RoadPath path in roadOuterPaths)
         {
+            Vector3 pos = (path.start + path.end) / 2;
+            pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform, "Environment") as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment") as GameObject;
             road.transform.localScale = new Vector3(2, 1, path.Length() * length);
             roads.Add(road);
         }
         foreach (RoadPath path in roadSubPaths)
         {
+            Vector3 pos = (path.start + path.end) / 2;
+            pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform, "Environment");
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment");
             road.transform.localScale = new Vector3(1, 1, path.Length() * length);
             roads.Add(road);
         }
         foreach (RoadPath path in roadMinorPaths)
         {
+            Vector3 pos = (path.start + path.end) / 2;
+            pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, (path.start + path.end) / 2, rot, transform, "Environment");
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment");
             road.transform.localScale = new Vector3(1, 1, path.Length() * length);
             roads.Add(road);
         }
