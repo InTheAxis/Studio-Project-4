@@ -67,8 +67,11 @@ public class CharTPController : MonoBehaviourPun
 
     private void Start()
     {
-        if (CharTPCamera.Instance != null)        
-            CharTPCamera.Instance.SetCharController(this);        
+        if (CharTPCamera.Instance != null/* && photonView.IsMine && PhotonNetwork.IsConnected*/)
+        {
+            CharTPCamera.Instance.SetCharController(this);
+            CharMinimapCamera.Instance.SetCharController(this);
+        }
 
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);
 

@@ -35,9 +35,13 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - goInGameRequestReceived
+  - carry
+  - interact
+  - requestAccepted
+  - requestRejected
+  - requestReceived
   - destroy
-  - destructibleReleaseOwner
-  - destructibleRequestOwner
+  - queryUse
   - onRequestSuccess
   - queryCarry
   - queryDrop
@@ -46,9 +50,5 @@ MonoBehaviour:
   - rpcDestroy
   - breakApart
   - destructibleEnsureOwnerIsReleased
-  - queryUse
-  - requestAccepted
-  - requestReceived
-  - requestRejected
   DisableAutoOpenWizard: 1
   ShowSettings: 0
