@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ada39dff194e5ed4c980c6c6b1e63532
+guid: 63727a95cde68c64d8639fd1a7a5bb12
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -8,17 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Attachment_Type5_A4_shardMaterial
-    second: {fileID: 2100000, guid: a0ddaa40c13ba0e4ab0c3d024d0908df, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Attachment_Type6_A3_shardMaterial
-    second: {fileID: 2100000, guid: 8a6467ba55d445b4eb02cba2661b2f1a, type: 2}
+    second: {fileID: 2100000, guid: 863ae2ac5f55f1b45b39e6fe844a4a26, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: 073fecd1377ce254299bb638dbaad1fb, type: 2}
+    second: {fileID: 2100000, guid: 343cade108ac7694d8617377fd9d8d05, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -95,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
