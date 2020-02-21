@@ -322,7 +322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
   cooldownTime: 1
-  range: 5
   radius: 5
   include:
     serializedVersion: 2
@@ -364,7 +363,6 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   cooldownTime: 1
   forceMagnitude: 20
-  range: 5
   radius: 5
   include:
     serializedVersion: 2

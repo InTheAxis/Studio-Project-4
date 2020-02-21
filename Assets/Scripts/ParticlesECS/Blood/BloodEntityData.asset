@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BloodEntityData
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleEntityDataObj
+  scale: 0.6
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: ffe61d13b2051b54e8fd2e179394a208, type: 2}
+  velMin: {x: -5.31, y: 3.75, z: -1.38}
+  velMax: {x: 3.36, y: 9.13, z: 2.17}
+  lifeTime: 3.94
