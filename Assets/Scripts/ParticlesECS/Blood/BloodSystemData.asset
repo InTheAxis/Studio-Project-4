@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BloodSystemData
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemDataObj
   enabledOnAwake: 1
-  numPerUpdate: 6
-  rate: 0.01
+  numPerUpdate: 100
+  rate: 0.03

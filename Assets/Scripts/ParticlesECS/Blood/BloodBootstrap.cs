@@ -17,6 +17,7 @@ public class BloodBootstrap : ParticleBootstrap
 
         EntityArchetype arch = em.CreateArchetype(
             typeof(Translation),
+            typeof(Rotation),
             typeof(Scale),
             typeof(LocalToWorld),   //necessary for render
             typeof(RenderMesh),     //necessary for render

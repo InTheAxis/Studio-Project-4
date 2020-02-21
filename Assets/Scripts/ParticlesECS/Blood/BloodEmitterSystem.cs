@@ -2,9 +2,11 @@
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Collections;
+using Unity.Rendering;
 using Unity.Jobs;
 using Unity.Burst;
 
+//TODO change to jobs
 public class BloodEmitterSystem : ComponentSystem
 {
     private ComponentType tag;
@@ -58,36 +60,63 @@ public class BloodEmitterSystem : ComponentSystem
                 tag,
                 ComponentType.ReadOnly<Disabled>(),
                 typeof(Translation),
+                typeof(Rotation),
+                typeof(Scale),
                 typeof(ParticleEntityData)
                 );
 
             NativeArray<Entity> arr = q.ToEntityArray(Allocator.TempJob);
             NativeArray<Translation> trans = q.ToComponentDataArray<Translation>(Allocator.TempJob);
+            NativeArray<Rotation> rots = q.ToComponentDataArray<Rotation>(Allocator.TempJob);
+            NativeArray<Scale> scales = q.ToComponentDataArray<Scale>(Allocator.TempJob);
             NativeArray<ParticleEntityData> dataArr = q.ToComponentDataArray<ParticleEntityData>(Allocator.TempJob);
 
             for (int i = 0; i < numPerUpdate && i < arr.Length; ++i)
             {
                 Entity e = arr[i];
                 Translation t = trans[i];
+                Rotation r = rots[i];
+                Scale s = scales[i];
                 ParticleEntityData datum = dataArr[i];
-                t.Value = rand.NextFloat3(new float3(-1, 0, -1), new float3(1, 0, 1));
-                datum.vel = rand.NextFloat3(datum.velMin, datum.velMax);
-                datum.life = datum.lifeTime;
+
+                datum.rot = datum.startRot;
+                datum.vel = datum.startVel;
+
+                t.Value = rand.NextFloat3(datum.emitAreaMin, datum.emitAreaMax);
+                r.Value = quaternion.Euler(datum.rot);
+                s.Value = datum.startScale;
+
+                datum.life = datum.lifeTime;           
+                
                 PostUpdateCommands.SetComponent(e, t);
+                PostUpdateCommands.SetComponent(e, r);
+                PostUpdateCommands.SetComponent(e, s);
                 PostUpdateCommands.SetComponent(e, datum);
                 PostUpdateCommands.AddComponent(e, typeof(ParticleAliveTag));
                 PostUpdateCommands.RemoveComponent(arr[i], typeof(Disabled));
             }
             arr.Dispose();
             trans.Dispose();
+            rots.Dispose();
+            scales.Dispose();
             dataArr.Dispose();
         }
 
         //update alive particles
         Entities.WithAllReadOnly(tag, typeof(ParticleAliveTag)).
-            ForEach((Entity e, ref Translation t, ref ParticleEntityData data) => {
+            ForEach((Entity e, ref Translation t, ref Rotation r, ref Scale s, ref ParticleEntityData data) => {
+                float percentLife = 1 - (data.life / data.lifeTime);
+
+                data.rot = math.lerp(data.startRot, data.endRot, percentLife);
+                data.vel = math.lerp(data.startVel, data.endVel, percentLife);
+
                 t.Value += data.vel * dt;
+                r.Value = quaternion.Euler(data.rot);
+                s.Value = math.lerp(data.startScale, data.endScale, percentLife);
+
                 data.life -= dt;
+
+
                 if (data.life <= 0)
                 {
                     PostUpdateCommands.RemoveComponent(e, typeof(ParticleAliveTag));

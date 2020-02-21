@@ -30,7 +30,6 @@ public class ParticleBootstrap : MonoBehaviour
 
         foreach (Entity e in entArr)
         {
-            em.SetComponentData(e, new Scale { Value = entityObj.scale });
             em.SetSharedComponentData(e, new RenderMesh { mesh = entityObj.mesh, material = entityObj.material, });
             em.SetComponentData(e, ParticleEntityData.Create(entityObj));
         }
