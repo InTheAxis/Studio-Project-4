@@ -19,7 +19,7 @@ public class MonsterChargeAtk : MonoBehaviour
     [SerializeField]
     private float delay = 0.5f;
     [SerializeField]
-    private float acceleration = 1;
+    private float acceleration = 0.05f;
 
     private IEnumerator chargeCorr;
 
@@ -47,16 +47,19 @@ public class MonsterChargeAtk : MonoBehaviour
             yield return new WaitForSeconds(delay);
             charControl.disableKeyInput = true;
             float timer = 0;
-            float vel = 0;
             Vector3 dir = charControl.forward;
+            float sqrDist = chargeDist * chargeDist;
             float speed = chargeDist / duration;
             Vector3 pos = charControl.position;
             while (timer < duration && !chargeChk.collided)
             {
                 timer += Time.deltaTime;
-                vel += acceleration * Time.deltaTime;
-                pos += dir * vel * speed * Time.deltaTime;
-                charControl.Move(pos);
+                speed += acceleration * Time.deltaTime;
+                charControl.AddForce(dir * speed, ForceMode.Acceleration);
+
+                if (Mathf.Abs((pos - charControl.position).sqrMagnitude - sqrDist) <= 0.1f)
+                    break;
+
                 yield return null;
             }
             charControl.disableKeyInput = false;

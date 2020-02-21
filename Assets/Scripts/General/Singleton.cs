@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour
 {
-    private static Singleton<T> instance = null;
+    public static Singleton<T> instance = null;
 
     private void Awake()
     {

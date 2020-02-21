@@ -5,25 +5,38 @@ using Photon.Pun;
 
 public class CharTPController : MonoBehaviourPun
 {
+    [Header("References, look for them in children")]
     public List<Transform> lookTargets; //places for cam to look
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+    [Header("Speed settings")]
+    [SerializeField]
     [Tooltip("Vertical and Horizontal movement speed")]
-    public float moveSpeed = 5;
-    [Tooltip("Mouse sensitivity, affects rotation speed")]
-    public float mouseSens = 1;
-    [Tooltip("Clamps how far you can look up or down")]
-    public float maxLookY = 0.6f;
-    [Tooltip("Starting y-axis look direction, from -1 to 1")]
-    public float initialLookY = 0.8f;
-
+    private float moveSpeed = 50;
+    [SerializeField]
+    [Tooltip("How fast to deccelerate after letting go of movement key")]
+    private float deccel = 10;
+    [SerializeField]
     [Tooltip("Higher means able to move more in air")]
-    public float airSpeed = 1;
+    private float airMoveSpeed = 20;
+    [SerializeField]
     [Tooltip("Speed of crouch walk")]
-    public float crouchSpeed = 2;
-    [Tooltip("Force applied to rigidbody to jump upwards")]
-    public float jumpForce = 2;
+    private float crouchSpeed = 25;
+    [SerializeField]
+    [Tooltip("Speed of jump")]
+    private float jumpSpeed = 5;
+
+    [Header("Mouse Settings")]
+    [SerializeField]
+    [Tooltip("Mouse sensitivity, affects rotation speed")]
+    private float mouseSens = 1;
+    [SerializeField]
+    [Tooltip("Clamps how far you can look up or down")]
+    private float maxLookY = 0.9f;
+    [SerializeField]
+    [Tooltip("Starting y-axis look direction, from -1 to 1")]
+    private float initialLookY = -0.5f;
 
     [HideInInspector]
     public bool disableMovement;
@@ -54,6 +67,9 @@ public class CharTPController : MonoBehaviourPun
 
     private void Start()
     {
+        if (CharTPCamera.Instance != null)        
+            CharTPCamera.Instance.SetCharController(this);        
+
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);
 
         pPos = transform.position;
@@ -121,7 +137,7 @@ public class CharTPController : MonoBehaviourPun
             if (crouchChk.crouching)
                 currSpeed = crouchSpeed;
             else if (jumpChk.airborne)
-                currSpeed = airSpeed;
+                currSpeed = airMoveSpeed;
             else
                 currSpeed = moveSpeed;
 
@@ -134,21 +150,26 @@ public class CharTPController : MonoBehaviourPun
             if (velY > 0)
                 jumpChk.Jumping();
             if (inp.jump && !jumpChk.airborne)            
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.VelocityChange);
 
             //move player
-            pPos = rb.position;
-            pPos += moveAmt * Time.deltaTime * currSpeed;
-            Move(pPos);
+            //pPos = rb.position;
+            //pPos += moveAmt * Time.deltaTime * currSpeed;
+            //Move(pPos);
+            rb.AddForce(moveAmt * currSpeed, ForceMode.Acceleration);
             //rotate player
             transform.rotation = Quaternion.LookRotation(pforward, Vector3.up);
         }
 
-        rb.velocity = new Vector3(0, rb.velocity.y, 0); //reset in case it slides    
+        //deccelerate to 0
+        Vector3 temp = rb.velocity;
+        temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * deccel);
+        temp.y = rb.velocity.y;
+        rb.velocity = temp;  
     }
 
-    public void Move(Vector3 pos)
+    public void AddForce(Vector3 force, ForceMode mode)
     {
-        rb.MovePosition(pos);
+        rb.AddForce(force, mode);
     }
 }

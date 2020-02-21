@@ -251,13 +251,14 @@ MonoBehaviour:
   - {fileID: 7549976724487257557}
   jumpChk: {fileID: 3402467720299827767}
   crouchChk: {fileID: 3402467720941865846}
-  moveSpeed: 5
+  moveSpeed: 50
+  deccel: 10
+  airMoveSpeed: 20
+  crouchSpeed: 25
+  jumpSpeed: 5
   mouseSens: 2
   maxLookY: 0.9
   initialLookY: -0.5
-  airSpeed: 3
-  crouchSpeed: 2
-  jumpForce: 5
   disableMovement: 0
   disableKeyInput: 0
   disableMouseInput: 0
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 5071471449440821494}
   maxEnergy: 100
-  decayRate: 1
+  decayRate: 5
 --- !u!114 &3023660623748070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,11 +325,11 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   ener: {fileID: 4943199071075631875}
   chargeChk: {fileID: 2727105021364358267}
-  enerConsumption: 0
-  duration: 0.5
-  chargeDist: 70
-  delay: 0.5
-  acceleration: 2
+  enerConsumption: 3
+  duration: 0.2
+  chargeDist: 50
+  delay: 0.3
+  acceleration: 0.5
 --- !u!1001 &8226840309704502532
 PrefabInstance:
   m_ObjectHideFlags: 0
