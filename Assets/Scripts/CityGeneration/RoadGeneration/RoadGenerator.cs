@@ -68,17 +68,19 @@ public class RoadGenerator : Generator
 
     public struct RoadPath
     {
-        public RoadPath(Vector3 start, Vector3 end)
+        public RoadPath(Vector3 start, Vector3 end, float width)
         {
             this.start = start;
             this.end = end;
             this.dir = (end - start).normalized;
+            this.width = width;
             // this.length = (end - start).magnitude;
         }
 
         public Vector3 start;
         public Vector3 end;
         public Vector3 dir;
+        public float width;
 
         public float Length()
         {
@@ -103,12 +105,14 @@ public class RoadGenerator : Generator
 
     private void OnDrawGizmos()
     {
+        if (!gizmosEnabled)
+            return;
         if (!voronoi.IsGenerated())
             return;
         Gizmos.color = Color.red;
         foreach (PoissonPoint poissonPoint in voronoi.GetPoisson().GetPoints())
         {
-            Gizmos.DrawSphere(poissonPoint.pos, poissonPoint.radius);
+            Gizmos.DrawSphere(poissonPoint.pos * scale, poissonPoint.radius * 3);
         }
         Gizmos.color = Color.white;
         foreach (VoronoiVertice vertice in voronoi.GetVoronoiPoints())
@@ -448,7 +452,7 @@ public class RoadGenerator : Generator
             DestroyImmediate(gameObject);
         }
         roads.Clear();
-        float length = 0.1f;
+        float length = 1f;
         foreach (RoadPath path in roadInnerPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
@@ -508,7 +512,7 @@ public class RoadGenerator : Generator
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(sub.minLength, sub.maxLength) * scale * scaleMultiplier;
-                roadSubPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2));
+                roadSubPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, subRoadWidth));
             }
         }
     }
@@ -531,7 +535,7 @@ public class RoadGenerator : Generator
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(subdivision.minLength, subdivision.maxLength) * scale * scaleMultiplier;
-                roadMinorPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2));
+                roadMinorPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, minorRoadWidth));
             }
         }
     }
@@ -573,11 +577,11 @@ public class RoadGenerator : Generator
         {
             Vector3 point = intersectionNodes[i].pos;
             Vector3 point1 = intersectionNodes[i + 1].pos;
-            roadInnerPaths.Add(new RoadPath(point, point1));
+            roadInnerPaths.Add(new RoadPath(point, point1, centralRoadWidth));
         }
         Vector3 pointa = intersectionNodes[0].pos;
         Vector3 pointb = intersectionNodes[intersectionNodes.Count - 1].pos;
-        roadInnerPaths.Add(new RoadPath(pointa, pointb));
+        roadInnerPaths.Add(new RoadPath(pointa, pointb, centralRoadWidth));
         //
         // outer paths
         foreach (VoronoiVertice vertice in voronoi.GetCentral())
@@ -594,7 +598,7 @@ public class RoadGenerator : Generator
                 }
                 if (counter > 1)
                 {
-                    roadOuterPaths.Add(new RoadPath(vertice.pos, other.pos));
+                    roadOuterPaths.Add(new RoadPath(vertice.pos, other.pos, mainRoadWidth));
                     break;
                 }
             }

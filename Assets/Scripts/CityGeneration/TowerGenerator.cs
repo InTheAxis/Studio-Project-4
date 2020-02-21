@@ -40,6 +40,8 @@ public class TowerGenerator : Generator
 
     private void OnDrawGizmos()
     {
+        if (!gizmosEnabled)
+            return;
         // Gizmos.DrawWireSphere(Vector3.zero, scale);
         //Gizmos.color = Color.red;
         //Gizmos.DrawWireSphere(Vector3.zero, 0.2f * scale);

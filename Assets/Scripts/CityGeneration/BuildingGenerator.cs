@@ -63,6 +63,8 @@ public class BuildingGenerator : Generator
 
     private void OnDrawGizmos()
     {
+        if (!gizmosEnabled)
+            return;
         foreach (Transform trans in transform)
         {
             Gizmos.DrawWireSphere(trans.position, buffer * scale);
