@@ -15,20 +15,7 @@ public class BloodBootstrap : ParticleBootstrap
     {
         Instance = this;
 
-        EntityArchetype arch = em.CreateArchetype(
-            typeof(Translation),
-            typeof(Rotation),
-            typeof(Scale),
-            typeof(LocalToWorld),   //necessary for render
-            typeof(RenderMesh),     //necessary for render
-            typeof(RenderBounds),   //necessary for render
-            typeof(Disabled),
-            //custom
-            typeof(ParticleEntityData),
-            typeof(BloodTag)
-            );
-
-        Init(arch, typeof(BloodTag));
+        Init(typeof(BloodTag));
     }
 
     private void Update()

@@ -23,10 +23,23 @@ public class ParticleBootstrap : MonoBehaviour
         em = World.DefaultGameObjectInjectionWorld.EntityManager;
     }
 
-    protected void Init(EntityArchetype particle, ComponentType systemTag)
+    protected void Init(ComponentType systemTag)
     {
+        EntityArchetype arch = em.CreateArchetype(
+            typeof(Translation),
+            typeof(Rotation),
+            typeof(Scale),
+            typeof(LocalToWorld),   //necessary for render
+            typeof(RenderMesh),     //necessary for render
+            typeof(RenderBounds),   //necessary for render
+            typeof(Disabled),
+            //custom
+            typeof(ParticleEntityData), 
+            systemTag
+        );
+
         NativeArray<Entity> entArr = new NativeArray<Entity>(maxNumEnts, Allocator.Temp);
-        em.CreateEntity(particle, entArr);
+        em.CreateEntity(arch, entArr);
 
         foreach (Entity e in entArr)
         {
