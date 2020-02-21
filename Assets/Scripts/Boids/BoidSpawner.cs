@@ -12,9 +12,9 @@ public class BoidSpawner : ComponentSystem
     {
         if (generated)
             return;
-        generated = true;
         Entities.ForEach((ref BoidSpawnerData data, ref Translation translation) =>
         {
+            generated = true;
             for (int i = 0; i < data.numSpawn; ++i)
             {
                 Vector3 pos = Random.insideUnitSphere * data.range;

@@ -1,5 +1,154 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &319650117739267996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8310847097019195986}
+  - component: {fileID: 1295911177967918045}
+  - component: {fileID: 7841431485085244249}
+  - component: {fileID: 2030239546}
+  m_Layer: 0
+  m_Name: BoidManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8310847097019195986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319650117739267996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 23.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5890597338796914725}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1295911177967918045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319650117739267996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef38caa3abe2831488cc7750ad7a138c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boidRef: {fileID: 6566418352985127789, guid: d642e9613641e3741aad0bcbcfcc7a54, type: 3}
+  numSpawn: 50
+  range: 10
+--- !u!114 &7841431485085244249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319650117739267996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df24216785ea6e49b27adbcfe617b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.267
+  alignRate: 0.0228
+  coheseRate: 0.02
+  separateRate: 0.0594
+  viewRadius: 7
+  separateRadius: 2
+  align: 1
+  cohese: 1
+  separate: 1
+--- !u!114 &2030239546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319650117739267996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0
+--- !u!1 &1284325392231104113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1970345592454583450}
+  - component: {fileID: 2030239543}
+  - component: {fileID: 2030239545}
+  m_Layer: 0
+  m_Name: DecalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1970345592454583450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284325392231104113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5890597338796914725}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030239543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284325392231104113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5930868f6fc8894a833051cfbd41903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRock: 5
+  density: 100
+  range: 50
+  rockA: {fileID: 100000, guid: da1981c3ee8ea7e4186a753e15495628, type: 3}
+  rockB: {fileID: 100000, guid: 41ba2a6f1d128f94eba95e5213a81254, type: 3}
+  rockC: {fileID: -927199367670048503, guid: 418c9450d7a6e984387132a58df7caa1, type: 3}
+  rockD: {fileID: 100000, guid: b332dc24cbb08144da2f112f82406700, type: 3}
+  rockE: {fileID: 100000, guid: 821158ae724ce854e920539f935295b8, type: 3}
+  rockF: {fileID: 0}
+  rockG: {fileID: 0}
+--- !u!114 &2030239545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284325392231104113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0
 --- !u!1 &4706646000120290610
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +226,8 @@ Transform:
   - {fileID: 5890597339044720972}
   - {fileID: 4080677318420839248}
   - {fileID: 7976648869096780611}
+  - {fileID: 8310847097019195986}
+  - {fileID: 1970345592454583450}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,8 +250,8 @@ MonoBehaviour:
     enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  scale: 250
-  generateOnStart: 0
+  scale: 115.69
+  generateOnStart: 1
 --- !u!114 &5809545488305829278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b18d27c0e82ce4e8d18de10b718568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverInstantiate: 0
+  serverInstantiate: 1
 --- !u!1 &5890597339044720962
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,12 +308,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2c915e884eb7d44a61c484fca2ea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  centralRoadWidth: 2
+  mainRoadWidth: 2.5
+  subRoadWidth: 1.5
+  minorRoadWidth: 1
   sprite: {fileID: 0}
   scaleMultiplier: 1
   resolution: 100
   centerBuffer: 0.451
   cleanUp: 1
-  RoadRef: {fileID: 3848365652827750180, guid: d69dd2ffe54851f459813e99f277bf16, type: 3}
+  RoadRef: {fileID: 8483622626547749704, guid: f53b1005619653e4f8f72268fbbea74b, type: 3}
   density: 17
   length: 139.3
   sub:
@@ -218,9 +373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae179f9963a1934a882b64c0267c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityScriptable: {fileID: 11400000, guid: 34a27c6468b51724d895c1e1d36fdd82, type: 2}
+  cityScriptable: {fileID: 11400000, guid: 6c715ec834d63314194077cfc2a8ef49, type: 2}
   towerGenerator: {fileID: 899756740256859345}
-  density: 426
-  buffer: 0.038
-  centerBuffer: 0.152
-  towerBuffer: 0.254
+  density: 274
+  buffer: 0.183
+  centerBuffer: 0.231
+  towerBuffer: 0.243

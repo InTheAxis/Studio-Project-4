@@ -19,8 +19,8 @@ public class PropGenerator : ComponentSystem
         Entities.ForEach((ref DecalData data) =>
         {
             generated = true;
-            poisson.GenerateDensity(1000);
-            poisson.Scale(50);
+            poisson.GenerateDensity(data.density);
+            poisson.Scale(data.range);
             foreach (PoissonPoint point in poisson.GetPoints())
             {
                 Entity entRef = data.rockA;

@@ -22,6 +22,8 @@ public struct DecalData : IComponentData
     //   authoring the data in the Editor.
     public int numRock;
 
+    public int density;
+    public int range;
     public Entity rockA;
     public Entity rockB;
     public Entity rockC;
