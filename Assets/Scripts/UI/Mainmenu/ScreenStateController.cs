@@ -16,6 +16,7 @@ public class ScreenStateController : MonoBehaviour
         SERVERSELECT,
         CONNECTINGTOSERVER,
         MATCHLOBBY,
+        LOADING,
         OPTIONS,
         CREDITS,
         COUNT,
@@ -134,7 +135,7 @@ public class ScreenStateController : MonoBehaviour
                 screens[i].SetActive(false);
         }
 
-        mainmenuModel.SetActive(true);
+        mainmenuModel.SetActive(false);
         lobbyModels.SetActive(false);
 
         NetworkClient.instance.connectToMasterServer();
@@ -395,6 +396,12 @@ public class ScreenStateController : MonoBehaviour
         else if(name == "LobbyReady")
         {
             /* TODO: Lobby Ready? */
+
+            /* Pseudo Start Game */
+            mainmenuModel.SetActive(false);
+            lobbyModels.SetActive(false);
+            setScene(ScreenStates.LOADING);
+            screens[(int)ScreenStates.LOADING].GetComponent<Loading>().Load("Destructibles");
         }
         else if(name == "LobbyCharacter")
         {
