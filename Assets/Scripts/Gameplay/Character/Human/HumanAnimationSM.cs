@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharAnimationSM : MonoBehaviour
+public class HumanAnimationSM : MonoBehaviour
 {
     public Animator animator;
     public CharTPController charControl;
@@ -69,6 +69,6 @@ public class CharAnimationSM : MonoBehaviour
         animator.ResetTrigger(curState);
         curState = next;
         animator.SetTrigger(curState);
-        Debug.Log("Anim State: " + curState);
+        Debug.Log("Human anim state: " + curState);
     }
 }

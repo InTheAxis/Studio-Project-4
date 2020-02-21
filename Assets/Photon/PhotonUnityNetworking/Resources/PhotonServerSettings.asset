@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 0c8c38df-f316-4baa-be93-51bb65181683
-    AppIdChat: 70c90456-1bcb-447d-aea1-8b37704ec406
+    AppIdRealtime: 
+    AppIdChat: 
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
@@ -28,30 +28,6 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - goInGameRequestReceived
-  - carry
-  - interact
-  - requestAccepted
-  - requestRejected
-  - requestReceived
-  - destroy
-  - queryUse
-  - onRequestSuccess
-  - queryCarry
-  - queryDrop
-  - destructibleReleaseOwner
-  - destructibleRequestOwner
-  - rpcDestroy
-  - breakApart
-  - destructibleEnsureOwnerIsReleased
-  - helloRequest
-  - receiveReadyList
-  - receiveToggle
+  RpcList: []
   DisableAutoOpenWizard: 1
   ShowSettings: 0

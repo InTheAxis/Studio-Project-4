@@ -7,15 +7,16 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject playerPrefab;
+    private bool isHuman;
     [SerializeField]
-    private CharTPCamera playerCamera;
+    private GameObject humanPrefab;
+    [SerializeField]
+    private GameObject monsterPrefab;
 
     public static GameObject playerObj = null;
 
     private void Awake()
     {
-        playerObj = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
-        playerCamera.GiveMeCharController(playerObj.GetComponent<CharTPController>());
+        playerObj = PhotonNetwork.Instantiate(isHuman ? humanPrefab.name : monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
     }
 }

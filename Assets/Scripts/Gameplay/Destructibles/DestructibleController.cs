@@ -18,6 +18,7 @@ public class DestructibleController : MonoBehaviourPun
 
     [SerializeField]
     private Transform holdDestructibles = null;
+    private const string holdDestructiblesTag = "HoldDestructibles";
 
     [SerializeField]
     private CharTPController playerController = null;
@@ -40,7 +41,7 @@ public class DestructibleController : MonoBehaviourPun
 
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
-            holdDestructibles = playerController.transform.Find("LookTarget").Find("HoldDestructibles");
+            holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
 
         //throwCollider.radius = detectionRadius;
     }
@@ -113,7 +114,6 @@ public class DestructibleController : MonoBehaviourPun
         // Release the destructibles
         if (Input.GetMouseButtonUp(0))
         {
-
             if (throwables != null && throwables.Count > 0)
             {
                 if (!canThrow)

@@ -2,25 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//===================Make sure there is only one of this script in each scene!
 public class CharTPCamera : MonoBehaviour
-{    
-    [Tooltip("Should be sett externally with a function...TEMP")]
-    public CharTPController charControl;
-    [Tooltip("What the camera should look at and follow")]
-    public List<Transform> lookTargets;
+{
+    public static CharTPCamera Instance;
     
+    //[Header("References from Character Object")]
+    //[SerializeField]
+    //[Tooltip("Should be sett externaly with this class' function")]
+    private CharTPController charControl;
+    //[SerializeField]
+    //[Tooltip("What the camera should look at and follow")]
+    private List<Transform> lookTargets;
+
+    [Header("Distance to Target")]
+    [SerializeField] 
     [Tooltip("How far the camera should be away from look target")]
-    public float targetCamDist;
+    private float targetCamDist;
+    [SerializeField]
     [Tooltip("At what distance away should the camera start")]
-    public float initialCamDist;
+    private float initialCamDist;
+    [Header("Camera Collision Settings")]
+    [SerializeField]
     [Tooltip("What layers will trigger the collision")]
-    public LayerMask mask;
+    private LayerMask mask;
+    [SerializeField]
     [Tooltip("How fast the camera will lerp to targets")]
-    public float camAdjustSpeed = 5;
+    private float camAdjustSpeed = 5;
+    [SerializeField]
     [Tooltip("How fast the camera will lerp when occluded")]
-    public float camOccludeSpeed = 50;
+    private float camOccludeSpeed = 50;
+    [SerializeField]
     [Tooltip("Offsets where the rays are cast from, higher means the camera detects occlusions earlier")]
-    public float adjustOffset = 0.3f;
+    private float adjustOffset = 0.3f;
+
+    [Header("Camera Shake Settings")]
+    [SerializeField]
+    [Tooltip("How long to shake cam")]
+    private float shakeDuration = 0.5f;
+    [SerializeField]
+    [Tooltip("How far to shake cam")]
+    private float shakeAmplitude = 0.01f;
+    [SerializeField]
+    [Tooltip("How frequent to shake cam")]
+    private float shakeFrequency = 0.5f;
 
     private Transform target;
     private Transform nextTarget;
@@ -32,10 +57,11 @@ public class CharTPCamera : MonoBehaviour
     private float moveCloserDist;
     private Vector3[] clipPoint;
     private Vector3 desiredPos;
+    private IEnumerator camShakeCorr;
 
-    #region Public Calls
+    #region private Calls
     //attach char controller for that look direction
-    public void GiveMeCharController(CharTPController cc)
+    public void SetCharController(CharTPController cc)
     {
         charControl = cc;
         lookTargets = cc.lookTargets;
@@ -62,11 +88,33 @@ public class CharTPCamera : MonoBehaviour
         targetCamDist = distToTarget;
         targetIdx = index;
     }
+    public void LookAt(string _name, float distToTarget)
+    {
+        int idx = -1;
+        for (int i = 0; i < lookTargets.Count; ++i)
+        {
+            if (lookTargets[i].name == _name)
+            {
+                idx = i;
+                break;
+            } 
+        }
+        if (idx < 0)
+            return;
+
+        LookAt(idx, distToTarget);
+    }
 
     //returns the index of transform in target array
-    public int IsLookingAt() 
+    public int IsLookingAtIdx() 
     {
         return targetIdx;
+    }
+    
+    //returns name of target being looked at
+    public string IsLookingAt()
+    {
+        return nextTarget.name;
     }
 
     //use me to look at player (index 0 and default dist)
@@ -74,7 +122,29 @@ public class CharTPCamera : MonoBehaviour
     {
         LookAt(0, defaultCamDist);
     }
+
+    //use me to shake camera at deafult settings
+    public void Shake()
+    {
+        Shake(shakeDuration, shakeAmplitude, shakeFrequency);
+    }
+    //use me to shake camera with overriden settings
+    public void Shake(float duration, float amplitude, float frequency)
+    {
+        if (camShakeCorr != null)
+            StopCoroutine(camShakeCorr);
+        nextTarget = lookTargets[targetIdx];
+        camShakeCorr = ShakerCorr(duration, amplitude, frequency);
+        StartCoroutine(camShakeCorr);
+    }
+
     #endregion
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -91,19 +161,13 @@ public class CharTPCamera : MonoBehaviour
         }
 
         cam = GetComponent<Camera>();
-
         clipPoint = new Vector3[5];
+        camShakeCorr = null;
     }   
     private void LateUpdate()
     {
-        //TEMP ,DO THIS ELSEWHERE
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (IsLookingAt() == 0)
-                LookAt(1, 2);
-            else
-                LookAtPlayer();
-        }
+        if (Input.GetKeyDown(KeyCode.T))
+            Shake();
 
         if ((target.position - nextTarget.position).magnitude > 0)
         { 
@@ -139,12 +203,13 @@ public class CharTPCamera : MonoBehaviour
         clipPoint[2] = rot * new Vector3(x, -y, z) + desiredPos;
         clipPoint[3] = rot * new Vector3(-x, -y, z) + desiredPos;
         clipPoint[4] = desiredPos - transform.forward;
-
+#if UNITY_EDITOR
         Debug.DrawLine(clipPoint[0], target.transform.position, Color.white);
         Debug.DrawLine(clipPoint[1], target.transform.position, Color.white);
         Debug.DrawLine(clipPoint[2], target.transform.position, Color.white);
         Debug.DrawLine(clipPoint[3], target.transform.position, Color.white);
         Debug.DrawLine(clipPoint[4], target.transform.position, Color.green);
+#endif
     }
 
     private void CalculateObstruction()
@@ -164,5 +229,23 @@ public class CharTPCamera : MonoBehaviour
             
         }
         moveCloserDist = Mathf.Clamp(minDist, 0.1f, targetCamDist);
+    }
+
+    private IEnumerator ShakerCorr(float duration, float amp, float freq)
+    {
+        float timer = 0;
+        Transform lookAt = nextTarget;
+        nextTarget = target;
+        Vector3 up = transform.up;
+        Vector3 right = Vector3.Cross(transform.forward, up);
+        while (timer < duration)
+        {
+            timer += Time.deltaTime / freq;
+            target.position += right * Random.Range(-amp, amp);
+            target.position += up * Random.Range(-amp, amp);
+            yield return null;
+        }
+        nextTarget = lookAt;
+        camShakeCorr = null;
     }
 }

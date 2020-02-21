@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6390612172081307795}
   - component: {fileID: 4129656510330212911}
-  - component: {fileID: 1645788969373057777}
+  - component: {fileID: 7093804658423446314}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,10 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad97f639bb8db445aa1af5b38cc2449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98,
+  isHuman: 1
+  humanPrefab: {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98,
+    type: 3}
+  monsterPrefab: {fileID: 9117360599836359461, guid: cf563ebba308a014da77de9fb8065171,
     type: 3}
   playerCamera: {fileID: 0}
---- !u!114 &1645788969373057777
+--- !u!114 &7093804658423446314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

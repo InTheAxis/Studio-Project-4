@@ -45,10 +45,19 @@ public class Destructible : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient)
             return;
 
-        if (!isDestroyed && collision.relativeVelocity.magnitude >= sqrBreakForce)
+        if (!isDestroyed)
         {
-            isDestroyed = true;
-            Destruct(collision);
+            if (collision.relativeVelocity.magnitude >= sqrBreakForce)
+            {
+                isDestroyed = true;
+                Destruct(collision);
+            }
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            { 
+                //TODO for elson :) , explode force based on velocity, maybe based on mass too
+                isDestroyed = true;
+                Destruct(collision);
+            }
         }
 
     }
