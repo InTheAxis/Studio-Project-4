@@ -11,6 +11,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
 
     public System.Action masterServerConnectedCallback;
     public System.Action<List<string>> roomJoinedCallback;
+    public System.Action randomRoomJoinFailedCallback;
     public System.Action roomJoinFailedCallback;
     public System.Action roomCreateFailedCallback;
     public System.Action<string> playerJoinedCallback;
@@ -83,6 +84,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         Debug.Log("Join Random Failed: " + returnCode + " / " + message);
         UIStateBehaviourLobby.isHost = true;
+        randomRoomJoinFailedCallback?.Invoke();
         Host("");
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
