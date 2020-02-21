@@ -7,52 +7,34 @@ using Unity.Jobs;
 using Unity.Burst;
 
 //TODO change to jobs
+
+[UpdateAfter(typeof(BloodEmitterQueryJobSystem))]
 public class BloodEmitterSystem : ComponentSystem
 {
     private ComponentType tag;
 
-    private int numPerUpdate;
-    private float rate;
-    private bool initVals;
-    private float dt;
+    public bool enabled;
+    public int numPerUpdate;
+    public float rate;
+
     private Random rand;
-    private float timer = 0;
-    private Entity emitter;
+    private float timer;
     protected override void OnCreate()
     {
         //=================== just change this to reuse this system for other types of particles
         tag = ComponentType.ReadOnly<BloodTag>();
         //======================================================================================
 
-        initVals = false;
-        dt = 0;
+        numPerUpdate = 1;
+        rate = 0.1f;
+
         rand.InitState();
-        timer = 99999;
+        timer = 0;
     }
     protected override void OnUpdate()
-    {        
-        if (!initVals)
-        { //init
-            EntityQuery q = GetEntityQuery(tag, ComponentType.ReadOnly<ParticleSystemData>());
-            NativeArray<Entity> ent = q.ToEntityArray(Allocator.TempJob);
-            NativeArray<ParticleSystemData> temp = q.ToComponentDataArray<ParticleSystemData>(Allocator.TempJob);
-            if (temp.Length > 0)
-            {
-                initVals = true;
-                numPerUpdate = temp[0].numPerUpdate;
-                rate = temp[0].rate;
-                for (int i = 1; i < ent.Length; ++i) //destory extra ones
-                    PostUpdateCommands.DestroyEntity(ent[i]);
-                emitter = ent[0];
-            } 
-            temp.Dispose();
-            ent.Dispose();
-        }
-
-        dt = Time.DeltaTime;
-        timer += dt;
-        var emitTag = GetComponentDataFromEntity<ParticleEmitTag>(true);
-        if (emitTag.HasComponent(emitter) && timer >= rate)
+    {
+        timer += Time.DeltaTime;
+        if (enabled && timer >= rate)
         {
             timer = 0;
             //get disabled particles and make it alive        
@@ -86,8 +68,8 @@ public class BloodEmitterSystem : ComponentSystem
                 r.Value = quaternion.Euler(datum.rot);
                 s.Value = datum.startScale;
 
-                datum.life = datum.lifeTime;           
-                
+                datum.life = datum.lifeTime;
+
                 PostUpdateCommands.SetComponent(e, t);
                 PostUpdateCommands.SetComponent(e, r);
                 PostUpdateCommands.SetComponent(e, s);
@@ -101,27 +83,110 @@ public class BloodEmitterSystem : ComponentSystem
             scales.Dispose();
             dataArr.Dispose();
         }
+    }
+}
 
-        //update alive particles
-        Entities.WithAllReadOnly(tag, typeof(ParticleAliveTag)).
-            ForEach((Entity e, ref Translation t, ref Rotation r, ref Scale s, ref ParticleEntityData data) => {
-                float percentLife = 1 - (data.life / data.lifeTime);
+[BurstCompile]
+[UpdateBefore(typeof(BloodEmitterSystem))]
+public class BloodEmitterQueryJobSystem : JobComponentSystem
+{
+    [ReadOnly] private ComponentDataFromEntity<ParticleEmitTag> q;
+    private BloodEmitterSystem initSystem;
+    private NativeArray<bool> enabled;
+    private NativeArray<int> numPerUpdate;
+    private NativeArray<float> rate;
 
-                data.rot = math.lerp(data.startRot, data.endRot, percentLife);
-                data.vel = math.lerp(data.startVel, data.endVel, percentLife);
+    protected override void OnCreate()
+    {
+        initSystem = World.GetOrCreateSystem<BloodEmitterSystem>();
+        enabled = new NativeArray<bool>(1, Allocator.TempJob);
+        numPerUpdate = new NativeArray<int>(1, Allocator.TempJob);
+        rate = new NativeArray<float>(1, Allocator.TempJob);
+    }
 
-                t.Value += data.vel * dt;
-                r.Value = quaternion.Euler(data.rot);
-                s.Value = math.lerp(data.startScale, data.endScale, percentLife);
+    protected override void OnDestroy()
+    {
+        enabled.Dispose();
+        numPerUpdate.Dispose();
+        rate.Dispose();
+    }
+    private struct SearchJob : IJobForEachWithEntity<BloodTag, ParticleSystemData>
+    {
+        public NativeArray<bool> enabled;
+        public NativeArray<int> numPerUpdate;
+        public NativeArray<float> rate;
+        [ReadOnly] public ComponentDataFromEntity<ParticleEmitTag> query;
+        public void Execute(Entity entity, int index, [ReadOnly] ref BloodTag tag, [ReadOnly] ref ParticleSystemData data)
+        {
+            if (query.HasComponent(entity))
+                enabled[0] = true;
+            numPerUpdate[0] = data.numPerUpdate;
+            rate[0] = data.rate;
+        }
+    }
+    protected override JobHandle OnUpdate(JobHandle inputDeps)
+    {
+        q = GetComponentDataFromEntity<ParticleEmitTag>(true);
 
-                data.life -= dt;
+        SearchJob job = new SearchJob
+        {
+            enabled = enabled,
+            numPerUpdate = numPerUpdate,
+            rate = rate,
+            query = q,
+    };
+        var handle = job.Schedule(this, inputDeps);
+        handle.Complete();
+        initSystem.enabled = job.enabled[0];
+        initSystem.numPerUpdate = job.numPerUpdate[0];
+        initSystem.rate = job.rate[0];
+        return handle;
+    }
+}
+
+[BurstCompile]
+[UpdateAfter(typeof(BloodEmitterSystem))]
+public class BloodEmitterMoveJobSystem : JobComponentSystem
+{
+    private EndSimulationEntityCommandBufferSystem ecbs;
+    protected override void OnCreate()
+    {
+        ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+    }
+    private struct EmitJob : IJobForEachWithEntity<BloodTag, ParticleAliveTag, Translation, Rotation, Scale, ParticleEntityData>
+    {
+        [ReadOnly] public float dt;
+        public EntityCommandBuffer.Concurrent ecb;
+        public void Execute(Entity entity, int index, [ReadOnly] ref BloodTag tag1, [ReadOnly] ref ParticleAliveTag tag2, ref Translation t, ref Rotation r, ref Scale s, ref ParticleEntityData data)
+        {
+            float percentLife = 1 - (data.life / data.lifeTime);
+
+            data.rot = math.lerp(data.startRot, data.endRot, percentLife);
+            data.vel = math.lerp(data.startVel, data.endVel, percentLife);
+
+            t.Value += data.vel * dt;
+            r.Value = quaternion.Euler(data.rot);
+            s.Value = math.lerp(data.startScale, data.endScale, percentLife);
+
+            data.life -= dt;
 
 
-                if (data.life <= 0)
-                {
-                    PostUpdateCommands.RemoveComponent(e, typeof(ParticleAliveTag));
-                    PostUpdateCommands.AddComponent(e, typeof(Disabled));
-                }
-            });
+            if (data.life <= 0)
+            {
+                ecb.RemoveComponent(index, entity, typeof(ParticleAliveTag));
+                ecb.AddComponent(index, entity, typeof(Disabled));
+            }
+        }
+    }
+    protected override JobHandle OnUpdate(JobHandle inputDeps)
+    {
+        EmitJob job = new EmitJob
+        {
+            dt = Time.DeltaTime,
+            ecb = ecbs.CreateCommandBuffer().ToConcurrent(),
+        };
+        var handle = job.Schedule(this, inputDeps);
+        ecbs.AddJobHandleForProducer(handle);
+        return handle;
     }
 }
