@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -15469,6 +15469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5637c0ceb8a0574c8bc3bf9b33915fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingameSceneName: Destructibles
 --- !u!1 &1674382446
 GameObject:
   m_ObjectHideFlags: 0
@@ -15895,7 +15896,7 @@ Transform:
   m_LocalScale: {x: 6, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709092909
 GameObject:
@@ -20408,7 +20409,7 @@ RectTransform:
   - {fileID: 180203527}
   - {fileID: 348311229}
   m_Father: {fileID: 2039101763}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

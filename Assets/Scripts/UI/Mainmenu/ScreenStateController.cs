@@ -135,7 +135,7 @@ public class ScreenStateController : MonoBehaviour
                 screens[i].SetActive(false);
         }
 
-        mainmenuModel.SetActive(false);
+        mainmenuModel.SetActive(true);
         lobbyModels.SetActive(false);
 
         NetworkClient.instance.connectToMasterServer();
@@ -153,7 +153,7 @@ public class ScreenStateController : MonoBehaviour
 
     private void Update()
     {
-
+        // TODO: Update start button activeness depending on player readiness
     }
 
 
@@ -193,6 +193,9 @@ public class ScreenStateController : MonoBehaviour
 
         if (currentScreen == ScreenStates.CONNECTINGTOSERVER)
         {
+            // TODO: Set button to be either start or ready, depending on is host or not
+            // if (PhotonNetwork.isMasterClient)
+
             setScene(ScreenStates.MATCHLOBBY);
             mainmenuModel.SetActive(false);
             lobbyModels.SetActive(true);
@@ -257,6 +260,7 @@ public class ScreenStateController : MonoBehaviour
             playfabAuthenticator.Login(tmLoginUsername.text, tmLoginPassword.text,
                 playerName =>
                 {
+                    PlayerSettings.playerName = playerName;
                     setScene(ScreenStates.MAINMENU);
                     tmUsername.text = tmLoginUsername.text;
                 }, (errorMsg, errorType) =>
@@ -296,6 +300,7 @@ public class ScreenStateController : MonoBehaviour
                 playfabAuthenticator.Register(tmRegisterUsername.text, tmRegisterPassword.text, tmRegisterEmail.text,
                     playerName =>
                     {
+                        PlayerSettings.playerName = playerName;
                         setScene(ScreenStates.MAINMENU);
                         tmUsername.text = tmRegisterUsername.text;
                     }, (errorMsg, errorType) =>
@@ -376,6 +381,7 @@ public class ScreenStateController : MonoBehaviour
         {
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Host(hostPasswordInput.GetComponent<TMP_InputField>().text);
+
             //setScene(ScreenStates.MATCHLOBBY);
             //mainmenuModel.SetActive(false);
             //lobbyModels.SetActive(true);
@@ -391,17 +397,18 @@ public class ScreenStateController : MonoBehaviour
         }
         else if(name == "LobbyStart")
         {
-            /* TODO: Lobby Start */
+            // TODO: This line loads the scene. Add this to loading class
+            NetworkClient.instance.goInGame();
         }
         else if(name == "LobbyReady")
         {
-            /* TODO: Lobby Ready? */
+            NetworkClient.instance.toggleReady(PlayerSettings.playerName);
 
             /* Pseudo Start Game */
-            mainmenuModel.SetActive(false);
-            lobbyModels.SetActive(false);
-            setScene(ScreenStates.LOADING);
-            screens[(int)ScreenStates.LOADING].GetComponent<Loading>().Load("Destructibles");
+            //mainmenuModel.SetActive(false);
+            //lobbyModels.SetActive(false);
+            //setScene(ScreenStates.LOADING);
+            //screens[(int)ScreenStates.LOADING].GetComponent<Loading>().Load("Destructibles");
         }
         else if(name == "LobbyCharacter")
         {

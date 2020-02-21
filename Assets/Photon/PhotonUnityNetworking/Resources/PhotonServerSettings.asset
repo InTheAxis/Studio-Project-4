@@ -50,5 +50,8 @@ MonoBehaviour:
   - rpcDestroy
   - breakApart
   - destructibleEnsureOwnerIsReleased
+  - helloRequest
+  - receiveReadyList
+  - receiveToggle
   DisableAutoOpenWizard: 1
   ShowSettings: 0

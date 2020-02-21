@@ -9,6 +9,9 @@ public class NetworkClient : MonoBehaviourPunCallbacks
 {
     public static NetworkClient instance = null;
 
+    [SerializeField]
+    private string ingameSceneName;
+
     public System.Action masterServerConnectedCallback;
     public System.Action<List<string>> roomJoinedCallback;
     public System.Action randomRoomJoinFailedCallback;
@@ -70,11 +73,15 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     }
     public void DisconnectFromRoom()
     {
+        NetworkClientPView.instance.disconnect(PlayerSettings.playerName);
         PhotonNetwork.LeaveRoom();
     }
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room!");
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.InstantiateSceneObject("NetworkLobbyManager", Vector3.zero, Quaternion.identity);
+
         List<string> players = new List<string>();
         foreach (var p in PhotonNetwork.PlayerList)
             players.Add(p.NickName);
@@ -113,8 +120,12 @@ public class NetworkClient : MonoBehaviourPunCallbacks
 
     public void goInGame()
     {
-        PhotonView photonView = PhotonView.Get(NetworkClientPView.instance);
-        photonView.RPC("goInGameRequestReceived", RpcTarget.All);
+        //PhotonView photonView = PhotonView.Get(NetworkClientPView.instance);
+        //photonView.RPC("goInGameRequestReceived", RpcTarget.All);
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(ingameSceneName);
+        else
+            Debug.LogError("Attempted to go in game as a non-master client! This should not be possible");
     }
 
     public static void setPlayerProperty(string key, object v)
@@ -127,4 +138,24 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         return PhotonNetwork.LocalPlayer.CustomProperties[key];
     }
+
+
+    #region Ready Functions
+    public List<string> getReadyPlayers()
+    {
+        return NetworkClientPView.instance.getReadyPlayers();
+    }
+    public bool isReady(string playerName)
+    {
+        return NetworkClientPView.instance.isReady(playerName);
+    }
+    public bool areAllReady()
+    {
+        return NetworkClientPView.instance.areAllReady(PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+    public void toggleReady(string playerName)
+    {
+        NetworkClientPView.instance.toggleReady(playerName);
+    }
+    #endregion
 }
