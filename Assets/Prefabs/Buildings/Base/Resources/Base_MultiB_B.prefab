@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 156270088869958046}
   - component: {fileID: 6906374779196026179}
   - component: {fileID: 8986038891381419243}
+  - component: {fileID: -5246429668549708494}
+  - component: {fileID: -7066863607078111198}
   m_Layer: 0
   m_Name: Base_MultiB_B
   m_TagString: Untagged
@@ -130,8 +132,48 @@ MonoBehaviour:
   - {fileID: 7057387648585362808, guid: a88c6303e68595d42a2024aea38ff13b, type: 3}
   - {fileID: 5937052863877096555, guid: 410050ccccee2e74a97c9e638c522cfd, type: 3}
   - {fileID: 5064003927898793342, guid: e727e1c04e8175248b1d936c23970b8a, type: 3}
+  hitParticle: {fileID: 0}
+  dustParticles: {fileID: 0}
+  hitParticleSpawnChance: 0.65
   breakForce: 2
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
+--- !u!114 &-5246429668549708494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329878174928145087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: -7066863607078111198}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-7066863607078111198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329878174928145087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4105158192927321507}
   - component: {fileID: 908374353056815672}
   - component: {fileID: 3934111201883274382}
+  - component: {fileID: -4585815994929398763}
   m_Layer: 0
   m_Name: Attachment_Type4_A
   m_TagString: Untagged
@@ -130,8 +131,32 @@ MonoBehaviour:
   - {fileID: 8012857599494886779, guid: 89462cfb32174014297d136b699362eb, type: 3}
   - {fileID: 8228892437641302922, guid: f1b0d46f64094104f96d1d708faef487, type: 3}
   - {fileID: 6336585640901296733, guid: 7789716d9613e1d41aea02606cf99393, type: 3}
+  hitParticle: {fileID: 0}
+  dustParticles: {fileID: 0}
+  hitParticleSpawnChance: 0.65
   breakForce: 2
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
+--- !u!114 &-4585815994929398763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663008982935307974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

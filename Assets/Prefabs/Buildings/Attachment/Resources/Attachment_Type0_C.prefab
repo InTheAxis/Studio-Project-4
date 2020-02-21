@@ -126,8 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed: {fileID: 6955158030857737665, guid: c4ae9966a12256c4d9d6f2893f965390,
-    type: 3}
+  destroyed: []
   hitParticle: {fileID: 0}
   dustParticles: {fileID: 0}
   hitParticleSpawnChance: 0.65
