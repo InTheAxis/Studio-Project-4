@@ -56,7 +56,7 @@ public class HumanAnimationSM : MonoBehaviour
         }
         else if (charControl.displacement > 0)
         {
-            StateChange("walk");
+            StateChange("run");
         }
         else
             StateChange("idle");
