@@ -3,7 +3,6 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Collections;
 using Unity.Rendering;
-using Unity.Mathematics;
 
 public class ParticleBootstrap : MonoBehaviour
 {
@@ -25,16 +24,18 @@ public class ParticleBootstrap : MonoBehaviour
     protected void Init(ComponentType systemTag)
     {
         EntityArchetype arch = em.CreateArchetype(
+            //for transform
             typeof(Translation),
             typeof(Rotation),
             typeof(Scale),
-            typeof(LocalToWorld),   //necessary for render
-            typeof(RenderMesh),     //necessary for render
-            typeof(RenderBounds),   //necessary for render
+            //for rendering
+            typeof(LocalToWorld),
+            typeof(RenderMesh),  
+            typeof(RenderBounds),
             typeof(PerInstanceCullingTag), //added this cuz converted GameObjects have this
             typeof(FrozenRenderSceneTag), //this is disable rendering of the entities
             
-
+            //custom
             typeof(ParticleEntityData), 
             systemTag
         );
