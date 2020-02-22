@@ -3,7 +3,6 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Collections;
 using Unity.Rendering;
-
 public class ParticleBootstrap : MonoBehaviour
 {
     [SerializeField]
@@ -34,7 +33,7 @@ public class ParticleBootstrap : MonoBehaviour
             typeof(RenderBounds),
             typeof(PerInstanceCullingTag), //added this cuz converted GameObjects have this
             typeof(FrozenRenderSceneTag), //this is disable rendering of the entities
-            
+
             //custom
             typeof(ParticleEntityData), 
             systemTag
@@ -45,6 +44,7 @@ public class ParticleBootstrap : MonoBehaviour
 
         foreach (Entity e in entArr)
         {
+
             em.SetSharedComponentData(e, new RenderMesh { mesh = entityObj.mesh, material = entityObj.material, });
             em.SetComponentData(e, ParticleEntityData.Create(entityObj));
         }
