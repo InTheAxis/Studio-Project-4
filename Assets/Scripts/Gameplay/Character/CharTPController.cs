@@ -71,6 +71,7 @@ public class CharTPController : MonoBehaviourPun
         {
             CharTPCamera.Instance.SetCharController(this);
             CharMinimapCamera.Instance.SetCharController(this);
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);

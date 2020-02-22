@@ -3,47 +3,94 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Linq;
+using System;
 
 public class DestructibleController : MonoBehaviourPun
 {
+    /* TODO: Aim Assist */
+
+    [Header("Pulling")]
     [SerializeField]
-    private Transform cameraTransform = null;
+    [Tooltip("The layer mask used for detection of objects that can be picked up")]
+    private LayerMask detectMask = 0;
     [SerializeField]
+    [Tooltip("The furthest distance the player can pull objects from")]
     private float pickUpMaxDistance = 6.0f;
     [SerializeField]
+    [Tooltip("The detection area around the object that is pulled")]
     private float detectionRadius = 4.5f;
     [SerializeField]
-    private LayerMask layerMask = 0;
-    
+    [Tooltip("The speed at which objects are pulled towards the player")]
+    private float pullSpeed = 1.0f;
 
+    [Header("Holding")]
     [SerializeField]
-    private Transform holdDestructibles = null;
-    private const string holdDestructiblesTag = "HoldDestructibles";
+    [Tooltip("The layer mask applied to throwables that are currently being held")]
+    private string heldMaskName = "HeldThrowables";
+    [SerializeField]
+    [Tooltip("The maximum distance a pulled object can be away from the player to be considered being held")]
+    private float holdPosTolerance = 1.0f;
+    [SerializeField]
+    [Tooltip("The speed at which the held object rotates at")]
+    private float holdRotateSpeed = 2.0f;
+    [SerializeField]
+    [Tooltip("The maximum tolerance that the picked up object can be from the holding position (X axis)")]
+    private Vector2 holdPosOffsetX = new Vector2(-0.25f, 0.90f);
+    [SerializeField]
+    [Tooltip("The maximum tolerance that the picked up object can be from the holding position (Y axis)")]
+    private Vector2 holdPosOffsetY = new Vector2(-0.10f, 0.80f);
 
+    [Header("Throwing")]
     [SerializeField]
-    private CharTPController playerController = null;
+    [Tooltip("The force applied to objects when pushing it away")]
+    private float throwForce = 40.0f;
+    [SerializeField]
+    [Tooltip("The layer mask used to aim at objects")]
+    private LayerMask aimMask = 0;
+
+    [Header("Highlighting")]
+    [SerializeField]
+    [Tooltip("The material used to highlight objects taht can be picked up")]
+    private Material highlightMaterial;
+
+    /* A list of colliders of objects that are being pulled/thrown */
     private List<Collider> throwables = null;
+    /* The offset positions of which the objects are held at */
     private List<Vector3> holdPositions;
+    /* The default materials of objects prior to being highlighted */
+    private Dictionary<GameObject, List<Material>> prevHighlighted = null;
+
+    /* Event Callbacks for UI */
+    public event Action<bool> pullStatus = null;
+    public event Action throwStatus = null;
+
+    private Transform cameraTransform = null;
+    private Transform holdDestructibles = null;
+
+    private CharTPController playerController = null;
     private bool isPulling = false;
     private bool canThrow = false;
+    private int heldMaskLayer = 0;
+    private const string holdDestructiblesTag = "HoldDestructibles";
+    private float holdPosToleranceSq = 0.0f;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
         holdPositions = new List<Vector3>();
+        prevHighlighted = new Dictionary<GameObject, List<Material>>();
 
         cameraTransform = Camera.main.transform;
-
-        //if (playerController == null)
-        //    playerController = GetComponent<CharTPController>();
-        //if (throwCollider == null)
-        //    throwCollider = transform.Find("ThrowCheck").GetComponent<SphereCollider>();
-
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
             holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
 
-        //throwCollider.radius = detectionRadius;
+
+        heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
+        if(heldMaskLayer == -1)
+            Debug.LogError("The layer " + heldMaskName + " is not set up in this project!");
     }
 
     private void Update()
@@ -73,20 +120,66 @@ public class DestructibleController : MonoBehaviourPun
             }
         }
 
+
+        RaycastHit hit;
+        bool hasTarget = false;
+
+        if (!isPulling && !canThrow)
+        {
+            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMask);
+
+            /* Resets all previously highlighted materials if not pulling an object /preparing to throw */
+            foreach (KeyValuePair<GameObject, List<Material>> pair in prevHighlighted)
+            {
+                if (pair.Key == null) continue;
+                MeshRenderer meshRenderer = pair.Key.GetComponent<MeshRenderer>();
+                meshRenderer.materials = pair.Value.ToArray();
+            }
+            prevHighlighted.Clear();
+
+            /* Can pick up some throwables */
+            if (hasTarget)
+            {
+                Collider[] collisions;
+                collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMask);
+                throwables = new List<Collider>(collisions);
+
+                /* Gets all surrounding throwables */
+                if (throwables?.Count > 0)
+                {
+
+                    for (int i = 0; i < throwables.Count; ++i)
+                    {
+                        GameObject go = throwables[i].gameObject;
+                        MeshRenderer meshRenderer = go.GetComponent<MeshRenderer>();
+
+                        if (prevHighlighted.ContainsKey(go)) continue;
+
+                        /* Store current materials for reset later */
+                        prevHighlighted.Add(go, meshRenderer.materials.OfType<Material>().ToList());
+
+                        /* Switch to highlighted material */
+                        Material[] highlightedMaterials = new Material[meshRenderer.materials.Length];
+                        for (int j = 0; j < meshRenderer.materials.Length; ++j)
+
+                            highlightedMaterials[j] = highlightMaterial;
+                        meshRenderer.materials = highlightedMaterials;
+                    }
+
+                }
+            }
+
+        }
+
+
         // Start pulling
         if (Input.GetMouseButtonDown(0))
         {
             if (!isPulling)
             {
-                RaycastHit hit;
-                bool hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, layerMask);
 
                 if (hasTarget)
                 {
-                    Collider[] collisions;
-                    collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, layerMask);
-                    throwables = new List<Collider>(collisions);
-
                     // Don't grab objects that are already owned by other players
                     if (throwables.Count > 0)
                         for (int i = 0; i < throwables.Count; ++i)
@@ -101,6 +194,7 @@ public class DestructibleController : MonoBehaviourPun
 
                         isPulling = true;
                         playerController.disableKeyInput = true;
+                        pullStatus?.Invoke(isPulling);
                     }
 
                 }
@@ -114,7 +208,7 @@ public class DestructibleController : MonoBehaviourPun
         // Release the destructibles
         if (Input.GetMouseButtonUp(0))
         {
-            if (throwables != null && throwables.Count > 0)
+            if (throwables?.Count > 0)
             {
                 if (!canThrow)
                 {
@@ -122,9 +216,6 @@ public class DestructibleController : MonoBehaviourPun
                     foreach (Collider collider in throwables)
                     {
                         if (collider == null) continue;
-
-                        //collider.attachedRigidbody.useGravity = true;
-                        //collider.attachedRigidbody.isKinematic = false;
 
                         // Tell master client to release ownership back to scene
                         // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
@@ -134,48 +225,35 @@ public class DestructibleController : MonoBehaviourPun
                     }
                     Debug.Log("Reset throwables");
                     isPulling = false;
+                    pullStatus?.Invoke(isPulling);
 
                 }
                 else
                 {
-                    //RaycastHit hit;
-                    //bool hasTarget = Physics.Raycast(cameraTransform.position + cameraTransform.forward * 5.0f, cameraTransform.forward, out hit, 100.0f);
-
-
-                    //if (hasTarget)
-                    //    Debug.Log("Found target");
-                    //else
-                    //    Debug.Log("no target");
+                    //RaycastHit aimHit;
+                    //bool aimAssist = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out aimHit, 50.0f, aimMask);
 
                     foreach (Collider collider in throwables)
                     {
                         if (collider == null) continue;
 
-                        //Rigidbody rb = collider.attachedRigidbody;
-                        //rb.useGravity = true;
-                        //rb.isKinematic = false;
-
-                        //Vector3 throwDir;
-
-                        //if (hasTarget)
-                        //{
-                        //    throwDir = (hit.point - collider.transform.position).normalized;
-                        //}
+                        //Vector3 targetDir;
+                        //if (aimAssist)
+                        //    targetDir = (aimHit.point - collider.transform.position).normalized;
                         //else
-                        //{
-                            //throwDir = cameraTransform.forward;
-                        //}
-                        //rb.AddForce(throwDir * 40.0f, ForceMode.Impulse);
+                        //    targetDir = cameraTransform.forward;
 
                         // Tell master client to release ownership back to scene
                         PhotonView colliderView = PhotonView.Get(collider);
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
-                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, cameraTransform.forward * 40.0f);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, cameraTransform.forward * throwForce);
                     }
 
 
                     Debug.Log("Throw!");
                     canThrow = false;
+                    throwStatus?.Invoke();
+
                 }
                 playerController.disableKeyInput = false;
 
@@ -183,39 +261,37 @@ public class DestructibleController : MonoBehaviourPun
         }
 
         // Updating positions/rotations
-        if (Input.GetMouseButton(0) && throwables != null)
+        if (Input.GetMouseButton(0))
         {
-            for (int i = 0; i < throwables.Count; ++i)
+            if (throwables?.Count > 0)
             {
-                Collider collider = throwables[i];
-                if (collider == null) continue;
-
-                Transform t = collider.transform;
-                Rigidbody rb = collider.attachedRigidbody;
-
-                //Vector3 offset = holdDestructibles.position - t.position;
-                //if(offset.sqrMagnitude > 2.0f)
-                ////    rb.AddForce(offset.normalized * 5.0f, ForceMode.Acceleration);
-                ///
-                Vector3 targetPos = holdDestructibles.position;
-                targetPos += holdDestructibles.right * holdPositions[i].x;
-                targetPos += holdDestructibles.up * holdPositions[i].y;
-
-
-
-                t.position = Vector3.Slerp(t.position, targetPos, Time.deltaTime * 2.0f);
-                //else
-                //    rb.AddForce(offset.normalized * 5.0f, ForceMode.Acceleration);
-                //t.position = Vector3.Lerp(t.position, holdDestructibles.position, Time.deltaTime * 5.0f);
-
-                float sqrDistFromHolding = (t.position - holdDestructibles.position).sqrMagnitude;
-                if(sqrDistFromHolding <= 1.5f)
+                for (int i = 0; i < throwables.Count; ++i)
                 {
-                    isPulling = false;
-                    canThrow = true;
+                    Collider collider = throwables[i];
+                    if (collider == null) continue;
+
+                    Transform t = collider.transform;
+                    Rigidbody rb = collider.attachedRigidbody;
+
+                    Vector3 targetPos = holdDestructibles.position;
+                    targetPos += holdDestructibles.right * holdPositions[i].x;
+                    targetPos += holdDestructibles.up * holdPositions[i].y;
+
+                    t.position = Vector3.Slerp(t.position, targetPos, Time.deltaTime * pullSpeed);
+
+                    Vector3 rot = t.rotation.eulerAngles;
+                    rot.z -= 10.0f;
+                    rot.y += 4.0f;
+                    t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(rot), Time.deltaTime * holdRotateSpeed);
+
+                    float sqrDistFromHolding = (t.position - holdDestructibles.position).sqrMagnitude;
+                    if (sqrDistFromHolding <= holdPosTolerance)
+                    {
+                        isPulling = false;
+                        canThrow = true;
+                    }
                 }
             }
-
         }
 
     }
@@ -234,14 +310,11 @@ public class DestructibleController : MonoBehaviourPun
             photonView.RPC("destructibleRequestOwner", RpcTarget.MasterClient, PhotonView.Get(collider).ViewID);
 
         collider.attachedRigidbody.useGravity = false;
-
-        //Vector3 targetPos = holdDestructibles.position;
-        //targetPos += transform.right * Random.Range(-0.25f, 0.90f);
-        //targetPos.y += Random.Range(-0.10f, 0.80f);
+        //collider.gameObject.layer = detectMask;
 
         Vector3 targetPos = Vector3.zero;
-        targetPos.x = Random.Range(-0.25f, 0.90f);
-        targetPos.y = Random.Range(-0.10f, 0.80f);
+        targetPos.x = UnityEngine.Random.Range(holdPosOffsetX.x, holdPosOffsetX.y);
+        targetPos.y = UnityEngine.Random.Range(holdPosOffsetY.x, holdPosOffsetY.y);
 
         holdPositions.Add(targetPos);
     }
@@ -261,6 +334,7 @@ public class DestructibleController : MonoBehaviourPun
         if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);
+            //view.gameObject.layer = detectMask;
             Rigidbody rb = view.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;

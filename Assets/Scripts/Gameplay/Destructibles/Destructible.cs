@@ -73,23 +73,31 @@ public class Destructible : MonoBehaviourPun
         /* Instantiate shattered clone */
         //GameObject target = destroyed;
         //GameObject clone = Instantiate(target, transform.position, transform.rotation);
-        foreach (GameObject target in destroyed)
+
+        if (destroyed.Count > 0)
         {
-            GameObject clone = PhotonNetwork.InstantiateSceneObject(target.name, transform.position + target.transform.position, transform.rotation);
-            clone.transform.localRotation = transform.localRotation;
-            clone.transform.localScale = transform.localScale;
+            foreach (GameObject target in destroyed)
+            {
+                if (target == null) continue;
 
-            Rigidbody cloneRigidbody = clone.GetComponent<Rigidbody>();
+                GameObject clone = PhotonNetwork.InstantiateSceneObject(target.name, transform.position + target.transform.position, transform.rotation);
+                clone.transform.localRotation = transform.localRotation;
+                clone.transform.localScale = transform.localScale;
 
-            Vector3 velocity;
-            velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
-            velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
-            velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
-            velocity.Normalize();
-            velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
-            velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
-            velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
-            cloneRigidbody.velocity = velocity;
+                Rigidbody cloneRigidbody = clone.GetComponent<Rigidbody>();
+
+                Vector3 velocity;
+                velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
+                velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
+                velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
+                velocity.Normalize();
+                velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
+                velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
+                velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
+                cloneRigidbody.velocity = velocity;
+            }
+
+
         }
 
         /* Instantiate particle hit */
@@ -98,6 +106,7 @@ public class Destructible : MonoBehaviourPun
         Vector3 normal = collision.GetContact(0).normal;
         photonView.RPC("breakApart", RpcTarget.Others, shouldSpawnParticles, point, normal);
         breakApart(shouldSpawnParticles, point, normal);
+ 
         //if (Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
         //{
         //    if (hitParticle != null)

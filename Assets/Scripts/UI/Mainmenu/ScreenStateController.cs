@@ -180,7 +180,6 @@ public class ScreenStateController : MonoBehaviour
         foreach(var p in PhotonNetwork.PlayerList)
         {
             string name = p.NickName;
-            Debug.Log(name + " -> Ready: " + NetworkClient.instance.isReady(name));
             players[playerIDs[name]].setReady(NetworkClient.instance.isReady(name));
         }
 
