@@ -8,15 +8,14 @@ using Unity.Mathematics;
 public class ParticleBootstrap : MonoBehaviour
 {
     [SerializeField]
-    protected int maxNumEnts;
+    protected ParticleSystemDataObj sysObj;
     [SerializeField]
     protected ParticleEntityDataObj entityObj;
-    [SerializeField]
-    protected ParticleSystemDataObj sysObj;
+    public bool isEmitting { protected set; get; }
 
-    protected Entity emitter;
     protected EntityManager em;
-    protected bool isEmitting;
+    protected Entity emitter;
+    protected ParticleSystemData data;
 
     private void Awake()
     {
@@ -32,13 +31,15 @@ public class ParticleBootstrap : MonoBehaviour
             typeof(LocalToWorld),   //necessary for render
             typeof(RenderMesh),     //necessary for render
             typeof(RenderBounds),   //necessary for render
-            typeof(Disabled),
-            //custom
+            typeof(PerInstanceCullingTag), //added this cuz converted GameObjects have this
+            typeof(FrozenRenderSceneTag), //this is disable rendering of the entities
+            
+
             typeof(ParticleEntityData), 
             systemTag
         );
 
-        NativeArray<Entity> entArr = new NativeArray<Entity>(maxNumEnts, Allocator.Temp);
+        NativeArray<Entity> entArr = new NativeArray<Entity>(sysObj.maxNumParticles, Allocator.Temp);
         em.CreateEntity(arch, entArr);
 
         foreach (Entity e in entArr)
@@ -51,9 +52,17 @@ public class ParticleBootstrap : MonoBehaviour
 
         //emitter entity
         emitter = em.CreateEntity(typeof(ParticleSystemData), systemTag);
-        em.SetComponentData(emitter, ParticleSystemData.Create(sysObj));
+        data = ParticleSystemData.Create(sysObj);
+        em.SetComponentData(emitter, data);
         if (sysObj.enabledOnAwake)
             Emit();
+    }
+
+    public void SetEmitterSource(Vector3 source, Vector3 dir)
+    {
+        data.pos = source;
+        data.dir = dir.normalized;
+        em.SetComponentData(emitter, data);
     }
 
     public void Emit()
@@ -66,5 +75,4 @@ public class ParticleBootstrap : MonoBehaviour
         em.RemoveComponent(emitter, typeof(ParticleEmitTag));
         isEmitting = false;
     }
-
 }

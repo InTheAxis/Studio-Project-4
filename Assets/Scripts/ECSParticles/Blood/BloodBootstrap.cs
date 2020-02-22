@@ -1,12 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Entities;
-using Unity.Transforms;
-using Unity.Collections;
-using Unity.Rendering;
-using Unity.Mathematics;
-
 public struct BloodTag : IComponentData { }
 public class BloodBootstrap : ParticleBootstrap
 {
@@ -16,6 +9,14 @@ public class BloodBootstrap : ParticleBootstrap
         Instance = this;
 
         Init(typeof(BloodTag));
+
+        BloodSpray(Vector3.zero, Vector3.down);
+    }
+
+    public void BloodSpray(Vector3 pos, Vector3 forward)
+    {
+        SetEmitterSource(pos, forward);
+        Emit();
     }
 
     private void Update()
@@ -23,5 +24,10 @@ public class BloodBootstrap : ParticleBootstrap
         if (Input.GetKeyDown(KeyCode.P))
             if (isEmitting) StopEmit();
             else            Emit();
+
+        if (Input.GetKeyDown(KeyCode.U))
+            SetEmitterSource(Vector3.zero, Vector3.down);
+        if (Input.GetKeyDown(KeyCode.I))
+            SetEmitterSource(new Vector3(-10, 1, 0), Vector3.right);
     }
 }
