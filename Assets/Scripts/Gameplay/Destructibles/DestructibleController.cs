@@ -13,7 +13,7 @@ public class DestructibleController : MonoBehaviourPun
     [Header("Pulling")]
     [SerializeField]
     [Tooltip("The layer mask used for detection of objects that can be picked up")]
-    private LayerMask detectMask = 0;
+    private string detectMaskName = "Throwable";
     [SerializeField]
     [Tooltip("The furthest distance the player can pull objects from")]
     private float pickUpMaxDistance = 6.0f;
@@ -46,9 +46,17 @@ public class DestructibleController : MonoBehaviourPun
     [Tooltip("The force applied to objects when pushing it away")]
     private float throwForce = 40.0f;
     [SerializeField]
+    [Tooltip("Enable aim assist such that throwables are thrown towards the center crosshair")]
+    private bool enableAimAssist = true;
+    [SerializeField]
     [Tooltip("The layer mask used to aim at objects")]
     private LayerMask aimMask = 0;
-
+    [SerializeField]
+    [Tooltip("The minimum offset for aim assist to allow for more realistic accuracy")]
+    private Vector3 aimAssistOffsetMin = new Vector3(-0.50f, -0.50f, -0.50f);
+    [SerializeField]
+    [Tooltip("The maximum offset for aim assist to allow for more realistic accuracy")]
+    private Vector3 aimAssistOffsetMax = new Vector3(0.50f, 0.50f, 0.50f);
     [Header("Highlighting")]
     [SerializeField]
     [Tooltip("The material used to highlight objects taht can be picked up")]
@@ -61,36 +69,44 @@ public class DestructibleController : MonoBehaviourPun
     /* The default materials of objects prior to being highlighted */
     private Dictionary<GameObject, List<Material>> prevHighlighted = null;
 
-    /* Event Callbacks for UI */
+    /* Event Callbacks for Crosshair */
     public event Action<bool> pullStatus = null;
     public event Action throwStatus = null;
 
+    private CharTPController playerController = null;
     private Transform cameraTransform = null;
     private Transform holdDestructibles = null;
 
-    private CharTPController playerController = null;
+    private int heldMaskLayer = 0;
+    private int detectMaskLayer = 0;
+    private float holdPosToleranceSq = 0.0f;
+
+    private const string holdDestructiblesTag = "HoldDestructibles";
+
     private bool isPulling = false;
     private bool canThrow = false;
-    private int heldMaskLayer = 0;
-    private const string holdDestructiblesTag = "HoldDestructibles";
-    private float holdPosToleranceSq = 0.0f;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
-        holdPositions = new List<Vector3>();
-        prevHighlighted = new Dictionary<GameObject, List<Material>>();
+
+
+        heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
+        if (heldMaskLayer == -1)
+            Debug.LogError("The layer " + heldMaskName + " is not set up in this project!");
+
+        detectMaskLayer = LayerMask.NameToLayer(detectMaskName);
+        if (detectMaskLayer == -1)
+            Debug.LogError("The layer " + detectMaskName + " is not set up in this project!");
 
         cameraTransform = Camera.main.transform;
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
             holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
 
-
-        heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
-        if(heldMaskLayer == -1)
-            Debug.LogError("The layer " + heldMaskName + " is not set up in this project!");
+        holdPositions = new List<Vector3>();
+        prevHighlighted = new Dictionary<GameObject, List<Material>>();
+        holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
     }
 
     private void Update()
@@ -126,7 +142,7 @@ public class DestructibleController : MonoBehaviourPun
 
         if (!isPulling && !canThrow)
         {
-            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMask);
+            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMaskLayer);
 
             /* Resets all previously highlighted materials if not pulling an object /preparing to throw */
             foreach (KeyValuePair<GameObject, List<Material>> pair in prevHighlighted)
@@ -141,7 +157,7 @@ public class DestructibleController : MonoBehaviourPun
             if (hasTarget)
             {
                 Collider[] collisions;
-                collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMask);
+                collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMaskLayer);
                 throwables = new List<Collider>(collisions);
 
                 /* Gets all surrounding throwables */
@@ -230,23 +246,53 @@ public class DestructibleController : MonoBehaviourPun
                 }
                 else
                 {
-                    //RaycastHit aimHit;
-                    //bool aimAssist = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out aimHit, 50.0f, aimMask);
+
+                    RaycastHit[] aimHits;
+                    
+                    Vector3 hitPoint = Vector3.zero;
+
+                    /* Make held objects fly towards target object */
+                    if (enableAimAssist)
+                    {
+                        aimHits = Physics.RaycastAll(cameraTransform.position, cameraTransform.forward, 50.0f, aimMask);
+
+                        if (aimHits.Length > 0)
+                        {
+                            System.Array.Sort(aimHits, (x, y) => x.distance.CompareTo(y.distance));
+                            for (int i = 0; i < aimHits.Length; ++i)
+                            {
+                                if (aimHits[i].transform == playerController.transform) continue;
+                                hitPoint = aimHits[i].point;
+                                break;
+                            }
+                        }
+
+                    }
 
                     foreach (Collider collider in throwables)
                     {
                         if (collider == null) continue;
 
-                        //Vector3 targetDir;
-                        //if (aimAssist)
-                        //    targetDir = (aimHit.point - collider.transform.position).normalized;
-                        //else
-                        //    targetDir = cameraTransform.forward;
+                        Vector3 targetDir;
+                        if (!hitPoint.Equals(Vector3.zero))
+                        {
+                            Vector3 offset = hitPoint - collider.transform.position;
+
+                            /* Add slight variations for aim assist fairness */
+                            offset.x += UnityEngine.Random.Range(aimAssistOffsetMin.x, aimAssistOffsetMax.x);
+                            offset.y += UnityEngine.Random.Range(aimAssistOffsetMin.y, aimAssistOffsetMax.y);
+                            offset.z += UnityEngine.Random.Range(aimAssistOffsetMin.z, aimAssistOffsetMax.z);
+                            targetDir = offset.normalized;
+                        }
+                        else
+                        {
+                            targetDir = cameraTransform.forward;
+                        }
 
                         // Tell master client to release ownership back to scene
                         PhotonView colliderView = PhotonView.Get(collider);
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
-                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, cameraTransform.forward * throwForce);
+                        photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
                     }
 
 
@@ -260,6 +306,7 @@ public class DestructibleController : MonoBehaviourPun
             }
         }
 
+      
         // Updating positions/rotations
         if (Input.GetMouseButton(0))
         {
@@ -273,17 +320,20 @@ public class DestructibleController : MonoBehaviourPun
                     Transform t = collider.transform;
                     Rigidbody rb = collider.attachedRigidbody;
 
+                    /* Position over time */
                     Vector3 targetPos = holdDestructibles.position;
                     targetPos += holdDestructibles.right * holdPositions[i].x;
                     targetPos += holdDestructibles.up * holdPositions[i].y;
-
                     t.position = Vector3.Slerp(t.position, targetPos, Time.deltaTime * pullSpeed);
 
+                    /* Rotation over time */
                     Vector3 rot = t.rotation.eulerAngles;
                     rot.z -= 10.0f;
                     rot.y += 4.0f;
                     t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(rot), Time.deltaTime * holdRotateSpeed);
 
+
+                    /* Detects when the pulled object is near enough to be considered "held" */
                     float sqrDistFromHolding = (t.position - holdDestructibles.position).sqrMagnitude;
                     if (sqrDistFromHolding <= holdPosTolerance)
                     {
@@ -296,12 +346,6 @@ public class DestructibleController : MonoBehaviourPun
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
-
-
     private void setupThrowable(Collider collider)
     {
         if (PhotonNetwork.IsMasterClient)
@@ -310,7 +354,7 @@ public class DestructibleController : MonoBehaviourPun
             photonView.RPC("destructibleRequestOwner", RpcTarget.MasterClient, PhotonView.Get(collider).ViewID);
 
         collider.attachedRigidbody.useGravity = false;
-        //collider.gameObject.layer = detectMask;
+        collider.gameObject.layer = heldMaskLayer;
 
         Vector3 targetPos = Vector3.zero;
         targetPos.x = UnityEngine.Random.Range(holdPosOffsetX.x, holdPosOffsetX.y);
@@ -334,7 +378,7 @@ public class DestructibleController : MonoBehaviourPun
         if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);
-            //view.gameObject.layer = detectMask;
+            view.gameObject.layer = detectMaskLayer;
             Rigidbody rb = view.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
@@ -351,6 +395,7 @@ public class DestructibleController : MonoBehaviourPun
         if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);
+            view.gameObject.layer = detectMaskLayer;
             Rigidbody rb = view.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
