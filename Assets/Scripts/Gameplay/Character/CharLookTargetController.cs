@@ -20,9 +20,15 @@ public class CharLookTargetController : MonoBehaviour
         if (inp.map)
         {
             if (tpCam.IsLookingAtIdx() == 0) //0 is always player
-                tpCam.LookAt(1, 2);
+            {
+                tpCam.LookAt("Map", 2);
+                CharMinimapCamera.Instance.getMinimap().SetActive(true);
+            }
             else
+            {
+                CharMinimapCamera.Instance.getMinimap().SetActive(false);
                 tpCam.LookAtPlayer();
+            }
 
         }
         else if (inp.front)
