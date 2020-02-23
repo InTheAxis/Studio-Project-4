@@ -42,30 +42,39 @@ public class BuildingGenerator : Generator
         poisson.Scale(scale);
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + 1))
         {
-            GameObject buildingRef = cityScriptable.SelectMesh();
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos.pos, Quaternion.identity, transform, "Environment");
-            building.GetComponent<ProceduralBuilding>().GenerateRandom();
-            building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
+            Vector3 vpos = pos.pos;
+            vpos.y += 0.1f;
             // check for road
-            Collider[] colls = Physics.OverlapSphere(new Vector3(building.transform.position.x, 0, building.transform.position.z), buffer * scale);
+            bool emptySpot = true;
+            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer * scale);
             foreach (Collider col in colls)
             {
                 if (col.tag == "Road")
                 {
-                    building.SetActive(false);
+                    emptySpot = false;
                     break;
                 }
+            }
+            if (emptySpot)
+            {
+                GameObject buildingRef = cityScriptable.SelectMesh();
+                GameObject building = InstantiateHandler.mInstantiate(buildingRef, vpos, Quaternion.identity, transform, "Environment");
+                building.GetComponent<ProceduralBuilding>().GenerateRandom();
+                building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
             }
         }
     }
 
     private void OnDrawGizmos()
     {
+        if (!gizmosEnabled)
+            return;
         foreach (Transform trans in transform)
         {
             Gizmos.DrawWireSphere(trans.position, buffer * scale);
         }
         Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Vector3.zero, scale * centerBuffer);
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
             // poisson.Inject(new PoissonPoint(point.pos, towerBuffer));

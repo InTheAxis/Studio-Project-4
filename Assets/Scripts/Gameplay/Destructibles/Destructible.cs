@@ -7,26 +7,29 @@ using Photon.Realtime;
 public class Destructible : MonoBehaviourPun
 {
     [Header("General")]
-    [SerializeField]
     public List<GameObject> destroyed = null;
 
     [Header("Visuals")]
-    [SerializeField]
-    private GameObject hitParticle = null;
-    [SerializeField]
-    private GameObject dustParticles = null;
+    public GameObject hitParticle = null;
+
+    public GameObject dustParticles = null;
+
     [SerializeField]
     private float hitParticleSpawnChance = 0.65f;
 
     [Header("Explosion")]
     [SerializeField]
     private float breakForce = 2.0f;
+
     [SerializeField]
     private Vector3 minExplosionDir = new Vector3(-1.0f, -1.0f, -1.0f);
+
     [SerializeField]
     private Vector3 maxExplosionDir = new Vector3(1.0f, 1.0f, 1.0f);
+
     [SerializeField]
     private Vector3 minExplosionForce = new Vector3(1.0f, 1.0f, 1.0f);
+
     [SerializeField]
     private Vector3 maxExplosionForce = new Vector3(2.0f, 2.0f, 2.0f);
 
@@ -53,20 +56,17 @@ public class Destructible : MonoBehaviourPun
                 Destruct(collision);
             }
             if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            { 
+            {
                 //TODO for elson :) , explode force based on velocity, maybe based on mass too
                 isDestroyed = true;
                 Destruct(collision);
             }
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
     }
-
 
     private void Destruct(Collision collision)
     {
@@ -149,5 +149,4 @@ public class Destructible : MonoBehaviourPun
 
         Destroy(this.gameObject);
     }
-
 }

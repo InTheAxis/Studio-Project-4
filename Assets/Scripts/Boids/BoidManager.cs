@@ -43,6 +43,15 @@ public class BoidManager : ComponentSystem
     {
         Entities.ForEach((ref BoidData data, ref Translation translation) =>
         {
+            if (translation.Value.y < 3)
+            {
+                translation.Value.y = 30;
+            }
+            if (Vector3.Magnitude(translation.Value) > 80)
+            {
+                translation.Value = new Vector3(0, 15, 0);
+                data.vel = UnityEngine.Random.insideUnitSphere;
+            }
             // update position
             Vector3 currentPos = translation.Value;
             translation.Value = currentPos + data.vel * managerData.speed;
