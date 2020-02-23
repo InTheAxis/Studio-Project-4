@@ -9,8 +9,6 @@ public class BloodBootstrap : ParticleBootstrap
         Instance = this;
 
         Init(typeof(BloodTag));
-
-        BloodSpray(Vector3.zero, Vector3.down);
     }
 
     public void BloodSpray(Vector3 pos, Vector3 forward)
@@ -22,12 +20,13 @@ public class BloodBootstrap : ParticleBootstrap
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
-            if (isEmitting) StopEmit();
-            else            Emit();
+            BloodSpray(new Vector3(-1, 1, 0), Vector3.right);
+            //if (isEmitting) StopEmit();
+            //else            Emit();
 
-        if (Input.GetKeyDown(KeyCode.U))
-            SetEmitterSource(Vector3.zero, Vector3.down);
-        if (Input.GetKeyDown(KeyCode.I))
-            SetEmitterSource(new Vector3(-10, 1, 0), Vector3.right);
+        //if (Input.GetKeyDown(KeyCode.U))
+        //    SetEmitterSource(new Vector3(0, 3, 0), Vector3.down);
+        //if (Input.GetKeyDown(KeyCode.I))
+        //    SetEmitterSource(new Vector3(-1, 1, 0), Vector3.right);
     }
 }
