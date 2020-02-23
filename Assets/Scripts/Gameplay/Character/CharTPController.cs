@@ -67,9 +67,6 @@ public class CharTPController : MonoBehaviourPun
 
     private void Start()
     {
-        if (CharTPCamera.Instance != null)        
-            CharTPCamera.Instance.SetCharController(this);        
-
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);
 
         pPos = transform.position;

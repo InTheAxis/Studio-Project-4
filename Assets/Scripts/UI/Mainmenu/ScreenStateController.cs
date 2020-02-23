@@ -314,6 +314,8 @@ public class ScreenStateController : MonoBehaviour
         else if (name == "Logout")
         {
             /* Playfab Logout */
+            PlayerSettings.playerName = null;
+
             setScene(ScreenStates.LOGIN);
             buttonMask.Begin(buttonMaskStartY);
             loginInput.SetActive(false);
