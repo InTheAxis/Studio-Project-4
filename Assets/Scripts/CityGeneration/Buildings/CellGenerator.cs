@@ -69,6 +69,13 @@ public class CellGenerator : Generator
     private TowerGenerator towerGenerator;
 
     [SerializeField]
+    private PlayerSpawnGenerator playerSpawnGenerator;
+
+    [Range(0, 1)]
+    [SerializeField]
+    private float playerBuffer;
+
+    [SerializeField]
     private float towerBuffer;
 
     public List<BuildingCell> GetCells()
@@ -114,7 +121,7 @@ public class CellGenerator : Generator
                     currPos = currDist * dir + startPos;
                     //Vector3 end = currPos + dir * cellLength;
                     //Vector3 cellMax = end + pDir * cellWidth;
-                    // TODO: check for tower
+                    // check for tower
                     bool isAvailable = true;
                     foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints())
                     {
@@ -123,6 +130,19 @@ public class CellGenerator : Generator
                             isAvailable = false;
                         }
                     }
+                    // check for player
+                    foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+                    {
+                        if (Vector3.Distance(currPos, point) < playerBuffer + currCellRadius)
+                        {
+                            isAvailable = false;
+                        }
+                    }
+                    if (Vector3.Distance(currPos, playerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)
+                    {
+                        isAvailable = false;
+                    }
+                    // check for hunter
                     if (isAvailable)
                     {
                         // create cell
@@ -153,5 +173,12 @@ public class CellGenerator : Generator
         {
             Gizmos.DrawWireSphere(point.pos, towerBuffer);
         }
+        Gizmos.color = Color.magenta;
+        foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+        {
+            Gizmos.DrawWireSphere(point, playerBuffer * scale);
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(playerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
     }
 }

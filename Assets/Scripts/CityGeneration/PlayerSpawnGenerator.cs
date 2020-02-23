@@ -14,7 +14,7 @@ public class PlayerSpawnGenerator : Generator
     [SerializeField]
     private float playerBuffer;
 
-    public List<Vector3> playerSpawnPos { get; private set; }
+    public List<Vector3> playerSpawnPos { get; private set; } = new List<Vector3>();
 
     public Vector3 hunterSpawnPos { get; private set; }
 
