@@ -13,7 +13,9 @@ public class ConvertToPhotonSceneObject : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             GameObject newObj = PhotonNetwork.InstantiateSceneObject(prefab.name, transform.position, transform.rotation);
-            newObj.transform.localScale = transform.localScale;
+            Vector3 scale = transform.localScale;
+            scale.Scale(newObj.transform.localScale);
+            newObj.transform.localScale = scale;
         }
         Destroy(this.gameObject);
     }
