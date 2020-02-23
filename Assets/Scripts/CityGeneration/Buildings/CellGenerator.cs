@@ -24,6 +24,7 @@ public struct BuildingCell
     //private Vector2 max;
     //private Vector2 maxB;
     public bool isLeft;
+
     public Quaternion rot;
     public float radius;
 }
@@ -63,13 +64,18 @@ public class CellGenerator : Generator
 
     [SerializeField]
     private RoadGenerator roadGenerator;
+
     [SerializeField]
     private TowerGenerator towerGenerator;
+
+    [SerializeField]
+    private float towerBuffer;
 
     public List<BuildingCell> GetCells()
     {
         return cells;
     }
+
     public override void Clear()
     {
         cells.Clear();
@@ -82,13 +88,13 @@ public class CellGenerator : Generator
         foreach (RoadGenerator.RoadPath path in roadGenerator.GetRoadOuterPaths())
         {
             Vector3 dir = path.dir;
-             Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
+            Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
             Quaternion rot = Quaternion.LookRotation(pDir, Vector3.up);
             for (int i = 0; i < 2; ++i)
             {
-            bool isLeft = true;
+                bool isLeft = true;
                 // initial path values
-                 float currDist = 0;
+                float currDist = 0;
                 if (i == 1)
                 {
                     rot = Quaternion.LookRotation(-pDir, Vector3.up);
@@ -109,9 +115,19 @@ public class CellGenerator : Generator
                     //Vector3 end = currPos + dir * cellLength;
                     //Vector3 cellMax = end + pDir * cellWidth;
                     // TODO: check for tower
-                    //
-                    // create cell
-                    cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot));
+                    bool isAvailable = true;
+                    foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints())
+                    {
+                        if (Vector3.Distance(currPos, point.pos) < towerBuffer + currCellRadius)
+                        {
+                            isAvailable = false;
+                        }
+                    }
+                    if (isAvailable)
+                    {
+                        // create cell
+                        cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot));
+                    }
                     currDist += spacing + currCellRadius;
                 }
             }
@@ -130,6 +146,12 @@ public class CellGenerator : Generator
             else
                 Gizmos.color = Color.green;
             Gizmos.DrawSphere(cell.pos, 2);
+        }
+        // tower
+        Gizmos.color = Color.red;
+        foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints())
+        {
+            Gizmos.DrawWireSphere(point.pos, towerBuffer);
         }
     }
 }
