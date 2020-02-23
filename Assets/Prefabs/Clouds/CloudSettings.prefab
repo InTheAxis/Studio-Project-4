@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3439353843307518995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 19.96, z: 0}
-  m_LocalScale: {x: 253.70166, y: 46.94, z: 233.90677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3439353843980447287}
   m_RootOrder: 0
@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 3439353843980447285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 11.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1500, y: 20, z: 1500}
   m_Children:
   - {fileID: 3439353843307518999}
   m_Father: {fileID: 0}
@@ -142,21 +142,21 @@ MonoBehaviour:
   container: {fileID: 3439353843307518999}
   sprite: {fileID: 0}
   layer: 0
-  numSteps: 50
+  numSteps: 40
   resolutionA: 20
-  generateScaleA: 2.56
-  numGridA: 22
-  densityThresholdA: 0.59
-  cloudScaleA: 7.23
-  densityMultiplierA: 0.27
-  offsetA: {x: 79.3, y: 0, z: 0}
-  resolutionB: 20
-  generateScaleB: 2.76
-  numGridB: 26
-  densityThresholdB: 0.6
-  cloudScaleB: 10.16
-  densityMultiplierB: 0.12
-  offsetB: {x: 0, y: 0, z: 0}
+  generateScaleA: 3.39
+  numGridA: 39
+  densityThresholdA: 0.35
+  cloudScaleA: 1.08
+  densityMultiplierA: 0.06
+  offsetA: {x: 395.23492, y: 41.06018, z: -20.53009}
+  resolutionB: 15
+  generateScaleB: 4.7
+  numGridB: 31
+  densityThresholdB: 0.47
+  cloudScaleB: 1.38
+  densityMultiplierB: 0.31
+  offsetB: {x: -433.41364, y: 82.12036, z: 189.33301}
 --- !u!114 &3439353843980447286
 MonoBehaviour:
   m_ObjectHideFlags: 0
