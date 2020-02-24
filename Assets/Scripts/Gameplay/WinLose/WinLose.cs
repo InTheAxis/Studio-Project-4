@@ -7,6 +7,12 @@ public class WinLose : MonoBehaviourPun
 {
     private bool gameEnded = false;
 
+    private float backToLobbyTimer = 0.0f;
+    private bool hasSentLoadRequest = false;
+
+    [SerializeField]
+    private float delayToLobbyTime = 5.0f;
+
     private void Update()
     {
         if (!PhotonNetwork.IsMasterClient)
@@ -18,6 +24,16 @@ public class WinLose : MonoBehaviourPun
                 gameEnd(true);
             else if (Input.GetKeyDown(KeyCode.J))
                 gameEnd(false);
+        }
+        else
+        {
+            backToLobbyTimer += Time.deltaTime;
+            if (backToLobbyTimer >= delayToLobbyTime && !hasSentLoadRequest)
+            {
+                hasSentLoadRequest = true;
+                ScreenStateController.ReturningFromInGame = true;
+                PhotonNetwork.LoadLevel("Mainmenu");
+            }
         }
     }
 

@@ -93,12 +93,15 @@ public class InteractableManagerLocal : MonoBehaviour
         }
 
         // Show tooltip
-        if (carryingInteractable != null)
-            interactableTooltip.text = carryingInteractable.getCarriedTooltip();
-        else if (lastCollidedInteractable != null)
-            interactableTooltip.text = lastCollidedInteractable.getUncarriedTooltip();
-        else
-            interactableTooltip.text = "";
+        if (interactableTooltip != null)
+        {
+            if (carryingInteractable != null)
+                interactableTooltip.text = carryingInteractable.getCarriedTooltip();
+            else if (lastCollidedInteractable != null)
+                interactableTooltip.text = lastCollidedInteractable.getUncarriedTooltip();
+            else
+                interactableTooltip.text = "";
+        }
     }
 
     private void useInteractable(InteractableBase interactable)

@@ -111,6 +111,10 @@ public class DestructibleController : MonoBehaviourPun
         prevHighlighted = new Dictionary<GameObject, List<Material>>();
         holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
     }
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     private void Update()
     {

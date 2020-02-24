@@ -11,6 +11,11 @@ public class LockCursor : MonoBehaviour
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
 #if UNITY_EDITOR
     private void Update()
     {
