@@ -14,12 +14,15 @@ public class DestructibleController : MonoBehaviourPun
     [SerializeField]
     [Tooltip("The layer mask used for detection of objects that can be picked up")]
     private LayerMask detectMask = 0;
+
     [SerializeField]
     [Tooltip("The furthest distance the player can pull objects from")]
     private float pickUpMaxDistance = 6.0f;
+
     [SerializeField]
     [Tooltip("The detection area around the object that is pulled")]
     private float detectionRadius = 4.5f;
+
     [SerializeField]
     [Tooltip("The speed at which objects are pulled towards the player")]
     private float pullSpeed = 1.0f;
@@ -28,15 +31,19 @@ public class DestructibleController : MonoBehaviourPun
     [SerializeField]
     [Tooltip("The layer mask applied to throwables that are currently being held")]
     private LayerMask heldMask = 0;
+
     [SerializeField]
     [Tooltip("The maximum distance a pulled object can be away from the player to be considered being held")]
     private float holdPosTolerance = 1.0f;
+
     [SerializeField]
     [Tooltip("The speed at which the held object rotates at")]
     private float holdRotateSpeed = 2.0f;
+
     [SerializeField]
     [Tooltip("The maximum tolerance that the picked up object can be from the holding position (X axis)")]
     private Vector2 holdPosOffsetX = new Vector2(-0.25f, 0.90f);
+
     [SerializeField]
     [Tooltip("The maximum tolerance that the picked up object can be from the holding position (Y axis)")]
     private Vector2 holdPosOffsetY = new Vector2(-0.10f, 0.80f);
@@ -45,18 +52,23 @@ public class DestructibleController : MonoBehaviourPun
     [SerializeField]
     [Tooltip("The force applied to objects when pushing it away")]
     private float throwForce = 40.0f;
+
     [SerializeField]
     [Tooltip("Enable aim assist such that throwables are thrown towards the center crosshair")]
     private bool enableAimAssist = true;
+
     [SerializeField]
     [Tooltip("The layer mask used to aim at objects")]
     private LayerMask aimMask = 0;
+
     [SerializeField]
     [Tooltip("The minimum offset for aim assist to allow for more realistic accuracy")]
     private Vector3 aimAssistOffsetMin = new Vector3(-0.50f, -0.50f, -0.50f);
+
     [SerializeField]
     [Tooltip("The maximum offset for aim assist to allow for more realistic accuracy")]
     private Vector3 aimAssistOffsetMax = new Vector3(0.50f, 0.50f, 0.50f);
+
     [Header("Highlighting")]
     [SerializeField]
     [Tooltip("The material used to highlight objects taht can be picked up")]
@@ -70,7 +82,9 @@ public class DestructibleController : MonoBehaviourPun
     private Dictionary<GameObject, List<Material>> prevHighlighted = null;
 
     /* Event Callbacks for Crosshair */
+
     public event Action<bool> pullStatus = null;
+
     public event Action throwStatus = null;
 
     private CharTPController playerController = null;
@@ -92,7 +106,6 @@ public class DestructibleController : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-
         heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
         if (heldMaskLayer == -1)
             Debug.LogError("The layer " + heldMaskName + " is not set up in this project!");
@@ -100,7 +113,6 @@ public class DestructibleController : MonoBehaviourPun
         detectMaskLayer = LayerMask.NameToLayer(detectMaskName);
         if (detectMaskLayer == -1)
             Debug.LogError("The layer " + detectMaskName + " is not set up in this project!");
-
 
         cameraTransform = Camera.main.transform;
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
@@ -139,7 +151,6 @@ public class DestructibleController : MonoBehaviourPun
             }
         }
 
-
         RaycastHit hit;
         bool hasTarget = false;
 
@@ -166,7 +177,6 @@ public class DestructibleController : MonoBehaviourPun
                 /* Gets all surrounding throwables */
                 if (throwables?.Count > 0)
                 {
-
                     for (int i = 0; i < throwables.Count; ++i)
                     {
                         GameObject go = throwables[i].gameObject;
@@ -184,19 +194,15 @@ public class DestructibleController : MonoBehaviourPun
                             highlightedMaterials[j] = highlightMaterial;
                         meshRenderer.materials = highlightedMaterials;
                     }
-
                 }
             }
-
         }
-
 
         // Start pulling
         if (Input.GetMouseButtonDown(0))
         {
             if (!isPulling)
             {
-
                 if (hasTarget)
                 {
                     // Don't grab objects that are already owned by other players
@@ -214,8 +220,9 @@ public class DestructibleController : MonoBehaviourPun
                         isPulling = true;
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
+                        // audio
+                        playerController.GetComponent<PlayerAudioController>().PickUpDebris();
                     }
-
                 }
                 else
                 {
@@ -231,7 +238,6 @@ public class DestructibleController : MonoBehaviourPun
             {
                 if (!canThrow)
                 {
-
                     foreach (Collider collider in throwables)
                     {
                         if (collider == null) continue;
@@ -240,18 +246,15 @@ public class DestructibleController : MonoBehaviourPun
                         // Do not release locally as we might not have gotten the message that this object is now controlled by us before we release it
                         PhotonView colliderView = PhotonView.Get(collider);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, Vector3.zero);
-
                     }
                     Debug.Log("Reset throwables");
                     isPulling = false;
                     pullStatus?.Invoke(isPulling);
-
                 }
                 else
                 {
-
                     RaycastHit[] aimHits;
-                    
+
                     Vector3 hitPoint = Vector3.zero;
 
                     /* Make held objects fly towards target object */
@@ -269,7 +272,6 @@ public class DestructibleController : MonoBehaviourPun
                                 break;
                             }
                         }
-
                     }
 
                     foreach (Collider collider in throwables)
@@ -298,18 +300,16 @@ public class DestructibleController : MonoBehaviourPun
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
                     }
 
-
                     Debug.Log("Throw!");
                     canThrow = false;
                     throwStatus?.Invoke();
-
+                    // audio
+                    playerController.GetComponent<PlayerAudioController>().LaunchDebris();
                 }
                 playerController.disableKeyInput = false;
-
             }
         }
 
-      
         // Updating positions/rotations
         if (Input.GetMouseButton(0))
         {
@@ -335,7 +335,6 @@ public class DestructibleController : MonoBehaviourPun
                     rot.y += 4.0f;
                     t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(rot), Time.deltaTime * holdRotateSpeed);
 
-
                     /* Detects when the pulled object is near enough to be considered "held" */
                     float sqrDistFromHolding = (t.position - holdDestructibles.position).sqrMagnitude;
                     if (sqrDistFromHolding <= holdPosTolerance)
@@ -346,7 +345,6 @@ public class DestructibleController : MonoBehaviourPun
                 }
             }
         }
-
     }
 
     private void setupThrowable(Collider collider)
@@ -373,6 +371,7 @@ public class DestructibleController : MonoBehaviourPun
         if (view.Owner == null)
             NetworkOwnership.instance.transferOwnerAsMaster(view, messageInfo.Sender);
     }
+
     [PunRPC]
     private void destructibleReleaseOwner(int viewID, Vector3 force, PhotonMessageInfo messageInfo)
     {
@@ -390,6 +389,7 @@ public class DestructibleController : MonoBehaviourPun
         }
         photonView.RPC("destructibleEnsureOwnerIsReleased", messageInfo.Sender, viewID);
     }
+
     [PunRPC]
     private void destructibleEnsureOwnerIsReleased(int viewID, PhotonMessageInfo messageInfo)
     {

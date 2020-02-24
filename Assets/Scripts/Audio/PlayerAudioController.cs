@@ -38,7 +38,7 @@ public class PlayerAudioController : AudioController
 
     public void PickUpDebris()
     {
-        Play("pickup0");
+        Play("pickup0", 0.22f);
     }
 
     public void Interact()
@@ -53,6 +53,6 @@ public class PlayerAudioController : AudioController
 
     public void LaunchDebris()
     {
-        Play("launch0");
+        Play("launch0", 0.3f);
     }
 }
