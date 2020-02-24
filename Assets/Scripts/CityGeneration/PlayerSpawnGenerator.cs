@@ -31,18 +31,31 @@ public class PlayerSpawnGenerator : Generator
     [SerializeField]
     private float centerBuffer;
 
+    [SerializeField]
+    private bool spawnTogether;
+
+    [SerializeField]
+    private float spawnTogetherRadius;
+
     public override void Clear()
+
     {
         generated = false;
     }
 
-    public override void Generate()
+    public void SpawnTogether()
     {
-        Debug.Log("Generating Spawn");
-        generated = true;
-        playerSpawnPos.Clear();
-        hunterSpawnPos = Vector3.zero;
-        poisson.ClearInjected();
+        poisson.GenerateDensity(5, 0.6f);
+        poisson.Scale(spawnTogetherRadius);
+        for (int i = 0; i < 4; ++i)
+        {
+            playerSpawnPos.Add(poisson.GetPoints()[i].pos);
+        }
+        hunterSpawnPos = poisson.GetPoints()[4].pos;
+    }
+
+    public void SpawnDefault()
+    {
         poisson.Inject(new PoissonPoint(Vector3.zero, centerBuffer));
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
@@ -71,6 +84,19 @@ public class PlayerSpawnGenerator : Generator
         hunterSpawnPos = hunterPoisson.GetPoints()[hunterPoisson.GetPoints().Count - 1].pos * scale;
     }
 
+    public override void Generate()
+    {
+        Debug.Log("Generating Spawn");
+        generated = true;
+        playerSpawnPos.Clear();
+        hunterSpawnPos = Vector3.zero;
+        poisson.ClearInjected();
+        if (spawnTogether)
+            SpawnTogether();
+        else
+            SpawnDefault();
+    }
+
     private void OnDrawGizmos()
     {
         if (!gizmosEnabled)
@@ -79,9 +105,17 @@ public class PlayerSpawnGenerator : Generator
         Gizmos.DrawWireSphere(Vector3.zero, centerBuffer * scale);
         Gizmos.color = Color.magenta;
         foreach (Vector3 pos in playerSpawnPos)
-            Gizmos.DrawWireSphere(pos, playerBuffer * scale);
+        {
+            if (spawnTogether)
+                Gizmos.DrawSphere(pos, 1);
+            else
+                Gizmos.DrawWireSphere(pos, playerBuffer * scale);
+        }
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(hunterSpawnPos, hunterBuffer * scale);
+        if (spawnTogether)
+            Gizmos.DrawSphere(hunterSpawnPos, 2);
+        else
+            Gizmos.DrawWireSphere(hunterSpawnPos, hunterBuffer * scale);
         Gizmos.color = Color.red;
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
             Gizmos.DrawWireSphere(point.pos, towerBuffer * scale);
