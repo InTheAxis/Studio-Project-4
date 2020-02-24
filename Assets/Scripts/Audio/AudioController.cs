@@ -18,7 +18,7 @@ public class AudioController : MonoBehaviour
             Debug.LogError("No audio source found on: " + gameObject.name);
     }
 
-    public void Play(string name)
+    public void Play(string name, float timeOffset = 0.0f)
     {
         if (source == null)
             return;
@@ -29,6 +29,7 @@ public class AudioController : MonoBehaviour
             return;
         }
         source.clip = s;
+        source.time = timeOffset;
         source.Play();
     }
 }
