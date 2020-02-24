@@ -5,6 +5,7 @@ using Unity.Collections;
 using Unity.Rendering;
 public class ParticleBootstrap : MonoBehaviour
 {
+    [Header("ParticleSystem Settings")]
     [SerializeField]
     protected ParticleSystemDataObj sysObj;
     [SerializeField]

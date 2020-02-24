@@ -1086,7 +1086,7 @@ GameObject:
   - component: {fileID: 825893617}
   - component: {fileID: 825893616}
   m_Layer: 0
-  m_Name: BloodParticlesECSBootStrap
+  m_Name: BloodECSParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sysObj: {fileID: 11400000, guid: 91fedc655b91e8c48a6f80e83e479ade, type: 2}
   entityObj: {fileID: 11400000, guid: d5e9b95395d5dcc4ba76b9183f158143, type: 2}
+  emitter: {fileID: 825893617}
 --- !u!4 &825893617
 Transform:
   m_ObjectHideFlags: 0
