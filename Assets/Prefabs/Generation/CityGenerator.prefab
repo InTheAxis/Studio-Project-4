@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 4185348921600003789}
   - component: {fileID: 809026108929300310}
   - component: {fileID: 1237015917351263884}
+  - component: {fileID: 6478886105883047785}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -223,6 +224,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 500, y: 1, z: 500}
   m_Center: {x: 250, y: 0, z: 250}
+--- !u!114 &6478886105883047785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941302238996355911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68560f7e1dec18147af04587d21410ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainData: {fileID: 15600000, guid: 18483ed191097364cab513104fb3066c, type: 2}
 --- !u!1 &1284325392231104113
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,8 +498,8 @@ MonoBehaviour:
     enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  scale: 149.41
-  generateOnStart: 0
+  scale: 44.1
+  generateOnStart: 1
 --- !u!114 &5809545488305829278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b18d27c0e82ce4e8d18de10b718568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverInstantiate: 1
+  serverInstantiate: 0
 --- !u!1 &5890597339044720962
 GameObject:
   m_ObjectHideFlags: 0
