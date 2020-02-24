@@ -34,7 +34,7 @@ public class TowerGenerator : Generator
     {
         foreach (PoissonPoint point in poisson.GetPoints(1))
         {
-            InstantiateHandler.mInstantiate(towerRef, point.pos, transform);
+            InstantiateHandler.mInstantiate(towerRef, point.pos, Quaternion.identity, transform, "Interactable");
         }
     }
 
