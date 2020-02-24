@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using TMPro;
 
 public class InteractableManagerLocal : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class InteractableManagerLocal : MonoBehaviour
     private float interactRaycastLostTimeout = 0.4f;
 
     [SerializeField]
-    private Text interactableTooltip;
+    private TextMeshProUGUI interactableTooltip;
 
     private InteractableBase lastCollidedInteractable = null;
     private float lastCollidedTimer = 0.0f;
