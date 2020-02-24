@@ -9,6 +9,8 @@ using Photon.Pun;
 
 public class ScreenStateController : MonoBehaviour
 {
+    private ScreenStateController instance = null;
+
     private enum ScreenStates
     {
         CONNECTINGTOPHOTON,
@@ -139,17 +141,22 @@ public class ScreenStateController : MonoBehaviour
 
     [SerializeField]
     private ScreenStates currentScreen = ScreenStates.CONNECTINGTOPHOTON;
+    // Flag used to determine what to initialize when starting this class
+    private static bool returningFromInGame = false;
+    public static bool ReturningFromInGame { get => returningFromInGame; set => returningFromInGame = value; }
 
-    private Stack<ScreenStates> history = null;
+    private static Stack<ScreenStates> history = null;
 
     //private List<GameObject> playerModels = null;
     //private List<TextMeshPro> playerNames = null;
-    private List<LobbyPlayer> players = null;
+    private static List<LobbyPlayer> players = null;
 
-    private Dictionary<string, int> playerIDs = null;
+    private static Dictionary<string, int> playerIDs = null;
 
     private void Start()
     {
+        Debug.Log("Start");
+
         // Attach callbacks
         NetworkClient.instance.masterServerConnectedCallback = connectedToPhotonServers;
         NetworkClient.instance.roomJoinedCallback = joinedLobby;
@@ -159,10 +166,26 @@ public class ScreenStateController : MonoBehaviour
         NetworkClient.instance.playerJoinedCallback = playerJoined;
         NetworkClient.instance.playerLeftCallback = playerLeft;
 
-        history = new Stack<ScreenStates>();
+        if (returningFromInGame)
+        {
+            returningFromInGame = false;
+            currentScreen = history.Peek();
+            if (PhotonNetwork.IsMasterClient)
+                PhotonNetwork.InstantiateSceneObject("NetworkLobbyManager", Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            NetworkClient.instance.connectToMasterServer();
+
+            history = new Stack<ScreenStates>();
+            players = new List<LobbyPlayer>();
+            playerIDs = new Dictionary<string, int>();
+        }
+
         hovered = new List<GameObject>();
         prevHovered = new List<GameObject>();
         hoverGrowScale = new Vector3(hoverGrowSize, hoverGrowSize, hoverGrowSize);
+
 
         for (int i = 0; i < screens.Length; ++i)
         {
@@ -172,9 +195,7 @@ public class ScreenStateController : MonoBehaviour
                 screens[i].SetActive(false);
         }
 
-        players = new List<LobbyPlayer>();
-        playerIDs = new Dictionary<string, int>();
-
+        players.Clear();
         for (int i = 0; i < lobbyModels.transform.childCount; ++i)
         {
             Transform t = lobbyModels.transform.GetChild(i);
@@ -183,8 +204,6 @@ public class ScreenStateController : MonoBehaviour
 
         mainmenuModel.SetActive(true);
         lobbyModels.SetActive(false);
-
-        NetworkClient.instance.connectToMasterServer();
     }
 
     private void OnDestroy()
@@ -481,7 +500,7 @@ public class ScreenStateController : MonoBehaviour
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
-                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
+                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("MapGeneration");
                 //NetworkClient.instance.goInGame();
             }
             else

@@ -44,11 +44,11 @@ public class InteractableManagerLocal : MonoBehaviour
         {
             if (rayInfo.collider.isTrigger)
             {
-                if (lastCollidedInteractable == null || rayInfo.collider.gameObject == lastCollidedInteractable)
-                {
+                //if (lastCollidedInteractable == null || rayInfo.collider.gameObject == lastCollidedInteractable.gameObject)
+                //{
                     lastCollidedInteractable = rayInfo.collider.gameObject.GetComponentInParent<InteractableBase>();
                     lastCollidedTimer = 0.0f;
-                }
+                //}
             }
         }
         // If not looking at an interactable, disallow interaction if last seen interactable is not lenient
@@ -93,12 +93,15 @@ public class InteractableManagerLocal : MonoBehaviour
         }
 
         // Show tooltip
-        if (carryingInteractable != null)
-            interactableTooltip.text = carryingInteractable.getCarriedTooltip();
-        else if (lastCollidedInteractable != null)
-            interactableTooltip.text = lastCollidedInteractable.getUncarriedTooltip();
-        else
-            interactableTooltip.text = "";
+        if (interactableTooltip != null)
+        {
+            if (carryingInteractable != null)
+                interactableTooltip.text = carryingInteractable.getCarriedTooltip();
+            else if (lastCollidedInteractable != null)
+                interactableTooltip.text = lastCollidedInteractable.getUncarriedTooltip();
+            else
+                interactableTooltip.text = "";
+        }
     }
 
     private void useInteractable(InteractableBase interactable)

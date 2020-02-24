@@ -12,6 +12,11 @@ public class LobbyPlayer
 
     public LobbyPlayer(GameObject model)
     {
+        setModel(model);
+    }
+
+    public void setModel(GameObject model)
+    {
         this.model = model;
         tmName = model.transform.Find("Name").GetComponent<TextMeshPro>();
         tmName.text = "";
