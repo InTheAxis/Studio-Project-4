@@ -159,7 +159,7 @@ public class InteractableSM
         public override STATE getState() { return STATE.CONSTANT_USING; }
         public override STATE checkState()
         {
-            if (usingInteractable == null)
+            if (usingInteractable != null)
                 return STATE.CONSTANT_USING;
             else
                 return STATE.NOTHING;
