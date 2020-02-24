@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2071051417844002476
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 791890196130391855}
-  m_Layer: 8
-  m_Name: Minimap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &791890196130391855
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071051417844002476}
-  m_LocalRotation: {x: -0, y: -0.13761623, z: -0, w: 0.9904856}
-  m_LocalPosition: {x: 0.243, y: 0.40699995, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9117360599836359460}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -15.820001, z: 0}
 --- !u!1 &3200763372267784818
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,8 +195,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9117360599836359461}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0aaa018ab005a7945891eebd8e848ae7, type: 3}
-  m_Controller: {fileID: 9100000, guid: f414f236439bce4428993d83160f4dfe, type: 2}
+  m_Avatar: {fileID: 9000000, guid: ed289aee068e1254e88a2b2a97ba4c64, type: 3}
+  m_Controller: {fileID: 9100000, guid: 08bca11ece686ca4cacb98378cbc4193, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -308,26 +278,20 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: idle
   - Type: 9
-    SynchronizeType: 0
-    Name: run
-  - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: crouch
   - Type: 9
-    SynchronizeType: 0
-    Name: jump
-  - Type: 9
-    SynchronizeType: 0
-    Name: fall
-  - Type: 9
-    SynchronizeType: 0
-    Name: died
-  - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: crouchWalk
+  - Type: 9
+    SynchronizeType: 1
+    Name: run
+  - Type: 9
+    SynchronizeType: 1
+    Name: map
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -670,11 +634,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human_Male_Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 2634981581850956081, guid: 7b41085d05f34294fb660f3b4b6ec9be,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b41085d05f34294fb660f3b4b6ec9be, type: 3}
 --- !u!4 &2944188230070091456 stripped
@@ -698,7 +657,7 @@ PrefabInstance:
     - target: {fileID: 3058145091160448120, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4205423508039414090, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
@@ -748,7 +707,7 @@ PrefabInstance:
     - target: {fileID: 4981898664547048032, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4981898664547048032, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
@@ -765,16 +724,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7040078494574333705, guid: 04d3b3f968afea34790a69675508fe73,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00039151803
-      objectReference: {fileID: 0}
-    - target: {fileID: 7040078494574333705, guid: 04d3b3f968afea34790a69675508fe73,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.15461786
-      objectReference: {fileID: 0}
     - target: {fileID: 9107986963222061843, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_RootOrder
@@ -782,31 +731,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04d3b3f968afea34790a69675508fe73, type: 3}
---- !u!4 &7401798657762259781 stripped
+--- !u!4 &6772616942878280246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9107986963222061843, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 2565709116428265765}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8534311436951121934 stripped
+--- !u!4 &4140574568475179508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1940343873033900241, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 2565709116428265765}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6809449677640928192 stripped
+--- !u!4 &8534311436951121934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6193801680840448299, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 2565709116428265765}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6772616942878280246 stripped
+--- !u!4 &6809449677640928192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9014865867432764133, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 2565709116428265765}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4140574568475179508 stripped
+--- !u!4 &9117360599678648190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6709349634282411611, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
