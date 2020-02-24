@@ -48,6 +48,7 @@ public class Crosshair : MonoBehaviour
         /* Notify events */
         controller.pullStatus += onPullStatus;
         controller.throwStatus += onThrow;
+        CharMinimapCamera.Instance.eventShowMinimap += onMinimapToggle;
 
         if(quarterHolder == null)
             quarterHolder = transform.Find("Quarters");
@@ -139,5 +140,10 @@ public class Crosshair : MonoBehaviour
         targetRadius = 12.0f;
         lerpSpeed = throwLerpSpeed;
         rotating = false;
+    }
+
+    private void onMinimapToggle(bool status)
+    {
+        gameObject.SetActive(!status);
     }
 }
