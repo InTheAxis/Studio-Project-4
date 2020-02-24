@@ -121,13 +121,23 @@ public class CellGenerator : Generator
                     currPos = currDist * dir + startPos;
                     //Vector3 end = currPos + dir * cellLength;
                     //Vector3 cellMax = end + pDir * cellWidth;
-                    // check for tower
+                    // check for other cell
                     bool isAvailable = true;
+                    foreach (BuildingCell cell in cells)
+                    {
+                        if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius)
+                        {
+                            isAvailable = false;
+                            break;
+                        }
+                    }
+                    // check for tower
                     foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints())
                     {
                         if (Vector3.Distance(currPos, point.pos) < towerBuffer + currCellRadius)
                         {
                             isAvailable = false;
+                            break;
                         }
                     }
                     // check for player
@@ -136,6 +146,7 @@ public class CellGenerator : Generator
                         if (Vector3.Distance(currPos, point) < playerBuffer + currCellRadius)
                         {
                             isAvailable = false;
+                            break;
                         }
                     }
                     if (Vector3.Distance(currPos, playerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)

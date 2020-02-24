@@ -19,7 +19,7 @@ public class RoadGenerator : Generator
     //
     public int resolution = 100;
 
-    [Range(0, 0.5f)]
+    [Range(0, 0.8f)]
     public float centerBuffer = 0.02f;
 
     public bool cleanUp;
@@ -112,7 +112,7 @@ public class RoadGenerator : Generator
         Gizmos.color = Color.red;
         foreach (PoissonPoint poissonPoint in voronoi.GetPoisson().GetPoints())
         {
-            Gizmos.DrawSphere(poissonPoint.pos * scale, poissonPoint.radius * 3);
+            Gizmos.DrawSphere(poissonPoint.pos * scale, poissonPoint.radius);
         }
         Gizmos.color = Color.white;
         foreach (VoronoiVertice vertice in voronoi.GetVoronoiPoints())
