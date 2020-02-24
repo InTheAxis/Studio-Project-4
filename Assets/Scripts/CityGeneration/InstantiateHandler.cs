@@ -13,7 +13,7 @@ public class InstantiateHandler : MonoBehaviour
         sServerInstantiate = serverInstantiate;
     }
 
-    private void Start()
+    private void Awake()
     {
         sServerInstantiate = serverInstantiate;
     }

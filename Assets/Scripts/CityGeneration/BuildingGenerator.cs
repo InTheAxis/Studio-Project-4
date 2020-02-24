@@ -62,7 +62,7 @@ public class BuildingGenerator : Generator
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
-            vpos.y += 0.2f;
+            vpos.y += 0.5f;
             // check for road
             bool emptySpot = true;
             Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer * scale);
@@ -90,7 +90,7 @@ public class BuildingGenerator : Generator
             return;
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1))
         {
-            Gizmos.DrawWireSphere(pos.pos, pos.radius);
+            Gizmos.DrawWireSphere(pos.pos, buffer * scale);
         }
         Gizmos.color = Color.green;
         foreach (Transform trans in transform)
