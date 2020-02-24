@@ -9,6 +9,7 @@ public class CellBuildingGenerator : Generator
 
     [SerializeField]
     public CityScriptable cityScriptable;
+
     public override void Clear()
     {
         while (transform.childCount > 0)
@@ -20,7 +21,7 @@ public class CellBuildingGenerator : Generator
     public override void Generate()
     {
         Clear();
-        foreach(BuildingCell cell in cellGenerator.GetCells())
+        foreach (BuildingCell cell in cellGenerator.GetCells())
         {
             GameObject buildingRef = cityScriptable.SelectMesh(cell.radius);
             if (buildingRef == null)
@@ -28,7 +29,7 @@ public class CellBuildingGenerator : Generator
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();
             Vector3 pos = cell.pos;
             pos += cell.offSetDir * buildingRadius;
-            pos.y += 0.1f;
+            pos.y += 0.2f;
             // Instantitate
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
