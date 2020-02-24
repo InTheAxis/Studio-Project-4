@@ -9,7 +9,6 @@ using Photon.Pun;
 
 public class ScreenStateController : MonoBehaviour
 {
-
     private enum ScreenStates
     {
         CONNECTINGTOPHOTON,
@@ -28,12 +27,14 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("Stores a collection of different menu screens")]
     private GameObject[] screens = null;
+
     [SerializeField]
     private TextMeshProUGUI tmUsername = null;
 
     [Header("Models")]
     [SerializeField]
     private GameObject mainmenuModel = null;
+
     [SerializeField]
     private GameObject lobbyModels = null;
 
@@ -41,62 +42,83 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("The size of the button when hovered")]
     private float hoverGrowSize = 1.2f;
+
     [SerializeField]
     private Color busyColor = Color.yellow;
+
     [SerializeField]
     private Color failColor = Color.red;
+
     [SerializeField]
     private Color successColor = Color.green;
 
     [Header("Transitions")]
     [SerializeField]
     private ButtonMaskEffect buttonMask = null;
+
     [SerializeField]
     private float buttonMaskStartY = 78.0f;
+
     [SerializeField]
     private float buttonHeightGap = 120.0f;
+
     [SerializeField]
     private float canvasFadeSpeed = 2.0f;
 
     [Header("Login")]
     [SerializeField]
     private CanvasGroup cgLogin = null;
+
     [SerializeField]
     private TMP_InputField tmLoginUsername = null;
+
     [SerializeField]
     private TMP_InputField tmLoginPassword = null;
+
     [SerializeField]
     private TextMeshProUGUI tmLoginStatus = null;
 
     [Header("Registration")]
     [SerializeField]
     private CanvasGroup cgRegister = null;
+
     [SerializeField]
     private TMP_InputField tmRegisterEmail = null;
+
     [SerializeField]
     private TMP_InputField tmRegisterUsername = null;
+
     [SerializeField]
     private TMP_InputField tmRegisterPassword = null;
+
     [SerializeField]
     private TMP_InputField tmRegisterConfirm = null;
+
     [SerializeField]
     private TextMeshProUGUI tmRegisterStatus = null;
 
     [Header("Server Selection")]
     [SerializeField]
     private CanvasGroup cgHost = null;
+
     [SerializeField]
     private CanvasGroup cgJoin = null;
+
     [SerializeField]
     private GameObject registerInput = null;
+
     [SerializeField]
     private GameObject loginInput = null;
+
     [SerializeField]
     private GameObject hostPasswordInput = null;
+
     [SerializeField]
     private GameObject joinPasswordInput = null;
+
     [SerializeField]
     private TextMeshProUGUI hostCreateStatus = null;
+
     [SerializeField]
     private TextMeshProUGUI joinLobbyStatus = null;
 
@@ -114,6 +136,7 @@ public class ScreenStateController : MonoBehaviour
     private Vector3 hoverGrowScale = Vector3.zero;
 
     /* Screen State */
+
     [SerializeField]
     private ScreenStates currentScreen = ScreenStates.CONNECTINGTOPHOTON;
 
@@ -122,6 +145,7 @@ public class ScreenStateController : MonoBehaviour
     //private List<GameObject> playerModels = null;
     //private List<TextMeshPro> playerNames = null;
     private List<LobbyPlayer> players = null;
+
     private Dictionary<string, int> playerIDs = null;
 
     private void Start()
@@ -162,6 +186,7 @@ public class ScreenStateController : MonoBehaviour
 
         NetworkClient.instance.connectToMasterServer();
     }
+
     private void OnDestroy()
     {
         NetworkClient.instance.masterServerConnectedCallback = null;
@@ -177,7 +202,7 @@ public class ScreenStateController : MonoBehaviour
     {
         // TODO: Update start button activeness depending on player readiness
 
-        foreach(var p in PhotonNetwork.PlayerList)
+        foreach (var p in PhotonNetwork.PlayerList)
         {
             string name = p.NickName;
             players[playerIDs[name]].setReady(NetworkClient.instance.isReady(name));
@@ -185,7 +210,7 @@ public class ScreenStateController : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if(NetworkClient.instance.areAllReady())
+            if (NetworkClient.instance.areAllReady())
             {
                 tmReady.transform.parent.GetComponent<Button>().enabled = true;
                 tmReady.GetComponent<TextMeshProUGUI>().color = successColor;
@@ -195,12 +220,8 @@ public class ScreenStateController : MonoBehaviour
                 tmReady.transform.parent.GetComponent<Button>().enabled = false;
                 tmReady.GetComponent<TextMeshProUGUI>().color = failColor;
             }
-
         }
-
-
     }
-
 
     private void getHoveredUIElements()
     {
@@ -219,7 +240,9 @@ public class ScreenStateController : MonoBehaviour
     }
 
     /* Network callbacks */
+
     #region Network Callbacks
+
     private void connectedToPhotonServers()
     {
         // This function is called each time we connect to photon servers, including when reconnecting to photon servers after leaving a room.
@@ -230,7 +253,6 @@ public class ScreenStateController : MonoBehaviour
 
     private void joinedLobby(List<string> playersInLobby)
     {
-
         // Note: This function is called while either joining or hosting. Essentially the callback for when we enter the room.
         playerIDs.Clear();
         for (int i = 0; i < 5; ++i)
@@ -244,7 +266,6 @@ public class ScreenStateController : MonoBehaviour
             {
                 players[i].setInactive();
             }
-
         }
 
         // Note: Planning for the host to always be the hunter. The host is always the first string in the list
@@ -267,34 +288,37 @@ public class ScreenStateController : MonoBehaviour
             NetworkClient.instance.DisconnectFromRoom();
         }
     }
+
     private void failedToJoinRandomLobby()
     {
         // TODO: State switched from joining to hosting. Need to change whatever variables that depend on this state
-
     }
+
     private void failedToJoinLobby()
     {
         joinLobbyStatus.text = "Lobby does not exist / is in progress";
     }
+
     private void failedToCreateLobby()
     {
         hostCreateStatus.text = "Lobby already exists";
     }
+
     private void playerJoined(string playerName)
     {
         Debug.Log(playerName + "with ID: " + playerIDs.Count + " joined!");
         players[playerIDs.Count].setActive(playerName);
         playerIDs.Add(playerName, playerIDs.Count);
-
     }
+
     private void playerLeft(string playerName)
     {
         Debug.Log(playerName + "with ID: " + playerIDs.Count + " left!");
         playerIDs.Remove(playerName);
         players[playerIDs.Count].setInactive();
     }
-    #endregion
 
+    #endregion Network Callbacks
 
     public void onButtonClick(string name)
     {
@@ -334,15 +358,14 @@ public class ScreenStateController : MonoBehaviour
         }
         else if (name == "Register")
         {
-
             /* Invalid Email */
-            if(!tmRegisterEmail.text.Contains("@"))
+            if (!tmRegisterEmail.text.Contains("@"))
             {
                 tmRegisterStatus.color = failColor;
                 tmRegisterStatus.text = "Invalid Email";
             }
             /* Empty Fields */
-            else if(tmRegisterEmail.text.Equals("") || tmRegisterUsername.text.Equals("") || tmRegisterPassword.text.Equals("") || tmRegisterConfirm.text.Equals("")) /*|| tmRegisterUsername.text == "" || tmRegisterPassword.text = "" || tmRegisterConfirm.text == "")*/
+            else if (tmRegisterEmail.text.Equals("") || tmRegisterUsername.text.Equals("") || tmRegisterPassword.text.Equals("") || tmRegisterConfirm.text.Equals("")) /*|| tmRegisterUsername.text == "" || tmRegisterPassword.text = "" || tmRegisterConfirm.text == "")*/
             {
                 tmRegisterStatus.color = failColor;
                 tmRegisterStatus.text = "Invalid Fields";
@@ -373,7 +396,6 @@ public class ScreenStateController : MonoBehaviour
                         tmRegisterStatus.text = "Failed to Register";
                     });
             }
-
         }
         else if (name == "Logout")
         {
@@ -389,14 +411,14 @@ public class ScreenStateController : MonoBehaviour
         {
             loginInput.SetActive(!loginInput.activeSelf);
             registerInput.SetActive(false);
-            if(loginInput.activeSelf)
+            if (loginInput.activeSelf)
                 StartCoroutine(fadeCanvasGroup(cgLogin, true));
         }
         else if (name == "MainmenuRegister")
         {
             loginInput.SetActive(false);
             registerInput.SetActive(!registerInput.activeSelf);
-            if(registerInput.activeSelf)
+            if (registerInput.activeSelf)
                 StartCoroutine(fadeCanvasGroup(cgRegister, true));
         }
         else if (name == "MainmenuPlay")
@@ -436,49 +458,44 @@ public class ScreenStateController : MonoBehaviour
             hostPasswordInput.SetActive(false);
             if (joinPasswordInput.activeSelf)
                 StartCoroutine(fadeCanvasGroup(cgJoin, true));
-
         }
         else if (name == "ServerJoinRandom")
         {
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Join("");
         }
-        else if(name == "ServerHostCreate")
+        else if (name == "ServerHostCreate")
         {
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Host(hostPasswordInput.GetComponent<TMP_InputField>().text);
         }
-        else if(name == "ServerJoinRoom")
+        else if (name == "ServerJoinRoom")
         {
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Join(joinPasswordInput.GetComponent<TMP_InputField>().text);
         }
-        else if(name == "LobbyReady")
+        else if (name == "LobbyReady")
         {
             if (PhotonNetwork.IsMasterClient)
             {
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
-                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Destructibles");
+                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
                 //NetworkClient.instance.goInGame();
             }
             else
             {
                 NetworkClient.instance.toggleReady(PlayerSettings.playerName);
             }
-
-
         }
-        else if(name == "LobbyCharacter")
+        else if (name == "LobbyCharacter")
         {
-            
         }
-        else if(name == "LobbySettings")
+        else if (name == "LobbySettings")
         {
-
         }
-        else if(name == "LobbyLeave")
+        else if (name == "LobbyLeave")
         {
             NetworkClient.instance.DisconnectFromRoom();
 
@@ -495,7 +512,6 @@ public class ScreenStateController : MonoBehaviour
                 mainmenuModel.SetActive(true);
                 lobbyModels.SetActive(false);
             }
-
         }
     }
 
@@ -509,7 +525,6 @@ public class ScreenStateController : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         canvas.alpha = targetAlpha;
-        
     }
 
     public void onHoverEnterButton(GameObject go)
