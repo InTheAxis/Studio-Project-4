@@ -70,7 +70,7 @@ public class CharTPController : MonoBehaviourPun
         if (CharTPCamera.Instance != null/* && photonView.IsMine && PhotonNetwork.IsConnected*/)
         {
             CharTPCamera.Instance.SetCharController(this);
-            CharMinimapCamera.Instance.SetCharController(this);
+            //CharMinimapCamera.Instance.SetCharController(this);
             Cursor.lockState = CursorLockMode.Locked;
         }
 

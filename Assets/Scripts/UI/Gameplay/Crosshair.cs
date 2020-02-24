@@ -48,7 +48,8 @@ public class Crosshair : MonoBehaviour
         /* Notify events */
         controller.pullStatus += onPullStatus;
         controller.throwStatus += onThrow;
-        CharMinimapCamera.Instance.eventShowMinimap += onMinimapToggle;
+        CharTPCamera.Instance.GetComponent<CharLookTargetController>().showMap += onMinimapToggle;
+        //CharMinimapCamera.Instance.eventShowMinimap += onMinimapToggle;
 
         if(quarterHolder == null)
             quarterHolder = transform.Find("Quarters");
