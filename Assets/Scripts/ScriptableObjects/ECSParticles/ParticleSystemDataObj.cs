@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ParticleSystemDataObj : ScriptableObject
 {
+    public enum EMIT_DIR_TYPE
+    {
+        DEFAULT = 0,
+        RADIAL,
+    }
+
     [Header("System Settings")]
 
     [Tooltip("Start emitting on entity creation?")]
@@ -15,6 +21,11 @@ public class ParticleSystemDataObj : ScriptableObject
     public int numJobBatch;
 
     [Header("Emission Settings")]
+    [Tooltip("How much to randomise emission pos")]
+    public Vector3 emitPosRandom;
+    [Tooltip("Shape of emission")]
+    public EMIT_DIR_TYPE emitDirType;
+
     [Tooltip("Number of particles to spawn per tick")]
     public int numPerUpdate;
     [Tooltip("How many seconds before next tick")]

@@ -144,6 +144,8 @@
                 [ReadOnly] [DeallocateOnJobCompletion] public NativeArray<Particle> particles;
                 [ReadOnly] public float3 pos;
                 [ReadOnly] public float3 dir;
+                [ReadOnly] public float3 posRandom;
+                [ReadOnly] public int emitDirType;
                 public EntityCommandBuffer.Concurrent ecb;
                 public Random rand;
                 public void Execute(int index)
@@ -156,8 +158,20 @@
 
                     data._startRot = data.startRot + rand.NextFloat3(-data.rotRandom, data.rotRandom);
                     data._startScale = data.startScale + rand.NextFloat(-data.scaleRandom, data.scaleRandom);
-                    data._startVel = data.startSpeed * dir + rand.NextFloat3(-data.velRandom, data.velRandom);
                     data._startGravity = data.startGravity + rand.NextFloat3(-data.gravityRandom, data.gravityRandom);
+
+                    float3 emitDir = dir;
+                    switch (emitDirType)
+                    {
+                        case 0:
+                        default:
+                            //emitDir = dir;
+                            break;
+                        case 1:
+                            emitDir = rand.NextFloat3(new float3(-1, -1, -1), new float3(1, 1, 1));
+                            break;
+                    }
+                    data._startVel = data.startSpeed * emitDir + rand.NextFloat3(-data.velRandom, data.velRandom);
 
                     data._endRot = data.endRot + rand.NextFloat3(-data.rotRandom, data.rotRandom);
                     data._endScale = data.endScale + rand.NextFloat(-data.scaleRandom, data.scaleRandom);
@@ -165,14 +179,16 @@
                     data._endGravity = data.endGravity + rand.NextFloat3(-data.gravityRandom, data.gravityRandom);
 
                     //set internal vals
+                    data.emitSource = pos + rand.NextFloat3(-posRandom, posRandom);
+                    data.emitDir = emitDir;
                     data.rot = data._startRot;
-                    r.Value = quaternion.Euler(data.rot);
-                    s.Value = data._startScale;
                     data.vel = data._startVel;
                     data.gravity = data._startGravity;
-
-                    t.Value = data.emitSource + rand.NextFloat3(-data.emitRandom, data.emitRandom) + pos;
                     data.life = data.lifeTime + rand.NextFloat(-data.lifeTimeRandom, data.lifeTimeRandom);
+                    
+                    t.Value = data.emitSource;
+                    r.Value = quaternion.Euler(data.rot);
+                    s.Value = data._startScale;
 
                     ecb.SetComponent(index, particles[index].e, t);
                     ecb.SetComponent(index, particles[index].e, r);
@@ -246,6 +262,8 @@
                     particles = particles,
                     pos = sysData.pos,
                     dir = sysData.dir,
+                    posRandom = sysData.emitPosRandom,
+                    emitDirType = sysData.emitDirType,
                     ecb = ecbs.CreateCommandBuffer().ToConcurrent(),
                     rand = new Random((uint)UnityEngine.Random.Range(1, 100000)),
                 };
@@ -293,7 +311,10 @@
                     if (data.gravityOverTime)
                         data.gravity = math.lerp(data._startGravity, data._endGravity, percentLife);
 
-                    data.vel += data.gravity * dt;
+                    if (data.gravTowardsSource)
+                        data.vel += math.length(data.gravity) * -data.emitDir * dt;
+                    else
+                        data.vel += data.gravity * dt;
                     t.Value += data.vel * dt;
                 }
             }
