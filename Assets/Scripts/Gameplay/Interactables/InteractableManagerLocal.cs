@@ -44,11 +44,11 @@ public class InteractableManagerLocal : MonoBehaviour
         {
             if (rayInfo.collider.isTrigger)
             {
-                if (lastCollidedInteractable == null || rayInfo.collider.gameObject == lastCollidedInteractable)
-                {
+                //if (lastCollidedInteractable == null || rayInfo.collider.gameObject == lastCollidedInteractable.gameObject)
+                //{
                     lastCollidedInteractable = rayInfo.collider.gameObject.GetComponentInParent<InteractableBase>();
                     lastCollidedTimer = 0.0f;
-                }
+                //}
             }
         }
         // If not looking at an interactable, disallow interaction if last seen interactable is not lenient
