@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5720360889423278228}
   - component: {fileID: 5720360889423278231}
   - component: {fileID: 4708678696028358990}
+  - component: {fileID: 5967938285904950349}
   - component: {fileID: 7538099396693343801}
   m_Layer: 0
   m_Name: 'NetworkGameManager '
@@ -87,6 +88,18 @@ MonoBehaviour:
   aimAssistOffsetMin: {x: -0.3, y: -0.35, z: -0.3}
   aimAssistOffsetMax: {x: 0.3, y: 0.35, z: -0.3}
   highlightMaterial: {fileID: 2100000, guid: 06c53990ebf61d54e85a9510511540a5, type: 2}
+--- !u!114 &5967938285904950349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720360889423278249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10206081f4c03c40822af5185a0075b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7538099396693343801
 MonoBehaviour:
   m_ObjectHideFlags: 0
