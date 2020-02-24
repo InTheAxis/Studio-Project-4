@@ -90,13 +90,13 @@ public class PoissonGenerator
     /// <param name="density"></param>
     /// <param name="radius"></param>
     /// <returns>return true if density was generated. false if less then the density was generated</returns>
-    public bool Generate(int density, float radius)
+    public bool Generate(int density, float radius, int maxAttempt = 4)
     {
         points.Clear();
         InjectIntoMain();
         int numGenerated = 0;
         int attempts = 0;
-        int MAX_ATTEMPTS = density * 2;
+        int MAX_ATTEMPTS = density * maxAttempt;
 
         while (numGenerated < density && attempts < MAX_ATTEMPTS)
         {

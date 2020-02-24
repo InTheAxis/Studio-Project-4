@@ -47,6 +47,12 @@ public class CharTPCamera : MonoBehaviour
     [Tooltip("How frequent to shake cam")]
     private float shakeFrequency = 0.5f;
 
+    [Header("Crosshair")]
+    [SerializeField]
+    [Tooltip("Crosshair Sprite")]
+    private Transform crosshair = null;
+
+
     private Transform target;
     private Transform nextTarget;
     private Camera cam;
@@ -189,6 +195,8 @@ public class CharTPCamera : MonoBehaviour
         transform.position = target.transform.position - (rotatedLookDir * curCamDist);
         //rotate cam
         transform.rotation = Quaternion.LookRotation(rotatedLookDir, Vector3.up);
+
+        //crosshair.position = cam.ScreenToWorldPoint(new Vector3(Screen.width / 4, Screen.height / 4, cam.nearClipPlane));
     }
 
     private void UpdateCameraClipPoints()

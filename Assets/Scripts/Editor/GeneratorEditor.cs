@@ -68,3 +68,25 @@ public class TowerGeneratorEditor : Editor
         GUILayout.EndHorizontal();
     }
 }
+
+[CustomEditor(typeof(CellGenerator))]
+public class CellGeneratorEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        Generator script = (Generator)target;
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Generate"))
+        {
+            script.Generate();
+        }
+        if (GUILayout.Button("Clear"))
+        {
+            script.Clear();
+        }
+        GUILayout.EndHorizontal();
+    }
+}

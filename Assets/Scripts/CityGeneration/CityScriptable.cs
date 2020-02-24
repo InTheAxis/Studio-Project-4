@@ -40,4 +40,33 @@ public class CityScriptable : ScriptableObject
         }
         return selected.mesh;
     }
+    /// <summary>
+    /// find building that fits the range most closely
+    /// </summary>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    public GameObject SelectMesh(float range)
+    {
+        // float val = Random.value;
+        MeshData selected = null;
+        float closestDiff = float.MaxValue;
+        // sort by chance
+        // meshList.Sort((p1, p2) => p1.chance.CompareTo(p2.chance));
+        foreach (MeshData meshData in meshList)
+        {
+            float currentRange = meshData.mesh.GetComponent<ProceduralBuilding>().GetRadius();
+            if (currentRange > range)
+                continue;
+            float currentDiff = range - currentRange;
+            if (currentDiff < closestDiff)
+                selected = meshData;
+        }
+        // select closest
+        if(selected == null)
+        {
+            Debug.Log("cannot select building with range");
+            return null;
+        }
+        return selected.mesh;
+    }
 }

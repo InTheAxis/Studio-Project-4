@@ -11,6 +11,7 @@ public class TowerGenerator : Generator
     {
         return poisson;
     }
+
     public override void Clear()
     {
         while (transform.childCount > 0)
@@ -24,7 +25,7 @@ public class TowerGenerator : Generator
         Clear();
         poisson.ClearInjected();
         poisson.Inject(new PoissonPoint(Vector3.zero, 0.1f));
-        poisson.GenerateDensity(4, 0.6f);
+        poisson.GenerateDensity(4, 0.55f);
         poisson.Scale(scale);
         CreateTowers();
     }
@@ -39,9 +40,11 @@ public class TowerGenerator : Generator
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(Vector3.zero, scale);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(Vector3.zero, 0.2f * scale);
+        if (!gizmosEnabled)
+            return;
+        // Gizmos.DrawWireSphere(Vector3.zero, scale);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(Vector3.zero, 0.2f * scale);
         Gizmos.color = Color.green;
         foreach (PoissonPoint poissonPoint in poisson.GetPoints())
         {

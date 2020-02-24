@@ -31,8 +31,8 @@ TagManager:
   - 
   - Throwable
   - UITurntable
-  - 
-  - 
+  - Minimap
+  - HeldThrowables
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Crosshair
+    uniqueID: 3716910609
     locked: 0
   - name: UI
     uniqueID: 2006396935

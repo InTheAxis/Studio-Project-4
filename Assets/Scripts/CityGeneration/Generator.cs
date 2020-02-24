@@ -6,6 +6,9 @@ public abstract class Generator : MonoBehaviour
 {
     protected float scale;
 
+    [SerializeField]
+    protected bool gizmosEnabled;
+
     public void SetScale(float f)
     {
         scale = f;
