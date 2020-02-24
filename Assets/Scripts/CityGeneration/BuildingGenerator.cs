@@ -90,7 +90,7 @@ public class BuildingGenerator : Generator
             return;
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1))
         {
-            Gizmos.DrawWireSphere(pos.pos, pos.radius);
+            Gizmos.DrawWireSphere(pos.pos, buffer * scale);
         }
         Gizmos.color = Color.green;
         foreach (Transform trans in transform)
