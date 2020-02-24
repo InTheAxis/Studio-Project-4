@@ -48,7 +48,6 @@ public class Minimap3D : MonoBehaviour
         trigger.showHologram += onShowHologram;
         trigger.hideHologram += onHideHologram;
 
-
     }
 
     public void Update()
@@ -90,16 +89,15 @@ public class Minimap3D : MonoBehaviour
         {
             Transform playerTransform = GameManager.playerObj.transform;
             float playerY = playerTransform.rotation.eulerAngles.y;
-            transform.position = playerTransform.position;
-            transform.rotation = playerTransform.rotation;
+
 
             Vector3 planeRot = plane.transform.localRotation.eulerAngles;
             planeRot.y = playerY;
             plane.transform.localRotation = Quaternion.Slerp(plane.transform.localRotation, Quaternion.Euler(planeRot), Time.deltaTime * 5.0f);
 
             Vector3 frameRot = compassDirFrame.localRotation.eulerAngles;
-            frameRot.y = playerY;
-            compassDirFrame.localRotation = Quaternion.Slerp(plane.transform.localRotation, Quaternion.Euler(frameRot), Time.deltaTime * 5.0f);
+            frameRot.z = -playerY;
+            compassDirFrame.localRotation = Quaternion.Slerp(compassDirFrame.transform.localRotation, Quaternion.Euler(frameRot), Time.deltaTime * 5.0f);
 
             //Vector3 dottedPos = compassDottedFrame.transform.localPosition;
             //dottedPos.y = -0.05f + 2.0f * Mathf.Sin(Time.deltaTime * 10.0f);
@@ -200,6 +198,7 @@ public class Minimap3D : MonoBehaviour
             holograms.Add(go, clone);
             clone.transform.SetParent(activeHolder);
             clone.transform.localRotation = Quaternion.identity;
+
         }
         /* Fetch hologram from inactive pool */
         else
