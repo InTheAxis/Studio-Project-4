@@ -9,8 +9,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
+      propertyPath: destroyed.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
       propertyPath: breakForce
-      value: 6
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: destroyed.Array.data[2]
+      value: 
+      objectReference: {fileID: 790828920242029795, guid: ac880b7895ab21d43b4a3fec8e1ab2f7,
+        type: 3}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: destroyed.Array.data[3]
+      value: 
+      objectReference: {fileID: 790828920242029795, guid: ac880b7895ab21d43b4a3fec8e1ab2f7,
+        type: 3}
+    - target: {fileID: 5073358625377605692, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073358625377605692, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5238688215020704870, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
@@ -84,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 4985674206888800058, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
       propertyPath: buildingRadius
-      value: 17.5
+      value: 20.36
       objectReference: {fileID: 0}
     - target: {fileID: 6217483007441088821, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}

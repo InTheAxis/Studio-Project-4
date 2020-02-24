@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64666023ba933e7458ba45b6d293aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   hunterBuffer: 0.286
   playerBuffer: 0.155
   towerGenerator: {fileID: 899756740256859345}
@@ -223,7 +223,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 500, y: 1, z: 500}
-  m_Center: {x: 250, y: 0, z: 250}
+  m_Center: {x: 250, y: -0.5, z: 250}
 --- !u!114 &6478886105883047785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 1730360239650699216}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 99.13, y: 99.13, z: 99.13}
+  m_LocalScale: {x: 158.3, y: 158.3, z: 158.3}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
   m_RootOrder: 2
@@ -498,7 +498,7 @@ MonoBehaviour:
     enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  scale: 99.13
+  scale: 130
   generateOnStart: 1
 --- !u!114 &5809545488305829278
 MonoBehaviour:
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b18d27c0e82ce4e8d18de10b718568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverInstantiate: 0
+  serverInstantiate: 1
 --- !u!1 &5890597339044720962
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,14 +557,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmosEnabled: 0
-  centralRoadWidth: 6.87
-  mainRoadWidth: 14.01
-  subRoadWidth: 10.13
+  centralRoadWidth: 4.07
+  mainRoadWidth: 9.8
+  subRoadWidth: 7.3
   minorRoadWidth: 5.02
   sprite: {fileID: 64814105939109950}
   scaleMultiplier: 1
   resolution: 100
-  centerBuffer: 0.419
+  centerBuffer: 0.302
   cleanUp: 1
   RoadRef: {fileID: 8483622626547749704, guid: f53b1005619653e4f8f72268fbbea74b, type: 3}
   density: 17
@@ -622,10 +622,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c862ec7e1c8d83d4d869eb0eeee8170e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   buffer:
-    min: 0.9
-    max: 1.87
+    min: 0.59
+    max: 1.15
   cellRadius:
     min: 22.47
     max: 24.6
@@ -634,7 +634,7 @@ MonoBehaviour:
   towerGenerator: {fileID: 899756740256859345}
   playerSpawnGenerator: {fileID: 5596241166495700578}
   playerBuffer: 0.045
-  towerBuffer: 25.85
+  towerBuffer: 21.27
 --- !u!1 &7494504864392050960
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,9 +728,9 @@ MonoBehaviour:
   cityScriptable: {fileID: 11400000, guid: 6c715ec834d63314194077cfc2a8ef49, type: 2}
   towerGenerator: {fileID: 899756740256859345}
   cellGenerator: {fileID: 4866337199736129184}
-  density: 37
-  buffer: 0.205
-  centerBuffer: 0.247
-  towerBuffer: 0.184
+  density: 553
+  buffer: 0.166
+  centerBuffer: 0.19
+  towerBuffer: 0.105
   playerSpawnGenerator: {fileID: 5596241166495700578}
   playerBuffer: 0.045
