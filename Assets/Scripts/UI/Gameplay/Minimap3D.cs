@@ -22,6 +22,9 @@ public class Minimap3D : MonoBehaviour
     [SerializeField]
     private Material hologramMat = null;
 
+    [SerializeField]
+    private string controlTowerTag = "Landmark";
+
     [Header("Storage")]
     [SerializeField]
     private Transform activeHolder = null;
@@ -30,11 +33,7 @@ public class Minimap3D : MonoBehaviour
 
     [Header("UI")]
     [SerializeField]
-    private Transform displayHolder = null;
-    [SerializeField]
     private Transform compassDirFrame = null;
-    [SerializeField]
-    private Transform compassDottedFrame = null;
     [SerializeField]
     private TextMeshPro tmAngle = null;
 
@@ -218,7 +217,7 @@ public class Minimap3D : MonoBehaviour
         relativePlaneScale.y *= scaleFactor;
         relativePlaneScale.z *= scaleFactor;
 
-        if(go.CompareTag("Landmark"))
+        if(go.CompareTag(controlTowerTag))
         {
             Debug.Log(relativePlaneScale);
             Debug.Log(go.GetComponent<Collider>().bounds.size.y);

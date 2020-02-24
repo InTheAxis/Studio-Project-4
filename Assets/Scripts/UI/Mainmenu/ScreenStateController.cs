@@ -118,9 +118,6 @@ public class ScreenStateController : MonoBehaviour
     private ScreenStates currentScreen = ScreenStates.CONNECTINGTOPHOTON;
 
     private Stack<ScreenStates> history = null;
-
-    //private List<GameObject> playerModels = null;
-    //private List<TextMeshPro> playerNames = null;
     private List<LobbyPlayer> players = null;
     private Dictionary<string, int> playerIDs = null;
 
