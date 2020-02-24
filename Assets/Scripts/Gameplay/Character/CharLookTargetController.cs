@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +13,18 @@ public class CharLookTargetController : MonoBehaviour
         public bool front;
     };
     private InputData inp;
+    private Minimap3D minimap = null;
+
+    public event Action<bool> showMap;
+
     private void Update()
     {
+        if (minimap == null)
+        {
+            minimap = GameManager.playerObj.GetComponentInChildren<Minimap3D>();
+            minimap.gameObject.SetActive(false);
+        }
+
         inp.map = Input.GetKeyDown(KeyCode.M);
         inp.front = Input.GetKeyDown(KeyCode.O);
 
@@ -22,11 +33,16 @@ public class CharLookTargetController : MonoBehaviour
             if (tpCam.IsLookingAtIdx() == 0) //0 is always player
             {
                 tpCam.LookAt("Map", 2);
-                CharMinimapCamera.Instance.getMinimap().SetActive(true);
+
+                minimap.gameObject.SetActive(true);
+                showMap?.Invoke(true);
             }
             else
             {
-                CharMinimapCamera.Instance.getMinimap().SetActive(false);
+
+                minimap.gameObject.SetActive(false);
+
+                showMap?.Invoke(false);
                 tpCam.LookAtPlayer();
             }
 
