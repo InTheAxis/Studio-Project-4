@@ -111,6 +111,7 @@ public class InteractableManagerLocal : MonoBehaviour
     }
     private void releaseConstantUseInteractable(InteractableBase interactable)
     {
+        NetworkOwnership.instance.releaseOwnership(PhotonView.Get(interactable), null, null);
         usingInteractable = null;
         hasStoppedUsingInteractable = false;
     }

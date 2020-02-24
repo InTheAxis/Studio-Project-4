@@ -128,7 +128,7 @@ public class InteractableManagerMaster : MonoBehaviourPun
             (sm) => { return sm.releaseConstantUseInteractable(interactable, messageInfo.Sender); },
             () =>
             {
-                NetworkOwnership.instance.releaseOwnership(view, null, null);
+                //NetworkOwnership.instance.releaseOwnership(view, null, null);
                 photonView.RPC("onRequestSuccess", messageInfo.Sender, view.ViewID);
             },
             () => { photonView.RPC("onRequestFail", messageInfo.Sender, view.ViewID); });
@@ -155,7 +155,7 @@ public class InteractableManagerMaster : MonoBehaviourPun
         queryMasterInteractable(interactable,
             (sm) => { return sm.dropInteractable(interactable, messageInfo.Sender); },
             () => {
-                NetworkOwnership.instance.releaseOwnership(view, null, null);
+                //NetworkOwnership.instance.releaseOwnership(view, null, null);
                 photonView.RPC("onRequestSuccess", messageInfo.Sender, view.ViewID);
             },
             () => { photonView.RPC("onRequestFail", messageInfo.Sender, view.ViewID); });

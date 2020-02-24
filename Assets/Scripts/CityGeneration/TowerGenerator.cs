@@ -25,7 +25,7 @@ public class TowerGenerator : Generator
         Clear();
         poisson.ClearInjected();
         poisson.Inject(new PoissonPoint(Vector3.zero, 0.1f));
-        poisson.GenerateDensity(4, 0.6f);
+        poisson.GenerateDensity(4, 0.55f);
         poisson.Scale(scale);
         CreateTowers();
     }
