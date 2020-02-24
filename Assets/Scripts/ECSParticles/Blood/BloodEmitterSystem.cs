@@ -22,23 +22,42 @@
 
             [ReadOnly] private ComponentDataFromEntity<ParticleEmitTag> q;
             private NativeArray<bool> enabledResult;
-            private NativeArray<ParticleSystemData> dataResult;         
+            private NativeArray<ParticleSystemData> dataResult;
+            
+            private EndSimulationEntityCommandBufferSystem ecbs;            
+            private bool emissionDone;
+            public void EmissionDone() { emissionDone = true; }
 
             protected override void OnCreate()
             {
+                emissionDone = false;
                 enabled = false;
+                ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             }
 
             private struct SearchJob : IJobForEachWithEntity<MY_TAG, ParticleSystemData>
             {
                 public NativeArray<bool> enabled;
                 public NativeArray<ParticleSystemData> data;
+                public EntityCommandBuffer.Concurrent ecb;
+                [ReadOnly] public bool emissionDone;
 
                 [ReadOnly] public ComponentDataFromEntity<ParticleEmitTag> query;
                 public void Execute(Entity entity, int index, [ReadOnly] ref MY_TAG tag, [ReadOnly] ref ParticleSystemData _data)
                 {
                     if (query.HasComponent(entity))
-                        enabled[0] = true;
+                    {
+                        if (emissionDone)
+                        {
+                            enabled[0] = false;
+                            ecb.RemoveComponent(index, entity, typeof(ParticleEmitTag));
+                        }
+                        else
+                            enabled[0] = true;
+                    }
+                    else
+                        enabled[0] = false;
+
                     data[0] = _data;
                 }
             }
@@ -53,15 +72,19 @@
                     enabled = enabledResult,
                     data = dataResult,
                     query = q,
+                    ecb = ecbs.CreateCommandBuffer().ToConcurrent(),
+                    emissionDone = emissionDone,
                 };
                 var handle = job.Schedule(this, inputDeps);
                 handle.Complete();
-                
+               
                 enabled = job.enabled[0];
                 data = job.data[0];
-
                 enabledResult.Dispose();
                 dataResult.Dispose();
+
+                if (!enabled)
+                    emissionDone = false;
 
                 return handle;
             }
@@ -177,7 +200,8 @@
 
                 if (!sysData.loop && elapsed - sysData.delay >= sysData.duration)
                 {
-                    enabled = false;
+                    //tell query to stop
+                    queryJobSystem.EmissionDone();
                     return new JobHandle();
                 }
 

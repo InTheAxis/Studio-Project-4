@@ -14,9 +14,15 @@ public class InteractableManagerLocal : MonoBehaviour
     [SerializeField]
     private float interactRaycastLostTimeout = 0.4f;
 
-    private GameObject lastCollidedInteractable = null;
+    [SerializeField]
+    private Text interactableTooltip;
+
+    private InteractableBase lastCollidedInteractable = null;
     private float lastCollidedTimer = 0.0f;
     private InteractableBase carryingInteractable = null;
+
+    private bool hasStoppedUsingInteractable = false;
+    private InteractableBase usingInteractable = null;
 
     private bool interactDown = false;
 
@@ -39,25 +45,43 @@ public class InteractableManagerLocal : MonoBehaviour
             {
                 if (lastCollidedInteractable == null || rayInfo.collider.gameObject == lastCollidedInteractable)
                 {
-                    lastCollidedInteractable = rayInfo.collider.gameObject;
+                    lastCollidedInteractable = rayInfo.collider.gameObject.GetComponentInParent<InteractableBase>();
                     lastCollidedTimer = 0.0f;
                 }
             }
         }
+        // If not looking at an interactable, disallow interaction if last seen interactable is not lenient
+        else if (lastCollidedInteractable != null && !lastCollidedInteractable.LenientInteraction)
+            lastCollidedInteractable = null;
 
+        // Time-out with last seen interactable, if not looking at an interactable
         if (lastCollidedTimer > interactRaycastLostTimeout)
             lastCollidedInteractable = null;
 
 
         // Pickup/Use looked at interactable
 
-        if (carryingInteractable == null && lastCollidedInteractable != null && hasClickedInteract) // Pickup the item currently looked at
+        if (usingInteractable != null) // Currently using an interactable
         {
-            InteractableBase lastCollided = lastCollidedInteractable.GetComponentInParent<InteractableBase>();
-            if (lastCollided.CanCarry) // The interactable can be carried
-                InteractableManagerMaster.instance.carryInteractable(lastCollided, carryInteractable, null);
+            if (!hasStoppedUsingInteractable) // Don't send release request more than once
+            {
+                if (interactDown) // Player is still interacting
+                    usingInteractable.interact();
+                else
+                {
+                    hasStoppedUsingInteractable = true;
+                    InteractableManagerMaster.instance.releaseConstantUseInteractable(usingInteractable, releaseConstantUseInteractable, null);
+                }
+            }
+        }
+        else if (carryingInteractable == null && lastCollidedInteractable != null && hasClickedInteract) // Pickup the item currently looked at
+        {
+            if (lastCollidedInteractable.AllowConstantInteraction) // The interactable must be constantly interacted with
+                InteractableManagerMaster.instance.constantUseInteractable(lastCollidedInteractable, constantUseInteractable, null);
+            else if (lastCollidedInteractable.CanCarry) // The interactable can be carried
+                InteractableManagerMaster.instance.carryInteractable(lastCollidedInteractable, carryInteractable, null);
             else // The interactable must be used immediately
-                InteractableManagerMaster.instance.useInteractable(lastCollided, useInteractable, null);
+                InteractableManagerMaster.instance.useInteractable(lastCollidedInteractable, useInteractable, null);
         }
         else if (carryingInteractable != null) // Is currently carrying the item
         {
@@ -66,12 +90,29 @@ public class InteractableManagerLocal : MonoBehaviour
             else if (hasClickedInteract) // Drop the item
                 InteractableManagerMaster.instance.dropInteractable(carryingInteractable, dropInteractable, null);
         }
+
+        // Show tooltip
+        if (carryingInteractable != null)
+            interactableTooltip.text = carryingInteractable.getCarriedTooltip();
+        else if (lastCollidedInteractable != null)
+            interactableTooltip.text = lastCollidedInteractable.getUncarriedTooltip();
+        else
+            interactableTooltip.text = "";
     }
 
     private void useInteractable(InteractableBase interactable)
     {
         interactable.interact();
         carryingInteractable = null;
+    }
+    private void constantUseInteractable(InteractableBase interactable)
+    {
+        usingInteractable = interactable;
+    }
+    private void releaseConstantUseInteractable(InteractableBase interactable)
+    {
+        usingInteractable = null;
+        hasStoppedUsingInteractable = false;
     }
     private void carryInteractable(InteractableBase interactable)
     {

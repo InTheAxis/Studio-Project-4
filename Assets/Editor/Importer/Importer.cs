@@ -417,32 +417,19 @@ public class Importer : EditorWindow
             {
 
                 /* Instantiate shattered version */
-                string shatteredPrefabPath = prefabPath + "/" + rawName + ".prefab";
+                string shatteredPrefabPath = prefabPath + "/" + rawName + "/Resources/";
+
+                if (!Directory.Exists(shatteredPrefabPath))
+                    Directory.CreateDirectory(shatteredPrefabPath);
 
                 GameObject shattered = (GameObject) PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
                 PrefabUtility.UnpackPrefabInstance(shattered, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
-                /* Change relevant properties */
-                Transform parent = shattered.transform;
-                parent.position = Vector3.zero;
-
-                for (int i = 0; i < parent.childCount; ++i)
-                {
-                    GameObject childGO = parent.GetChild(i).gameObject;
-                    childGO.AddComponent<Rigidbody>();
-                    MeshCollider collider = childGO.AddComponent<MeshCollider>();
-                    collider.convex = true;
-                }
-
-
-                /* Save shattered prefab */
-                PrefabUtility.SaveAsPrefabAssetAndConnect(shattered, shatteredPrefabPath, InteractionMode.AutomatedAction);
-
-                /* Instantiate non-shattered version */
                 string nonShatteredName = rawName.Substring(0, rawName.LastIndexOf("_"));
                 string nonnShatteredAssetPath = "Assets/Models/" + categoryPath + "/" + nonShatteredName + ".fbx";
                 string nonShatteredPrefabPath = prefabPath + "/" + nonShatteredName + ".prefab";
 
+                /* Instantiate non-shattered version */
                 GameObject nonShattered = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(nonnShatteredAssetPath));
                 PrefabUtility.UnpackPrefabInstance(nonShattered, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
@@ -452,8 +439,23 @@ public class Importer : EditorWindow
                 meshCollider.convex = true;
 
                 /* Link to the shattered prefab, not gameobject */
-                //Destructible destructible = nonShattered.AddComponent<Destructible>();
-                //destructible.destroyed = (GameObject)AssetDatabase.LoadMainAssetAtPath(shatteredPrefabPath);
+                Destructible destructible = nonShattered.AddComponent<Destructible>();
+                destructible.destroyed = new List<GameObject>();
+
+                Transform parent = shattered.transform;
+                parent.position = Vector3.zero;
+
+                for (int i = 0; i < parent.childCount; ++i)
+                {
+                    GameObject childGO = parent.GetChild(i).gameObject;
+                    childGO.AddComponent<Rigidbody>();
+                    MeshCollider collider = childGO.AddComponent<MeshCollider>();
+                    collider.convex = true;
+                    string currentShardPath = shatteredPrefabPath + childGO.name + ".prefab";
+                    Debug.Log(currentShardPath);
+                    PrefabUtility.SaveAsPrefabAssetAndConnect(childGO, currentShardPath, InteractionMode.AutomatedAction);
+                    destructible.destroyed.Add((GameObject)AssetDatabase.LoadMainAssetAtPath(currentShardPath));
+                }
 
                 /* Save non-shattered prefab */
                 PrefabUtility.SaveAsPrefabAssetAndConnect(nonShattered, nonShatteredPrefabPath, InteractionMode.AutomatedAction);
@@ -469,6 +471,7 @@ public class Importer : EditorWindow
         }
 
 
+        if(!destinationPath.EndsWith("_Shattered"))
         {
             /* Instantiate clone in scene */
             GameObject clone = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));

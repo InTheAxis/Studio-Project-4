@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: BloodSystemData
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemDataObj
-  enabledOnAwake: 1
+  enabledOnAwake: 0
   maxNumParticles: 1000
-  numJobBatch: 1
-  numPerUpdate: 30
+  numJobBatch: 5
+  numPerUpdate: 20
   rate: 0.01
-  loop: 1
-  duration: 5
+  loop: 0
+  duration: 0.15
   delay: 0
