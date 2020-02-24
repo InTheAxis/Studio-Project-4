@@ -70,11 +70,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab70939786f2ba4cab2082bca6f0574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectMaskName: Throwable
+  detectMask:
+    serializedVersion: 2
+    m_Bits: 262144
   pickUpMaxDistance: 6
   detectionRadius: 4.5
   pullSpeed: 2.5
-  heldMaskName: HeldThrowables
+  heldMask:
+    serializedVersion: 2
+    m_Bits: 524288
   holdPosTolerance: 1
   holdRotateSpeed: 5
   holdPosOffsetX: {x: -0.25, y: 0.9}
@@ -83,7 +87,7 @@ MonoBehaviour:
   enableAimAssist: 1
   aimMask:
     serializedVersion: 2
-    m_Bits: 697617
+    m_Bits: 435473
   aimAssistOffsetMin: {x: -0.3, y: -0.35, z: -0.3}
   aimAssistOffsetMax: {x: 0.3, y: 0.35, z: -0.3}
   highlightMaterial: {fileID: 2100000, guid: 06c53990ebf61d54e85a9510511540a5, type: 2}

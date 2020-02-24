@@ -6,8 +6,7 @@ using System;
 public class MinimapTrigger : MonoBehaviour
 {
     [SerializeField]
-    private string maskName = "Environment";
-    private int buildingMaskLayer = 0;
+    private LayerMask buildingMask = 0;
 
     /* Event Callbacks for Minimap Trigger */
     public event Action<GameObject> showHologram;
@@ -15,7 +14,7 @@ public class MinimapTrigger : MonoBehaviour
 
     private void Awake()
     {
-        buildingMaskLayer = LayerMask.NameToLayer(maskName);
+        //buildingMaskLayer = LayerMask.NameToLayer(maskName);
     }
 
     public void setBounds(float size)
@@ -26,13 +25,13 @@ public class MinimapTrigger : MonoBehaviour
     /* TODO: Ignore all ground */
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == buildingMaskLayer && collider.gameObject.name != "Ground")
+        if (LayerMaskExt.CheckIfIgnored(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
             showHologram?.Invoke(collider.gameObject);
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.layer == buildingMaskLayer && collider.gameObject.name != "Ground")
+        if (LayerMaskExt.CheckIfIgnored(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
             hideHologram?.Invoke(collider.gameObject);
     }
 }

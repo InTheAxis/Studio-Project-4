@@ -13,7 +13,7 @@ public class DestructibleController : MonoBehaviourPun
     [Header("Pulling")]
     [SerializeField]
     [Tooltip("The layer mask used for detection of objects that can be picked up")]
-    private string detectMaskName = "Throwable";
+    private LayerMask detectMask = 0;
     [SerializeField]
     [Tooltip("The furthest distance the player can pull objects from")]
     private float pickUpMaxDistance = 6.0f;
@@ -27,7 +27,7 @@ public class DestructibleController : MonoBehaviourPun
     [Header("Holding")]
     [SerializeField]
     [Tooltip("The layer mask applied to throwables that are currently being held")]
-    private string heldMaskName = "HeldThrowables";
+    private LayerMask heldMask = 0;
     [SerializeField]
     [Tooltip("The maximum distance a pulled object can be away from the player to be considered being held")]
     private float holdPosTolerance = 1.0f;
@@ -77,11 +77,13 @@ public class DestructibleController : MonoBehaviourPun
     private Transform cameraTransform = null;
     private Transform holdDestructibles = null;
 
-    private int heldMaskLayer = 0;
-    private int detectMaskLayer = 0;
+    private int heldMaskLayer = -1;
+    private int detectMaskLayer = -1;
     private float holdPosToleranceSq = 0.0f;
 
     private const string holdDestructiblesTag = "HoldDestructibles";
+    private const string heldMaskName = "HeldThrowables";
+    private const string detectMaskName = "Throwable";
 
     private bool isPulling = false;
     private bool canThrow = false;
@@ -98,6 +100,7 @@ public class DestructibleController : MonoBehaviourPun
         detectMaskLayer = LayerMask.NameToLayer(detectMaskName);
         if (detectMaskLayer == -1)
             Debug.LogError("The layer " + detectMaskName + " is not set up in this project!");
+
 
         cameraTransform = Camera.main.transform;
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
@@ -142,7 +145,7 @@ public class DestructibleController : MonoBehaviourPun
 
         if (!isPulling && !canThrow)
         {
-            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMaskLayer);
+            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMask);
 
             /* Resets all previously highlighted materials if not pulling an object /preparing to throw */
             foreach (KeyValuePair<GameObject, List<Material>> pair in prevHighlighted)
@@ -157,7 +160,7 @@ public class DestructibleController : MonoBehaviourPun
             if (hasTarget)
             {
                 Collider[] collisions;
-                collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMaskLayer);
+                collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMask);
                 throwables = new List<Collider>(collisions);
 
                 /* Gets all surrounding throwables */
