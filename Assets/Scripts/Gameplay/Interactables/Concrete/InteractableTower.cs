@@ -16,13 +16,6 @@ public class InteractableTower : InteractableBase
     {
         wasInteracting = true;
         Debug.Log("Interact");
-
-        // Done interacting
-        if (interactTime >= timeToFinishInteraction)
-        {
-            Debug.Log("Tower destroyed!");
-            destroyThis(); // Can only be called inside interact
-        }
     }
 
     private void LateUpdate()
@@ -33,6 +26,13 @@ public class InteractableTower : InteractableBase
             Debug.Log("Reset Interact");
             wasInteracting = false;
             interactTime += Time.deltaTime;
+
+            // Done interacting
+            if (interactTime >= timeToFinishInteraction)
+            {
+                Debug.Log("Tower destroyed!");
+                destroyThis(); // Can only be called inside interact
+            }
         }
         else // Reset timer
             interactTime = 0.0f;
