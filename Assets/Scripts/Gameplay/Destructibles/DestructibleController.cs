@@ -187,7 +187,14 @@ public class DestructibleController : MonoBehaviourPun
                         GameObject go = throwables[i].gameObject;
                         MeshRenderer meshRenderer = go.GetComponent<MeshRenderer>();
 
-                        if (prevHighlighted.ContainsKey(go)) continue;
+                        if (prevHighlighted.ContainsKey(go))
+                            continue;
+                        
+                        if(PhotonView.Get(go).Owner != null)
+                        {
+                            if(PhotonView.Get(go).Owner?.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                                continue;
+                        }
 
                         /* Store current materials for reset later */
                         prevHighlighted.Add(go, meshRenderer.materials.OfType<Material>().ToList());
@@ -226,7 +233,7 @@ public class DestructibleController : MonoBehaviourPun
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
                         // audio
-                        playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
+                        //playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
                     }
                 }
                 else
@@ -301,6 +308,7 @@ public class DestructibleController : MonoBehaviourPun
 
                         // Tell master client to release ownership back to scene
                         PhotonView colliderView = PhotonView.Get(collider);
+                        collider.gameObject.layer = detectMaskLayer;
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
 
@@ -327,7 +335,7 @@ public class DestructibleController : MonoBehaviourPun
                 for (int i = 0; i < throwables.Count; ++i)
                 {
                     Collider collider = throwables[i];
-                    if (collider == null) continue;
+                    if (collider == null || i >= holdPositions.Count) continue;
 
                     Transform t = collider.transform;
                     Rigidbody rb = collider.attachedRigidbody;

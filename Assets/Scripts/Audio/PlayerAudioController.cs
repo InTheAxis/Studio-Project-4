@@ -9,6 +9,7 @@ public class PlayerAudioController : AudioController
 
     public void Step()
     {
+        return;
         // check terrain or misc
         RaycastHit hit;
         if (!Physics.Raycast(transform.position, -Vector3.up, out hit, 2, layerMask))
