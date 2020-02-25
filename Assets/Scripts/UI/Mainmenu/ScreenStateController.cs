@@ -496,7 +496,7 @@ public class ScreenStateController : MonoBehaviour
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
-                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Destructibles");
+                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
                 //NetworkClient.instance.goInGame();
             }
             else
