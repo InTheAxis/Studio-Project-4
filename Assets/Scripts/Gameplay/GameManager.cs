@@ -28,7 +28,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         setCamera(playerObj);
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;        
     }
 
     public static void setCamera(GameObject playerObj)
