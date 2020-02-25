@@ -4739,13 +4739,14 @@ MonoBehaviour:
   mapRadius: 100
   simpleCube: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
     type: 3}
+  holographicCentralTower: {fileID: 1140501743893796294, guid: 825fb57e98844724f85247f5a91329d3,
+    type: 3}
   scrollSensitivity: 0.1
   hologramMat: {fileID: 2100000, guid: 478ef20f104bb7e41811e56db262810b, type: 2}
+  controlTowerTag: Landmark
   activeHolder: {fileID: 7166891302723178332}
   inactiveHolder: {fileID: 2399878575869177083}
-  displayHolder: {fileID: 2438526275402287455}
   compassDirFrame: {fileID: 5339877117634274711}
-  compassDottedFrame: {fileID: 1323212279454836207}
   tmAngle: {fileID: 8931408046722163897}
 --- !u!1 &5402441871280262555
 GameObject:
