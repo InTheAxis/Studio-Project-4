@@ -19,11 +19,11 @@ public class CharLookTargetController : MonoBehaviour
 
     private void Update()
     {
-        //if (minimap == null)
-        //{
-        //    minimap = GameManager.playerObj.GetComponentInChildren<Minimap3D>();
-        //    minimap.gameObject.SetActive(false);
-        //}
+        if (minimap == null)
+        {
+            minimap = GameManager.playerObj.GetComponentInChildren<Minimap3D>();
+            minimap.gameObject.SetActive(false);
+        }
 
         inp.map = Input.GetKeyDown(KeyCode.M);
         inp.front = Input.GetKeyDown(KeyCode.O);
