@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2465480697074514709}
   - component: {fileID: 1489383866299834162}
   - component: {fileID: 7653059638726018710}
+  - component: {fileID: -1985920494820235055}
   m_Layer: 18
   m_Name: shard1
   m_TagString: Untagged
@@ -136,6 +137,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2465480697074514709}
   - {fileID: 1489383866299834162}
+  - {fileID: -1985920494820235055}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -187,3 +189,16 @@ MonoBehaviour:
   timeBeforeDespawn: 20
   smallShardScaleThreshold: 1
   shardSettleVelocityThreshold: 0.1
+--- !u!114 &-1985920494820235055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765446553972957676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609993bc6d7866543b7eb6164bbb67f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 1

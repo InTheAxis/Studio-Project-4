@@ -104,7 +104,7 @@ public class DestructibleController : MonoBehaviourPun
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
         if (heldMaskLayer == -1)
@@ -125,7 +125,7 @@ public class DestructibleController : MonoBehaviourPun
     }
     private void OnDestroy()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
@@ -187,7 +187,14 @@ public class DestructibleController : MonoBehaviourPun
                         GameObject go = throwables[i].gameObject;
                         MeshRenderer meshRenderer = go.GetComponent<MeshRenderer>();
 
-                        if (prevHighlighted.ContainsKey(go)) continue;
+                        if (prevHighlighted.ContainsKey(go))
+                            continue;
+                        
+                        if(PhotonView.Get(go).Owner != null)
+                        {
+                            if(PhotonView.Get(go).Owner?.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                                continue;
+                        }
 
                         /* Store current materials for reset later */
                         prevHighlighted.Add(go, meshRenderer.materials.OfType<Material>().ToList());
@@ -226,7 +233,7 @@ public class DestructibleController : MonoBehaviourPun
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
                         // audio
-                        playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
+                        //playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
                     }
                 }
                 else
@@ -301,8 +308,13 @@ public class DestructibleController : MonoBehaviourPun
 
                         // Tell master client to release ownership back to scene
                         PhotonView colliderView = PhotonView.Get(collider);
+                        collider.gameObject.layer = detectMaskLayer;
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
+
+                        //enable DamageData if have
+                        DamageData damageData = collider.gameObject.GetComponent<DamageData>();
+                        if (damageData) damageData.SetIsDamaging();
                     }
 
                     Debug.Log("Throw!");
@@ -323,7 +335,7 @@ public class DestructibleController : MonoBehaviourPun
                 for (int i = 0; i < throwables.Count; ++i)
                 {
                     Collider collider = throwables[i];
-                    if (collider == null) continue;
+                    if (collider == null || i >= holdPositions.Count) continue;
 
                     Transform t = collider.transform;
                     Rigidbody rb = collider.attachedRigidbody;
@@ -380,7 +392,7 @@ public class DestructibleController : MonoBehaviourPun
     [PunRPC]
     private void destructibleReleaseOwner(int viewID, Vector3 force, PhotonMessageInfo messageInfo)
     {
-        Debug.Log("Received release request");
+        //Debug.Log("Received release request");
         PhotonView view = PhotonView.Find(viewID);
         if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
@@ -399,7 +411,7 @@ public class DestructibleController : MonoBehaviourPun
     private void destructibleEnsureOwnerIsReleased(int viewID, PhotonMessageInfo messageInfo)
     {
         PhotonView view = PhotonView.Find(viewID);
-        Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
+        //Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
         if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);

@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5584791643462493646}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HoldDestructibles
   m_TagString: HoldDestructibles
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2438526275402287455}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5339877117634274711}
   - component: {fileID: 3713420892967211419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Compass Frame (Direction)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9107986963222061843}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1149,7 +1149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323212279454836207}
   - component: {fileID: 7161577748538510815}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Compass Frame (Dotted)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,7 +1958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7166891302723178332}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2480,7 +2480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725928543837572732}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2881,7 +2881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4106207589982847778}
   - component: {fileID: 5062421292680289779}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Compass Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3149,7 +3149,7 @@ GameObject:
   - component: {fileID: 4336459358691315032}
   - component: {fileID: 4336459358691315035}
   - component: {fileID: 4336459358691315034}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: East
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3354,7 +3354,7 @@ GameObject:
   - component: {fileID: 4336459358707329439}
   - component: {fileID: 4336459358707329438}
   - component: {fileID: 4336459358707329425}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: North
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3559,7 +3559,7 @@ GameObject:
   - component: {fileID: 4336459358889702516}
   - component: {fileID: 4336459358889702519}
   - component: {fileID: 4336459358889702518}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: South
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3764,7 +3764,7 @@ GameObject:
   - component: {fileID: 4336459359252755195}
   - component: {fileID: 4336459359252755194}
   - component: {fileID: 4336459359252755197}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: West
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4140,7 +4140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981898664547048032}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BaseChar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4205,7 +4205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9014865867432764133}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Me
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4328,7 +4328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6193801680840448299}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: LookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4699,7 +4699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 623342114307098276}
   - component: {fileID: 2518563266708644907}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8136794709007606087}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Compass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5069,7 +5069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2399878575869177083}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Inactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5754,7 +5754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6709349632813746740}
   - component: {fileID: 2565709117848426382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5798,7 +5798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6709349633310481883}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5820,7 +5820,6 @@ Transform:
   - {fileID: 6709349632813746740}
   - {fileID: 6709349634691835509}
   - {fileID: 6709349634394390322}
-  - {fileID: 5973411866348259426}
   m_Father: {fileID: 4981898664547048032}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5833,7 +5832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6709349634282411611}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5866,7 +5865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6709349634301972139}
   - component: {fileID: 2565709116632961811}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5912,7 +5911,7 @@ GameObject:
   - component: {fileID: 6709349634394390322}
   - component: {fileID: 6709349634394390320}
   - component: {fileID: 6709349634394390323}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5960,7 +5959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignore:
     serializedVersion: 2
-    m_Bits: 2870
+    m_Bits: 3894
 --- !u!1 &6709349634691835508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5972,7 +5971,7 @@ GameObject:
   - component: {fileID: 6709349634691835509}
   - component: {fileID: 6709349634691835507}
   - component: {fileID: 6709349634691835506}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CrouchCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6021,7 +6020,7 @@ MonoBehaviour:
   charTop: {fileID: 2565709116632961811}
   ignore:
     serializedVersion: 2
-    m_Bits: 690999
+    m_Bits: 692023
 --- !u!1 &6794851931397448997
 GameObject:
   m_ObjectHideFlags: 0
@@ -6239,7 +6238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1940343873033900241}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FrontSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6711,7 +6710,7 @@ GameObject:
   - component: {fileID: 6506266536948300695}
   - component: {fileID: 8552241693379437787}
   - component: {fileID: 7526110890709870311}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6867,7 +6866,7 @@ GameObject:
   - component: {fileID: 237988978744252518}
   - component: {fileID: 4417093738802514225}
   - component: {fileID: 2828957255570506820}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GauntletPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7503,69 +7502,6 @@ Transform:
   m_Father: {fileID: 7990406271071310620}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8414210098417737381
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5973411866348259426}
-  - component: {fileID: 264767431897439088}
-  - component: {fileID: 4205423508039414090}
-  m_Layer: 8
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5973411866348259426
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8414210098417737381}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
-  m_Children: []
-  m_Father: {fileID: 6709349633310481883}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &264767431897439088
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8414210098417737381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4205423508039414090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8414210098417737381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7aff20cc4227d849ac3391dab714c62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignore:
-    serializedVersion: 2
-    m_Bits: 43831
-  hitTime: 0.1
-  triggered: 0
 --- !u!1 &8441296438741959858
 GameObject:
   m_ObjectHideFlags: 0
@@ -7733,7 +7669,7 @@ GameObject:
   - component: {fileID: 4147867681691047827}
   - component: {fileID: 3755141441746937045}
   - component: {fileID: 8345583909730590407}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8159,7 +8095,7 @@ GameObject:
   - component: {fileID: 8931408046722163899}
   - component: {fileID: 8931408046722163898}
   - component: {fileID: 8931408046722163897}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Angle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

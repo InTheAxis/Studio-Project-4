@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8330348490936675048}
   - component: {fileID: 3046983364457632337}
   - component: {fileID: 132201296837773144}
+  - component: {fileID: -6801974739879537807}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyed: {fileID: 0}
+  destroyed: []
   hitParticle: {fileID: 0}
   dustParticles: {fileID: 0}
   hitParticleSpawnChance: 0.65
@@ -132,3 +133,17 @@ MonoBehaviour:
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 5, y: 5, z: 5}
+--- !u!114 &-6801974739879537807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576424394635024083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609993bc6d7866543b7eb6164bbb67f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damaging: 0
+  dmg: 1
