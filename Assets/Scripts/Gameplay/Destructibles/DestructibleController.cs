@@ -104,7 +104,7 @@ public class DestructibleController : MonoBehaviourPun
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
         if (heldMaskLayer == -1)
@@ -125,7 +125,7 @@ public class DestructibleController : MonoBehaviourPun
     }
     private void OnDestroy()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
@@ -303,6 +303,10 @@ public class DestructibleController : MonoBehaviourPun
                         PhotonView colliderView = PhotonView.Get(collider);
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
+
+                        //enable DamageData if have
+                        DamageData damageData = collider.gameObject.GetComponent<DamageData>();
+                        if (damageData) damageData.SetIsDamaging();
                     }
 
                     Debug.Log("Throw!");

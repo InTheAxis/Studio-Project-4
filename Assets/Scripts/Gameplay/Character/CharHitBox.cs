@@ -3,24 +3,27 @@
 public class CharHitBox : MonoBehaviour
 {
     public System.Action<int> OnHit;
+    public bool hit { private set; get; }
 
-    public bool hit { get { return triggered; } }
-
-    [HideInInspector]
-    public bool triggered; //in case you want override
-
-    private void OnTriggerEnter(Collider other)
+    //private void Start()
+    //{
+    //    Collider[] otherCollsOnThisPlayer = transform.root.GetComponentsInChildren<Collider>();
+    //    foreach (Collider c in otherCollsOnThisPlayer)
+    //        Physics.IgnoreCollision(c, GetComponent<Collider>(), true);
+    //}
+    private void OnCollisionEnter(Collision collision)
     {
-        if (!triggered)
+        if (!hit)
         {
-            DamageData ddata = other.GetComponent<DamageData>();
-            if (ddata)
+            DamageData ddata = collision.gameObject.GetComponent<DamageData>();
+            if (ddata && ddata.damaging)
                 OnHit?.Invoke(ddata.dmg);
-            triggered = true;
+            hit = true;
         }
     }
-    private void OnTriggerExit(Collider other)
+
+    private void OnCollisionExit(Collision collision)
     {
-        triggered = false;   
+        hit = false;           
     }
 }
