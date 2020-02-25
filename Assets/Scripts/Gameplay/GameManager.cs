@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             isHuman = !PhotonNetwork.IsMasterClient;
 
         playerObj = PhotonNetwork.Instantiate(isHuman ? humanPrefab.name : monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        playerObj.GetComponent<CharModelSelect>().SelectModel(2);
     }
 
     private void Start()

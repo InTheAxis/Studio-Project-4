@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 9117360599836359451}
   - component: {fileID: 5071471449440821494}
   - component: {fileID: 4173598710368709281}
+  - component: {fileID: 7213396364793080915}
   - component: {fileID: 6066984036327698655}
   - component: {fileID: 4943199071075631875}
   - component: {fileID: 3023660623748070}
@@ -161,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 9117360599836359461}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0aaa018ab005a7945891eebd8e848ae7, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4e6d21f7db9c98e41a6211719698b4c9, type: 2}
+  m_Controller: {fileID: 9100000, guid: f414f236439bce4428993d83160f4dfe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -241,28 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 1
-    Name: idle
-  - Type: 9
-    SynchronizeType: 1
-    Name: walk
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouch
-  - Type: 9
-    SynchronizeType: 1
-    Name: jump
-  - Type: 9
-    SynchronizeType: 1
-    Name: fall
-  - Type: 9
-    SynchronizeType: 1
-    Name: died
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouchWalk
+  m_SynchronizeParameters: []
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -325,6 +305,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aff20cc4227d849ac3391dab714c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7213396364793080915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329dba550c62dd34a8f7cb30f038892c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5488716603191071706}
+  modelOptions:
+  - {fileID: 6366732446506168700}
+  correspondingAvatars:
+  - {fileID: 9000000, guid: 0aaa018ab005a7945891eebd8e848ae7, type: 3}
 --- !u!114 &6066984036327698655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,6 +1230,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7040078494574333705, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000391518
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040078494574333705, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.15461785
+      objectReference: {fileID: 0}
     - target: {fileID: 7059663738969764741, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
@@ -1547,6 +1554,12 @@ Transform:
 --- !u!4 &8662849283538314104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 725928543837572732, guid: 04d3b3f968afea34790a69675508fe73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226840309704502532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6366732446506168700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3058145091160448120, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 8226840309704502532}
   m_PrefabAsset: {fileID: 0}
