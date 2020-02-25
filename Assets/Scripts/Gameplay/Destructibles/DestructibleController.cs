@@ -123,6 +123,7 @@ public class DestructibleController : MonoBehaviourPun
         prevHighlighted = new Dictionary<GameObject, List<Material>>();
         holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
     }
+
     private void OnDestroy()
     {
         //Cursor.lockState = CursorLockMode.None;
@@ -142,7 +143,7 @@ public class DestructibleController : MonoBehaviourPun
                 if (view.Owner != null && view.Owner.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     // Requiring hold positions' to have the same index as throwables'
-                    if(i < holdPositions.Count)
+                    if (i < holdPositions.Count)
                         holdPositions.RemoveAt(i);
                     throwables.RemoveAt(i--);
                 }
@@ -189,10 +190,10 @@ public class DestructibleController : MonoBehaviourPun
 
                         if (prevHighlighted.ContainsKey(go))
                             continue;
-                        
-                        if(PhotonView.Get(go).Owner != null)
+
+                        if (PhotonView.Get(go).Owner != null)
                         {
-                            if(PhotonView.Get(go).Owner?.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                            if (PhotonView.Get(go).Owner?.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
                                 continue;
                         }
 
@@ -233,7 +234,7 @@ public class DestructibleController : MonoBehaviourPun
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
                         // audio
-                        //playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
+                        playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
                     }
                 }
                 else

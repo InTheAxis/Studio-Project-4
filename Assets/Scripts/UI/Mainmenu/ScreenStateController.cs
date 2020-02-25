@@ -141,8 +141,10 @@ public class ScreenStateController : MonoBehaviour
 
     [SerializeField]
     private ScreenStates currentScreen = ScreenStates.CONNECTINGTOPHOTON;
+
     // Flag used to determine what to initialize when starting this class
     private static bool returningFromInGame = false;
+
     public static bool ReturningFromInGame { get => returningFromInGame; set => returningFromInGame = value; }
 
     private Stack<ScreenStates> history = null;
@@ -181,7 +183,6 @@ public class ScreenStateController : MonoBehaviour
         hovered = new List<GameObject>();
         prevHovered = new List<GameObject>();
         hoverGrowScale = new Vector3(hoverGrowSize, hoverGrowSize, hoverGrowSize);
-
 
         for (int i = 0; i < screens.Length; ++i)
         {
@@ -496,7 +497,7 @@ public class ScreenStateController : MonoBehaviour
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
-                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Destructibles");
+                screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
                 //NetworkClient.instance.goInGame();
             }
             else
