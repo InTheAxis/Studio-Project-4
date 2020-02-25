@@ -13,7 +13,7 @@ public static class RunPreloadScene
 
     private const string MENU_ITEM = "Addons/Run Preload";
 
-    private static bool toggled = false;
+    private static bool toggled = EditorPrefs.GetBool(MENU_ITEM);
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	static void InitLoadingScene()

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2663908857235015493}
   - component: {fileID: 281753500567782650}
   m_Layer: 0
-  m_Name: Minimap Cube
+  m_Name: Minimap Central Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 478ef20f104bb7e41811e56db262810b, type: 2}
+  - {fileID: 2100000, guid: 86eeeb39251a661458e92958eeb6fc16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,4 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6d938067d10364298c303d8ef1e9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  speed: 5

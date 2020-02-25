@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MinimapHolographic
+  m_Name: HolographicLandmark
   m_Shader: {fileID: -6465566751694194690, guid: a930bade6de37a14db6b1464b3af46f8,
     type: 3}
   m_ShaderKeywords: 
@@ -98,9 +98,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_20734E21: {r: 0.14921528, g: 1.1308043, b: 1.6649288, a: 0}
-    - Color_5A7AA5EB: {r: 0, g: 1.2041883, b: 1.9999998, a: 0}
+    - Color_5A7AA5EB: {r: 3.1171288, g: 0.35449702, b: 0.3178249, a: 0}
     - Color_7E06C9C6: {r: 0, g: 0.9093256, b: 2, a: 1}
-    - Color_C6620304: {r: 2, g: 0.5026376, b: 0, a: 0}
+    - Color_C6620304: {r: 0.108008705, g: 2.5442061, b: 0.7453122, a: 0}
     - Color_FB7C723C: {r: 0.0495283, g: 0.27454355, b: 0.5, a: 0}
     - Vector2_1B1DD1B5: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_62FB1B20: {r: 10, g: 1, b: 0, a: 0}
@@ -110,7 +110,7 @@ Material:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HologramPlaneCenter: {r: -12.038057, g: 1.6032546, b: -42.31716, a: 0}
+    - _HologramPlaneCenter: {r: -1.8500173, g: 1.6027961, b: 6.290592, a: 0}
     - _PlaneCenter: {r: 4.5369577, g: 1.3632228, b: -23.64915, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
 --- !u!114 &5555179559177486859
