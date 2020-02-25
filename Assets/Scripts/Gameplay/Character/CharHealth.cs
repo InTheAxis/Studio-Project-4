@@ -15,7 +15,11 @@ public class CharHealth : MonoBehaviour, IPunObservable
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
 
-    public System.Action OnRespawn;
+    public delegate void OnDeadCallback();
+    public delegate void OnRespawnCallback();
+
+    public OnDeadCallback OnDead;
+    public OnRespawnCallback OnRespawn;
     public bool dead { private set; get; }
     
     private int hp;
@@ -129,6 +133,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
             respawnCorr = AutoRespawn(autoRespawnTime);
             StartCoroutine(respawnCorr);
         }
+
+        OnDead?.Invoke();
 
         Debug.Log("Dieded");
     } 
