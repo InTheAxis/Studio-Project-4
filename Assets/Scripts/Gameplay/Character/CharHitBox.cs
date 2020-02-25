@@ -1,14 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CharHitBox : MonoBehaviour
 {
-    [SerializeField]
-    private LayerMask ignore;
-    [SerializeField]
-    private float hitTime = 0.1f;
-
     public System.Action<int> OnHit;
 
     public bool hit { get { return triggered; } }
@@ -18,7 +11,7 @@ public class CharHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!triggered && LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (!triggered)
         {
             DamageData ddata = other.GetComponent<DamageData>();
             if (ddata)
