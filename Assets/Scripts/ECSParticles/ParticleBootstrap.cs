@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Collections;
@@ -19,6 +20,11 @@ public class ParticleBootstrap : MonoBehaviour
     private void Awake()
     {
         em = World.DefaultGameObjectInjectionWorld.EntityManager;
+    }
+
+    private void OnDestroy()
+    {
+        DestroyEntities();
     }
 
     protected void Init(ComponentType systemTag)
@@ -58,6 +64,11 @@ public class ParticleBootstrap : MonoBehaviour
         em.SetComponentData(emitter, data);
         if (sysObj.enabledOnAwake)
             Emit();
+    }
+
+    protected virtual void DestroyEntities() 
+    {
+        Debug.LogError("You must implement your own system to clean up the particles!");   
     }
 
     public void SetEmitterSource(Vector3 source, Vector3 dir)

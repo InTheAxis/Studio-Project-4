@@ -10,7 +10,7 @@ public class CharTPCamera : MonoBehaviour
     //[Header("References from Character Object")]
     //[SerializeField]
     //[Tooltip("Should be sett externaly with this class' function")]
-    private CharTPController charControl;
+    public CharTPController charControl { get; private set; }
     //[SerializeField]
     //[Tooltip("What the camera should look at and follow")]
     private List<Transform> lookTargets;

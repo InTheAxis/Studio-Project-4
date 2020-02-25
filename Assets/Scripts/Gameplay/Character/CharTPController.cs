@@ -77,6 +77,26 @@ public class CharTPController : MonoBehaviourPun
 
     private InputData inp;
 
+    // List of all objs with CharTPController, updated in OnEnable and OnDisable, to be used for anywhere that needs references to other players
+    private static List<CharTPController> playerControllerRefs = new List<CharTPController>();
+    public static List<CharTPController> PlayerControllerRefs { get => playerControllerRefs; }
+    public delegate void OnPlayerAddCallback(CharTPController newPlayer);
+    public delegate void OnPlayerRemoveCallback(CharTPController removedPlayer);
+
+    public static OnPlayerAddCallback OnPlayerAdd;
+    public static OnPlayerRemoveCallback OnPlayerRemoved;
+
+    private void OnEnable()
+    {
+        playerControllerRefs.Add(this);
+        OnPlayerAdd?.Invoke(this);
+    }
+    private void OnDisable()
+    {
+        playerControllerRefs.Remove(this);
+        OnPlayerRemoved?.Invoke(this);
+    }
+
     private void Start()
     {
         initialLookY = Mathf.Clamp(initialLookY, -maxLookY, maxLookY);

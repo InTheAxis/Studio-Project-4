@@ -37,7 +37,7 @@ public class SingletonPun<T> : MonoBehaviourPun
 {
     public static T instance = default(T);
 
-    private void Awake()
+    protected void Awake()
     {
         checkSingleton();
     }

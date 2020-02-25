@@ -15,7 +15,13 @@ public class CharHealth : MonoBehaviour, IPunObservable
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
 
-    public System.Action OnRespawn;
+    public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow);
+    public delegate void OnDeadCallback();
+    public delegate void OnRespawnCallback();
+
+    public OnHealthChangeCallback OnHealthChange;
+    public OnDeadCallback OnDead;
+    public OnRespawnCallback OnRespawn;
     public bool dead { private set; get; }
     
     private int hp;
@@ -43,7 +49,11 @@ public class CharHealth : MonoBehaviour, IPunObservable
         }
         else 
         {
-            hp =            (int)stream.ReceiveNext();
+            int newHp = (int)stream.ReceiveNext();
+            if (newHp != hp)
+                OnHealthChange?.Invoke(charControl, newHp);
+            hp = newHp;
+
             invulnerable =  (bool)stream.ReceiveNext();
             bool nextDead = (bool)stream.ReceiveNext();
             if (dead && !nextDead)
@@ -71,6 +81,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
         //TEMP ,DO THIS ELSEWHERE
         if (Input.GetKeyDown(KeyCode.R))
             Respawn(1);
+
+        if (Input.GetKeyDown(KeyCode.P))
+            TakeDmg(1);
     }
 
     public void Respawn(float invulTime)
@@ -78,7 +91,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
         if (respawnCorr != null)
             StopCoroutine(respawnCorr);
         respawnCorr = null;
-        hp = maxHp;
+        //hp = maxHp;
+        Heal(999);
         dead = false;
         OnRespawn?.Invoke();
         charControl.disableMovement = dead;
@@ -103,6 +117,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
             Die();
         }
 
+        OnHealthChange?.Invoke(charControl, hp);
         Debug.Log("Took dmg, hp is " + hp);
     }
 
@@ -115,6 +130,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         if (hp > maxHp)
             hp = maxHp;
 
+        OnHealthChange?.Invoke(charControl, hp);
         Debug.Log("Healed by " + amt + " , current hp is " + hp);
     }
 
@@ -129,6 +145,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
             respawnCorr = AutoRespawn(autoRespawnTime);
             StartCoroutine(respawnCorr);
         }
+
+        OnDead?.Invoke();
 
         Debug.Log("Dieded");
     } 

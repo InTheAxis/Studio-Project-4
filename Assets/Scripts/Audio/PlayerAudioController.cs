@@ -9,7 +9,6 @@ public class PlayerAudioController : AudioController
 
     public void Step()
     {
-        return;
         // check terrain or misc
         RaycastHit hit;
         if (!Physics.Raycast(transform.position, -Vector3.up, out hit, 2, layerMask))
@@ -39,7 +38,8 @@ public class PlayerAudioController : AudioController
 
     public void PickUpDebris()
     {
-        Play("pickup0", 0.22f);
+        Play("pickup0");
+        Play("held0", 1);
     }
 
     public void Interact()
@@ -54,6 +54,7 @@ public class PlayerAudioController : AudioController
 
     public void LaunchDebris()
     {
-        Play("launch0", 0.3f);
+        Play("throw0");
+        SetAudio("held0", AudioState.Stop, 1);
     }
 }
