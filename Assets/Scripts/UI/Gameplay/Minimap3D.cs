@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class Minimap3D : MonoBehaviourPun
+public class Minimap3D : MonoBehaviour
 {
 
     [SerializeField]
@@ -60,12 +60,6 @@ public class Minimap3D : MonoBehaviourPun
 
     public void Update()
     {
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
         if (deltaY != 0.0f)
@@ -102,7 +96,13 @@ public class Minimap3D : MonoBehaviourPun
 
         if(GameManager.playerObj != null)
         {
-            Transform playerTransform = GameManager.playerObj.transform;
+            Transform playerTransform = transform.root;
+            if(playerTransform != GameManager.playerObj.transform)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
             float playerY = playerTransform.rotation.eulerAngles.y;
 
 
