@@ -61,7 +61,10 @@ public class Minimap3D : MonoBehaviourPun
     public void Update()
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected)
+        {
+            gameObject.SetActive(false);
             return;
+        }
 
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
