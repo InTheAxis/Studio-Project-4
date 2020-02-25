@@ -4434,7 +4434,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88129374}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -107717,8 +107717,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4895581359626413090, guid: a3004b8f29be72b4bb3738febe130872,
+        type: 3}
+      propertyPath: spectateScreen
+      value: 
+      objectReference: {fileID: 2716719663590149795}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3004b8f29be72b4bb3738febe130872, type: 3}
+--- !u!1 &2716719663590149795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2716719663378540793, guid: a3004b8f29be72b4bb3738febe130872,
+    type: 3}
+  m_PrefabInstance: {fileID: 2716719663590149794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3576695791164915865
 Transform:
   m_ObjectHideFlags: 0
