@@ -66,7 +66,7 @@ public class PlayerInfoController : MonoBehaviour
                 transform.GetChild(i).gameObject.SetActive(false);
             else if (foundPlayer) // Replace old PlayerInfo with a new one targeting the Player HUD child above its current one
                 playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i);
-            else if (playerInfo[i].name == player.photonView.Owner.NickName) // Remove and replace the PlayerInfo that takes over its place
+            else if (playerInfo[i].name == player.photonView.Controller.NickName) // Remove and replace the PlayerInfo that takes over its place
             {
                 foundPlayer = true;
                 playerInfo.RemoveAt(i);
