@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9117360599836359461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.347, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4801944567712635587}
@@ -340,7 +340,7 @@ MonoBehaviour:
   animator: {fileID: 5488716603191071706}
   charControl: {fileID: 9117360599836359451}
   health: {fileID: 5071471449440821494}
-  hitbox: {fileID: 0}
+  hitbox: {fileID: 4173598710368709281}
 --- !u!114 &4943199071075631875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 5071471449440821494}
   maxEnergy: 100
-  decayRate: 5
+  decayRate: 1
 --- !u!114 &3023660623748070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   ener: {fileID: 4943199071075631875}
   chargeChk: {fileID: 3353481281967616732}
-  enerConsumption: 3
+  enerConsumption: 10
   duration: 0.2
   chargeDist: 50
   delay: 0.3

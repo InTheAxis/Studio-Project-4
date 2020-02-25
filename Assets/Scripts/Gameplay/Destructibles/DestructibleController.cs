@@ -384,7 +384,7 @@ public class DestructibleController : MonoBehaviourPun
     [PunRPC]
     private void destructibleReleaseOwner(int viewID, Vector3 force, PhotonMessageInfo messageInfo)
     {
-        Debug.Log("Received release request");
+        //Debug.Log("Received release request");
         PhotonView view = PhotonView.Find(viewID);
         if (view.Owner == null || view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
@@ -403,7 +403,7 @@ public class DestructibleController : MonoBehaviourPun
     private void destructibleEnsureOwnerIsReleased(int viewID, PhotonMessageInfo messageInfo)
     {
         PhotonView view = PhotonView.Find(viewID);
-        Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
+        //Debug.Log("Ensure owner released called. View Owner " + view.Owner?.ActorNumber + " Player " + PhotonNetwork.LocalPlayer.ActorNumber);
         if (view.Owner?.ActorNumber == messageInfo.Sender.ActorNumber)
         {
             view.TransferOwnership(0);
