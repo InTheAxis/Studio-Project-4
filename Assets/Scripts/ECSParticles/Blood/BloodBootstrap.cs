@@ -7,19 +7,23 @@ public class BloodBootstrap : ParticleBootstrap
     [SerializeField]
     private Transform emitter;
 
-    public static BloodBootstrap Instance;
+    private ECSParticles.Blood.EmitterCleanUpJobSystem cleanup;
+
     private void Start()
     {
-        Instance = this;
-
         Init(typeof(BloodTag));
+
+        cleanup = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<ECSParticles.Blood.EmitterCleanUpJobSystem>();
     }
-    private void Update()
+
+    protected override void DestroyEntities()
+    {
+        cleanup.Update();
+    }
+
+    private void LateUpdate()
     {
         if (emitter)
             SetEmitterSource(emitter.position, emitter.forward);
-
-        if (Input.GetKeyDown(KeyCode.P))
-            Emit();
     }
 }
