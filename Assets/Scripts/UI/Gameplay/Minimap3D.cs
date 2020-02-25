@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class Minimap3D : MonoBehaviour
+public class Minimap3D : MonoBehaviourPun
 {
 
     [SerializeField]
@@ -59,6 +60,8 @@ public class Minimap3D : MonoBehaviour
 
     public void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            return;
 
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
@@ -69,7 +72,6 @@ public class Minimap3D : MonoBehaviour
         }
 
         /* Update hologram's transform */
-        hologramMat.SetVector("_HologramPlaneCenter", plane.transform.position);
         //Debug.Log("Plane Pos: " + plane.transform.position);
         foreach (KeyValuePair<GameObject, GameObject> pair in holograms)
         {

@@ -25,6 +25,7 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
             instance = this;
         else
             Debug.LogError("NetworkOwnership instantiated more than once! This should not happen");
+
     }
 
     public static bool objectIsOwned(PhotonView view)
