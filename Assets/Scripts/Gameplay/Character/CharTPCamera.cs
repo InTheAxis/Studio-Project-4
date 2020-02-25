@@ -106,7 +106,10 @@ public class CharTPCamera : MonoBehaviour
             } 
         }
         if (idx < 0)
+        {
+            Debug.LogErrorFormat("Can't find lookTarget {0}", _name);
             return;
+        }
 
         LookAt(idx, distToTarget);
     }

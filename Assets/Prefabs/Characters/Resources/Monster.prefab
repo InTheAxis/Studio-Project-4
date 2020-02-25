@@ -280,6 +280,7 @@ MonoBehaviour:
   - {fileID: 1094558408789626849}
   - {fileID: 886516775757303319}
   - {fileID: 7549976724487257557}
+  - {fileID: 8662849283538314104}
   jumpChk: {fileID: 3402467720299827767}
   crouchChk: {fileID: 3402467720941865846}
   moveSpeed: 50
@@ -976,6 +977,12 @@ Transform:
 --- !u!4 &7549976724487257557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1940343873033900241, guid: 04d3b3f968afea34790a69675508fe73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226840309704502532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8662849283538314104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 725928543837572732, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 8226840309704502532}
   m_PrefabAsset: {fileID: 0}
