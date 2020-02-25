@@ -142,7 +142,8 @@ public class DestructibleController : MonoBehaviourPun
                 if (view.Owner != null && view.Owner.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
                 {
                     // Requiring hold positions' to have the same index as throwables'
-                    holdPositions.RemoveAt(i);
+                    if(i < holdPositions.Count)
+                        holdPositions.RemoveAt(i);
                     throwables.RemoveAt(i--);
                 }
             }

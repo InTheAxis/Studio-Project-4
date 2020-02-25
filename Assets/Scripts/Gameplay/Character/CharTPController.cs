@@ -112,8 +112,8 @@ public class CharTPController : MonoBehaviourPun
         }
         if (!disableMouseInput)
         {
-            inp.mouseY = Input.GetAxis("Mouse Y");
-            inp.mouseX = Input.GetAxis("Mouse X");
+            inp.mouseY = Input.GetAxisRaw("Mouse Y");
+            inp.mouseX = Input.GetAxisRaw("Mouse X");
         }
         else
         {

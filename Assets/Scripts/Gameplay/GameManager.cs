@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-                if (CharTPCamera.Instance != null)
+        if (CharTPCamera.Instance != null)
             CharTPCamera.Instance.SetCharController(playerObj.GetComponent<CharTPController>());
     }
 }

@@ -29,25 +29,23 @@ public class Crosshair : MonoBehaviour
     private float lerpSpeed = 2.0f;
 
     private bool rotating = false;
-    private DestructibleController controller = null;
+    private bool isBound = false;
 
     private void Start()
     {
-        if (NetworkOwnership.instance == null)
-        {
-            Debug.LogError("Offline mode interactions might not work with Crosshair");
-            controller = FindObjectOfType<DestructibleController>();
-        }
-        else
-        {
-            /* Hooks onto the current player's destructible controller */
-            controller = NetworkOwnership.instance.GetComponent<DestructibleController>();
-        }
+        //if (NetworkOwnership.instance == null)
+        //{
+        //    Debug.LogError("Offline mode interactions might not work with Crosshair");
+        //    controller = FindObjectOfType<DestructibleController>();
+        //}
+        //else
+        //{
+        //    /* Hooks onto the current player's destructible controller */
+        //    controller = NetworkOwnership.instance.GetComponent<DestructibleController>();
+        //}
 
 
-        /* Notify events */
-        controller.pullStatus += onPullStatus;
-        controller.throwStatus += onThrow;
+        
         CharTPCamera.Instance.GetComponent<CharLookTargetController>().showMap += onMinimapToggle;
         //CharMinimapCamera.Instance.eventShowMinimap += onMinimapToggle;
 
@@ -67,6 +65,15 @@ public class Crosshair : MonoBehaviour
 
     private void Update()
     {
+        if(!isBound && NetworkOwnership.instance != null)
+        {
+            /* Notify events */
+            DestructibleController controller = NetworkOwnership.instance.GetComponent<DestructibleController>();
+            controller.pullStatus += onPullStatus;
+            controller.throwStatus += onThrow;
+            isBound = true;
+        }
+
         currentRadius = Mathf.Lerp(currentRadius, targetRadius, Time.deltaTime * lerpSpeed);
         for (int i = 0; i < quarterHolder.childCount; ++i)
             setQuarterPosition(i, currentRadius);
