@@ -40,8 +40,7 @@ public class CharLookTargetController : MonoBehaviour
             else
             {
 
-                minimap.gameObject.SetActive(false);
-
+                minimap.Hide();
                 showMap?.Invoke(false);
                 tpCam.LookAtPlayer();
             }
