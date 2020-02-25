@@ -75,6 +75,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
         //TEMP ,DO THIS ELSEWHERE
         if (Input.GetKeyDown(KeyCode.R))
             Respawn(1);
+
+        if (Input.GetKeyDown(KeyCode.P))
+            Die();
     }
 
     public void Respawn(float invulTime)

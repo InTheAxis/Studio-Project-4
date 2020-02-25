@@ -27,7 +27,7 @@ public class DamageData : MonoBehaviour, IPunObservable
 
     private void Start()
     {
-        damaging = true;
+        damaging = false;
     }
 
     public void SetIsDamaging()
@@ -44,7 +44,7 @@ public class DamageData : MonoBehaviour, IPunObservable
             if (hitbox)
             {
                 hitbox.OnHit?.Invoke(dmg);
-                //damaging = false;
+                damaging = false;
                 Debug.LogFormat("{0} hit player", gameObject.name);
             }
         }
@@ -54,7 +54,7 @@ public class DamageData : MonoBehaviour, IPunObservable
     {
         if (damaging && collision.gameObject.CompareTag("Terrain") && GetComponent<Rigidbody>().velocity.sqrMagnitude < 4)
         {
-            //damaging = false;
+            damaging = false;
             Debug.LogFormat("{0} is no longer damaging", gameObject.name);
         }
     }
