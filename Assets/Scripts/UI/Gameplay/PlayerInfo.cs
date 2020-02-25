@@ -24,6 +24,16 @@ public class PlayerInfo
         number = int.Parse(tmNumberCounter.text);
         barHolder = self.Find("Healthbars");
     }
+    public PlayerInfo(Transform self, string name)
+    {
+        this.self = self;
+        tmName = self.Find("Name").GetComponent<TextMeshProUGUI>();
+        this.name = name;
+        tmName.text = name;
+        tmNumberCounter = self.Find("Number").Find("Counter").GetComponent<TextMeshProUGUI>();
+        number = int.Parse(tmNumberCounter.text);
+        barHolder = self.Find("Healthbars");
+    }
 
     public void setHealth(int health)
     {
@@ -54,5 +64,10 @@ public class PlayerInfo
         setNumber(number);
         setName(name);
         setHealth(health);
+    }
+
+    public void setActive(bool isActive)
+    {
+        self.gameObject.SetActive(isActive);
     }
 }

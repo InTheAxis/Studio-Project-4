@@ -44,8 +44,13 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
     {
         if (registrationCour != null)
             StopCoroutine(registrationCour);
-        registrationCour = deregisterCallbacks();
-        StartCoroutine(registrationCour);
+        //registrationCour = deregisterCallbacks();
+        //StartCoroutine(registrationCour);
+
+        WinLose.instance.winLossCallback -= winLoss;
+        CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+        playerHealthComp.OnDead -= playerDied;
+        playerHealthComp.OnRespawn -= playerRespawned;
     }
 
     private void playerRespawned()
