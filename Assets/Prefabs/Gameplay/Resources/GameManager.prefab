@@ -44,10 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad97f639bb8db445aa1af5b38cc2449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanPrefab: {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98,
-    type: 3}
-  monsterPrefab: {fileID: 9117360599836359461, guid: cf563ebba308a014da77de9fb8065171,
-    type: 3}
+  isOverride: 0
+  isHuman: 1
+  modelPrefabs:
+  - {fileID: 9117360599836359461, guid: cf563ebba308a014da77de9fb8065171, type: 3}
+  - {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98, type: 3}
+  - {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98, type: 3}
+  - {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98, type: 3}
+  - {fileID: 9117360599836359461, guid: 18e7df20976080a449f3929f71bdbd98, type: 3}
 --- !u!114 &7093804658423446314
 MonoBehaviour:
   m_ObjectHideFlags: 0

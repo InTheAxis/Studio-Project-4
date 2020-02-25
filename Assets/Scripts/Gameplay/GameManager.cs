@@ -11,19 +11,21 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool isHuman = true;
     [SerializeField]
-    private GameObject humanPrefab;
-    [SerializeField]
-    private GameObject monsterPrefab;
+    private List<GameObject> modelPrefabs;
 
     public static GameObject playerObj = null;
 
 
     private void Awake()
     {
-        if(!isOverride)
-            isHuman = !PhotonNetwork.IsMasterClient;
+        int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
+        Debug.Log("Got prefab index " + prefabIndex);
 
-        playerObj = PhotonNetwork.Instantiate(isHuman ? humanPrefab.name : monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        if (isOverride)
+            prefabIndex = isHuman ? 1 : 0;
+
+        Debug.Log("Instantiating prefab of index " + prefabIndex);
+        playerObj = PhotonNetwork.Instantiate(modelPrefabs[prefabIndex].name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
     }
 
     private void Start()

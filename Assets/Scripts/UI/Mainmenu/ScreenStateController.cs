@@ -29,14 +29,11 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("Stores a collection of different menu screens")]
     private GameObject[] screens = null;
-
     [SerializeField]
     private TextMeshProUGUI tmUsername = null;
-
     [Header("Models")]
     [SerializeField]
     private GameObject mainmenuModel = null;
-
     [SerializeField]
     private GameObject lobbyModels = null;
 
@@ -44,93 +41,82 @@ public class ScreenStateController : MonoBehaviour
     [SerializeField]
     [Tooltip("The size of the button when hovered")]
     private float hoverGrowSize = 1.2f;
-
     [SerializeField]
     private Color busyColor = Color.yellow;
-
     [SerializeField]
     private Color failColor = Color.red;
-
     [SerializeField]
     private Color successColor = Color.green;
 
     [Header("Transitions")]
     [SerializeField]
     private ButtonMaskEffect buttonMask = null;
-
     [SerializeField]
     private float buttonMaskStartY = 78.0f;
-
     [SerializeField]
     private float buttonHeightGap = 120.0f;
-
     [SerializeField]
     private float canvasFadeSpeed = 2.0f;
 
     [Header("Login")]
     [SerializeField]
     private CanvasGroup cgLogin = null;
-
     [SerializeField]
     private TMP_InputField tmLoginUsername = null;
-
     [SerializeField]
     private TMP_InputField tmLoginPassword = null;
-
     [SerializeField]
     private TextMeshProUGUI tmLoginStatus = null;
 
     [Header("Registration")]
     [SerializeField]
     private CanvasGroup cgRegister = null;
-
     [SerializeField]
     private TMP_InputField tmRegisterEmail = null;
-
     [SerializeField]
     private TMP_InputField tmRegisterUsername = null;
-
     [SerializeField]
     private TMP_InputField tmRegisterPassword = null;
-
     [SerializeField]
     private TMP_InputField tmRegisterConfirm = null;
-
     [SerializeField]
     private TextMeshProUGUI tmRegisterStatus = null;
 
     [Header("Server Selection")]
     [SerializeField]
     private CanvasGroup cgHost = null;
-
     [SerializeField]
     private CanvasGroup cgJoin = null;
-
     [SerializeField]
     private GameObject registerInput = null;
-
     [SerializeField]
     private GameObject loginInput = null;
-
     [SerializeField]
     private GameObject hostPasswordInput = null;
-
     [SerializeField]
     private GameObject joinPasswordInput = null;
-
     [SerializeField]
     private TextMeshProUGUI hostCreateStatus = null;
-
     [SerializeField]
     private TextMeshProUGUI joinLobbyStatus = null;
 
     [Header("Lobby")]
     [SerializeField]
     private TextMeshProUGUI tmReady = null;
+    [SerializeField]
+    private Transform mapHolder = null;
+    [SerializeField]
+    private GameObject mapSelectPrevious = null;
+    [SerializeField]
+    private GameObject mapSelectNext = null;
+    [SerializeField]
+    private GameObject[] lobbySubscreens = null;
+
 
     private List<GameObject> hovered;
     private List<GameObject> prevHovered;
     private List<RaycastResult> raycastResults;
+    private int mapIndex = 0;
 
     public TextMeshPro test = null;
 
@@ -153,7 +139,6 @@ public class ScreenStateController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Start");
 
         // Attach callbacks
         NetworkClient.instance.masterServerConnectedCallback = connectedToPhotonServers;
@@ -290,6 +275,7 @@ public class ScreenStateController : MonoBehaviour
             setScene(ScreenStates.MATCHLOBBY);
             mainmenuModel.SetActive(false);
             lobbyModels.SetActive(true);
+            onMapSelect("Previous");
             tmReady.text = PhotonNetwork.IsMasterClient ? "Start" : "Ready";
 
             if (PhotonNetwork.IsMasterClient)
@@ -541,6 +527,53 @@ public class ScreenStateController : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         canvas.alpha = targetAlpha;
+    }
+
+    public void onToggleSubscreen(GameObject go)
+    {
+        bool state = !go.activeSelf;
+        for (int i = 0; i < lobbySubscreens.Length; ++i)
+            lobbySubscreens[i].SetActive(false);
+        go.SetActive(state);
+    }
+
+    public void onPlayerSelect(GameObject go)
+    {
+        /* Player 0 is always the Monster */
+        /* Player 1-4 are the Survivors */
+        Debug.Log("Player: " + go.transform.GetSiblingIndex());
+        NetworkClient.setPlayerProperty("charModel", go.transform.GetSiblingIndex());
+    }
+
+    public void onMapSelect(string type)
+    {
+        mapHolder.GetChild(mapIndex).gameObject.SetActive(false);
+
+        if (type == "Previous")
+            --mapIndex;
+        else if (type == "Next")
+            ++mapIndex;
+
+        mapIndex = Mathf.Clamp(mapIndex, 0, mapHolder.childCount - 1);
+        mapHolder.GetChild(mapIndex).gameObject.SetActive(true);
+
+        if (mapIndex == 0)
+        {
+            mapSelectPrevious.SetActive(false);
+            mapSelectNext.SetActive(true);
+        }
+        else if(mapIndex == mapHolder.childCount - 1)
+        {
+            mapSelectPrevious.SetActive(true);
+            mapSelectNext.SetActive(false);
+        }
+        else
+        {
+            mapSelectPrevious.SetActive(true);
+            mapSelectNext.SetActive(true);
+        }
+
+
     }
 
     public void onHoverEnterButton(GameObject go)
