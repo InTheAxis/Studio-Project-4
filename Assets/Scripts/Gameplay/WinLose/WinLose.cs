@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class WinLose : MonoBehaviourPun
+public class WinLose : SingletonPun<WinLose>
 {
+    public delegate void WinLossCallback(bool isHunterWin);
+    public WinLossCallback winLossCallback;
+
     private bool gameEnded = false;
 
     private float backToLobbyTimer = 0.0f;
@@ -43,12 +46,17 @@ public class WinLose : MonoBehaviourPun
         gameEnded = true;
         Debug.Log("Sending game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
         photonView.RPC("receiveGameEnd", RpcTarget.Others, isHunterWin);
+
+        winLossCallback(isHunterWin);
     }
 
     // Should only ever be called on remote clients
     [PunRPC]
     private void receiveGameEnd(bool isHunterWin)
     {
+        gameEnded = true;
         Debug.Log("Received game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
+
+        winLossCallback(isHunterWin);
     }
 }
