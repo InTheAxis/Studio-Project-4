@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class WinLose : SingletonPun<WinLose>
+public class WinLose : MonoBehaviourPun
 {
+    public static WinLose instance = null;
+
     public delegate void WinLossCallback(bool isHunterWin);
     public WinLossCallback winLossCallback;
 
@@ -15,6 +17,14 @@ public class WinLose : SingletonPun<WinLose>
 
     [SerializeField]
     private float delayToLobbyTime = 5.0f;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Debug.LogWarning("WinLose instance already instanced! This should not happen");
+    }
 
     private void Update()
     {
