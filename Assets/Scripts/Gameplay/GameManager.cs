@@ -6,7 +6,10 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
-    public bool isHuman { get; private set; }
+    [SerializeField]
+    private bool isOverride = false;
+    [SerializeField]
+    private bool isHuman = true;
     [SerializeField]
     private GameObject humanPrefab;
     [SerializeField]
@@ -14,9 +17,11 @@ public class GameManager : MonoBehaviour
 
     public static GameObject playerObj = null;
 
+
     private void Awake()
     {
-        isHuman = !PhotonNetwork.IsMasterClient;
+        if(!isOverride)
+            isHuman = !PhotonNetwork.IsMasterClient;
 
         playerObj = PhotonNetwork.Instantiate(isHuman ? humanPrefab.name : monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
         if (CharTPCamera.Instance != null)
