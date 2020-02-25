@@ -7,29 +7,80 @@ using UnityEngine.Audio;
 public class AudioController : MonoBehaviour
 {
     [SerializeField]
-    private AudioClip[] clips;
+    private Sound[] sounds;
 
-    private AudioSource source;
+    private AudioSource[] source;
+
+    public enum AudioState
+    {
+        Play,
+        Pause,
+        Resume,
+        Stop,
+    }
 
     private void Awake()
     {
-        source = GetComponent<AudioSource>();
+        source = GetComponents<AudioSource>();
         if (source == null)
             Debug.LogError("No audio source found on: " + gameObject.name);
+
+        if (sounds.Length > 0)
+        {
+            foreach (Sound s in sounds)
+            {
+                //s.source = gameObject.AddComponent<AudioSource>();
+                //s.source.clip = s.clip;
+                //s.source.volume = s.volume;
+                //s.source.pitch = s.pitch;
+                //s.source.loop = s.loop;
+
+                //if (s.sfx)
+                //    sfxSounds.Add(s);
+                //else
+                //    musicSounds.Add(s);
+
+                if (s.playOnAwake)
+                    Play(s.name);
+            }
+        }
     }
 
-    public void Play(string name, float timeOffset = 0.0f)
+    public void SetAudio(string name, AudioState state, int index = 0)
     {
-        if (source == null)
-            return;
-        AudioClip s = Array.Find(clips, clip => clip.name == name);
+        Sound s = Array.Find(sounds, sound => sound.clip.name == name);
         if (s == null)
         {
-            Debug.LogError("[Audio] " + name + " clip does not exist!");
+            Debug.LogError("[Audio] " + name + " sound does not exist!");
             return;
         }
-        source.clip = s;
-        source.time = timeOffset;
-        source.Play();
+        source[index].clip = s.clip;
+        source[index].clip = s.clip;
+        source[index].volume = s.volume;
+        source[index].pitch = s.pitch;
+        source[index].loop = s.loop;
+        switch (state)
+        {
+            case AudioState.Play:
+                source[index].Play();
+                break;
+
+            case AudioState.Pause:
+                source[index].Pause();
+                break;
+
+            case AudioState.Resume:
+                source[index].UnPause();
+                break;
+
+            case AudioState.Stop:
+                source[index].Stop();
+                break;
+        }
+    }
+
+    public void Play(string name, int index = 0)
+    {
+        SetAudio(name, AudioState.Play, index);
     }
 }
