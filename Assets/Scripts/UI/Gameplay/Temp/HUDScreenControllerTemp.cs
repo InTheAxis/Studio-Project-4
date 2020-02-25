@@ -7,6 +7,8 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
     [SerializeField]
     private GameObject deadScreen;
     [SerializeField]
+    private GameObject spectateScreen;
+    [SerializeField]
     private GameObject endScreen;
 
     private IEnumerator registrationCour = null;
@@ -15,7 +17,19 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
     {
         deadScreen.SetActive(false);
         endScreen.SetActive(false);
+    }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            if (deadScreen.activeSelf)
+            {
+                deadScreen.SetActive(false);
+                spectateScreen.SetActive(true);
+                setNextPlayerSpectate();
+            }
+            else
+                setNextPlayerSpectate();
     }
 
     private void OnEnable()
@@ -37,10 +51,23 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
     private void playerRespawned()
     {
         deadScreen.SetActive(false);
+        spectateScreen.SetActive(false);
+        GameManager.setCamera(GameManager.playerObj);
     }
     private void playerDied()
     {
         deadScreen.SetActive(true);
+    }
+    private void setNextPlayerSpectate()
+    {
+        // Edge case: Only one player is in game. Don't change the camera
+        if (CharTPController.PlayerControllerRefs.Count == 1)
+            return;
+
+        int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj == CharTPCamera.Instance.charControl);
+        if (++currIndex == CharTPController.PlayerControllerRefs.Count)
+            currIndex = 0;
+        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex]);
     }
 
     private void winLoss(bool isHunterWin)
