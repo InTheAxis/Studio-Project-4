@@ -28,7 +28,8 @@ public class Loading : MonoBehaviour
     public void Load(string targetScene)
     {
         indicator.SetActive(true);
-        tmTips.text = tips[Random.Range(0, tips.Length)];
+        if (tmTips.text == "null")
+            tmTips.text = tips[Random.Range(0, tips.Length)];
 
         if(usePseudoLoading)
             StartCoroutine(pseudoLoadScene(targetScene));
@@ -39,7 +40,8 @@ public class Loading : MonoBehaviour
     public void LoadPhoton(string targetScene)
     {
         indicator.SetActive(true);
-        tmTips.text = tips[Random.Range(0, tips.Length)];
+        if (tmTips.text == "null")
+            tmTips.text = tips[Random.Range(0, tips.Length)];
 
         if (usePseudoLoading)
             StartCoroutine(pseudoLoadScenePhoton(targetScene));
