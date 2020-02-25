@@ -332,5 +332,33 @@
             }
         }
 
+
+        [BurstCompile]
+        [DisableAutoCreation]
+        public class EmitterCleanUpJobSystem : JobComponentSystem
+        {
+            private EndSimulationEntityCommandBufferSystem ecbs;
+
+            protected override void OnCreate()
+            {
+                ecbs = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+            }
+
+            private struct CleanUpJob : IJobForEachWithEntity<MY_TAG>
+            {
+                public EntityCommandBuffer.Concurrent ecb;
+                public void Execute(Entity entity, int index, [ReadOnly] ref MY_TAG c0)
+                {
+                    ecb.DestroyEntity(index, entity);
+                }
+            }
+            protected override JobHandle OnUpdate(JobHandle inputDeps)
+            {
+                CleanUpJob job = new CleanUpJob { ecb = ecbs.CreateCommandBuffer().ToConcurrent() };
+                var handle = job.Schedule(this, inputDeps);
+                ecbs.AddJobHandleForProducer(handle);
+                return handle;
+            }
+        }
     }
 }
