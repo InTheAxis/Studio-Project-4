@@ -8,7 +8,7 @@ public class HumanAnimationSM : MonoBehaviour
     public CharTPController charControl;
     public CharHealth health;
     public CharHitBox hitbox;
-
+ 
     private string curState;
     
     private void Start()
@@ -16,24 +16,27 @@ public class HumanAnimationSM : MonoBehaviour
         curState = "idle";
     }
 
-
     private void LateUpdate()
     {
+        if (GameManager.playerObj != null)
+        {
+            if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+                return;
+        }
+        else return;
+
         CalculateState();
     }
 
-
     private void CalculateState()
     {
-        //TODO Improve this if it gets too messy
-
         if (curState == "died" && !health.dead)
             StateChange("idle");
 
         if (health.dead)
             StateChange("died");
-        //else if (hitbox.hit)
-        //    StateChange("hit");
+        else if (hitbox.hit)
+            StateChange("hit");
         else if (charControl.jumpChk.airborne)
         {
             if (charControl.velY > 0)
@@ -41,11 +44,11 @@ public class HumanAnimationSM : MonoBehaviour
                 //if (charControl.velY < charControl.jumpForce)
                 //    StateChange("hang");
                 //else
-                    StateChange("jump");
+                StateChange("jump");
             }
             else
                 //StateChange("fall");
-              StateChange("jump");
+                StateChange("jump");
         }
         else if (charControl.crouchChk.crouching)
         {
