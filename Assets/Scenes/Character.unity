@@ -1595,6 +1595,12 @@ PrefabInstance:
       propertyPath: isHuman
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4129656510330212911, guid: 965d653db2070874db463d54f05b6517,
+        type: 3}
+      propertyPath: humanPrefab
+      value: 
+      objectReference: {fileID: 9117360599836359461, guid: 783fc374b75aa88418351339205cb13e,
+        type: 3}
     - target: {fileID: 6390612172081307795, guid: 965d653db2070874db463d54f05b6517,
         type: 3}
       propertyPath: m_LocalPosition.x

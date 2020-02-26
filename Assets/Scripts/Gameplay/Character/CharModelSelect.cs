@@ -10,6 +10,8 @@ public class CharModelSelect : MonoBehaviour
     List<GameObject> modelOptions;
     [SerializeField]
     List<Avatar> correspondingAvatars;
+    [SerializeField]
+    List<Avatar> correspondingControllers;
 
     private bool selected = false;
 
