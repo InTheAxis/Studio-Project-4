@@ -1424,10 +1424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df24216785ea6e49b27adbcfe617b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.267
-  alignRate: 0.0228
+  speed: 0.119
+  alignRate: 0.0179
   coheseRate: 0.02
   separateRate: 0.0594
+  avoidGroundRate: 2
   viewRadius: 7
   separateRadius: 2
   align: 1

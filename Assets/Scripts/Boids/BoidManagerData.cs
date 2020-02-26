@@ -34,6 +34,9 @@ public struct BoidManagerData : IComponentData
     [Range(0, 0.1f)]
     public float separateRate;
 
+    [Range(0, 2.0f)]
+    public float avoidGroundRate;
+
     public float viewRadius;
     public float separateRadius;
 
