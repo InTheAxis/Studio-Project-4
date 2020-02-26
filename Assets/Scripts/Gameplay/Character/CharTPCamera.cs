@@ -175,6 +175,9 @@ public class CharTPCamera : MonoBehaviour
     }   
     private void LateUpdate()
     {
+        if (charControl == null)
+            return;
+
         if (Input.GetKeyDown(KeyCode.T))
             Shake();
 

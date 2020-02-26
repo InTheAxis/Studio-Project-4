@@ -8,7 +8,7 @@ public class ConvertToPhotonSceneObject : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
 
-    private void Awake()
+    private void Start()
     {
         if (PhotonNetwork.IsMasterClient)
         {
