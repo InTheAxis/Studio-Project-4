@@ -480,6 +480,7 @@ public class ScreenStateController : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                NetworkClient.instance.setRoomVisibility(false);
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
