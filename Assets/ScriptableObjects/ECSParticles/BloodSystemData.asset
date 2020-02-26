@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ede982663dbaa4495c7b091c9e4f5f, type: 3}
   m_Name: BloodSystemData
   m_EditorClassIdentifier: 
-  enabledOnAwake: 1
+  enabledOnAwake: 0
   maxNumParticles: 1000
   numJobBatch: 5
   emitPosRandom: {x: 0, y: 0, z: 0}
   emitDirType: 1
   numPerUpdate: 30
   rate: 0.01
-  loop: 1
+  loop: 0
   duration: 0.3
   delay: 0
