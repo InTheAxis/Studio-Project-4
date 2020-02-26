@@ -4,7 +4,7 @@ public struct BloodTag : IComponentData { }
 public class BloodBootstrap : ParticleBootstrap
 {
     [Header("Emit Source and Direction")]
-    [SerializeField]
+    //[SerializeField]
     private Transform emitter;
 
     private ECSParticles.Blood.EmitterCleanUpJobSystem cleanup;
@@ -14,6 +14,8 @@ public class BloodBootstrap : ParticleBootstrap
         Init(typeof(BloodTag));
 
         cleanup = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<ECSParticles.Blood.EmitterCleanUpJobSystem>();
+
+        emitter = GameManager.playerObj?.transform;
     }
 
     protected override void DestroyEntities()

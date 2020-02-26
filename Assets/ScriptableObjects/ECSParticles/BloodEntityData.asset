@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: becf6f9d1af6c884a95f9de554041b3d, type: 3}
+  m_Name: BloodEntityData
+  m_EditorClassIdentifier: 
+  mesh: {fileID: -9204119058436590431, guid: d5bcfdd52f6a63b4684e3ffb373adf68, type: 3}
+  material: {fileID: 2100000, guid: 99d703aa5c880e642af371326798d298, type: 2}
+  startRot: {x: 0, y: 0, z: 0}
+  rotRandom: {x: 2, y: 2, z: 2}
+  rotOverTime: 0
+  endRot: {x: 0, y: 0, z: 0}
+  startScale: 0.3
+  scaleRandom: 0
+  scaleOverTime: 1
+  endScale: 0.5
+  startSpeed: 5
+  velRandom: {x: 0, y: 0, z: 0}
+  velOverTime: 0
+  endVel: {x: 0, y: 0, z: 0}
+  startGravity: {x: 0, y: -9, z: 0}
+  gravityRandom: {x: 0, y: 0, z: 0}
+  gravTowardsSource: 0
+  gravityOverTime: 0
+  endGravity: {x: 0, y: 0, z: 0}
+  lifeTime: 0.3
+  lifeTimeRandom: 0
