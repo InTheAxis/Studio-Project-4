@@ -48,9 +48,15 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         //StartCoroutine(registrationCour);
 
         WinLose.instance.winLossCallback -= winLoss;
-        CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
-        playerHealthComp.OnDead -= playerDied;
-        playerHealthComp.OnRespawn -= playerRespawned;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            if (playerHealthComp != null)
+            {
+                playerHealthComp.OnDead -= playerDied;
+                playerHealthComp.OnRespawn -= playerRespawned;
+            }
+        }
     }
 
     private void playerRespawned()
