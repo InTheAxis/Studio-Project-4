@@ -55,7 +55,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
         setPlayerProperty("charModel", 0);
 
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 3;
+        roomOptions.MaxPlayers = 5;
         roomOptions.EmptyRoomTtl = 0;
         roomOptions.PlayerTtl = 0;
         if (password.Length > 0)
