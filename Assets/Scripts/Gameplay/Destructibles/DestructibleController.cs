@@ -114,14 +114,21 @@ public class DestructibleController : MonoBehaviourPun
         if (detectMaskLayer == -1)
             Debug.LogError("The layer " + detectMaskName + " is not set up in this project!");
 
-        cameraTransform = Camera.main.transform;
-        playerController = GameManager.playerObj.GetComponent<CharTPController>();
-        if (playerController != null)
-            holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
+        StartCoroutine(initPlayer());
 
         holdPositions = new List<Vector3>();
         prevHighlighted = new Dictionary<GameObject, List<Material>>();
         holdPosToleranceSq = holdPosTolerance * holdPosTolerance;
+    }
+    private IEnumerator initPlayer()
+    {
+        while (GameManager.playerObj == null)
+            yield return null;
+
+        cameraTransform = Camera.main.transform;
+        playerController = GameManager.playerObj.GetComponent<CharTPController>();
+        if (playerController != null)
+            holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
     }
 
     private void OnDestroy()
@@ -131,6 +138,9 @@ public class DestructibleController : MonoBehaviourPun
 
     private void Update()
     {
+        if (playerController == null)
+            return;
+
         // Remove any destructibles currently holding that are owned by another player (other player reached destructible before us)
         if (throwables?.Count > 0)
         {
