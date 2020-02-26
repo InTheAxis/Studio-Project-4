@@ -22,11 +22,6 @@ PrefabInstance:
       propertyPath: buffer
       value: 0.181
       objectReference: {fileID: 0}
-    - target: {fileID: 5809545488305829278, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: serverInstantiate
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: generators.Array.data[3].enabled
