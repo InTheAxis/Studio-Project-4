@@ -20,6 +20,7 @@ public class BoidManager : ComponentSystem
             {
                 managerData = data;
                 receivedData = true;
+                EntityManager.DestroyEntity(ent);
             });
         }
 
@@ -37,6 +38,14 @@ public class BoidManager : ComponentSystem
         }
 
         UpdatePos();
+    }
+
+    public void CleanUp()
+    {
+        Entities.ForEach((Entity ent, ref BoidData data) =>
+        {
+            EntityManager.DestroyEntity(ent);
+        });
     }
 
     private void UpdatePos()

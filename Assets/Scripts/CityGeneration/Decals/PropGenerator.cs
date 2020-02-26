@@ -12,6 +12,15 @@ public class PropGenerator : ComponentSystem
     public bool generated = false;
     private PoissonGenerator poisson = new PoissonGenerator();
 
+    public void CleanUp()
+    {
+        Entities.ForEach((Entity ent, ref DecalData data) =>
+        {
+            EntityManager.DestroyEntity(ent);
+        });
+        generated = false;
+    }
+
     protected override void OnUpdate()
     {
         if (generated)
