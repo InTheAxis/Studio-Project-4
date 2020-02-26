@@ -89,7 +89,6 @@ public class WinLose : MonoBehaviourPun
             if (backToLobbyTimer >= delayToLobbyTime && !hasSentLoadRequest)
             {
                 hasSentLoadRequest = true;
-                ScreenStateController.ReturningFromInGame = true;
                 PhotonNetwork.LoadLevel("Mainmenu");
             }
         }
@@ -99,6 +98,7 @@ public class WinLose : MonoBehaviourPun
     private void gameEnd(bool isHunterWin)
     {
         gameEnded = true;
+        ScreenStateController.ReturningFromInGame = true;
         Debug.Log("Sending game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
         photonView.RPC("receiveGameEnd", RpcTarget.Others, isHunterWin);
 
@@ -110,6 +110,7 @@ public class WinLose : MonoBehaviourPun
     private void receiveGameEnd(bool isHunterWin)
     {
         gameEnded = true;
+        ScreenStateController.ReturningFromInGame = true;
         Debug.Log("Received game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
 
         winLossCallback(isHunterWin);
