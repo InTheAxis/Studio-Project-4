@@ -17,6 +17,9 @@ public abstract class InteractableBase : MonoBehaviour
     private bool canCarry = false;
     public bool CanCarry { get => canCarry; }
 
+    public bool interactDone = false;
+
+
     public abstract string getInteractableName();
 
     [SerializeField]
