@@ -294,12 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5930868f6fc8894a833051cfbd41903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numRock: 2
+  numRock: 3
   density: 20
   range: 30
-  rock0: {fileID: 4735152758188089820, guid: c614b9d66e516a04a905dde68d17cb72, type: 3}
-  rock1: {fileID: 6180573846408238027, guid: ed2766e427e0f5643a4a986d747e4af6, type: 3}
-  rockC: {fileID: 0}
+  rock0: {fileID: 6072384740928766792, guid: 6af22fae6fa6c1b4d8116832e353a1bd, type: 3}
+  rock1: {fileID: 2057839505317842919, guid: 2279ba626965c4347902ca1a4b6d7dda, type: 3}
+  rockC: {fileID: 3695307399045412297, guid: 0047a16f3d92b854db168902645cb936, type: 3}
   rockD: {fileID: 0}
   rockE: {fileID: 0}
   rockF: {fileID: 0}

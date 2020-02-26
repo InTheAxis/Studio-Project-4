@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8501835696334963793
+--- !u!1 &6538125428260380752
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4875093122228352578}
-  - component: {fileID: 4538724499458215028}
-  - component: {fileID: 7908391906564518029}
+  - component: {fileID: 7847328523919184451}
+  - component: {fileID: 1277976693934483573}
+  - component: {fileID: 4792041536935859340}
   m_Layer: 0
   m_Name: Environment_OpenArea_TreeStumpB
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4875093122228352578
+--- !u!4 &7847328523919184451
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501835696334963793}
+  m_GameObject: {fileID: 6538125428260380752}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,21 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4538724499458215028
+--- !u!33 &1277976693934483573
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501835696334963793}
-  m_Mesh: {fileID: -1833371012545510238, guid: 23e84b9abe6009b4ca7d27c6256e9185, type: 3}
---- !u!23 &7908391906564518029
+  m_GameObject: {fileID: 6538125428260380752}
+  m_Mesh: {fileID: -1833371012545510238, guid: 9c41268a637d13d44b4baa82f8b716e4, type: 3}
+--- !u!23 &4792041536935859340
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501835696334963793}
+  m_GameObject: {fileID: 6538125428260380752}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5dbf767a6047bf40b8bb1e436ceb802, type: 2}
+  - {fileID: 2100000, guid: b469ed658149fb34b9868623488e6734, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
