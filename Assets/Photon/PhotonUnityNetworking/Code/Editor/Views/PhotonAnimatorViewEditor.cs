@@ -94,7 +94,7 @@ namespace Photon.Pun
         private void OnEnable()
         {
             this.m_Target = (PhotonAnimatorView)this.target;
-            this.m_Animator = this.m_Target.GetComponent<Animator>();
+            this.m_Animator = this.m_Target.GetComponentInChildren<Animator>();
 
             this.m_Controller = this.GetEffectiveController(this.m_Animator) as AnimatorController;
 
