@@ -20,11 +20,20 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(!isOverride)
-            isHuman = !PhotonNetwork.IsMasterClient;
+        int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
+        Debug.Log("Got prefab index " + prefabIndex);
 
-        playerObj = PhotonNetwork.Instantiate(isHuman ? humanPrefab.name : monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
-        playerObj.GetComponent<CharModelSelect>().SelectModel(2);
+        if (isOverride)
+            prefabIndex = isHuman ? 1 : 0;
+
+        Debug.Log("Instantiating prefab of index " + prefabIndex);
+        if (prefabIndex == 0)
+            playerObj = PhotonNetwork.Instantiate(monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        else
+        {
+            playerObj = PhotonNetwork.Instantiate(humanPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+            playerObj.GetComponent<CharModelSelect>().SelectModel(prefabIndex - 1);
+        }
     }
 
     private void Start()

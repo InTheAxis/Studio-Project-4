@@ -51,7 +51,8 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         // An empty password hosts a random room
         Debug.Log("Creating room with password " + password);
-        setPlayerProperty("isHunter", true);
+        //setPlayerProperty("isHunter", true);
+        setPlayerProperty("charModel", 0);
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 3;
@@ -64,7 +65,8 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     public void Join(string password)
     {
         Debug.Log("Joining room with password " + password);
-        setPlayerProperty("isHunter", false);
+        //setPlayerProperty("isHunter", false);
+        setPlayerProperty("charModel", 0);
 
         if (password.Length > 0)
             PhotonNetwork.JoinRoom(password);

@@ -480,6 +480,7 @@ public class ScreenStateController : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                NetworkClient.instance.setRoomVisibility(false);
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
@@ -542,6 +543,7 @@ public class ScreenStateController : MonoBehaviour
         /* Player 0 is always the Monster */
         /* Player 1-4 are the Survivors */
         Debug.Log("Player: " + go.transform.GetSiblingIndex());
+        NetworkClient.setPlayerProperty("charModel", go.transform.GetSiblingIndex());
     }
 
     public void onMapSelect(string type)
