@@ -11,9 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool isHuman = true;
     [SerializeField]
-    private GameObject humanPrefab;
-    [SerializeField]
-    private GameObject monsterPrefab;
+    private List<GameObject> modelPrefabs;
 
     public static GameObject playerObj = null;
 
@@ -26,13 +24,12 @@ public class GameManager : MonoBehaviour
         if (isOverride)
             prefabIndex = isHuman ? 1 : 0;
 
-        Debug.Log("Instantiating prefab of index " + prefabIndex);
-        if (prefabIndex == 0)
-            playerObj = PhotonNetwork.Instantiate(monsterPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        if (prefabIndex >= modelPrefabs.Count || prefabIndex < 0)
+            Debug.LogErrorFormat("Invalid idx of {0}", prefabIndex);
         else
         {
-            playerObj = PhotonNetwork.Instantiate(humanPrefab.name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
-            playerObj.GetComponent<CharModelSelect>().SelectModel(prefabIndex - 1);
+            Debug.Log("Instantiating prefab of index " + prefabIndex);
+            playerObj = PhotonNetwork.Instantiate(modelPrefabs[prefabIndex].name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
         }
     }
 
