@@ -23,7 +23,7 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && (deadScreen.activeSelf || spectateScreen.activeSelf))
             if (deadScreen.activeSelf)
             {
                 deadScreen.SetActive(false);
@@ -79,10 +79,10 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         if (CharTPController.PlayerControllerRefs.Count == 1)
             return;
 
-        int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj == CharTPCamera.Instance.charControl);
+        int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj.controller == CharTPCamera.Instance.charControl);
         if (++currIndex == CharTPController.PlayerControllerRefs.Count)
             currIndex = 0;
-        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex]);
+        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex].controller);
     }
 
     private void winLoss(bool isHunterWin)
