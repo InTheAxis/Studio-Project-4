@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment_Whole_Metro
       objectReference: {fileID: 0}
+    - target: {fileID: 7921269527918891184, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e8a728d9430334d98420368e7526af, type: 3}
 --- !u!1001 &4062964256427733475
