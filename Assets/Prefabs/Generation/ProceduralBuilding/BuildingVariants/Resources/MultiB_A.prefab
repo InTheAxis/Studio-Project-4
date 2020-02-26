@@ -44,6 +44,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base_MultiB_A
       objectReference: {fileID: 0}
+    - target: {fileID: 5238688215020704870, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 9144795395136906869, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -203,6 +208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AttachmentSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4864466897521250390, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}

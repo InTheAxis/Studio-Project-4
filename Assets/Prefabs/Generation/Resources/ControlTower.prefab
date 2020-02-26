@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2508381915322140454}
   - component: {fileID: 4173722650999028775}
-  m_Layer: 15
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: -5212480000998723040}
   - component: {fileID: -1308369214344310058}
   - component: {fileID: 6826552010628832027}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ControlTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,6 +199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Environment_Whole_ControlTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490861979288737068, guid: 2ee765489cab3e840aa22d1c1f092f2a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ee765489cab3e840aa22d1c1f092f2a, type: 3}

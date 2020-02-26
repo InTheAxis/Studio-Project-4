@@ -811,6 +811,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment_Whole_CentralTower
       objectReference: {fileID: 0}
+    - target: {fileID: 7337615432047156530, guid: a0098a338ee51424c887259f3f70b3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0098a338ee51424c887259f3f70b3b7, type: 3}
 --- !u!4 &1191200953305713243 stripped
