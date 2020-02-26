@@ -6,8 +6,10 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 {
     [SerializeField]
     private GameObject deadScreen;
+
     [SerializeField]
     private GameObject spectateScreen;
+
     [SerializeField]
     private GameObject endScreen;
 
@@ -65,10 +67,12 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         spectateScreen.SetActive(false);
         GameManager.setCamera(GameManager.playerObj);
     }
+
     private void playerDied()
     {
         deadScreen.SetActive(true);
     }
+
     private void setNextPlayerSpectate()
     {
         // Edge case: Only one player is in game. Don't change the camera
@@ -92,10 +96,18 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
             yield return null;
 
         WinLose.instance.winLossCallback += winLoss;
-        CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
-        playerHealthComp.OnDead += playerDied;
-        playerHealthComp.OnRespawn += playerRespawned;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            playerHealthComp.OnDead += playerDied;
+            playerHealthComp.OnRespawn += playerRespawned;
+        }
+        else
+        {
+            Debug.LogWarning("No player object");
+        }
     }
+
     private IEnumerator deregisterCallbacks()
     {
         while (WinLose.instance == null)

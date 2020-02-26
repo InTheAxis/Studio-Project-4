@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking; 
-using UnityEngine.SceneManagement; 
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LoadingQuotes : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI displayText;
+
     [SerializeField]
     private TYPE type = TYPE.ANY;
-    public enum TYPE 
+
+    public enum TYPE
     {
         ANY = 0,
         WEATHER,
@@ -40,6 +42,7 @@ public class LoadingQuotes : MonoBehaviour
         displayText.text = "null";
         GetQuote(type);
     }
+
     public void GetQuote(TYPE type = TYPE.ANY)
     {
         if (type == TYPE.ANY)
@@ -59,20 +62,24 @@ public class LoadingQuotes : MonoBehaviour
         switch (type)
         {
             default:
-            case TYPE.NUMBERS:                
+            case TYPE.NUMBERS:
                 break;
+
             case TYPE.WEATHER:
                 OpenWeatherJson w = JsonUtility.FromJson<OpenWeatherJson>(result);
                 ret = w.GetWeather();
                 break;
+
             case TYPE.TEMPERATURE:
                 OpenWeatherJson t = JsonUtility.FromJson<OpenWeatherJson>(result);
                 ret = t.GetTemp();
                 break;
+
             case TYPE.JOKE:
                 DadJoke d = JsonUtility.FromJson<DadJoke>(result);
                 ret = d.GetJoke();
                 break;
+
             case TYPE.INSPIRATION:
                 FamousQuotes f = JsonUtility.FromJson<FamousQuotes>(result);
                 ret = f.GetQuote();
@@ -88,16 +95,16 @@ public class LoadingQuotes : MonoBehaviour
         if (uwr.isNetworkError)
             Debug.LogErrorFormat("Error getting from {0}, {1}", uri, uwr.error);
         else if (uwr.isDone)
-        { 
+        {
             displayText.text = FormatResult(uwr.downloadHandler.text, type);
             Debug.LogFormat("Got quote : {0}", displayText.text);
         }
     }
 
-
     #region Json Parsing and Result Formatting
-    
-    #region Weather 
+
+    #region Weather
+
     [System.Serializable]
     private struct OpenWeatherJson
     {
@@ -105,26 +112,29 @@ public class LoadingQuotes : MonoBehaviour
         public string text;
 
         public string GetWeather()
-        { 
-            return string.Format("You should look out your window, I see {0}.", weather[0].description);
-
-        }
-        public string GetTemp() 
         {
-            return string.Format("Current temperatures are {0}, but it feels like {1}.", main.temp, main.feels_like); 
+            return string.Format("You should look out your window, I see {0}.", weather[0].description);
+        }
+
+        public string GetTemp()
+        {
+            return string.Format("Current temperatures are {0}, but it feels like {1}.", main.temp, main.feels_like);
         }
 
         public Temp main;
         public Weather[] weather;
     }
+
     [System.Serializable]
     private struct Weather
     {
         //public int id;
         //public string main;
         public string description;
+
         //public string icon;
     }
+
     [System.Serializable]
     private struct Temp
     {
@@ -135,9 +145,11 @@ public class LoadingQuotes : MonoBehaviour
         //public int pressure;
         //public int humidity;
     }
-    #endregion
 
-    #region Jokes 
+    #endregion Weather
+
+    #region Jokes
+
     [System.Serializable]
     private struct DadJoke
     {
@@ -149,11 +161,14 @@ public class LoadingQuotes : MonoBehaviour
         //public int id;
         //public string type;
         public string setup;
+
         public string punchline;
     }
-    #endregion
 
-    #region Inspiration 
+    #endregion Jokes
+
+    #region Inspiration
+
     [System.Serializable]
     private struct FamousQuotes
     {
@@ -164,11 +179,13 @@ public class LoadingQuotes : MonoBehaviour
 
         //public string id;
         public string content;
+
         public string author;
         //public string[] tags;
         //public int length;
     }
-    #endregion
 
-    #endregion
+    #endregion Inspiration
+
+    #endregion Json Parsing and Result Formatting
 }

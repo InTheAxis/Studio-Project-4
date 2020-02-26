@@ -7,11 +7,13 @@ using UnityEngine;
 public class CharLookTargetController : MonoBehaviour
 {
     public CharTPCamera tpCam;
-    private struct InputData 
+
+    private struct InputData
     {
         public bool map;
         public bool front;
     };
+
     private InputData inp;
     private Minimap3D minimap = null;
 
@@ -19,7 +21,7 @@ public class CharLookTargetController : MonoBehaviour
 
     private void Update()
     {
-        if (minimap == null)
+        if (minimap == null && GameManager.playerObj != null)
         {
             minimap = GameManager.playerObj.GetComponentInChildren<Minimap3D>();
             minimap.gameObject.SetActive(false);
@@ -39,12 +41,10 @@ public class CharLookTargetController : MonoBehaviour
             }
             else
             {
-
                 minimap.Hide();
                 showMap?.Invoke(false);
                 tpCam.LookAtPlayer();
             }
-
         }
         else if (inp.front)
         {
@@ -53,8 +53,7 @@ public class CharLookTargetController : MonoBehaviour
             else if (tpCam.IsLookingAt() == "Front")
                 tpCam.LookAt("FrontSide", 2);
             else if (tpCam.IsLookingAt() == "FrontSide")
-                tpCam.LookAtPlayer();            
+                tpCam.LookAtPlayer();
         }
-
     }
 }
