@@ -128,7 +128,7 @@ public class DestructibleController : MonoBehaviourPun
         cameraTransform = Camera.main.transform;
         playerController = GameManager.playerObj.GetComponent<CharTPController>();
         if (playerController != null)
-            holdDestructibles = GameObject.FindGameObjectWithTag(holdDestructiblesTag).transform;
+            holdDestructibles = playerController.transform.Find("BaseChar").Find("HoldDestructibles");
     }
 
     private void OnDestroy()
