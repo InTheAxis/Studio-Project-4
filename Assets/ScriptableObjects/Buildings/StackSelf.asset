@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ebfe4f7bbf8c1544a0844e0b71c6bc8, type: 3}
-  m_Name: Default
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: StackSelf
   m_EditorClassIdentifier: 
   meshList:
-  - mesh: {fileID: 7307666935101455286, guid: 427d84714166959478bcca1ba55bdc06, type: 3}
-    weight: 0
-    chance: 0
+  - mesh: {fileID: 2352481948361145153, guid: 4a8deb72cde5ccd41ba6919648ef464e, type: 3}
+    weight: 1
+    chance: 1

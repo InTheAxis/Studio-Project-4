@@ -42,11 +42,22 @@ PrefabInstance:
       propertyPath: gizmosEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5809545488305829278, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: serverInstantiate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: scale
       value: 238.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: city
+      value: 
+      objectReference: {fileID: 11400000, guid: 34a27c6468b51724d895c1e1d36fdd82,
+        type: 2}
     - target: {fileID: 5890597338796914725, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: m_LocalPosition.x
