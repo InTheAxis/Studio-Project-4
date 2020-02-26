@@ -111,6 +111,8 @@ public class ScreenStateController : MonoBehaviour
     private GameObject mapSelectNext = null;
     [SerializeField]
     private GameObject[] lobbySubscreens = null;
+    [SerializeField]
+    private GameObject charSelectButton = null;
 
 
     private List<GameObject> hovered;
@@ -221,7 +223,12 @@ public class ScreenStateController : MonoBehaviour
                 tmReady.transform.parent.GetComponent<Button>().enabled = false;
                 tmReady.GetComponent<TextMeshProUGUI>().color = failColor;
             }
+
+            //disable character select
+            charSelectButton.SetActive(false);
         }
+        else
+            charSelectButton.SetActive(true);
     }
 
     private void getHoveredUIElements()
@@ -541,7 +548,7 @@ public class ScreenStateController : MonoBehaviour
     public void onPlayerSelect(GameObject go)
     {
         /* Player 0 is always the Monster */
-        /* Player 1-4 are the Survivors */
+        /* Player 1 onwards are the Survivors */
         Debug.Log("Player: " + go.transform.GetSiblingIndex());
         NetworkClient.setPlayerProperty("charModel", go.transform.GetSiblingIndex());
     }
