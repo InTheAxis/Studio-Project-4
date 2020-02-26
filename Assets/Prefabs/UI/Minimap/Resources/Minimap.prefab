@@ -203,15 +203,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane: {fileID: 1439737728588284931}
   planeScaleRange: {x: 0.3, y: 0.55}
+  planeMaxHeight: 15
+  worldMaxHeight: 100
   mapRadius: 300
-  simpleCube: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
-    type: 3}
   scrollSensitivity: 0.1
+  hologramMat: {fileID: 2100000, guid: 478ef20f104bb7e41811e56db262810b, type: 2}
+  simpleHologram: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
+    type: 3}
+  complexHologram: {fileID: 5331565749110258536, guid: 1d695e5b730160546b76e211cb393a10,
+    type: 3}
+  controlTowerTag: Landmark
   activeHolder: {fileID: 613424768125321610}
   inactiveHolder: {fileID: 5384246735842255405}
-  displayHolder: {fileID: 5341789789146367881}
   compassDirFrame: {fileID: 2444811154904345409}
-  compassDottedFrame: {fileID: 8766896273379339065}
+  tmAngle: {fileID: 0}
 --- !u!1 &2852484480387873353
 GameObject:
   m_ObjectHideFlags: 0

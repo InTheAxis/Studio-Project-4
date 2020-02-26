@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1498018746896148287}
   - component: {fileID: 7606877335044873481}
   - component: {fileID: 4228184923897995760}
+  - component: {fileID: -1939064929186616731}
   m_Layer: 0
   m_Name: Environment_Whole_ControlTower
-  m_TagString: Untagged
+  m_TagString: Landmark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-1939064929186616731
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490861979288737068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7665531208748891271, guid: 4bb7a3c257a520b4da45cbf9f4d01fe7, type: 3}

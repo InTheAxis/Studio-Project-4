@@ -21,7 +21,7 @@ public class HologramAnimate : MonoBehaviour
         {
             currentScale = Vector3.Lerp(currentScale, targetScale, speed * Time.deltaTime);
             transform.localScale = currentScale;
-            if ((targetScale - currentScale).sqrMagnitude <= 0.02f)
+            if ((targetScale - currentScale).sqrMagnitude <= 0.001f)
             {
                 if (shrink)
                     gameObject.SetActive(false);

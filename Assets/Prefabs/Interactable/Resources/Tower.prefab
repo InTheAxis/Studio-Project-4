@@ -149,8 +149,10 @@ MonoBehaviour:
   allowConstantInteraction: 1
   lenientInteraction: 0
   canCarry: 0
+  interactDone: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
-  timeToFinishInteraction: 2
+  timeToFinishInteractionMonster: 10
+  timeToFinishInteractionHuman: 5
 --- !u!1 &3251071315449172671
 GameObject:
   m_ObjectHideFlags: 0

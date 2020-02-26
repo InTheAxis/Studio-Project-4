@@ -76,10 +76,16 @@ public class MonsterEnergy : MonoBehaviour, IPunObservable
     }
     public void Recharge(float amt)
     {
+        Debug.Log("Recahrged");
         energy += amt;
         if (energy > maxEnergy)
             energy = maxEnergy;
     }
+    public void RechargePercent(float percent) //0 to 1
+    {
+        Recharge(maxEnergy * percent);
+    }
+
     public void RechargeFull()
     {
         Recharge(maxEnergy);

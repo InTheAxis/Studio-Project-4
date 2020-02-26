@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9859066e0410ff54e82ceeb629cdcbb3
+guid: 6407f583121c29a489a1c1d9eb1d56f0
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: f39e6094372e16d4ca6269343ce70d96, type: 2}
+    second: {fileID: 2100000, guid: ff33c7ec6528c9748b021589fbc22c47, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -18,7 +18,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 1
+    optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
