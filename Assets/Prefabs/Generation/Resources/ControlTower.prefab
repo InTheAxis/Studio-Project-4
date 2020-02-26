@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd02723c4e41b43429e2dc1a33661cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowConstantInteraction: 0
-  lenientInteraction: 1
+  allowConstantInteraction: 1
+  lenientInteraction: 0
   canCarry: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
   timeToFinishInteraction: 2
