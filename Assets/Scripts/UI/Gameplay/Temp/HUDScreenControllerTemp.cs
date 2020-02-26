@@ -92,7 +92,7 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 
     private IEnumerator registerCallbacks()
     {
-        while (WinLose.instance == null)
+        while (WinLose.instance == null || GameManager.playerObj == null)
             yield return null;
 
         WinLose.instance.winLossCallback += winLoss;
@@ -110,7 +110,7 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 
     private IEnumerator deregisterCallbacks()
     {
-        while (WinLose.instance == null)
+        while (WinLose.instance == null || GameManager.playerObj == null)
             yield return null;
 
         WinLose.instance.winLossCallback -= winLoss;

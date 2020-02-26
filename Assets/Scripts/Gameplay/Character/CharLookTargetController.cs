@@ -21,7 +21,10 @@ public class CharLookTargetController : MonoBehaviour
 
     private void Update()
     {
-        if (minimap == null && GameManager.playerObj != null)
+        if (GameManager.playerObj == null)
+            return;
+
+        if (minimap == null)
         {
             minimap = GameManager.playerObj.GetComponentInChildren<Minimap3D>();
             minimap.gameObject.SetActive(false);
