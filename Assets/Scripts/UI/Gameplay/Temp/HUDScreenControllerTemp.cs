@@ -6,8 +6,10 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 {
     [SerializeField]
     private GameObject deadScreen;
+
     [SerializeField]
     private GameObject spectateScreen;
+
     [SerializeField]
     private GameObject endScreen;
 
@@ -21,7 +23,7 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && (deadScreen.activeSelf || spectateScreen.activeSelf))
             if (deadScreen.activeSelf)
             {
                 deadScreen.SetActive(false);
@@ -48,9 +50,15 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         //StartCoroutine(registrationCour);
 
         WinLose.instance.winLossCallback -= winLoss;
-        CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
-        playerHealthComp.OnDead -= playerDied;
-        playerHealthComp.OnRespawn -= playerRespawned;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            if (playerHealthComp != null)
+            {
+                playerHealthComp.OnDead -= playerDied;
+                playerHealthComp.OnRespawn -= playerRespawned;
+            }
+        }
     }
 
     private void playerRespawned()
@@ -59,20 +67,22 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         spectateScreen.SetActive(false);
         GameManager.setCamera(GameManager.playerObj);
     }
+
     private void playerDied()
     {
         deadScreen.SetActive(true);
     }
+
     private void setNextPlayerSpectate()
     {
         // Edge case: Only one player is in game. Don't change the camera
         if (CharTPController.PlayerControllerRefs.Count == 1)
             return;
 
-        int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj == CharTPCamera.Instance.charControl);
+        int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj.controller == CharTPCamera.Instance.charControl);
         if (++currIndex == CharTPController.PlayerControllerRefs.Count)
             currIndex = 0;
-        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex]);
+        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex].controller);
     }
 
     private void winLoss(bool isHunterWin)
@@ -82,17 +92,25 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
 
     private IEnumerator registerCallbacks()
     {
-        while (WinLose.instance == null)
+        while (WinLose.instance == null || GameManager.playerObj == null)
             yield return null;
 
         WinLose.instance.winLossCallback += winLoss;
-        CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
-        playerHealthComp.OnDead += playerDied;
-        playerHealthComp.OnRespawn += playerRespawned;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            playerHealthComp.OnDead += playerDied;
+            playerHealthComp.OnRespawn += playerRespawned;
+        }
+        else
+        {
+            Debug.LogWarning("No player object");
+        }
     }
+
     private IEnumerator deregisterCallbacks()
     {
-        while (WinLose.instance == null)
+        while (WinLose.instance == null || GameManager.playerObj == null)
             yield return null;
 
         WinLose.instance.winLossCallback -= winLoss;

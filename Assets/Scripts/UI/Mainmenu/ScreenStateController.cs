@@ -111,6 +111,8 @@ public class ScreenStateController : MonoBehaviour
     private GameObject mapSelectNext = null;
     [SerializeField]
     private GameObject[] lobbySubscreens = null;
+    [SerializeField]
+    private GameObject charSelectButton = null;
 
 
     private List<GameObject> hovered;
@@ -133,9 +135,9 @@ public class ScreenStateController : MonoBehaviour
 
     public static bool ReturningFromInGame { get => returningFromInGame; set => returningFromInGame = value; }
 
-    private Stack<ScreenStates> history = null;
-    private List<LobbyPlayer> players = null;
-    private Dictionary<string, int> playerIDs = null;
+    private static Stack<ScreenStates> history = null;
+    private static List<LobbyPlayer> players = null;
+    private static Dictionary<string, int> playerIDs = null;
 
     private void Start()
     {
@@ -221,7 +223,12 @@ public class ScreenStateController : MonoBehaviour
                 tmReady.transform.parent.GetComponent<Button>().enabled = false;
                 tmReady.GetComponent<TextMeshProUGUI>().color = failColor;
             }
+
+            //disable character select
+            charSelectButton.SetActive(false);
         }
+        else
+            charSelectButton.SetActive(true);
     }
 
     private void getHoveredUIElements()
@@ -348,10 +355,8 @@ public class ScreenStateController : MonoBehaviour
             playfabAuthenticator.Login(tmLoginUsername.text, tmLoginPassword.text,
                 playerName =>
                 {
-                    PhotonNetwork.NickName = playerName;
-                    PlayerSettings.playerName = playerName;
+                    setName(playerName);
                     setScene(ScreenStates.MAINMENU);
-                    tmUsername.text = tmLoginUsername.text;
                 }, (errorMsg, errorType) =>
                 {
                     tmLoginStatus.color = failColor;
@@ -388,10 +393,8 @@ public class ScreenStateController : MonoBehaviour
                 playfabAuthenticator.Register(tmRegisterUsername.text, tmRegisterPassword.text, tmRegisterEmail.text,
                     playerName =>
                     {
-                        PhotonNetwork.NickName = playerName;
-                        PlayerSettings.playerName = playerName;
+                        setName(playerName);
                         setScene(ScreenStates.MAINMENU);
-                        tmUsername.text = tmRegisterUsername.text;
                     }, (errorMsg, errorType) =>
                     {
                         tmRegisterStatus.color = failColor;
@@ -461,13 +464,17 @@ public class ScreenStateController : MonoBehaviour
             if (joinPasswordInput.activeSelf)
                 StartCoroutine(fadeCanvasGroup(cgJoin, true));
         }
-        else if (name == "ServerJoinRandom")
+        else if (name == "ServerJoinRandom" || name == "QuickJoinRandom")
         {
+            if (name == "QuickJoinRandom")
+                setRandomName();
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Join("");
         }
-        else if (name == "ServerHostCreate")
+        else if (name == "ServerHostCreate" || name == "QuickHost")
         {
+            if (name == "QuickHost")
+                setRandomName();
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Host(hostPasswordInput.GetComponent<TMP_InputField>().text);
         }
@@ -480,6 +487,7 @@ public class ScreenStateController : MonoBehaviour
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                NetworkClient.instance.setRoomVisibility(false);
                 mainmenuModel.SetActive(false);
                 lobbyModels.SetActive(false);
                 setScene(ScreenStates.LOADING);
@@ -516,6 +524,16 @@ public class ScreenStateController : MonoBehaviour
             }
         }
     }
+    private void setName(string name)
+    {
+        PhotonNetwork.NickName = name;
+        PlayerSettings.playerName = name;
+        tmUsername.text = name;
+    }
+    private void setRandomName()
+    {
+        setName("Guest" + Random.Range(0, 10000));
+    }
 
     private IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn)
     {
@@ -540,8 +558,9 @@ public class ScreenStateController : MonoBehaviour
     public void onPlayerSelect(GameObject go)
     {
         /* Player 0 is always the Monster */
-        /* Player 1-4 are the Survivors */
+        /* Player 1 onwards are the Survivors */
         Debug.Log("Player: " + go.transform.GetSiblingIndex());
+        NetworkClient.setPlayerProperty("charModel", go.transform.GetSiblingIndex());
     }
 
     public void onMapSelect(string type)

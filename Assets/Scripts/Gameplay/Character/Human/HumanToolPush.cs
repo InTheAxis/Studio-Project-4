@@ -34,11 +34,15 @@ public class HumanToolPush : MonoBehaviour
     }
     private void Update()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         pressed = Input.GetAxisRaw("Fire2") != 0;
     }
 
     private void FixedUpdate()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         if (pressed && cooldown <= 0)
         {
             cooldown = cooldownTime;

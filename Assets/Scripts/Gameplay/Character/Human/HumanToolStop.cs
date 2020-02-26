@@ -21,14 +21,23 @@ public class HumanToolStop : MonoBehaviour
 
     private bool pressed;
     private float cooldown;
-
+    private void OnEnable()
+    {
+        //init & reset
+        cooldown = 0;
+        pressed = false;
+    }
     private void Update()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         pressed = Input.GetAxisRaw("Fire2") != 0;
     }
 
     private void FixedUpdate()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         if (pressed && cooldown <= 0)
         {
             cooldown = cooldownTime;

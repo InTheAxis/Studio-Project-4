@@ -45,6 +45,9 @@ public class CellGenerator : Generator
 {
     private List<BuildingCell> cells = new List<BuildingCell>();
 
+    [SerializeField]
+    private CityGenerator cityGenerator;
+
     //[SerializeField]
     //private float minOffset;
 
@@ -114,7 +117,8 @@ public class CellGenerator : Generator
                 currPos += dir * buffer.Get();
                 while (currDist < path.Length())    // main cell loop
                 {
-                    float currCellRadius = cellRadius.Get();
+                    // float currCellRadius = cellRadius.Get();
+                    float currCellRadius = cityGenerator.city.SelectMesh().GetComponent<ProceduralBuilding>().GetRadius();
                     //float cellWidth = width.Get();
                     float spacing = buffer.Get();
                     currDist += currCellRadius;
@@ -141,7 +145,7 @@ public class CellGenerator : Generator
                         }
                     }
                     // check for player
-                    foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+                    foreach (Vector3 point in PlayerSpawnGenerator.playerSpawnPos)
                     {
                         if (Vector3.Distance(currPos, point) < playerBuffer + currCellRadius)
                         {
@@ -149,7 +153,7 @@ public class CellGenerator : Generator
                             break;
                         }
                     }
-                    if (Vector3.Distance(currPos, playerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)
+                    if (Vector3.Distance(currPos, PlayerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)
                     {
                         isAvailable = false;
                     }
@@ -173,10 +177,10 @@ public class CellGenerator : Generator
         foreach (BuildingCell cell in cells)
         {
             if (cell.isLeft)
-                Gizmos.color = Color.red;
+                Gizmos.color = Color.blue;
             else
                 Gizmos.color = Color.green;
-            Gizmos.DrawSphere(cell.pos, 2);
+            Gizmos.DrawWireSphere(cell.pos, cell.radius);
         }
         // tower
         Gizmos.color = Color.red;
@@ -185,11 +189,11 @@ public class CellGenerator : Generator
             Gizmos.DrawWireSphere(point.pos, towerBuffer);
         }
         Gizmos.color = Color.magenta;
-        foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+        foreach (Vector3 point in PlayerSpawnGenerator.playerSpawnPos)
         {
             Gizmos.DrawWireSphere(point, playerBuffer * scale);
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
+        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
     }
 }

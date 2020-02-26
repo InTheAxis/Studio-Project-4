@@ -23,7 +23,7 @@ public class InstantiateHandler : MonoBehaviour
         GameObject instantiated = null;
         if (sServerInstantiate)
         {
-            instantiated = PhotonNetwork.Instantiate(go.name, Vector3.zero, Quaternion.identity);
+            instantiated = PhotonNetwork.InstantiateSceneObject(go.name, Vector3.zero, Quaternion.identity);
         }
         else
         {
@@ -37,7 +37,7 @@ public class InstantiateHandler : MonoBehaviour
         GameObject instantiated = null;
         if (sServerInstantiate)
         {
-            instantiated = PhotonNetwork.Instantiate(go.name, pos, Quaternion.identity);
+            instantiated = PhotonNetwork.InstantiateSceneObject(go.name, pos, Quaternion.identity);
         }
         else
         {
@@ -51,7 +51,7 @@ public class InstantiateHandler : MonoBehaviour
         GameObject instantiated = null;
         if (sServerInstantiate)
         {
-            instantiated = PhotonNetwork.Instantiate(go.name, pos, rot);
+            instantiated = PhotonNetwork.InstantiateSceneObject(go.name, pos, rot);
         }
         else
         {

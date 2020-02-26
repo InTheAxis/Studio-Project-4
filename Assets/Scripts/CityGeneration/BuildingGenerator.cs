@@ -5,9 +5,12 @@ using UnityEngine;
 public class BuildingGenerator : Generator
 {
     private PoissonGenerator poisson = new PoissonGenerator();
-    public CityScriptable cityScriptable;
+
+    [SerializeField]
+    private CityGenerator cityGenerator;
+
     public TowerGenerator towerGenerator;
-    public CellGenerator cellGenerator;
+    public CellBuildingGenerator cellGenerator;
     // public float roadSearchRange = 15;
 
     [Range(0, 1000)]
@@ -43,23 +46,23 @@ public class BuildingGenerator : Generator
         poisson.ClearInjected();
         poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
         // inject player/hunter
-        foreach (Vector3 pos in playerSpawnGenerator.playerSpawnPos)
+        foreach (Vector3 pos in PlayerSpawnGenerator.playerSpawnPos)
         {
             poisson.Inject(new PoissonPoint(pos / scale, playerBuffer));
         }
-        poisson.Inject(new PoissonPoint(playerSpawnGenerator.hunterSpawnPos / scale, playerBuffer));
+        poisson.Inject(new PoissonPoint(PlayerSpawnGenerator.hunterSpawnPos / scale, playerBuffer));
         // inject tower
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
             poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer));
         }
-        foreach (BuildingCell cell in cellGenerator.GetCells())
+        foreach (BuildingCell cell in cellGenerator.buildingCells)
         {
             poisson.Inject(new PoissonPoint(cell.pos / scale, cell.radius / scale));
         }
         bool success = poisson.Generate(density, buffer);
         poisson.Scale(scale);
-        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1 + 5))
+        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
             vpos.y += 0.5f;
@@ -76,7 +79,7 @@ public class BuildingGenerator : Generator
             }
             if (emptySpot)
             {
-                GameObject buildingRef = cityScriptable.SelectMesh();
+                GameObject buildingRef = cityGenerator.city.SelectMesh();
                 GameObject building = InstantiateHandler.mInstantiate(buildingRef, vpos, Quaternion.identity, transform, "Environment");
                 building.GetComponent<ProceduralBuilding>().GenerateRandom();
                 building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
@@ -88,7 +91,7 @@ public class BuildingGenerator : Generator
     {
         if (!gizmosEnabled)
             return;
-        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1))
+        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1))
         {
             Gizmos.DrawWireSphere(pos.pos, buffer * scale);
         }

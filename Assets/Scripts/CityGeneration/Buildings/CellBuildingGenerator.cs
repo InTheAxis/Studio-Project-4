@@ -5,10 +5,12 @@ using UnityEngine;
 public class CellBuildingGenerator : Generator
 {
     [SerializeField]
-    private CellGenerator cellGenerator;
+    private CityGenerator cityGenerator;
 
     [SerializeField]
-    public CityScriptable cityScriptable;
+    private CellGenerator cellGenerator;
+
+    public List<BuildingCell> buildingCells { get; private set; } = new List<BuildingCell>();
 
     public override void Clear()
     {
@@ -16,6 +18,7 @@ public class CellBuildingGenerator : Generator
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
+        buildingCells.Clear();
     }
 
     public override void Generate()
@@ -23,7 +26,7 @@ public class CellBuildingGenerator : Generator
         Clear();
         foreach (BuildingCell cell in cellGenerator.GetCells())
         {
-            GameObject buildingRef = cityScriptable.SelectMesh(cell.radius);
+            GameObject buildingRef = cityGenerator.city.SelectMesh(cell.radius);
             if (buildingRef == null)
                 continue;
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();
@@ -34,6 +37,7 @@ public class CellBuildingGenerator : Generator
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             //building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
+            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot));
         }
     }
 }

@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
       propertyPath: destroyed.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
       propertyPath: breakForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
@@ -29,6 +29,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 790828920242029795, guid: ac880b7895ab21d43b4a3fec8e1ab2f7,
         type: 3}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: maxExplosionForce.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: maxExplosionForce.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: maxExplosionForce.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: minExplosionForce.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: minExplosionForce.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754601243265824180, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: minExplosionForce.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5073358625377605692, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
       propertyPath: m_Enabled
@@ -43,6 +73,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Base_MultiB_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238688215020704870, guid: 3c9d8eafabffcfa40b394021a52c0e72,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9144795395136906869, guid: 3c9d8eafabffcfa40b394021a52c0e72,
         type: 3}
@@ -203,6 +238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AttachmentSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4864466897521250390, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}

@@ -94,7 +94,7 @@ public class CloudScript : MonoBehaviour
 
     private void SetValues()
     {
-        Debug.Log("Frame");
+        // Debug.Log("Frame");
         //if (material == null)
         //    material = new Material(shader);
         // Set container bounds:

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class MonsterEnergy : MonoBehaviour
+public class MonsterEnergy : MonoBehaviour, IPunObservable
 {
     [SerializeField]
     private CharHealth health;
@@ -12,6 +13,18 @@ public class MonsterEnergy : MonoBehaviour
     private float decayRate = 0.01f;
 
     private float energy;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(energy);
+        }
+        else 
+        {
+            energy = (float)stream.ReceiveNext();
+        }
+    }
 
     private void OnEnable()
     {
@@ -63,10 +76,16 @@ public class MonsterEnergy : MonoBehaviour
     }
     public void Recharge(float amt)
     {
+        Debug.Log("Recahrged");
         energy += amt;
         if (energy > maxEnergy)
             energy = maxEnergy;
     }
+    public void RechargePercent(float percent) //0 to 1
+    {
+        Recharge(maxEnergy * percent);
+    }
+
     public void RechargeFull()
     {
         Recharge(maxEnergy);

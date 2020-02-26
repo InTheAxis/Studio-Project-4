@@ -29,6 +29,13 @@ public class PlayerInfoController : MonoBehaviour
         CharTPController.OnPlayerAdd += addPlayerInfo;
         CharTPController.OnPlayerRemoved += removePlayerInfo;
     }
+    private void OnDestroy()
+    {
+        CharTPController.OnPlayerAdd -= addPlayerInfo;
+        CharTPController.OnPlayerRemoved -= removePlayerInfo;
+        foreach (var p in CharTPController.PlayerControllerRefs)
+            p.controller.GetComponent<CharHealth>().OnHealthChange -= updateHealth;
+    }
 
     private void Update()
     {
@@ -51,13 +58,21 @@ public class PlayerInfoController : MonoBehaviour
         return newPlayer;
     }
 
+    private void addPlayerInfo(CharTPController.PlayerControllerData newPlayer)
+    {
+        addPlayerInfo(newPlayer.controller);
+    }
     private void addPlayerInfo(CharTPController newPlayer)
     {
         playerInfo.Add(setupPlayerInfo(newPlayer));
 
         newPlayer.GetComponent<CharHealth>().OnHealthChange += updateHealth;
     }
-    private void removePlayerInfo(CharTPController player)
+    private void removePlayerInfo(CharTPController.PlayerControllerData player)
+    {
+        removePlayerInfo(player.name);
+    }
+    private void removePlayerInfo(string name)
     {
         bool foundPlayer = false;
         for (int i = 0; i < transform.childCount; ++i)
@@ -66,7 +81,7 @@ public class PlayerInfoController : MonoBehaviour
                 transform.GetChild(i).gameObject.SetActive(false);
             else if (foundPlayer) // Replace old PlayerInfo with a new one targeting the Player HUD child above its current one
                 playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i);
-            else if (playerInfo[i].name == player.photonView.Owner.NickName) // Remove and replace the PlayerInfo that takes over its place
+            else if (playerInfo[i].name == name) // Remove and replace the PlayerInfo that takes over its place
             {
                 foundPlayer = true;
                 playerInfo.RemoveAt(i);

@@ -6,32 +6,38 @@ using UnityEngine;
 public class CharTPCamera : MonoBehaviour
 {
     public static CharTPCamera Instance;
-    
+
     //[Header("References from Character Object")]
     //[SerializeField]
     //[Tooltip("Should be sett externaly with this class' function")]
     public CharTPController charControl { get; private set; }
+
     //[SerializeField]
     //[Tooltip("What the camera should look at and follow")]
     private List<Transform> lookTargets;
 
     [Header("Distance to Target")]
-    [SerializeField] 
+    [SerializeField]
     [Tooltip("How far the camera should be away from look target")]
     private float targetCamDist;
+
     [SerializeField]
     [Tooltip("At what distance away should the camera start")]
     private float initialCamDist;
+
     [Header("Camera Collision Settings")]
     [SerializeField]
     [Tooltip("What layers will trigger the collision")]
     private LayerMask mask;
+
     [SerializeField]
     [Tooltip("How fast the camera will lerp to targets")]
     private float camAdjustSpeed = 5;
+
     [SerializeField]
     [Tooltip("How fast the camera will lerp when occluded")]
     private float camOccludeSpeed = 50;
+
     [SerializeField]
     [Tooltip("Offsets where the rays are cast from, higher means the camera detects occlusions earlier")]
     private float adjustOffset = 0.3f;
@@ -40,9 +46,11 @@ public class CharTPCamera : MonoBehaviour
     [SerializeField]
     [Tooltip("How long to shake cam")]
     private float shakeDuration = 0.5f;
+
     [SerializeField]
     [Tooltip("How far to shake cam")]
     private float shakeAmplitude = 0.01f;
+
     [SerializeField]
     [Tooltip("How frequent to shake cam")]
     private float shakeFrequency = 0.5f;
@@ -51,7 +59,6 @@ public class CharTPCamera : MonoBehaviour
     [SerializeField]
     [Tooltip("Crosshair Sprite")]
     private Transform crosshair = null;
-
 
     private Transform target;
     private Transform nextTarget;
@@ -66,6 +73,7 @@ public class CharTPCamera : MonoBehaviour
     private IEnumerator camShakeCorr;
 
     #region private Calls
+
     //attach char controller for that look direction
     public void SetCharController(CharTPController cc)
     {
@@ -94,6 +102,7 @@ public class CharTPCamera : MonoBehaviour
         targetCamDist = distToTarget;
         targetIdx = index;
     }
+
     public void LookAt(string _name, float distToTarget)
     {
         int idx = -1;
@@ -103,7 +112,7 @@ public class CharTPCamera : MonoBehaviour
             {
                 idx = i;
                 break;
-            } 
+            }
         }
         if (idx < 0)
         {
@@ -115,11 +124,11 @@ public class CharTPCamera : MonoBehaviour
     }
 
     //returns the index of transform in target array
-    public int IsLookingAtIdx() 
+    public int IsLookingAtIdx()
     {
         return targetIdx;
     }
-    
+
     //returns name of target being looked at
     public string IsLookingAt()
     {
@@ -137,6 +146,7 @@ public class CharTPCamera : MonoBehaviour
     {
         Shake(shakeDuration, shakeAmplitude, shakeFrequency);
     }
+
     //use me to shake camera with overriden settings
     public void Shake(float duration, float amplitude, float frequency)
     {
@@ -147,8 +157,7 @@ public class CharTPCamera : MonoBehaviour
         StartCoroutine(camShakeCorr);
     }
 
-    #endregion
-
+    #endregion private Calls
 
     private void Awake()
     {
@@ -172,14 +181,22 @@ public class CharTPCamera : MonoBehaviour
         cam = GetComponent<Camera>();
         clipPoint = new Vector3[5];
         camShakeCorr = null;
-    }   
+    }
+
     private void LateUpdate()
     {
+        if (charControl == null)
+            return;
+
         if (Input.GetKeyDown(KeyCode.T))
             Shake();
-
+        if(!target)
+        {
+            Debug.LogError("No target");
+            return;
+        }
         if ((target.position - nextTarget.position).magnitude > 0)
-        { 
+        {
             target.position = Vector3.Slerp(target.position, nextTarget.position, Time.deltaTime * camAdjustSpeed);
             target.rotation = Quaternion.Slerp(target.rotation, nextTarget.rotation, Time.deltaTime * camAdjustSpeed);
         }
@@ -191,8 +208,10 @@ public class CharTPCamera : MonoBehaviour
 
         //if (moveCloserDist < 2)
         //    Debug.Log("player shld become transluscent");
-
-        rotatedLookDir = Quaternion.Euler(0, target.localEulerAngles.y, 0) * charControl.lookDir;
+        if (charControl)
+            rotatedLookDir = Quaternion.Euler(0, target.localEulerAngles.y, 0) * charControl.lookDir;
+        else
+            Debug.LogWarning("No charcontrol");
         //move cam
         desiredPos = target.transform.position - (rotatedLookDir * targetCamDist);
         transform.position = target.transform.position - (rotatedLookDir * curCamDist);
@@ -237,7 +256,6 @@ public class CharTPCamera : MonoBehaviour
                 if (dist < minDist)
                     minDist = dist;
             }
-            
         }
         moveCloserDist = Mathf.Clamp(minDist, 0.1f, targetCamDist);
     }

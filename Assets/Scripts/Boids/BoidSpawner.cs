@@ -8,11 +8,16 @@ public class BoidSpawner : ComponentSystem
 {
     private bool generated = false;
 
+    public void Reset()
+    {
+        generated = false;
+    }
+
     protected override void OnUpdate()
     {
         if (generated)
             return;
-        Entities.ForEach((ref BoidSpawnerData data, ref Translation translation) =>
+        Entities.ForEach((Entity ent, ref BoidSpawnerData data, ref Translation translation) =>
         {
             generated = true;
             for (int i = 0; i < data.numSpawn; ++i)
@@ -26,6 +31,7 @@ public class BoidSpawner : ComponentSystem
                 EntityManager.SetComponentData(spawned, new Translation { Value = pos });
                 EntityManager.SetComponentData(spawned, new BoidData(initialVel) { });
             }
+            EntityManager.DestroyEntity(ent);
         });
     }
 }

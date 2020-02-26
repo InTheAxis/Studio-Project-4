@@ -7,6 +7,10 @@ public class TowerGenerator : Generator
     public PoissonGenerator poisson = new PoissonGenerator();
     public GameObject towerRef;
 
+    [SerializeField]
+    [Range(0, 1)]
+    private float centerBuffer = 0.1f;
+
     public PoissonGenerator GetPoisson()
     {
         return poisson;
@@ -24,7 +28,7 @@ public class TowerGenerator : Generator
     {
         Clear();
         poisson.ClearInjected();
-        poisson.Inject(new PoissonPoint(Vector3.zero, 0.1f));
+        poisson.Inject(new PoissonPoint(Vector3.zero, centerBuffer));
         poisson.GenerateDensity(4, 0.55f);
         poisson.Scale(scale);
         CreateTowers();

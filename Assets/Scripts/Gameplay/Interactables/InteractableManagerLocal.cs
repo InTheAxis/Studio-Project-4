@@ -11,7 +11,7 @@ public class InteractableManagerLocal : MonoBehaviour
     private Camera camera;
 
     [SerializeField]
-    private float maxInteractDist = 50.0f;
+    private float maxInteractDist = 10.0f;
     [SerializeField]
     private float interactRaycastLostTimeout = 0.4f;
 
@@ -66,7 +66,7 @@ public class InteractableManagerLocal : MonoBehaviour
         {
             if (!hasStoppedUsingInteractable) // Don't send release request more than once
             {
-                if (interactDown) // Player is still interacting
+                if (interactDown && !usingInteractable.interactDone) // Player is still interacting
                     usingInteractable.interact();
                 else
                 {
