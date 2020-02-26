@@ -58,13 +58,13 @@ public class CharHealth : MonoBehaviour, IPunObservable
             bool nextDead = (bool)stream.ReceiveNext();
             if (dead && !nextDead)
             {
-                Respawn();
                 dead = nextDead;
+                Respawn();
             }
             else if (!dead && nextDead)
             {
-                Die();
                 dead = nextDead;
+                Die();
             }
         }
     }
@@ -92,8 +92,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
             StopCoroutine(respawnCorr);
         respawnCorr = null;
         //hp = maxHp;
-        Heal(999);
         dead = false;
+        Heal(999);
         OnRespawn?.Invoke();
         charControl.disableMovement = dead;
         SetInvulnerableTime(invulTime);

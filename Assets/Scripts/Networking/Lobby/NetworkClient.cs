@@ -141,6 +141,10 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         return PhotonNetwork.LocalPlayer.CustomProperties[key];
     }
+    public static object getPlayerProperty(Player player, string key)
+    {
+        return player.CustomProperties[key];
+    }
 
 
     #region Ready Functions

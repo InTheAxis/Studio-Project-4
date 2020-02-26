@@ -230,7 +230,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   hitbox: {fileID: 4390699988826743754}
   maxHp: 3
-  autoRespawnTime: 5
+  autoRespawnTime: -1
   respawnInvulTime: 1
 --- !u!114 &4390699988826743754
 MonoBehaviour:

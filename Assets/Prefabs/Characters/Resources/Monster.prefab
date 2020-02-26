@@ -256,13 +256,16 @@ MonoBehaviour:
     Name: jump
   - Type: 9
     SynchronizeType: 1
-    Name: fall
-  - Type: 9
-    SynchronizeType: 1
-    Name: died
-  - Type: 9
-    SynchronizeType: 1
     Name: crouchWalk
+  - Type: 9
+    SynchronizeType: 0
+    Name: map
+  - Type: 9
+    SynchronizeType: 0
+    Name: attack
+  - Type: 9
+    SynchronizeType: 0
+    Name: die
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -311,7 +314,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   hitbox: {fileID: 4173598710368709281}
   maxHp: 3
-  autoRespawnTime: 5
+  autoRespawnTime: -1
   respawnInvulTime: 1
 --- !u!114 &4173598710368709281
 MonoBehaviour:
