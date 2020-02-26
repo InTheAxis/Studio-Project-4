@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Spawn(Vector3.zero);
     }
 
     public void Spawn(Vector3 pos)
