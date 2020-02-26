@@ -187,7 +187,11 @@ public class CharTPCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
             Shake();
-
+        if(!target)
+        {
+            Debug.LogError("No target");
+            return;
+        }
         if ((target.position - nextTarget.position).magnitude > 0)
         {
             target.position = Vector3.Slerp(target.position, nextTarget.position, Time.deltaTime * camAdjustSpeed);

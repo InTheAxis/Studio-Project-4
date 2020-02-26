@@ -56,6 +56,10 @@ public class CityGenerator : MonoBehaviour
     {
         Debug.Log("Generation began");
         Clear();
+        foreach (GeneratorData generator in generators)
+        {
+            generator.generator.SetScale(scale);
+        }
 
         foreach (GeneratorData generator in generators)
         {
@@ -70,6 +74,7 @@ public class CityGenerator : MonoBehaviour
             sendSpawnDirective(player);
         spawnRequestingPlayers.Clear();
     }
+
     private void sendSpawnDirective(Player player)
     {
         Debug.Log("Sending spawn directive to " + player.ActorNumber);
