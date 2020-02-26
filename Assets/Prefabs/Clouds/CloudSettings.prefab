@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 3439353843980447285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 11.1, z: 0}
-  m_LocalScale: {x: 1500, y: 20, z: 1500}
+  m_LocalScale: {x: 2000, y: 170.52861, z: 2000}
   m_Children:
   - {fileID: 3439353843307518999}
   m_Father: {fileID: 0}
@@ -142,21 +142,21 @@ MonoBehaviour:
   container: {fileID: 3439353843307518999}
   sprite: {fileID: 0}
   layer: 0
-  numSteps: 40
-  resolutionA: 20
-  generateScaleA: 3.39
+  numSteps: 100
+  resolutionA: 40
+  generateScaleA: 3.27
   numGridA: 39
   densityThresholdA: 0.35
   cloudScaleA: 1.08
-  densityMultiplierA: 0.06
-  offsetA: {x: 395.23492, y: 41.06018, z: -20.53009}
-  resolutionB: 15
+  densityMultiplierA: 0.02
+  offsetA: {x: 0, y: 0, z: 0}
+  resolutionB: 30
   generateScaleB: 4.7
   numGridB: 31
   densityThresholdB: 0.47
   cloudScaleB: 1.38
-  densityMultiplierB: 0.31
-  offsetB: {x: -433.41364, y: 82.12036, z: 189.33301}
+  densityMultiplierB: 0.03
+  offsetB: {x: 0, y: 0, z: 0}
 --- !u!114 &3439353843980447286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,5 +170,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudScript: {fileID: 3439353843980447284}
-  moveRateA: {x: 2.77, y: 0.36, z: -0.18}
+  moveRateA: {x: 1.5, y: 0.36, z: -0.18}
   moveRateB: {x: -3.8, y: 0.72, z: 1.66}
