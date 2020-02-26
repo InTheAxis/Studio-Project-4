@@ -355,10 +355,8 @@ public class ScreenStateController : MonoBehaviour
             playfabAuthenticator.Login(tmLoginUsername.text, tmLoginPassword.text,
                 playerName =>
                 {
-                    PhotonNetwork.NickName = playerName;
-                    PlayerSettings.playerName = playerName;
+                    setName(playerName);
                     setScene(ScreenStates.MAINMENU);
-                    tmUsername.text = tmLoginUsername.text;
                 }, (errorMsg, errorType) =>
                 {
                     tmLoginStatus.color = failColor;
@@ -395,10 +393,8 @@ public class ScreenStateController : MonoBehaviour
                 playfabAuthenticator.Register(tmRegisterUsername.text, tmRegisterPassword.text, tmRegisterEmail.text,
                     playerName =>
                     {
-                        PhotonNetwork.NickName = playerName;
-                        PlayerSettings.playerName = playerName;
+                        setName(playerName);
                         setScene(ScreenStates.MAINMENU);
-                        tmUsername.text = tmRegisterUsername.text;
                     }, (errorMsg, errorType) =>
                     {
                         tmRegisterStatus.color = failColor;
@@ -468,13 +464,17 @@ public class ScreenStateController : MonoBehaviour
             if (joinPasswordInput.activeSelf)
                 StartCoroutine(fadeCanvasGroup(cgJoin, true));
         }
-        else if (name == "ServerJoinRandom")
+        else if (name == "ServerJoinRandom" || name == "QuickJoinRandom")
         {
+            if (name == "QuickJoinRandom")
+                setRandomName();
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Join("");
         }
-        else if (name == "ServerHostCreate")
+        else if (name == "ServerHostCreate" || name == "QuickHost")
         {
+            if (name == "QuickHost")
+                setRandomName();
             setScene(ScreenStates.CONNECTINGTOSERVER);
             NetworkClient.instance.Host(hostPasswordInput.GetComponent<TMP_InputField>().text);
         }
@@ -523,6 +523,16 @@ public class ScreenStateController : MonoBehaviour
                 lobbyModels.SetActive(false);
             }
         }
+    }
+    private void setName(string name)
+    {
+        PhotonNetwork.NickName = name;
+        PlayerSettings.playerName = name;
+        tmUsername.text = name;
+    }
+    private void setRandomName()
+    {
+        setName("Guest" + Random.Range(0, 10000));
     }
 
     private IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn)
