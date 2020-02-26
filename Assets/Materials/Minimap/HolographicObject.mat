@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MinimapHolographic
+  m_Name: HolographicObject
   m_Shader: {fileID: -6465566751694194690, guid: a930bade6de37a14db6b1464b3af46f8,
     type: 3}
   m_ShaderKeywords: 
@@ -98,7 +98,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_20734E21: {r: 0.14921528, g: 1.1308043, b: 1.6649288, a: 0}
-    - Color_5A7AA5EB: {r: 0, g: 1.2041883, b: 1.9999998, a: 0}
+    - Color_5A7AA5EB: {r: 0, g: 0.60209423, b: 1, a: 0}
     - Color_7E06C9C6: {r: 0, g: 0.9093256, b: 2, a: 1}
     - Color_C6620304: {r: 2, g: 0.5026376, b: 0, a: 0}
     - Color_FB7C723C: {r: 0.0495283, g: 0.27454355, b: 0.5, a: 0}

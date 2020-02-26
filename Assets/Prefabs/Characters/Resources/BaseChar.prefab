@@ -2786,13 +2786,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane: {fileID: 8650362576658762453}
   planeScaleRange: {x: 0.3, y: 0.55}
+  planeMaxHeight: 15
+  worldMaxHeight: 100
   mapRadius: 100
-  simpleCube: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
-    type: 3}
-  holographicCentralTower: {fileID: 1140501743893796294, guid: 825fb57e98844724f85247f5a91329d3,
-    type: 3}
   scrollSensitivity: 0.1
   hologramMat: {fileID: 2100000, guid: 478ef20f104bb7e41811e56db262810b, type: 2}
+  hologramLandmarkMat: {fileID: 2100000, guid: 86eeeb39251a661458e92958eeb6fc16, type: 2}
+  simpleHologram: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
+    type: 3}
+  complexHologram: {fileID: 5331565749110258536, guid: 1d695e5b730160546b76e211cb393a10,
+    type: 3}
   controlTowerTag: Landmark
   activeHolder: {fileID: 7166891302723178332}
   inactiveHolder: {fileID: 2399878575869177083}
