@@ -78,23 +78,42 @@ public class CharTPController : MonoBehaviourPun
     private InputData inp;
 
     // List of all objs with CharTPController, updated in OnEnable and OnDisable, to be used for anywhere that needs references to other players
-    private static List<CharTPController> playerControllerRefs = new List<CharTPController>();
-    public static List<CharTPController> PlayerControllerRefs { get => playerControllerRefs; }
-    public delegate void OnPlayerAddCallback(CharTPController newPlayer);
-    public delegate void OnPlayerRemoveCallback(CharTPController removedPlayer);
+    public struct PlayerControllerData
+    {
+        public string name;
+        public CharTPController controller;
+
+        public PlayerControllerData(PlayerControllerData other)
+        {
+            name = other.name;
+            controller = other.controller;
+        }
+    }
+    private static List<PlayerControllerData> playerControllerRefs = new List<PlayerControllerData>();
+    public static List<PlayerControllerData> PlayerControllerRefs { get => playerControllerRefs; }
+    public delegate void OnPlayerAddCallback(PlayerControllerData newPlayer);
+    public delegate void OnPlayerRemoveCallback(PlayerControllerData removedPlayer);
 
     public static OnPlayerAddCallback OnPlayerAdd;
     public static OnPlayerRemoveCallback OnPlayerRemoved;
 
     private void OnEnable()
     {
-        playerControllerRefs.Add(this);
-        OnPlayerAdd?.Invoke(this);
+        PlayerControllerData newPlayer = new PlayerControllerData() { name = photonView.Owner.NickName, controller = this };
+        playerControllerRefs.Add(newPlayer);
+        OnPlayerAdd?.Invoke(newPlayer);
     }
     private void OnDisable()
     {
-        playerControllerRefs.Remove(this);
-        OnPlayerRemoved?.Invoke(this);
+        PlayerControllerData removedPlayer = default;
+        for (int i = 0; i < playerControllerRefs.Count; ++i)
+            if (playerControllerRefs[i].controller == this)
+            {
+                removedPlayer = new PlayerControllerData(playerControllerRefs[i]);
+                playerControllerRefs.RemoveAt(i);
+                break;
+            }
+        OnPlayerRemoved?.Invoke(removedPlayer);
     }
 
     private void Start()

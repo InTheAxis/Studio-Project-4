@@ -4467,7 +4467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &427548870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11611,7 +11611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1256102938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14866,7 +14866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609229512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17703,6 +17703,7 @@ MonoBehaviour:
   lobbySubscreens:
   - {fileID: 2117151002}
   - {fileID: 401272140}
+  charSelectButton: {fileID: 1019053449}
   test: {fileID: 796395731}
   currentScreen: 0
 --- !u!4 &1786188274
@@ -17737,7 +17738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1798466063
 RectTransform:
   m_ObjectHideFlags: 0
