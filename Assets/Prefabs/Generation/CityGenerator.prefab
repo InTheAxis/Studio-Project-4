@@ -246,8 +246,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1970345592454583450}
-  - component: {fileID: 2030239543}
   - component: {fileID: 2030239545}
+  - component: {fileID: 1415029070478976314}
   m_Layer: 0
   m_Name: DecalManager
   m_TagString: Untagged
@@ -269,28 +269,6 @@ Transform:
   m_Father: {fileID: 5890597338796914725}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030239543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284325392231104113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5930868f6fc8894a833051cfbd41903, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numRock: 5
-  density: 100
-  range: 50
-  rockA: {fileID: 100000, guid: da1981c3ee8ea7e4186a753e15495628, type: 3}
-  rockB: {fileID: 100000, guid: 41ba2a6f1d128f94eba95e5213a81254, type: 3}
-  rockC: {fileID: -927199367670048503, guid: 418c9450d7a6e984387132a58df7caa1, type: 3}
-  rockD: {fileID: 100000, guid: b332dc24cbb08144da2f112f82406700, type: 3}
-  rockE: {fileID: 100000, guid: 821158ae724ce854e920539f935295b8, type: 3}
-  rockF: {fileID: 0}
-  rockG: {fileID: 0}
 --- !u!114 &2030239545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +282,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConversionMode: 0
+--- !u!114 &1415029070478976314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284325392231104113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5930868f6fc8894a833051cfbd41903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRock: 2
+  density: 20
+  range: 30
+  rock0: {fileID: 4735152758188089820, guid: c614b9d66e516a04a905dde68d17cb72, type: 3}
+  rock1: {fileID: 6180573846408238027, guid: ed2766e427e0f5643a4a986d747e4af6, type: 3}
+  rockC: {fileID: 0}
+  rockD: {fileID: 0}
+  rockE: {fileID: 0}
+  rockF: {fileID: 0}
+  rockG: {fileID: 0}
+  decal7: {fileID: 0}
+  decal8: {fileID: 0}
+  decal9: {fileID: 0}
+  decal10: {fileID: 0}
+  decal11: {fileID: 0}
+  decal12: {fileID: 0}
+  decal13: {fileID: 0}
+  decal14: {fileID: 0}
 --- !u!1 &1730360239650699216
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +509,7 @@ MonoBehaviour:
   - generator: {fileID: 5518757484286636409}
     enabled: 1
   scale: 130
-  generateOnStart: 0
+  generateOnStart: 1
 --- !u!114 &5809545488305829278
 MonoBehaviour:
   m_ObjectHideFlags: 0
