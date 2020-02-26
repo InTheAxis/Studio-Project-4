@@ -29,6 +29,13 @@ public class PlayerInfoController : MonoBehaviour
         CharTPController.OnPlayerAdd += addPlayerInfo;
         CharTPController.OnPlayerRemoved += removePlayerInfo;
     }
+    private void OnDestroy()
+    {
+        CharTPController.OnPlayerAdd -= addPlayerInfo;
+        CharTPController.OnPlayerRemoved -= removePlayerInfo;
+        foreach (var p in CharTPController.PlayerControllerRefs)
+            p.GetComponent<CharHealth>().OnHealthChange -= updateHealth;
+    }
 
     private void Update()
     {

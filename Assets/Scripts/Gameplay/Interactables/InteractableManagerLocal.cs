@@ -11,7 +11,7 @@ public class InteractableManagerLocal : MonoBehaviour
     private Camera camera;
 
     [SerializeField]
-    private float maxInteractDist = 50.0f;
+    private float maxInteractDist = 10.0f;
     [SerializeField]
     private float interactRaycastLostTimeout = 0.4f;
 

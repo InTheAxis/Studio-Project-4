@@ -133,9 +133,9 @@ public class ScreenStateController : MonoBehaviour
 
     public static bool ReturningFromInGame { get => returningFromInGame; set => returningFromInGame = value; }
 
-    private Stack<ScreenStates> history = null;
-    private List<LobbyPlayer> players = null;
-    private Dictionary<string, int> playerIDs = null;
+    private static Stack<ScreenStates> history = null;
+    private static List<LobbyPlayer> players = null;
+    private static Dictionary<string, int> playerIDs = null;
 
     private void Start()
     {
