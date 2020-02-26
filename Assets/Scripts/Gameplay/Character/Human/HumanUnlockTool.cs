@@ -19,6 +19,7 @@ public class HumanUnlockTool : MonoBehaviour
         PUSH,
         STOP,
         SLOW,
+        RANDOM,
     };
     private Dictionary<TYPE, MonoBehaviour> tools;
 
@@ -34,6 +35,8 @@ public class HumanUnlockTool : MonoBehaviour
     }
     public void Unlock(TYPE _type)
     {
+        if (_type == TYPE.RANDOM)
+            _type = (TYPE)Random.Range((int)TYPE.PULL, (int)TYPE.RANDOM);
         DisableAll();
         tools[_type].enabled = true;
         Debug.LogFormat("Unlocked Tool of {0}", _type.ToString());
