@@ -33,7 +33,7 @@ public class WinLose : MonoBehaviourPun
 
         CharTPController.OnPlayerAdd += onNewPlayer;
         foreach (var p in CharTPController.PlayerControllerRefs)
-            p.GetComponent<CharHealth>().OnDead += onPlayerDied;
+            p.controller.GetComponent<CharHealth>().OnDead += onPlayerDied;
     }
     private void OnDisable()
     {
@@ -42,11 +42,11 @@ public class WinLose : MonoBehaviourPun
 
         CharTPController.OnPlayerAdd -= onNewPlayer;
         foreach (var p in CharTPController.PlayerControllerRefs)
-            p.GetComponent<CharHealth>().OnDead -= onPlayerDied;
+            p.controller.GetComponent<CharHealth>().OnDead -= onPlayerDied;
     }
-    private void onNewPlayer(CharTPController newPlayer)
+    private void onNewPlayer(CharTPController.PlayerControllerData newPlayer)
     {
-        newPlayer.GetComponent<CharHealth>().OnDead += onPlayerDied;
+        newPlayer.controller.GetComponent<CharHealth>().OnDead += onPlayerDied;
     }
     private void onPlayerDied()
     {
@@ -54,9 +54,9 @@ public class WinLose : MonoBehaviourPun
         bool isSurvivorAlive = false;
 
         foreach (var p in CharTPController.PlayerControllerRefs)
-            if (!p.GetComponent<CharHealth>().dead)
+            if (!p.controller.GetComponent<CharHealth>().dead)
             {
-                if ((int)NetworkClient.getPlayerProperty(p.photonView.Controller, "charModel") == 0) // Hunter
+                if ((int)NetworkClient.getPlayerProperty(p.controller.photonView.Controller, "charModel") == 0) // Hunter
                     isHunterAlive = true;
                 else
                     isSurvivorAlive = true;
