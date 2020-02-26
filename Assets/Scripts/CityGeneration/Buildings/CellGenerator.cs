@@ -173,10 +173,10 @@ public class CellGenerator : Generator
         foreach (BuildingCell cell in cells)
         {
             if (cell.isLeft)
-                Gizmos.color = Color.red;
+                Gizmos.color = Color.blue;
             else
                 Gizmos.color = Color.green;
-            Gizmos.DrawSphere(cell.pos, 2);
+            Gizmos.DrawWireSphere(cell.pos, cell.radius);
         }
         // tower
         Gizmos.color = Color.red;

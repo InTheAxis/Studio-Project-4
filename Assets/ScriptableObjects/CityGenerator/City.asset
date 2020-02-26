@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebfe4f7bbf8c1544a0844e0b71c6bc8, type: 3}
   m_Name: City
   m_EditorClassIdentifier: 
-  meshList: []
+  meshList:
+  - mesh: {fileID: 7307666935101455286, guid: 427d84714166959478bcca1ba55bdc06, type: 3}
+    weight: 1
+    chance: 0.041666668
+  - mesh: {fileID: 4717264211973084059, guid: 8b0ca67cd72fdbe4fab9a32ade37f7c1, type: 3}
+    weight: 23
+    chance: 0.9583333

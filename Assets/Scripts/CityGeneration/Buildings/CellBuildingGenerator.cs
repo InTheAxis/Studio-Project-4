@@ -10,12 +10,15 @@ public class CellBuildingGenerator : Generator
     [SerializeField]
     public CityScriptable cityScriptable;
 
+    public List<BuildingCell> buildingCells { get; private set; } = new List<BuildingCell>();
+
     public override void Clear()
     {
         while (transform.childCount > 0)
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
+        buildingCells.Clear();
     }
 
     public override void Generate()
@@ -34,6 +37,7 @@ public class CellBuildingGenerator : Generator
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             //building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
+            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot));
         }
     }
 }

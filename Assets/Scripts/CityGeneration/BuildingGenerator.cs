@@ -7,7 +7,7 @@ public class BuildingGenerator : Generator
     private PoissonGenerator poisson = new PoissonGenerator();
     public CityScriptable cityScriptable;
     public TowerGenerator towerGenerator;
-    public CellGenerator cellGenerator;
+    public CellBuildingGenerator cellGenerator;
     // public float roadSearchRange = 15;
 
     [Range(0, 1000)]
@@ -53,13 +53,13 @@ public class BuildingGenerator : Generator
         {
             poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer));
         }
-        foreach (BuildingCell cell in cellGenerator.GetCells())
+        foreach (BuildingCell cell in cellGenerator.buildingCells)
         {
             poisson.Inject(new PoissonPoint(cell.pos / scale, cell.radius / scale));
         }
         bool success = poisson.Generate(density, buffer);
         poisson.Scale(scale);
-        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1 + 5))
+        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
             vpos.y += 0.5f;
@@ -88,7 +88,7 @@ public class BuildingGenerator : Generator
     {
         if (!gizmosEnabled)
             return;
-        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.GetCells().Count + 1))
+        foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1))
         {
             Gizmos.DrawWireSphere(pos.pos, buffer * scale);
         }
