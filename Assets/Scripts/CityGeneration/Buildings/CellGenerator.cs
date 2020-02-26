@@ -141,7 +141,7 @@ public class CellGenerator : Generator
                         }
                     }
                     // check for player
-                    foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+                    foreach (Vector3 point in PlayerSpawnGenerator.playerSpawnPos)
                     {
                         if (Vector3.Distance(currPos, point) < playerBuffer + currCellRadius)
                         {
@@ -149,7 +149,7 @@ public class CellGenerator : Generator
                             break;
                         }
                     }
-                    if (Vector3.Distance(currPos, playerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)
+                    if (Vector3.Distance(currPos, PlayerSpawnGenerator.hunterSpawnPos) < playerBuffer + currCellRadius)
                     {
                         isAvailable = false;
                     }
@@ -185,11 +185,11 @@ public class CellGenerator : Generator
             Gizmos.DrawWireSphere(point.pos, towerBuffer);
         }
         Gizmos.color = Color.magenta;
-        foreach (Vector3 point in playerSpawnGenerator.playerSpawnPos)
+        foreach (Vector3 point in PlayerSpawnGenerator.playerSpawnPos)
         {
             Gizmos.DrawWireSphere(point, playerBuffer * scale);
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
+        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
     }
 }

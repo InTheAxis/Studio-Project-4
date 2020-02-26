@@ -8,15 +8,20 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private bool isOverride = false;
+
     [SerializeField]
     private bool isHuman = true;
+
     [SerializeField]
     private List<GameObject> modelPrefabs;
 
     public static GameObject playerObj = null;
 
-
     private void Awake()
+    {
+    }
+
+    public void Spawn(Vector3 pos)
     {
         int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
         Debug.Log("Got prefab index " + prefabIndex);
@@ -29,7 +34,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Instantiating prefab of index " + prefabIndex);
-            playerObj = PhotonNetwork.Instantiate(modelPrefabs[prefabIndex].name, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+            playerObj = PhotonNetwork.Instantiate(modelPrefabs[prefabIndex].name, pos, Quaternion.identity);
         }
     }
 
@@ -42,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         CharTPCamera.Instance?.SetCharController(playerObj.GetComponent<CharTPController>());
     }
+
     public static void setCamera(CharTPController playerController)
     {
         CharTPCamera.Instance?.SetCharController(playerController);

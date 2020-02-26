@@ -43,11 +43,11 @@ public class BuildingGenerator : Generator
         poisson.ClearInjected();
         poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
         // inject player/hunter
-        foreach (Vector3 pos in playerSpawnGenerator.playerSpawnPos)
+        foreach (Vector3 pos in PlayerSpawnGenerator.playerSpawnPos)
         {
             poisson.Inject(new PoissonPoint(pos / scale, playerBuffer));
         }
-        poisson.Inject(new PoissonPoint(playerSpawnGenerator.hunterSpawnPos / scale, playerBuffer));
+        poisson.Inject(new PoissonPoint(PlayerSpawnGenerator.hunterSpawnPos / scale, playerBuffer));
         // inject tower
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {

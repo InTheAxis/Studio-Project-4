@@ -38,6 +38,7 @@ public class CityGenerator : MonoBehaviour
 
     public void Generate()
     {
+        Debug.Log("Generation began");
         Clear();
 
         foreach (GeneratorData generator in generators)
@@ -45,6 +46,8 @@ public class CityGenerator : MonoBehaviour
             if (generator.enabled)
                 generator.generator.Generate();
         }
+        Debug.Log("Generation complete");
+        // generation complete
     }
 
     private void OnDrawGizmos()
