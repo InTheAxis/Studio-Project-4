@@ -7,6 +7,8 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using static Unity.Mathematics.math;
 
+public struct DecalTag : IComponentData { }
+
 public class PropGenerator : ComponentSystem
 {
     public bool generated = false;
@@ -14,7 +16,7 @@ public class PropGenerator : ComponentSystem
 
     public void CleanUp()
     {
-        Entities.ForEach((Entity ent, ref DecalData data) =>
+        Entities.ForEach((Entity ent, ref DecalTag data) =>
         {
             EntityManager.DestroyEntity(ent);
         });
@@ -25,8 +27,9 @@ public class PropGenerator : ComponentSystem
     {
         if (generated)
             return;
-        Entities.ForEach((ref DecalData data) =>
+        Entities.ForEach((Entity ent, ref DecalData data) =>
         {
+            EntityManager.DestroyEntity(ent);
             generated = true;
             poisson.GenerateDensity(data.density);
             poisson.Scale(data.range);
@@ -89,6 +92,7 @@ public class PropGenerator : ComponentSystem
                         break;
                 }
                 Entity spawned = EntityManager.Instantiate(entRef);
+                EntityManager.AddComponent<DecalTag>(spawned);
                 EntityManager.SetComponentData(spawned, new Translation { Value = new float3(point.pos) });
                 EntityManager.SetComponentData(spawned, new Rotation { Value = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0) });
             }
