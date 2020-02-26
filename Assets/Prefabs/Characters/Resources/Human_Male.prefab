@@ -870,6 +870,23 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2518563266708644907, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: complexHologram
+      value: 
+      objectReference: {fileID: 5331565749110258536, guid: 1d695e5b730160546b76e211cb393a10,
+        type: 3}
+    - target: {fileID: 2518563266708644907, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: simpleHologram
+      value: 
+      objectReference: {fileID: 1140501743893796294, guid: b3f2349e268915e439898732eb7145ae,
+        type: 3}
+    - target: {fileID: 2518563266708644907, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: hologramLandmarkMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 86eeeb39251a661458e92958eeb6fc16, type: 2}
     - target: {fileID: 2588142538017183777, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
