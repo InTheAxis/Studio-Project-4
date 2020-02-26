@@ -19,7 +19,14 @@ public class LockCursor : MonoBehaviour
 #if UNITY_EDITOR
     private void Update()
     {
+#if !UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            lockCursor = !lockCursor;
+        }
+#endif
+
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
     }
 #endif
-}
+    }
