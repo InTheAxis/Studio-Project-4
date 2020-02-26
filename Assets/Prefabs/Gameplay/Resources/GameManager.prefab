@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
-  maxInteractDist: 50
+  maxInteractDist: 5
   interactRaycastLostTimeout: 0.4
   interactableTooltip: {fileID: 0}
 --- !u!114 &5327705195829999775
