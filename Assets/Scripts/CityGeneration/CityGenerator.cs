@@ -8,6 +8,9 @@ public class CityGenerator : MonoBehaviour
 {
     public static CityGenerator instance = null;
 
+    [SerializeField]
+    public CityScriptable city;
+
     //public List<Generator> generators;
     public List<GeneratorData> generators;
 

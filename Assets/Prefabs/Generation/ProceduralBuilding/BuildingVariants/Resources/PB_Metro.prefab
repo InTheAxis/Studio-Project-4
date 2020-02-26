@@ -7,6 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8040074768631649619}
     m_Modifications:
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: breakForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: minExplosionForce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: minExplosionForce.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: minExplosionForce.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: maxExplosionForce.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: maxExplosionForce.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: maxExplosionForce.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6608286375775937187, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
       propertyPath: m_LocalPosition.x
