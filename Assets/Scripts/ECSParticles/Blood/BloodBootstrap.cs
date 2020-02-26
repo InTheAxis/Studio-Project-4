@@ -37,16 +37,25 @@ public class BloodBootstrap : ParticleBootstrap
 
     private void LateUpdate()
     {
-        if (emitter)
-            SetEmitterSource(emitter.position, emitter.forward);
+        if (emitter == null)
+        {
+            emitter = GameManager.playerObj?.transform;
+            if (emitter)
+                charHitbox = emitter.GetComponent<CharHitBox>();
+            else
+                return;
+        }
+
+        SetEmitterSource(emitter.position, emitter.forward);
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.B))
-            Emit();
+            BloodSpray(0);
 #endif
     }
 
     private void BloodSpray(int dmg) 
     {
+        Debug.Log("Blood should Spray");
         Emit();
     }
 }

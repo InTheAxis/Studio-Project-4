@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
+    public static GameManager instance = null;
+
     [SerializeField]
     private bool isOverride = false;
 
@@ -19,10 +21,25 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Spawn(Vector3.zero);
+        if (instance == null)
+            instance = this;
+        else
+            Debug.LogError("Gamemanager instantiated twice! This should not happen");
     }
 
-    public void Spawn(Vector3 pos)
+    private void Start()
+    {
+        photonView.RPC("remoteRequestSpawn", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    private void remoteRequestSpawn(PhotonMessageInfo messageInfo)
+    {
+        CityGenerator.instance.playerRequestedSpawn(messageInfo.Sender);
+    }
+
+    [PunRPC]
+    private void Spawn(Vector3 pos)
     {
         int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
         Debug.Log("Got prefab index " + prefabIndex);
@@ -37,10 +54,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Instantiating prefab of index " + prefabIndex);
             playerObj = PhotonNetwork.Instantiate(modelPrefabs[prefabIndex].name, pos, Quaternion.identity);
         }
-    }
 
-    private void Start()
-    {
         setCamera(playerObj);
     }
 

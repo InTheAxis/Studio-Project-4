@@ -31,7 +31,19 @@ public class InteractableTower : InteractableBase
             if (interactTime >= timeToFinishInteraction)
             {
                 Debug.Log("Tower destroyed!");
-                destroyThis(); // Can only be called inside interact
+                HumanUnlockTool unlock = GameManager.playerObj.GetComponent<HumanUnlockTool>();
+                MonsterEnergy recahrge = GameManager.playerObj.GetComponent<MonsterEnergy>();
+                if (unlock)
+                {
+                    unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
+                    destroyThis(); // Can only be called inside interact
+                }
+                else if (recahrge)
+                {
+                    recahrge.RechargeFull();
+                    unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
+                    Debug.Log("Recharged");
+                }
             }
         }
         else // Reset timer
