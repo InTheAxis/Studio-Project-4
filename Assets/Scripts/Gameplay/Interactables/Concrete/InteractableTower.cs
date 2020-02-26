@@ -32,6 +32,11 @@ public class InteractableTower : InteractableBase
             {
                 Debug.Log("Tower destroyed!");
                 destroyThis(); // Can only be called inside interact
+                HumanUnlockTool unlock = GameManager.playerObj.GetComponent<HumanUnlockTool>();
+                if (unlock)
+                {
+                    unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
+                }
             }
         }
         else // Reset timer
