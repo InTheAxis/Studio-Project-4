@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
+[RequireComponent(typeof(PhotonView))]
 public class InteractableTower : InteractableBase
 {
     [SerializeField]
@@ -13,6 +15,29 @@ public class InteractableTower : InteractableBase
     private bool wasInteracting = false;
     private float interactTime = 0.0f;
 
+
+    [Header("Tower Light Indicators")]
+    [SerializeField]
+    private GameObject beingInteractedWithHunterLight = null;
+    [SerializeField]
+    private GameObject beingInteractedWithSurvivorLight = null;
+    [SerializeField]
+    private List<GameObject> interactStagesLights = new List<GameObject>();
+    private int hunterLightIndex;
+    private int survivorLightIndex;
+
+    private int currLight = -1;
+    private int currStage = 0;
+    // Used to discard old light change requests
+    private int lightTimestamp = 0;
+
+    private PhotonView thisView;
+
+    private void Awake()
+    {
+        thisView = PhotonView.Get(this);
+    }
+
     private void Start()
     {
         if (Photon.Pun.PhotonNetwork.IsMasterClient)
@@ -23,6 +48,11 @@ public class InteractableTower : InteractableBase
         {
             timeToFinishInteraction = timeToFinishInteractionHuman;
         }
+
+        hunterLightIndex = interactStagesLights.Count;
+        survivorLightIndex = hunterLightIndex + 1;
+        // Turn on the first stage light
+        turnOnLight(currStage, currStage);
     }
     public override string getInteractableName() { return "Tower"; }
 
@@ -44,28 +74,48 @@ public class InteractableTower : InteractableBase
             wasInteracting = false;
             interactTime += Time.deltaTime;
 
-            // Done interacting
-            if (interactTime >= timeToFinishInteraction)
+            if (interactTime >= timeToFinishInteraction) // Done interacting
             {
                 interactTime = timeToFinishInteraction;
-                Debug.Log("Tower destroyed!");
+                Debug.Log("Tower interaction finished!");
                 HumanUnlockTool unlock = GameManager.playerObj.GetComponent<HumanUnlockTool>();
-                MonsterEnergy recahrge = GameManager.playerObj.GetComponent<MonsterEnergy>();
-                if (unlock)
+                MonsterEnergy recharge = GameManager.playerObj.GetComponent<MonsterEnergy>();
+                if (unlock) // Is Human
                 {
-                    unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
-                    destroyThis(); // Can only be called inside interact
+                    // Advance stage
+                    if (++currStage >= interactStagesLights.Count) // Finished all stages. Destroy
+                    {
+                        unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
+                        destroyThis(); // Can only be called inside interact
+                    }
+                    else // Has more stages. Go to next stage
+                    {
+                        turnOnLight(currStage, currStage);
+                        interactTime = 0.0f;
+                    }
                 }
-                else if (recahrge)
+                else if (recharge) // Is Monster
                 {
-                    recahrge.RechargePercent(interactTime / timeToFinishInteraction);
+                    recharge.RechargePercent(interactTime / timeToFinishInteraction);
                     interactDone = true;
                     Debug.Log("Recharged");
                 }
             }
+            else // Not done interacting
+            {
+                // Activate being interacted lights
+                if (PhotonNetwork.IsMasterClient)
+                    turnOnLight(hunterLightIndex, currStage);
+                else
+                    turnOnLight(survivorLightIndex, currStage);
+            }
         }
         else // Reset timer
-        { 
+        {
+            // Stopped interacting. Set light back to current stage
+            if (interactTime > 0.0f)
+                turnOnLight(currStage, currStage);
+
             interactTime = 0.0f;
             interactDone = false;
         }
@@ -87,5 +137,78 @@ public class InteractableTower : InteractableBase
             else
                 return base.getUncarriedTooltip() + "destroy Tower";
         }
+    }
+
+    private void turnOnLight(int stage, int nowStage)
+    {
+        // Don't change light if current active light is same as new requested light
+        if (stage == currLight)
+            return;
+
+        GameObject activeLight = getLight();
+        if (activeLight != null)
+            activeLight.SetActive(false);
+
+        currStage = nowStage;
+        currLight = stage;
+
+        if (stage <= survivorLightIndex)
+        {
+            thisView.RPC("setLight", RpcTarget.Others, stage, nowStage);
+
+            activeLight = getLight(stage);
+            activeLight.SetActive(true);
+        }
+        else
+            Debug.LogError("Attempted to turn on Light with invalid index " + stage + " for Tower with ViewID of " + thisView?.ViewID);
+    }
+
+    [PunRPC]
+    private void setLight(int index, int nowStage, PhotonMessageInfo messageInfo)
+    {
+        // Ignore requests older than the newest request that we've received
+        if (messageInfo.SentServerTimestamp < lightTimestamp)
+            return;
+        lightTimestamp = messageInfo.SentServerTimestamp;
+
+        // var index
+        // Legend:
+        // n = No. of Stage Lights
+        //
+        // 0 to n - 1 == Index of light in interactStagesLights
+        // n          == beingInteractedWithHunterLight
+        // n + 1      == beingInteractedWithSurvivorLight
+
+        Debug.Log("Received request to change light to Index " + index + " for Tower with ViewID " + thisView?.ViewID);
+
+        GameObject activeLight = getLight();
+        if (activeLight != null)
+            activeLight.SetActive(false);
+
+        currStage = nowStage;
+        currLight = index;
+
+        activeLight = getLight(index);
+        if (activeLight != null)
+            activeLight.SetActive(true);
+    }
+
+    private GameObject getLight()
+    {
+        return getLight(currLight);
+    }
+    private GameObject getLight(int index)
+    {
+        int count = interactStagesLights.Count;
+        if (index < 0)
+            return null;
+        else if (index < count)
+            return interactStagesLights[index];
+        else if (index == count)
+            return beingInteractedWithHunterLight;
+        else if (index == count + 1)
+            return beingInteractedWithSurvivorLight;
+        else
+            return null;
     }
 }
