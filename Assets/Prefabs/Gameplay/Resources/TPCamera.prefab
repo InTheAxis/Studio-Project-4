@@ -141,6 +141,8 @@ MonoBehaviour:
   shakeDuration: 0.5
   shakeAmplitude: 0.01
   shakeFrequency: 0.5
+  cameraBobAmt: 0.05
+  cameraBobFreq: 10
   crosshair: {fileID: 0}
 --- !u!114 &8528182670797109007
 MonoBehaviour:

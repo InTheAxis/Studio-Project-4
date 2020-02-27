@@ -62,8 +62,11 @@ public class GameManager : MonoBehaviourPun
     {
         CharTPCamera.Instance?.SetCharController(playerObj.GetComponent<CharTPController>());
 
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient) //override camera values here
+        { 
             CharTPCamera.Instance.SetTargetDist(8); //if monster, set to further away
+            CharTPCamera.Instance.SetCameraBob(0.01f, 10);
+        }
     }
 
     public static void setCamera(CharTPController playerController)
