@@ -18,6 +18,12 @@ public class Shard : MonoBehaviour
     private float shardSettleVelocityThreshold = 0.1f;
     private bool shouldDespawn = false;
 
+    [Header("VFX")]
+    [SerializeField]
+    private GameObject monsterHit = null;
+    [SerializeField]
+    private GameObject survivorHit = null;
+
 
     private List<Rigidbody> smallShards = new List<Rigidbody>();
     private List<Rigidbody> sleepShards = new List<Rigidbody>();
@@ -48,6 +54,19 @@ public class Shard : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            if (monsterHit == null)
+            {
+                Debug.LogError("Add monsterHit particle to this shard: " + gameObject.name);
+                return;
+            }
+
+            GameObject clone = Instantiate(monsterHit);
+            clone.transform.position = collision.contacts[0].point;
+            clone.transform.forward = collision.contacts[0].normal;
+            Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
+            Debug.Log("MONSTER HIT");
+        }
     }
 }
