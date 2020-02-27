@@ -66,7 +66,7 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joining room with password " + password);
         //setPlayerProperty("isHunter", false);
-        setPlayerProperty("charModel", Random.Range(1,3));
+        setPlayerProperty("charModel", Random.Range(1, 3));
 
         if (password.Length > 0)
             PhotonNetwork.JoinRoom(password);
@@ -84,8 +84,24 @@ public class NetworkClient : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.InstantiateSceneObject("NetworkLobbyManager", Vector3.zero, Quaternion.identity);
 
+        // Avoid naming clash
+        bool clash = false;
+        do
+        {
+            clash = false;
+            foreach (var p in PhotonNetwork.PlayerListOthers)
+                if (p.NickName == PhotonNetwork.LocalPlayer.NickName)
+                {
+                    PhotonNetwork.LocalPlayer.NickName = PhotonNetwork.LocalPlayer.NickName + "1";
+                    clash = true;
+                    break;
+                }
+        }
+        while (clash);
+        setPlayerProperty("playerNameClashFree", true);
+
         List<string> players = new List<string>();
-        
+
         foreach (var p in PhotonNetwork.PlayerList)
             players.Add(p.NickName);
         roomJoinedCallback?.Invoke(players);
@@ -109,7 +125,14 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        playerJoinedCallback?.Invoke(newPlayer.NickName);
+        StartCoroutine(handlePlayerEnteredRoom(newPlayer));
+    }
+    private IEnumerator handlePlayerEnteredRoom(Player player)
+    {
+        while (getPlayerProperty(player, "playerNameClashFree") == null)
+            yield return new WaitForSeconds(0.05f);
+
+        playerJoinedCallback?.Invoke(player.NickName);
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
@@ -143,7 +166,10 @@ public class NetworkClient : MonoBehaviourPunCallbacks
     }
     public static object getPlayerProperty(Player player, string key)
     {
-        return player.CustomProperties[key];
+        if (player.CustomProperties.ContainsKey(key))
+            return player.CustomProperties[key];
+        else
+            return null;
     }
 
 

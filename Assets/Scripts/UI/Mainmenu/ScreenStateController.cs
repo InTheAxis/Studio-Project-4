@@ -208,7 +208,8 @@ public class ScreenStateController : MonoBehaviour
         foreach (var p in PhotonNetwork.PlayerList)
         {
             string name = p.NickName;
-            players[playerIDs[name]].setReady(NetworkClient.instance.isReady(name));
+            if (playerIDs.ContainsKey(name))
+                players[playerIDs[name]].setReady(NetworkClient.instance.isReady(name));
         }
 
         if (PhotonNetwork.IsMasterClient)
