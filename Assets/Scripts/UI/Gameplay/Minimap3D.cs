@@ -84,7 +84,6 @@ public class Minimap3D : MonoBehaviour
 
     public void Update()
     {
-
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
         if (deltaY != 0.0f)

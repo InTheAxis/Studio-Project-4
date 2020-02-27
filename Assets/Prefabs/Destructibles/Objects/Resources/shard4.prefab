@@ -189,6 +189,9 @@ MonoBehaviour:
   timeBeforeDespawn: 20
   smallShardScaleThreshold: 1
   shardSettleVelocityThreshold: 0.1
+  monsterHit: {fileID: 6098789413650356396, guid: 3f02098677631c04885bd03b63908a5d,
+    type: 3}
+  survivorHit: {fileID: 0}
 --- !u!114 &-7348983647757741538
 MonoBehaviour:
   m_ObjectHideFlags: 0
