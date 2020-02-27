@@ -84,6 +84,9 @@ public class Minimap3D : MonoBehaviour
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+            Flicker(0.50f);
+
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
         if (deltaY != 0.0f)
@@ -293,5 +296,44 @@ public class Minimap3D : MonoBehaviour
         }
         yield return new WaitForSeconds(0.20f);
         gameObject.SetActive(false);
+    }
+
+
+    public void Flicker(float duration)
+    {
+        StartCoroutine(flickerHolograms(duration));
+    }
+
+    private IEnumerator flickerHolograms(float duration)
+    {
+        
+
+        /* Flicker Chance */
+        hologramMat.SetFloat("Vector1_628109A8", 0.70f);
+        hologramLandmarkMat.SetFloat("Vector1_628109A8", 0.70f);
+
+        /* Alpha Clip */
+        hologramMat.SetFloat("Vector1_6B98BE53", 0.50f);
+        hologramLandmarkMat.SetFloat("Vector1_6B98BE53", 0.50f);
+
+        ///* Scan Speed */
+        //hologramMat.SetFloat("Vector1_444C18FD", 0.80f);
+        //hologramLandmarkMat.SetFloat("Vector1_444C18FD", 0.80f);
+
+        yield return new WaitForSeconds(duration);
+
+        /* Flicker Chance */
+        hologramMat.SetFloat("Vector1_628109A8", 0.02f);
+        hologramLandmarkMat.SetFloat("Vector1_628109A8", 0.02f);
+
+        /* Alpha Clip */
+        hologramMat.SetFloat("Vector1_6B98BE53", 0.10f);
+        hologramLandmarkMat.SetFloat("Vector1_6B98BE53", 0.10f);
+
+        ///* Scan Speed */
+        //hologramMat.SetFloat("Vector1_444C18FD", 0.12f);
+        //hologramLandmarkMat.SetFloat("Vector1_444C18FD", 0.12f);
+
+
     }
 }
