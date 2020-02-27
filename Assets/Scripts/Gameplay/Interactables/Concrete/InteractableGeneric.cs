@@ -14,6 +14,6 @@ public class InteractableGeneric : InteractableBase
 
     public override string getCarriedTooltip()
     {
-        return base.getCarriedTooltip() + "use Generic";
+        return base.getCarriedTooltip() + "Use Generic";
     }
 }

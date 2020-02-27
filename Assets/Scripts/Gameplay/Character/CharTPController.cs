@@ -45,6 +45,9 @@ public class CharTPController : MonoBehaviourPun
     [Tooltip("Starting y-axis look direction, from -1 to 1")]
     private float initialLookY = -0.5f;
 
+
+    //NOTE, These are set true and false by other scripts, so if it doesn't work may be because some other script is setting to false/true every frame!!!
+
     [HideInInspector]
     public bool disableMovement;
 
