@@ -5,7 +5,10 @@ using UnityEngine;
 public class BuildingGenerator : Generator
 {
     private PoissonGenerator poisson = new PoissonGenerator();
-    public CityScriptable cityScriptable;
+
+    [SerializeField]
+    private CityGenerator cityGenerator;
+
     public TowerGenerator towerGenerator;
     public CellBuildingGenerator cellGenerator;
     // public float roadSearchRange = 15;
@@ -76,7 +79,7 @@ public class BuildingGenerator : Generator
             }
             if (emptySpot)
             {
-                GameObject buildingRef = cityScriptable.SelectMesh();
+                GameObject buildingRef = cityGenerator.city.SelectMesh();
                 GameObject building = InstantiateHandler.mInstantiate(buildingRef, vpos, Quaternion.identity, transform, "Environment");
                 building.GetComponent<ProceduralBuilding>().GenerateRandom();
                 building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);

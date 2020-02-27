@@ -10,6 +10,7 @@ public class ProceduralBuilding : MonoBehaviour
     // public int seed = 0;
     [SerializeField]
     private float buildingRadius = 10;
+
     // references
     public GameObject rootRef;
 
@@ -20,15 +21,18 @@ public class ProceduralBuilding : MonoBehaviour
     private GameObject attachmentRoot;
 
     public GameObject attachmentPositions;
+
     // private variables
     public float GetRadius()
     {
         return buildingRadius;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(Vector3.zero, buildingRadius);
     }
+
     private void OnEnable()
     {
         //#if true
@@ -75,6 +79,8 @@ public class ProceduralBuilding : MonoBehaviour
         attachmentRoot = InstantiateHandler.mInstantiate(rootRef, transform);
         foreach (Transform slot in attachmentPositions.transform)
         {
+            if (!slot.gameObject.activeSelf)
+                continue;
             AttachmentSlot attachmentSlotScript = slot.GetComponent<AttachmentSlot>();
             if (Random.value <= attachmentSlotScript.chance)
             {

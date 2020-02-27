@@ -24,7 +24,7 @@ namespace Photon.Pun
     /// When Using Trigger Parameters, make sure the component that sets the trigger is higher in the stack of Components on the GameObject than 'PhotonAnimatorView'
     /// Triggers are raised true during one frame only.
     /// </remarks>
-    [RequireComponent(typeof(Animator))]
+    //[RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PhotonView))]
     [AddComponentMenu("Photon Networking/Photon Animator View")]
     public class PhotonAnimatorView : MonoBehaviour, IPunObservable
@@ -78,7 +78,7 @@ namespace Photon.Pun
 
         #region Members
 
-        private Animator m_Animator;
+        public Animator m_Animator;
 
         private PhotonStreamQueue m_StreamQueue = new PhotonStreamQueue(120);
 
@@ -123,7 +123,7 @@ namespace Photon.Pun
         private void Awake()
         {
             this.m_PhotonView = GetComponent<PhotonView>();
-            this.m_Animator = GetComponent<Animator>();
+            this.m_Animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()

@@ -45,6 +45,9 @@ public class CellGenerator : Generator
 {
     private List<BuildingCell> cells = new List<BuildingCell>();
 
+    [SerializeField]
+    private CityGenerator cityGenerator;
+
     //[SerializeField]
     //private float minOffset;
 
@@ -114,7 +117,8 @@ public class CellGenerator : Generator
                 currPos += dir * buffer.Get();
                 while (currDist < path.Length())    // main cell loop
                 {
-                    float currCellRadius = cellRadius.Get();
+                    // float currCellRadius = cellRadius.Get();
+                    float currCellRadius = cityGenerator.city.SelectMesh().GetComponent<ProceduralBuilding>().GetRadius();
                     //float cellWidth = width.Get();
                     float spacing = buffer.Get();
                     currDist += currCellRadius;

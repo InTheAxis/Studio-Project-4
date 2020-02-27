@@ -5,10 +5,10 @@ using UnityEngine;
 public class CellBuildingGenerator : Generator
 {
     [SerializeField]
-    private CellGenerator cellGenerator;
+    private CityGenerator cityGenerator;
 
     [SerializeField]
-    public CityScriptable cityScriptable;
+    private CellGenerator cellGenerator;
 
     public List<BuildingCell> buildingCells { get; private set; } = new List<BuildingCell>();
 
@@ -26,7 +26,7 @@ public class CellBuildingGenerator : Generator
         Clear();
         foreach (BuildingCell cell in cellGenerator.GetCells())
         {
-            GameObject buildingRef = cityScriptable.SelectMesh(cell.radius);
+            GameObject buildingRef = cityGenerator.city.SelectMesh(cell.radius);
             if (buildingRef == null)
                 continue;
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();

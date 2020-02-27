@@ -7,25 +7,39 @@ using Photon.Pun;
 public class Minimap3D : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("The plane on which the holograms are placed on")]
     private GameObject plane = null;
-
     [SerializeField]
+    [Tooltip("The scale of the plane, used to enlarge/diminish holograms")]
     private Vector2 planeScaleRange = new Vector2(0.05f, 0.30f);
-
     [SerializeField]
+    [Tooltip("Remaps the y scale of objects to this range on the holographic plane (planeMaxHeight / worldMaxHeight)")]
+    private float planeMaxHeight = 15.0f;
+    [SerializeField]
+    [Tooltip("Remaps the y scale of objects to this range on the holographic plane (planeMaxHeight / worldMaxHeight)")]
+    private float worldMaxHeight = 100.0f;
+    [SerializeField]
+    [Tooltip("The radius of the map that corresponds to the area mapped to the hologram at any given moment")]
     private float mapRadius = 300.0f;
-
     [SerializeField]
-    private GameObject simpleCube = null;
-
-    [SerializeField]
-    private GameObject holographicCentralTower = null;
-
-    [SerializeField]
+    [Tooltip("The sensitivity that controls how much the plane enlarges/diminish based on mouse scroll input")]
     private float scrollSensitivity = 0.1f;
 
+    [Header("Materials")]
     [SerializeField]
+    [Tooltip("The material applied to the hologram objects")]
     private Material hologramMat = null;
+    [SerializeField]
+    [Tooltip("The material applied to holographic landmarks")]
+    private Material hologramLandmarkMat = null;
+
+    [Header("Objects")]
+    [SerializeField]
+    private GameObject simpleHologram = null;
+    [SerializeField]
+    private GameObject complexHologram = null;
+
+
 
     [SerializeField]
     private string controlTowerTag = "Landmark";
@@ -40,27 +54,32 @@ public class Minimap3D : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     private Transform compassDirFrame = null;
-
     [SerializeField]
     private TextMeshPro tmAngle = null;
 
     private float planeScale = 0.25f;
+    private float distFactor = 0.0f;
     private float scaleFactor = 0.0f;
 
     /* Stores the real world object as key and the hologram as value */
     private Dictionary<GameObject, GameObject> holograms = null;
     private Dictionary<GameObject, GameObject> inactive = null;
+    private List<GameObject> cleanup = null;
+
+    private bool isGrowing = false;
 
     private void Awake()
     {
         holograms = new Dictionary<GameObject, GameObject>();
         inactive = new Dictionary<GameObject, GameObject>();
-        scaleFactor = plane.GetComponent<Collider>().bounds.size.x / mapRadius;
+        cleanup = new List<GameObject>();
+        distFactor = plane.GetComponent<Collider>().bounds.extents.x / mapRadius;
+        scaleFactor = planeMaxHeight / worldMaxHeight;
+
         MinimapTrigger trigger = GetComponentInChildren<MinimapTrigger>();
         trigger.setBounds(mapRadius);
         trigger.showHologram += onShowHologram;
         trigger.hideHologram += onHideHologram;
-        Debug.Log(plane.GetComponent<Collider>().bounds.size.x);
     }
 
     public void Update()
@@ -74,38 +93,36 @@ public class Minimap3D : MonoBehaviour
         }
 
         /* Update hologram's transform */
-        //Debug.Log("Plane Pos: " + plane.transform.position);
         foreach (KeyValuePair<GameObject, GameObject> pair in holograms)
         {
             GameObject building = pair.Key;
             if (building == null)
             {
-                Debug.LogError("Building is null");
+                //cleanup.Add(building);
                 continue;
             }
+
             Vector3 relativeWorldOffset = building.transform.position - transform.position;
             relativeWorldOffset.y = building.GetComponent<Collider>().bounds.extents.y;
 
             Vector3 relativePlaneOffset = relativeWorldOffset;
-            relativePlaneOffset.x *= scaleFactor;
-            relativePlaneOffset.y *= scaleFactor;
-            relativePlaneOffset.z *= scaleFactor;
-
-            //Vector3 relativePlaneScale = building.transform.localScale;
-            //relativePlaneScale.x *= scaleFactor;
-            //relativePlaneScale.y *= scaleFactor;
-            //relativePlaneScale.z *= scaleFactor;
-
-            /* Update hologram's transform */
+            relativePlaneOffset.x *= distFactor;
+            relativePlaneOffset.y *= distFactor;
+            relativePlaneOffset.z *= distFactor;
             Transform t = pair.Value.transform;
             t.localPosition = relativePlaneOffset;
-            //t.localScale = relativePlaneScale;
-            //Debug.Log(relativePlaneOffset.magnitude);
         }
+
+        /* Cleanup references to gameobjects that no longer exists */
+        foreach (GameObject go in cleanup)
+            holograms.Remove(go);
+        cleanup.Clear();
 
         if (GameManager.playerObj != null)
         {
             Transform playerTransform = transform.root;
+            
+            /* Do not run this code if I am not the owner of this minimap */
             if (playerTransform != GameManager.playerObj.transform)
             {
                 gameObject.SetActive(false);
@@ -114,10 +131,12 @@ public class Minimap3D : MonoBehaviour
 
             float playerY = playerTransform.rotation.eulerAngles.y;
 
+            /* Hologram Plane Rotation */
             Vector3 planeRot = plane.transform.localRotation.eulerAngles;
             planeRot.y = -playerY;
             plane.transform.localRotation = Quaternion.Slerp(plane.transform.localRotation, Quaternion.Euler(planeRot), Time.deltaTime * 5.0f);
 
+            /* Compass Rotation */
             Vector3 frameRot = compassDirFrame.localRotation.eulerAngles;
             frameRot.z = playerY;
             compassDirFrame.localRotation = Quaternion.Slerp(compassDirFrame.transform.localRotation, Quaternion.Euler(frameRot), Time.deltaTime * 5.0f);
@@ -126,27 +145,7 @@ public class Minimap3D : MonoBehaviour
             if (angle < 0.0f)
                 angle += 180.0f;
             tmAngle.text = ((int)angle).ToString();
-            //tmAngle =
-            //Vector3 dottedPos = compassDottedFrame.transform.localPosition;
-            //dottedPos.y = -0.05f + 2.0f * Mathf.Sin(Time.deltaTime * 10.0f);
-            //compassDottedFrame.transform.localPosition = dottedPos;
         }
-        //for(int i = 0; i < visible.Count; ++i)
-        //{
-        //    if (visible[i] == null) continue;
-
-        //    Vector3 screenPoint = minimapCam.WorldToViewportPoint(visible[i].transform.position);
-        //    bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
-        //    if (!onScreen)
-        //    {
-        //        GameObject clone = pairs[visible[i]];
-        //        Destroy(clone);
-
-        //        pairs.Remove(visible[i]);
-        //        visible.RemoveAt(i--);
-        //    }
-
-        //}
     }
 
     private void onShowHologram(GameObject go)
@@ -158,37 +157,43 @@ public class Minimap3D : MonoBehaviour
         /* Create new hologram */
         if (!inactive.ContainsKey(go))
         {
+
+            clone = Instantiate(complexHologram);
+            clone.GetComponent<MeshFilter>().mesh = go.GetComponent<MeshFilter>().mesh;
+
             if (go.CompareTag("Landmark"))
-                clone = Instantiate(holographicCentralTower);
+                clone.GetComponent<MeshRenderer>().material = hologramLandmarkMat;
             else
-                clone = Instantiate(simpleCube);
+                clone.GetComponent<MeshRenderer>().material = hologramMat;
+
+            Debug.Log(go.name + " Y: " + go.GetComponent<MeshCollider>().bounds.size.y);
+
             clone.name = go.name + " Hologram";
             holograms.Add(go, clone);
-            //clone.GetComponent<HologramAnimate>().Grow(new Vector3(1.0f, 1.0f, 1.0f));
         }
         /* Fetch hologram from inactive pool */
         else
         {
             clone = inactive[go];
-            //clone.GetComponent<HologramAnimate>().Grow(new Vector3(1.0f, 1.0f, 1.0f));
-            //clone.transform.SetParent(activeHolder);
-            //clone.transform.localRotation = Quaternion.identity;
             holograms.Add(go, clone);
             inactive.Remove(go);
         }
 
+        
         Vector3 relativeWorldOffset = go.transform.position - transform.position;
-        relativeWorldOffset.y = go.GetComponent<Collider>().bounds.extents.y;
+        Collider collider = go.GetComponent<Collider>();
 
+        /* Offset the holographic clone's y such that the entire object is above the holographic plane (assumes the origin is center and thus, offset by half)*/
+        relativeWorldOffset.y = collider.bounds.extents.y;
+
+        /* Set holographic clone's offset to its true offset relative to plane */
         Vector3 relativePlaneOffset = relativeWorldOffset;
-        relativePlaneOffset.x *= scaleFactor;
-        relativePlaneOffset.y *= scaleFactor;
-        relativePlaneOffset.z *= scaleFactor;
+        relativePlaneOffset.x *= distFactor;
+        relativePlaneOffset.y *= distFactor;
+        relativePlaneOffset.z *= distFactor;
 
-        Vector3 relativePlaneScale = go.transform.localScale;
-        relativePlaneScale.x *= scaleFactor;
-        relativePlaneScale.y *= scaleFactor;
-        relativePlaneScale.z *= scaleFactor;
+        /* Set holographic clone's scale to its true scale relative to plane */
+        Vector3 relativePlaneScale = getRelativeScale(go);
 
         /* Update hologram's transform */
         Transform t = clone.transform;
@@ -198,6 +203,8 @@ public class Minimap3D : MonoBehaviour
         t.localScale = Vector3.zero;
 
         clone.SetActive(true);
+
+        /* Animate the transition of clone by growing it to its target scale */
         clone.GetComponent<HologramAnimate>().Grow(relativePlaneScale);
     }
 
@@ -205,40 +212,73 @@ public class Minimap3D : MonoBehaviour
     {
         if (!holograms.ContainsKey(go) || inactive.ContainsKey(go)) return;
 
-        /* Move active hologram to inactive pool */
+        /* Shrink the object down to zero as it disappears */
+
+        Debug.Log("Hide: " + go.name);
+
         holograms[go].GetComponent<HologramAnimate>().Shrink();
+
+        /* Move active hologram to inactive pool */
         holograms[go].transform.SetParent(inactiveHolder);
         inactive.Add(go, holograms[go]);
         holograms.Remove(go);
     }
 
+
+    /* Set holographic clone's size to its true scale relative to plane, which includes its transform scale multiplied by its collider size */
     private Vector3 getRelativeScale(GameObject go)
     {
-        Vector3 relativePlaneScale = go.transform.localScale;
-        relativePlaneScale.x *= scaleFactor;
-        relativePlaneScale.y *= scaleFactor;
-        relativePlaneScale.z *= scaleFactor;
+        Collider collider = go.GetComponent<Collider>();
+        //Vector3 colliderSize = collider.bounds.size;
 
-        if (go.CompareTag(controlTowerTag))
-        {
-            Debug.Log(relativePlaneScale);
-            Debug.Log(go.GetComponent<Collider>().bounds.size.y);
-        }
+        //float colliderYScale = collider.bounds.size.y;
+        //colliderYScale = Mathf.Min(colliderYScale, worldMaxHeight);
+        //float yRatio = colliderYScale / worldMaxHeight;
+        Vector3 relativePlaneScale = go.transform.localScale * 0.055f;
+        //relativePlaneScale.y = scaleFactor * transform.localScale.y;
+
+
+        //float colliderYScale = collider.bounds.size.y * scaleFactor;
+        //colliderYScale = Mathf.Min(colliderYScale, worldMaxHeight);
+
+        //float scale = Mathf.Min(colliderYScale, distFactor);
+
+        //float ratio = scale / worldMaxHeight;
+        //Vector3 relativePlaneScale = collider.bounds.size * ratio;
+
+
+        //relativePlaneScale *= yRatio;
+        //relativePlaneScale.x *= scaleFactor;
+        //relativePlaneScale.y *= scaleFactor;
+        //relativePlaneScale.z *= scaleFactor;
+
+
+        //float currentY = relativePlaneScale.y;
+        //relativePlaneScale.y = planeYScaleRange.x + relativePlaneScale.y * (planeYScaleRange.y - planeYScaleRange.x) / Mathf.Min(100.0f, currentY);
+        //low2 + (value - low1) * (high2 - low2) / (high1 - low1)
 
         return relativePlaneScale;
     }
 
     private void OnEnable()
     {
+        /* Animate the transition of clone by growing it to its target scale */
         foreach (KeyValuePair<GameObject, GameObject> pair in holograms)
         {
+            if (pair.Key == null) continue;
+
+            pair.Value.SetActive(true);
             pair.Value.transform.localScale = Vector3.zero;
             pair.Value.GetComponent<HologramAnimate>().Grow(getRelativeScale(pair.Key));
         }
+
+        Debug.Log("Holograms Count: " + holograms.Count);
     }
+
 
     public void Hide()
     {
+        /* Shrink the object down to zero as it disappears */
         if (gameObject.activeSelf)
             StartCoroutine(shrinkHolograms());
     }
@@ -247,6 +287,8 @@ public class Minimap3D : MonoBehaviour
     {
         foreach (KeyValuePair<GameObject, GameObject> pair in holograms)
         {
+            if (pair.Key == null) continue;
+            Debug.Log("Hiding: " + pair.Key.name);
             pair.Value.GetComponent<HologramAnimate>().Shrink();
         }
         yield return new WaitForSeconds(0.20f);
