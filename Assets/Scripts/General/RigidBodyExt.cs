@@ -21,22 +21,23 @@ public struct RigidBodyExt
     { 
         foreach(Rigidbody rb in rbs)
         {
-            rb.velocity = Vector3.zero;
+            NetworkRigidbodyController.instance.setVel(rb, Vector3.zero);
         }
     }
     public static void SlowVel(Rigidbody[] rbs, Vector3 slowFactor)
     {
         foreach (Rigidbody rb in rbs)
         {
-            rb.velocity.Set(rb.velocity.x * slowFactor.x, rb.velocity.y * slowFactor.y, rb.velocity.z * slowFactor.z);
+            NetworkRigidbodyController.instance.setVel(rb, new Vector3(rb.velocity.x * slowFactor.x, rb.velocity.y * slowFactor.y, rb.velocity.z * slowFactor.z));
+            //rb.velocity.Set(rb.velocity.x * slowFactor.x, rb.velocity.y * slowFactor.y, rb.velocity.z * slowFactor.z);
         }
     }
-
     public static void SlowVel(Rigidbody[] rbs, float slowFactor)
     {
         foreach (Rigidbody rb in rbs)
         {
-            rb.velocity *= slowFactor;
+            NetworkRigidbodyController.instance.setVel(rb, rb.velocity * slowFactor);
+            //rb.velocity *= slowFactor;
         }
     }
 
@@ -44,7 +45,8 @@ public struct RigidBodyExt
     {
         foreach (Rigidbody rb in rbs)
         {
-            rb.AddForce(force, mode);
+            NetworkRigidbodyController.instance.applyForce(rb, force, mode);
+            //rb.AddForce(force, mode);
         }
     }
 
@@ -55,7 +57,8 @@ public struct RigidBodyExt
         {
             disp = (origin - rb.position);
             if (disp.sqrMagnitude > Mathf.Epsilon * Mathf.Epsilon)
-                rb.AddForce(disp.normalized * forceMag, mode);
+                NetworkRigidbodyController.instance.applyForce(rb, disp.normalized * forceMag, mode);
+                //rb.AddForce(disp.normalized * forceMag, mode);
         }
     }
 

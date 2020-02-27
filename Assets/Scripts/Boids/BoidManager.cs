@@ -119,6 +119,10 @@ public class BoidManager : ComponentSystem
             Vector3 dir = posA - separatePos;
             dataA.vel += dir * managerData.separateRate; // update vel
         }
+        if (transA.Value.y < 3)
+        {
+            dataA.vel += Vector3.up * managerData.avoidGroundRate; // update vel
+        }
         dataA.vel.Normalize(); // normalise vel
     }
 

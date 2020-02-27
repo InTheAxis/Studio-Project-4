@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MapSelector : MonoBehaviour
 {
@@ -19,10 +20,16 @@ public class MapSelector : MonoBehaviour
 
     [SerializeField]
     private Maps map;
+
     private static Maps sMap = Maps.NONE;
 
     private void Start()
     {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         if (sMap != Maps.NONE)
             map = sMap;
         if (map == Maps.MAX)
@@ -32,7 +39,7 @@ public class MapSelector : MonoBehaviour
         }
         if (map == Maps.RANDOM)
         {
-            map = (Maps)(Random.Range(0, (int)Maps.MAX-1));
+            map = (Maps)(Random.Range(0, (int)Maps.MAX - 1));
         }
         LoadMap();
     }
@@ -41,6 +48,7 @@ public class MapSelector : MonoBehaviour
     {
         InstantiateHandler.mInstantiate(mapGenerators[(int)map]);
     }
+
     public static void SelectMap(Maps map)
     {
         sMap = map;

@@ -320,6 +320,8 @@ public class DestructibleController : MonoBehaviourPun
                         // Tell master client to release ownership back to scene
                         PhotonView colliderView = PhotonView.Get(collider);
                         collider.gameObject.layer = detectMaskLayer;
+                        collider.attachedRigidbody.isKinematic = false;
+                        collider.attachedRigidbody.useGravity = true;
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
 
@@ -383,6 +385,7 @@ public class DestructibleController : MonoBehaviourPun
             photonView.RPC("destructibleRequestOwner", RpcTarget.MasterClient, PhotonView.Get(collider).ViewID);
 
         collider.attachedRigidbody.useGravity = false;
+        collider.attachedRigidbody.isKinematic = true;
         collider.gameObject.layer = heldMaskLayer;
 
         Vector3 targetPos = Vector3.zero;

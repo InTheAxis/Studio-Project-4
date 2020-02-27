@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: Balcony
+  m_EditorClassIdentifier: 
+  meshList:
+  - mesh: {fileID: -927199367670048503, guid: 64c944abae11b104f8457be4da5a0023, type: 3}
+    weight: 1
+    chance: 0.33333334
+  - mesh: {fileID: 8496652880805077324, guid: a3d3d57778a5493489c5bc8588529721, type: 3}
+    weight: 1
+    chance: 0.33333334
+  - mesh: {fileID: 5174950351624360559, guid: c282a9a65d3ebb448b56fb78a9add402, type: 3}
+    weight: 1
+    chance: 0.33333334

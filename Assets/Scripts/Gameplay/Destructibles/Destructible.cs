@@ -21,6 +21,10 @@ public class Destructible : MonoBehaviourPun
     [SerializeField]
     private float breakForce = 2.0f;
 
+    //[SerializeField]
+    //[Tooltip("The factor that determines how far the shard is relative to its parent when spawned, to prevent instant collisions ")]
+    //private float safetyTolerance = 0.50f;
+
     [SerializeField]
     private Vector3 minExplosionDir = new Vector3(-1.0f, -1.0f, -1.0f);
 
@@ -80,21 +84,21 @@ public class Destructible : MonoBehaviourPun
             {
                 if (target == null) continue;
 
-                GameObject clone = PhotonNetwork.InstantiateSceneObject(target.name, transform.position + target.transform.position, transform.rotation);
+                GameObject clone = PhotonNetwork.InstantiateSceneObject(target.name, transform.position + target.transform.position * 1.50f, transform.rotation);
                 clone.transform.localRotation = transform.localRotation;
-                clone.transform.localScale = transform.localScale;
+                clone.transform.localScale = transform.localScale * 0.95f;
 
                 Rigidbody cloneRigidbody = clone.GetComponent<Rigidbody>();
 
-                Vector3 velocity;
-                velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
-                velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
-                velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
-                velocity.Normalize();
-                velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
-                velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
-                velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
-                cloneRigidbody.velocity = velocity;
+                //Vector3 velocity;
+                //velocity.x = Random.Range(minExplosionDir.x, maxExplosionDir.x);
+                //velocity.y = Random.Range(minExplosionDir.y, maxExplosionDir.y);
+                //velocity.z = Random.Range(minExplosionDir.z, maxExplosionDir.z);
+                //velocity.Normalize();
+                //velocity.x *= Random.Range(minExplosionForce.x, maxExplosionForce.x);
+                //velocity.y *= Random.Range(minExplosionForce.y, maxExplosionForce.y);
+                //velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
+                cloneRigidbody.velocity = Vector3.zero;
             }
 
 
