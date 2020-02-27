@@ -84,8 +84,6 @@ public class Minimap3D : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-            Flicker(0.50f);
 
         /* Zoom in/out */
         float deltaY = Input.mouseScrollDelta.y * scrollSensitivity;
