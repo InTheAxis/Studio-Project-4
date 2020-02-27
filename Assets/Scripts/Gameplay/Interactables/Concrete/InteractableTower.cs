@@ -139,14 +139,14 @@ public class InteractableTower : InteractableBase
             if (wasInteracting)
                 return "Recharging " + Mathf.RoundToInt(interactTime / timeToFinishInteraction * 100.0f) + "%";
             else
-                return base.getUncarriedTooltip() + "recharge energy from Tower";
+                return base.getUncarriedTooltip() + "Recharge Energy from Tower";
         }
         else
         {
             if (wasInteracting)
-                return "Destroying Tower " + Mathf.RoundToInt(interactTime / timeToFinishInteraction * 100.0f) + "%";
+                return "Destroying " + Mathf.RoundToInt(interactTime / timeToFinishInteraction * 100.0f) + "%";
             else
-                return base.getUncarriedTooltip() + "destroy Tower";
+                return base.getUncarriedTooltip() + "Destroy Tower";
         }
     }
 
