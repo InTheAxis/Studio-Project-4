@@ -120,7 +120,7 @@ MonoBehaviour:
   m_SynchronizeVelocity: 0
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
-  m_SyncState: 1
+  m_SyncState: 0
   m_TeleportIfDistanceGreaterThan: 10
 --- !u!114 &2524581013760567537
 MonoBehaviour:
@@ -456,31 +456,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9117360599836359461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf8689086778a447a29527c8b56b9a0, type: 3}
+  m_Script: {fileID: 11500000, guid: d1e38d4c056a4c94196b1548376676e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: fb74df09f109b0a4899af00f460cebdb, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    sfx: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: b8f2f7bf0c6d23745826b3b131ec0e2b, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    playOnAwake: 0
-    sfx: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
-    playOnAwake: 0
-    sfx: 0
-    source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 0f2757d8c31d9f5469d0b4367f95d6e2, type: 3}
     volume: 0.5
     pitch: 1
@@ -495,9 +474,13 @@ MonoBehaviour:
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4891649
+  - clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    sfx: 0
+    source: {fileID: 0}
 --- !u!82 &5507467854546797379
 AudioSource:
   m_ObjectHideFlags: 0

@@ -244,7 +244,7 @@ public class DestructibleController : MonoBehaviourPun
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
                         // audio
-                        playerController.GetComponent<PlayerAudioController>()?.PickUpDebris();
+                        playerController.GetComponent<ThrowableAudioController>()?.PickUpDebris();
                     }
                 }
                 else
@@ -334,7 +334,7 @@ public class DestructibleController : MonoBehaviourPun
                     canThrow = false;
                     throwStatus?.Invoke();
                     // audio
-                    playerController.GetComponent<PlayerAudioController>()?.LaunchDebris();
+                    playerController.GetComponent<ThrowableAudioController>()?.LaunchDebris();
                 }
                 playerController.disableKeyInput = false;
             }
