@@ -15,6 +15,8 @@ public class InteractableTower : InteractableBase
     private bool wasInteracting = false;
     private float interactTime = 0.0f;
 
+    private bool interactedOnce = false;
+
     [Header("VFX")]
     [SerializeField]
     private ParticleSystem sparks = null;
@@ -76,6 +78,9 @@ public class InteractableTower : InteractableBase
             Debug.Log("Reset Interact");
             wasInteracting = false;
             interactTime += Time.deltaTime;
+
+            interactedOnce = true;
+
             if (GameManager.playerObj)
                 GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = true;
 
@@ -117,15 +122,20 @@ public class InteractableTower : InteractableBase
         }
         else // Reset timer
         {
+            if (interactedOnce)
+            {
+                interactedOnce = false;
+
+                if (GameManager.playerObj)
+                    GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
+            }
+
             // Stopped interacting. Set light back to current stage
             if (interactTime > 0.0f)
                 turnOnLight(currStage, currStage);
 
             if (sparks.isEmitting)
                 sparks.Stop();
-
-            if (GameManager.playerObj)
-                GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
 
             interactTime = 0.0f;
             interactDone = false;
