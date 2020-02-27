@@ -40,7 +40,7 @@ public class InteractableManagerLocal : MonoBehaviour
         Ray camRay = new Ray(camera.transform.position, camera.transform.forward);
         LayerMask mask = LayerMask.GetMask("Interactable");
         RaycastHit rayInfo;
-        if (Physics.Raycast(camRay, out rayInfo, maxInteractDist, mask))
+        if (Physics.Raycast(camRay, out rayInfo, maxInteractDist + (camera.transform.position - GameManager.playerObj.transform.position).magnitude, mask))
         {
             if (rayInfo.collider.isTrigger)
             {
