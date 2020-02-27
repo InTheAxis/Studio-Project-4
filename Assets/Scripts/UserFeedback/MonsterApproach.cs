@@ -33,6 +33,8 @@ public class MonsterApproach : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(!minimap)
+            minimap = GetComponentInChildren<Minimap3D>();
         if (monsterObj == null)
         {
             // get monster obj
