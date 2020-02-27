@@ -70,15 +70,14 @@ public class InteractableTower : InteractableBase
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj)
-            GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = wasInteracting;
-
         // Is interacting this frame
         if (wasInteracting)
         {
             Debug.Log("Reset Interact");
             wasInteracting = false;
             interactTime += Time.deltaTime;
+            if (GameManager.playerObj)
+                GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = true;
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
@@ -124,6 +123,10 @@ public class InteractableTower : InteractableBase
 
             if (sparks.isEmitting)
                 sparks.Stop();
+
+            if (GameManager.playerObj)
+                GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
+
             interactTime = 0.0f;
             interactDone = false;
         }

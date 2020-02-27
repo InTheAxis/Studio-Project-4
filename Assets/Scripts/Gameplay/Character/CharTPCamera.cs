@@ -51,9 +51,18 @@ public class CharTPCamera : MonoBehaviour
     [Tooltip("How far to shake cam")]
     private float shakeAmplitude = 0.01f;
 
+    [Header("Camera Bob Settings")]
     [SerializeField]
     [Tooltip("How frequent to shake cam")]
-    private float shakeFrequency = 0.5f;
+    private float shakeFrequency = 0.5f;    
+    
+    [SerializeField]
+    [Tooltip("How much the camera bobs")]
+    private float cameraBobAmt = 0.1f;
+
+    [SerializeField]
+    [Tooltip("How frequent the camera bobs")]
+    private float cameraBobFreq = 0.1f;
 
     [Header("Crosshair")]
     [SerializeField]
@@ -71,6 +80,7 @@ public class CharTPCamera : MonoBehaviour
     private Vector3[] clipPoint;
     private Vector3 desiredPos;
     private IEnumerator camShakeCorr;
+    private float cameraBobTimer;
 
     #region private Calls
 
@@ -157,6 +167,17 @@ public class CharTPCamera : MonoBehaviour
         StartCoroutine(camShakeCorr);
     }
 
+    public void SetTargetDist(float dist) //replaces the default set in inspector
+    {
+        defaultCamDist = targetCamDist = dist;
+    }
+
+    public void SetCameraBob(float bobAmt, float bobFreq) //replaces the default set in inspector
+    {
+        cameraBobAmt = bobAmt;
+        cameraBobFreq = bobFreq;
+    }
+
     #endregion private Calls
 
     private void Awake()
@@ -181,6 +202,7 @@ public class CharTPCamera : MonoBehaviour
         cam = GetComponent<Camera>();
         clipPoint = new Vector3[5];
         camShakeCorr = null;
+        cameraBobTimer = 0;
     }
 
     private void LateUpdate()
@@ -200,6 +222,14 @@ public class CharTPCamera : MonoBehaviour
             target.position = Vector3.Slerp(target.position, nextTarget.position, Time.deltaTime * camAdjustSpeed);
             target.rotation = Quaternion.Slerp(target.rotation, nextTarget.rotation, Time.deltaTime * camAdjustSpeed);
         }
+
+        if (charControl.displacement > 1)
+        {
+            cameraBobTimer += Time.deltaTime * cameraBobFreq;
+            target.position += Vector3.up * cameraBobAmt * Mathf.Sin(cameraBobTimer);
+        }
+        else
+            cameraBobTimer = 0;
 
         //calculate if shld move closer
         UpdateCameraClipPoints();

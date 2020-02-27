@@ -172,7 +172,7 @@ public class DestructibleController : MonoBehaviourPun
 
         if (!isPulling && !canThrow)
         {
-            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance, detectMask);
+            hasTarget = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickUpMaxDistance + (cameraTransform.position - playerController.transform.position).magnitude, detectMask);
 
             /* Resets all previously highlighted materials if not pulling an object /preparing to throw */
             foreach (KeyValuePair<GameObject, List<Material>> pair in prevHighlighted)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MonsterEnergy : MonoBehaviour, IPunObservable
+public class MonsterEnergy : MonoBehaviour
 {
     [SerializeField]
     private CharHealth health;
@@ -13,18 +13,6 @@ public class MonsterEnergy : MonoBehaviour, IPunObservable
     private float decayRate = 0.01f;
 
     private float energy;
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(energy);
-        }
-        else 
-        {
-            energy = (float)stream.ReceiveNext();
-        }
-    }
 
     private void OnEnable()
     {
