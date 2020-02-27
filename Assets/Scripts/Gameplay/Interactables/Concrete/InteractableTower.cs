@@ -15,6 +15,9 @@ public class InteractableTower : InteractableBase
     private bool wasInteracting = false;
     private float interactTime = 0.0f;
 
+    [Header("VFX")]
+    [SerializeField]
+    private ParticleSystem sparks = null;
 
     [Header("Tower Light Indicators")]
     [SerializeField]
@@ -60,6 +63,9 @@ public class InteractableTower : InteractableBase
     {
         wasInteracting = true;
         Debug.Log("Interact");
+
+        if (!sparks.isEmitting)
+            sparks.Play();
     }
 
     private void LateUpdate()
@@ -116,6 +122,8 @@ public class InteractableTower : InteractableBase
             if (interactTime > 0.0f)
                 turnOnLight(currStage, currStage);
 
+            if (sparks.isEmitting)
+                sparks.Stop();
             interactTime = 0.0f;
             interactDone = false;
         }
