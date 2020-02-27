@@ -61,7 +61,8 @@ public class CharTPController : MonoBehaviourPun
     public Vector3 lookDir { private set; get; }
 
     //these are just to cache values
-    private Rigidbody rb;
+    [HideInInspector]
+    public Rigidbody rb;
 
     private Vector3 pPos, pforward;
     private Vector3 right;
@@ -214,10 +215,5 @@ public class CharTPController : MonoBehaviourPun
         temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * deccel);
         temp.y = rb.velocity.y;
         rb.velocity = temp;
-    }
-
-    public void AddForce(Vector3 force, ForceMode mode)
-    {
-        rb.AddForce(force, mode);
     }
 }

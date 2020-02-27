@@ -157,6 +157,11 @@ public class CharTPCamera : MonoBehaviour
         StartCoroutine(camShakeCorr);
     }
 
+    public void SetTargetDist(float dist) //replaces the default set in inspector
+    {
+        defaultCamDist = targetCamDist = dist;
+    }
+
     #endregion private Calls
 
     private void Awake()
