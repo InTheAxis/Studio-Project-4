@@ -29,11 +29,11 @@ public abstract class InteractableBase : MonoBehaviour
     public abstract void interact();
     public virtual string getUncarriedTooltip()
     {
-        return "Press [E] to " + (canCarry ? "carry " + getInteractableName() : "");
+        return (canCarry ? "Carry " + getInteractableName() : "");
     }
     public virtual string getCarriedTooltip()
     {
-        return "Press [E] to drop " + getInteractableName() + "\nPress [F] to ";
+        return "Drop " + getInteractableName() + "\n";
     }
 
     protected void destroyThis()

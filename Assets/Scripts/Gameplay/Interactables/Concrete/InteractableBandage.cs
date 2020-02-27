@@ -15,6 +15,6 @@ public class InteractableBandage : InteractableBase
 
     public override string getUncarriedTooltip()
     {
-        return base.getUncarriedTooltip() + "use Bandage";
+        return base.getUncarriedTooltip() + "Use Bandage";
     }
 }
