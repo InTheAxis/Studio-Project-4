@@ -138,37 +138,37 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: idle
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: run
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: crouch
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: crouchWalk
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: jump
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: map
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: attack
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: died
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: hit
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: sabo
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: throw
   m_SynchronizeLayers:
   - SynchronizeType: 1

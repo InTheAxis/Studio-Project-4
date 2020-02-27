@@ -38,6 +38,8 @@ public class DamageData : MonoBehaviour, IPunObservable
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!PhotonNetwork.IsMasterClient) //test if it works
+            return;
         if (damaging)
         {
             CharHitBox hitbox = collision.gameObject.GetComponent<CharHitBox>();
@@ -52,7 +54,9 @@ public class DamageData : MonoBehaviour, IPunObservable
 
     private void OnCollisionStay(Collision collision)
     {
-        if (damaging && collision.gameObject.CompareTag("Terrain") && GetComponent<Rigidbody>().velocity.sqrMagnitude < 4)
+        if (!PhotonNetwork.IsMasterClient) //test if it works
+            return;
+        if (damaging && collision.gameObject.layer == LayerMask.NameToLayer("Environment") && GetComponent<Rigidbody>().velocity.sqrMagnitude < 4)
         {
             damaging = false;
             Debug.LogFormat("{0} is no longer damaging", gameObject.name);
