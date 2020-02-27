@@ -12,16 +12,22 @@ public class MonsterApproach : MonoBehaviour
     [SerializeField]
     private float innerRange = 1;   // distance from the player that is viewed as the highest intensity
 
+    [SerializeField]
+    private MinMax flickerRate;
+
     private bool inRange;
     private bool fadeOut;
     private float offsetRange;
 
     private AudioController audioController;
+    private bool flickering;
+    private Minimap3D minimap;
 
     private void Start()
     {
         audioController = BGAudioController.instance;
         offsetRange = outerRange - innerRange;
+        minimap = GetComponentInChildren<Minimap3D>();
     }
 
     // Update is called once per frame
@@ -70,6 +76,27 @@ public class MonsterApproach : MonoBehaviour
         float intensity = Mathf.Clamp(1 - (currRange - innerRange) / offsetRange, 0.1f, 1); // range of 0 - 1
         audioController.SetVol(intensity, 0);
         // TO DO: add overlay second track
+        // flicker
+        if (!flickering)
+        {
+            if (minimap.isActiveAndEnabled)
+                StartCoroutine(Flicker(intensity));
+        }
+    }
+
+    private IEnumerator Flicker(float intensity)
+    {
+        flickering = true;
+        float d1 = flickerRate.Get() / intensity;
+        yield return new WaitForSeconds(d1);  // non flicker duration
+        if (minimap.isActiveAndEnabled)
+        {
+            float d2 = flickerRate.Get() * intensity;
+            minimap.Flicker(d2);
+            yield return new WaitForSeconds(d2);
+            Debug.Log("flicker: " + d2);
+        }
+        flickering = false;
     }
 
     private void EnterRange()
