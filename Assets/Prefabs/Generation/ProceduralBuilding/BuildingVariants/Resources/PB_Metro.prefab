@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
       propertyPath: breakForce
-      value: 3
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
@@ -35,12 +35,17 @@ PrefabInstance:
     - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
       propertyPath: maxExplosionForce.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
       propertyPath: maxExplosionForce.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508379130886511557, guid: 92e8a728d9430334d98420368e7526af,
+        type: 3}
+      propertyPath: minExplosionDir.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6608286375775937187, guid: 92e8a728d9430334d98420368e7526af,
         type: 3}
