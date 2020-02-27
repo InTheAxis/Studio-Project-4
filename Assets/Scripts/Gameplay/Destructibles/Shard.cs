@@ -46,4 +46,8 @@ public class Shard : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 }
