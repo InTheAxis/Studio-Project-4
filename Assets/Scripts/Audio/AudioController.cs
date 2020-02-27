@@ -19,7 +19,7 @@ public class AudioController : MonoBehaviour
         Stop,
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         source = GetComponents<AudioSource>();
         if (source == null)
@@ -41,9 +41,14 @@ public class AudioController : MonoBehaviour
                 //    musicSounds.Add(s);
 
                 if (s.playOnAwake)
-                    Play(s.name);
+                    Play(s.clip.name);
             }
         }
+    }
+
+    public void Stop(int index = 0)
+    {
+        source[index].Stop();
     }
 
     public void SetAudio(string name, AudioState state, int index = 0)
@@ -77,6 +82,16 @@ public class AudioController : MonoBehaviour
                 source[index].Stop();
                 break;
         }
+    }
+
+    public void SetVol(float vol, int index = 0)
+    {
+        source[index].volume = vol;
+    }
+
+    public float GetVol(int index = 0)
+    {
+        return source[index].volume;
     }
 
     public void Play(string name, int index = 0)

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: -6912798697404563235}
   - component: {fileID: 4670906940980623606}
   - component: {fileID: 5507467854546797379}
+  - component: {fileID: 8334356224068470803}
   m_Layer: 8
   m_Name: Human_Male
   m_TagString: Untagged
@@ -449,40 +450,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
-    clip: {fileID: 8300000, guid: fb74df09f109b0a4899af00f460cebdb, type: 3}
+  - clip: {fileID: 8300000, guid: fb74df09f109b0a4899af00f460cebdb, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: b8f2f7bf0c6d23745826b3b131ec0e2b, type: 3}
+  - clip: {fileID: 8300000, guid: b8f2f7bf0c6d23745826b3b131ec0e2b, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
+  - clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
     volume: 0.5
     pitch: 1
     loop: 1
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: 0f2757d8c31d9f5469d0b4367f95d6e2, type: 3}
+  - clip: {fileID: 8300000, guid: 0f2757d8c31d9f5469d0b4367f95d6e2, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: 405099c5ec01fdd47a52f9dc5db6c01b, type: 3}
+  - clip: {fileID: 8300000, guid: 405099c5ec01fdd47a52f9dc5db6c01b, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
@@ -588,6 +584,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8334356224068470803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b453beb2845154f86738ce10c7623c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerRange: 23.01
+  innerRange: 1
 --- !u!1001 &2565709116428265765
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviourPun
     private List<GameObject> modelPrefabs;
 
     public static GameObject playerObj = null;
+    public static GameObject monsterObj = null;
 
     private void Awake()
     {

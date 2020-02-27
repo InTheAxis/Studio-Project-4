@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private float sfxAudioMultiplier = 1.0f;
+
     [SerializeField]
     private float musicAudioMultiplier = 1.0f;
 
@@ -44,16 +45,15 @@ public class AudioManager : MonoBehaviour
                     musicSounds.Add(s);
 
                 if (s.playOnAwake)
-                    setAudio(s.name, AudioState.Play);
+                    setAudio(s.clip.name, AudioState.Play);
             }
         }
         Debug.Log("[Audio] Initialized!");
     }
 
-
     public void setAudio(string name, AudioState state)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.clip.name == name);
         if (s == null)
         {
             Debug.LogError("[Audio] " + name + " sound does not exist!");
@@ -78,15 +78,13 @@ public class AudioManager : MonoBehaviour
                 s.source.Stop();
                 break;
         }
-
     }
 
     public void setSFXMultiplier(float multiplier)
     {
         sfxAudioMultiplier = multiplier;
-        foreach(Sound s in sfxSounds)
+        foreach (Sound s in sfxSounds)
             s.source.volume = s.volume * sfxAudioMultiplier;
-        
     }
 
     public void setMusicMultiplier(float multiplier)
@@ -94,7 +92,5 @@ public class AudioManager : MonoBehaviour
         musicAudioMultiplier = multiplier;
         foreach (Sound s in musicSounds)
             s.source.volume = s.volume * musicAudioMultiplier;
-
     }
-
 }

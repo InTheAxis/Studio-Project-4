@@ -64,6 +64,7 @@ MonoBehaviour:
   alignRate: 0.0228
   coheseRate: 0.02
   separateRate: 0.0594
+  avoidGroundRate: 0
   viewRadius: 7
   separateRadius: 2
   align: 1
@@ -755,7 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c862ec7e1c8d83d4d869eb0eeee8170e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   cityGenerator: {fileID: 5890597338796914724}
   buffer:
     min: 0.25
@@ -858,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae179f9963a1934a882b64c0267c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   cityGenerator: {fileID: 5890597338796914724}
   towerGenerator: {fileID: 899756740256859345}
   cellGenerator: {fileID: 8961182708676070527}
