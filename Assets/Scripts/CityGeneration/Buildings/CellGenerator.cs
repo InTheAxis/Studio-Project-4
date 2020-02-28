@@ -74,7 +74,7 @@ public class CellGenerator : Generator
     [SerializeField]
     private PlayerSpawnGenerator playerSpawnGenerator;
 
-    [Range(0, 1)]
+    [Min(0)]
     [SerializeField]
     private float playerBuffer;
 
@@ -191,9 +191,9 @@ public class CellGenerator : Generator
         Gizmos.color = Color.magenta;
         foreach (Vector3 point in PlayerSpawnGenerator.playerSpawnPos)
         {
-            Gizmos.DrawWireSphere(point, playerBuffer * scale);
+            Gizmos.DrawWireSphere(point, playerBuffer);
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer * scale);
+        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer);
     }
 }

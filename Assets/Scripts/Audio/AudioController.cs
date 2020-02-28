@@ -53,7 +53,7 @@ public class AudioController : MonoBehaviour
 
     public void SetAudio(string name, AudioState state, int index = 0)
     {
-        Sound s = Array.Find(sounds, sound => sound.clip.name == name);
+        Sound s = sounds.Find(sound => sound.clip.name == name);
         if (s == null)
         {
             Debug.LogError("[Audio] " + name + " sound does not exist!");
