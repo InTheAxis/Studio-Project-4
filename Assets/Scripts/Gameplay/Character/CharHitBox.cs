@@ -2,8 +2,16 @@
 
 public class CharHitBox : MonoBehaviour
 {
-    public System.Action<int> OnHit;
+    public System.Action<int, float> OnHit; //damage, dot product of angle
     public bool hit { private set; get; }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        { 
+            OnHit?.Invoke(1, -1);
+        }
+    }
 
     //private void Start()
     //{

@@ -39,7 +39,8 @@ public class CharLookTargetController : MonoBehaviour
             {
                 tpCam.LookAt("Map", 2);
 
-                minimap.gameObject.SetActive(true);
+
+                StartCoroutine(DelayOpenMap(0.3f));
                 showMap?.Invoke(true);
             }
             else
@@ -58,5 +59,11 @@ public class CharLookTargetController : MonoBehaviour
             else if (tpCam.IsLookingAt() == "FrontSide")
                 tpCam.LookAtPlayer();
         }
+    }
+
+    private IEnumerator DelayOpenMap(float dura)
+    {
+        yield return new WaitForSeconds(dura);
+        minimap.gameObject.SetActive(true);
     }
 }
