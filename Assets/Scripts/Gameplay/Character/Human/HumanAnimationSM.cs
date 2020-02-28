@@ -37,14 +37,14 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void LateUpdate()
     {
-        //if (GameManager.playerObj == null)
-        //    return;
-        //if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-        //    return;
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
 
 
-        if (Input.GetMouseButtonDown(0))
-            MiniMapToggle(true);
+        //if (Input.GetMouseButtonDown(0))
+        //    MiniMapToggle(true);
         //if (Input.GetMouseButtonUp(0))
         //    SabotagingDone(false);
 
@@ -83,6 +83,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void MiniMapToggle(bool b)
     {
+        if (!b)
+            return;
         animator.SetLayerWeight(1, 1);
         Trigger("map");
     }
