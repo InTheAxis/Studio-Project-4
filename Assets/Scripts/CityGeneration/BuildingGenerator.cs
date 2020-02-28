@@ -72,10 +72,10 @@ public class BuildingGenerator : Generator
             vpos.y += 0.5f;
             // check for road
             bool emptySpot = true;
-            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer * scale);
+            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer, LayerMask.NameToLayer("Road"));
             foreach (Collider col in colls)
             {
-                if (col.tag == "Road")
+                //if (col.tag == "Road")
                 {
                     emptySpot = false;
                     break;
@@ -122,6 +122,6 @@ public class BuildingGenerator : Generator
         {
             Gizmos.DrawWireSphere(pos, playerBuffer);
         }
-            Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer);
+        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer);
     }
 }
