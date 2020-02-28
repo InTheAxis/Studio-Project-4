@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterApproach : MonoBehaviour
 {
-    private GameObject monsterObj;
+    private GameObject monsterObj = null;
 
     [SerializeField]
     private float outerRange = 10;// distance from the player that is viewed as the lowest intensity
@@ -33,15 +33,16 @@ public class MonsterApproach : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!minimap)
+        if (!minimap)
             minimap = GetComponentInChildren<Minimap3D>();
         if (monsterObj == null)
         {
-            // get monster obj
-            // return
+            if (!GameManager.monsterObj)
+                return;
+            monsterObj = GameManager.monsterObj;
         }
 
-        Vector3 monsterPos = Vector3.zero;
+        Vector3 monsterPos = monsterObj.transform.position;
         float distFromMonster = Vector3.Distance(monsterPos, transform.position);
         if (distFromMonster < outerRange)
         {

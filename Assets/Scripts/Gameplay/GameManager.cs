@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void Spawn(Vector3 pos)
     {
+        pos.y = 5; //< spawn in the air
         int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
         Debug.Log("Got prefab index " + prefabIndex);
 
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviourPun
         CharTPCamera.Instance?.SetCharController(playerObj.GetComponent<CharTPController>());
 
         if (PhotonNetwork.IsMasterClient) //override camera values here
-        { 
+        {
             CharTPCamera.Instance.SetTargetDist(8); //if monster, set to further away
             CharTPCamera.Instance.SetCameraBob(0.01f, 10);
         }

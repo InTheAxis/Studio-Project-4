@@ -2,12 +2,12 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity;
 using UnityEditor;
 using UnityEngine;
 
 [Serializable]
-[GenerateAuthoringComponent]
-public struct BoidManagerData : IComponentData
+public struct MonsterData : IComponentData
 {
     // Add fields to your component here. Remember that:
     //
@@ -22,31 +22,6 @@ public struct BoidManagerData : IComponentData
     // * You should focus on the data structure that makes the most sense
     //   for runtime use here. Authoring Components will be used for
     //   authoring the data in the Editor.
-    [Range(0, 1.0f)]
-    public float speed;
 
-    [Range(0, 0.1f)]
-    public float alignRate;
-
-    [Range(0, 0.1f)]
-    public float coheseRate;
-
-    [Range(0, 0.1f)]
-    public float separateRate;
-
-    [Range(0, 1.0f)]
-    public float avoidGroundRate;
-
-    public float viewRadius;
-    public float separateRadius;
-
-    public bool align;
-    public bool cohese;
-    public bool separate;
-
-    public float range;
-    public float avoidGroundHeight;
-    public float avoidCeilingHeight;
-    public float minHeight;
-    public float maxHeight;
+    public Vector3 monsterPos;
 }

@@ -9,7 +9,7 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     protected List<Sound> sounds = new List<Sound>();
 
-    private AudioSource[] source;
+    protected AudioSource[] source;
 
     public enum AudioState
     {
@@ -22,7 +22,7 @@ public class AudioController : MonoBehaviour
     protected virtual void Awake()
     {
         source = GetComponents<AudioSource>();
-        if (source == null)
+        if (source.Length == 0)
             Debug.LogError("No audio source found on: " + gameObject.name);
 
         if (sounds.Count > 0)
@@ -53,7 +53,7 @@ public class AudioController : MonoBehaviour
 
     public void SetAudio(string name, AudioState state, int index = 0)
     {
-        Sound s = sounds.Find(sound => sound.clip.name == name);
+        Sound s = sounds.Find(sound => sound.clip?.name == name);
         if (s == null)
         {
             Debug.LogError("[Audio] " + name + " sound does not exist!");

@@ -22,6 +22,9 @@ public class ProceduralBuilding : MonoBehaviour
 
     public GameObject attachmentPositions;
 
+    [SerializeField]
+    private bool gizmosEnabled = false;
+
     // private variables
     public float GetRadius()
     {
@@ -30,6 +33,8 @@ public class ProceduralBuilding : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!gizmosEnabled)
+            return;
         Gizmos.DrawWireSphere(Vector3.zero, buildingRadius);
     }
 
@@ -74,6 +79,7 @@ public class ProceduralBuilding : MonoBehaviour
 
     private void Generate()
     {
+        Rigidbody rigid = GetComponent<Rigidbody>();
         // seed = Random.seed;
         Clear();
         attachmentRoot = InstantiateHandler.mInstantiate(rootRef, transform);
@@ -90,6 +96,9 @@ public class ProceduralBuilding : MonoBehaviour
                 GameObject attachment = InstantiateHandler.mInstantiate(meshRef, slot.transform.position, Quaternion.identity, attachmentRoot.transform, "Environment");
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
+                FixedJoint joint = attachment.AddComponent<FixedJoint>();
+                joint.connectedBody = rigid;
+                joint.breakForce = 4;
                 if (attachment.GetComponent<ProceduralBuilding>())
                     attachment.GetComponent<ProceduralBuilding>().Generate();
             }

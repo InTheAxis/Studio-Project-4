@@ -69,7 +69,7 @@ public class BuildingGenerator : Generator
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
-            vpos.y += 0.5f;
+            vpos.y += 1.5f;
             // check for road
             bool emptySpot = true;
             Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer, LayerMask.NameToLayer("Road"));
