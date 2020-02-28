@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviourPun
     private void Start()
     {
         photonView.RPC("remoteRequestSpawn", RpcTarget.MasterClient);
+
+        StartCoroutine(retrieveMonsterRef());
     }
 
     [PunRPC]
@@ -57,6 +59,15 @@ public class GameManager : MonoBehaviourPun
         }
 
         setCamera(playerObj);
+    }
+
+    private IEnumerator retrieveMonsterRef()
+    {
+        MonsterEnergy comp = null;
+        while ((comp = FindObjectOfType<MonsterEnergy>()) == null)
+            yield return new WaitForSeconds(0.2f);
+
+        monsterObj = comp.gameObject;
     }
 
     public static void setCamera(GameObject playerObj)
