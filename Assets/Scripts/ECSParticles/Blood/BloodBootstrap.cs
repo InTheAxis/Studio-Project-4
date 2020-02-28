@@ -7,13 +7,10 @@ public class BloodBootstrap : ParticleBootstrap
     //[SerializeField]
     private Transform emitter;
     private CharHitBox charHitbox;
-    private ECSParticles.Blood.EmitterCleanUpJobSystem cleanup;
 
     private void Start()
     {
         Init(typeof(BloodTag));
-
-        cleanup = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<ECSParticles.Blood.EmitterCleanUpJobSystem>();
 
         emitter = GameManager.playerObj?.transform;
         if (emitter)
@@ -32,6 +29,7 @@ public class BloodBootstrap : ParticleBootstrap
 
     protected override void DestroyEntities()
     {
+        ECSParticles.Blood.EmitterCleanUpJobSystem cleanup = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<ECSParticles.Blood.EmitterCleanUpJobSystem>();
         cleanup.Update();
     }
 
@@ -49,11 +47,11 @@ public class BloodBootstrap : ParticleBootstrap
         SetEmitterSource(emitter.position, emitter.forward);
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.B))
-            BloodSpray(0);
+            BloodSpray(0, 0);
 #endif
     }
 
-    private void BloodSpray(int dmg) 
+    private void BloodSpray(int dmg, float dot) 
     {
         Debug.Log("Blood should Spray");
         Emit();

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 292882255535992883}
   - component: {fileID: -3715255290989037327}
   - component: {fileID: -3270574837693441967}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Generic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffe61d13b2051b54e8fd2e179394a208, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   allowConstantInteraction: 0
   lenientInteraction: 1
   canCarry: 1
+  interactDone: 0
   positionOffsetWhileCarry: {x: 1, y: 0, z: 0}
 --- !u!114 &-3715255290989037327
 MonoBehaviour:

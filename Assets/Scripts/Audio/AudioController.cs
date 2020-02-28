@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 public class AudioController : MonoBehaviour
 {
     [SerializeField]
-    private Sound[] sounds;
+    protected List<Sound> sounds = new List<Sound>();
 
     private AudioSource[] source;
 
@@ -25,7 +25,7 @@ public class AudioController : MonoBehaviour
         if (source == null)
             Debug.LogError("No audio source found on: " + gameObject.name);
 
-        if (sounds.Length > 0)
+        if (sounds.Count > 0)
         {
             foreach (Sound s in sounds)
             {
@@ -53,7 +53,7 @@ public class AudioController : MonoBehaviour
 
     public void SetAudio(string name, AudioState state, int index = 0)
     {
-        Sound s = Array.Find(sounds, sound => sound.clip.name == name);
+        Sound s = sounds.Find(sound => sound.clip.name == name);
         if (s == null)
         {
             Debug.LogError("[Audio] " + name + " sound does not exist!");
