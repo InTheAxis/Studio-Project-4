@@ -62,5 +62,12 @@ MonoBehaviour:
   - setVel
   - applyForce
   - setLight
+  - towerSpawnDestructibles
+  - instantiateDestructibleFromPrefab
+  - destroyViewID
+  - destructViewID
+  - spawnDestructiblesFromViewID
+  - releaseControlToMasterRequest
+  - rpcDestruct
   DisableAutoOpenWizard: 1
   ShowSettings: 0
