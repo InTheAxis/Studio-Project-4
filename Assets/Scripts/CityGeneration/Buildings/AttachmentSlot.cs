@@ -12,17 +12,17 @@ public class AttachmentSlot : MonoBehaviour
     public GameObject SelectMesh()
     {
         float val = Random.value;
-        MeshData selected = null;
+        GoDropListItem selected = null;
         float incrementedVal = 0;
         // sort by chance
         buildingAttachment.meshList.Sort((p1, p2) => p1.chance.CompareTo(p2.chance));
-        foreach (MeshData meshData in buildingAttachment.meshList)
+        foreach (GoDropListItem meshData in buildingAttachment.meshList)
         {
             selected = meshData;
             incrementedVal += meshData.chance;
             if (incrementedVal > val)
                 break;
         }
-        return selected.mesh;
+        return selected.go;
     }
 }

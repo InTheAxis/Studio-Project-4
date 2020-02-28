@@ -13,22 +13,26 @@ public class BuildingGenerator : Generator
     public CellBuildingGenerator cellGenerator;
     // public float roadSearchRange = 15;
 
+    [SerializeField]
     [Range(0, 1000)]
-    public int density = 5;
+    private int density = 5;
 
-    [Range(0, 1)]
-    public float buffer = 0.1f;
+    [SerializeField]
+    [Min(0)]
+    private float buffer = 0.1f;
 
-    [Range(0, 1)]
-    public float centerBuffer = 0.1f;
+    [SerializeField]
+    [Min(0)]
+    private float centerBuffer = 0.1f;
 
-    [Range(0, 1)]
-    public float towerBuffer = 0.1f;
+    [SerializeField]
+    [Min(0)]
+    private float towerBuffer = 0.1f;
 
     [SerializeField]
     private PlayerSpawnGenerator playerSpawnGenerator;
 
-    [Range(0, 1)]
+    [Min(0)]
     [SerializeField]
     private float playerBuffer;
 
@@ -44,23 +48,23 @@ public class BuildingGenerator : Generator
     {
         Clear();
         poisson.ClearInjected();
-        poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer));
+        poisson.Inject(new PoissonPoint(Vector2.zero, centerBuffer / scale));
         // inject player/hunter
         foreach (Vector3 pos in PlayerSpawnGenerator.playerSpawnPos)
         {
-            poisson.Inject(new PoissonPoint(pos / scale, playerBuffer));
+            poisson.Inject(new PoissonPoint(pos / scale, playerBuffer / scale));
         }
-        poisson.Inject(new PoissonPoint(PlayerSpawnGenerator.hunterSpawnPos / scale, playerBuffer));
+        poisson.Inject(new PoissonPoint(PlayerSpawnGenerator.hunterSpawnPos / scale, playerBuffer / scale));
         // inject tower
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
-            poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer));
+            poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer / scale));
         }
         foreach (BuildingCell cell in cellGenerator.buildingCells)
         {
             poisson.Inject(new PoissonPoint(cell.pos / scale, cell.radius / scale));
         }
-        bool success = poisson.Generate(density, buffer);
+        bool success = poisson.Generate(density, buffer / scale);
         poisson.Scale(scale);
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
@@ -68,10 +72,10 @@ public class BuildingGenerator : Generator
             vpos.y += 0.5f;
             // check for road
             bool emptySpot = true;
-            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer * scale);
+            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer, LayerMask.NameToLayer("Road"));
             foreach (Collider col in colls)
             {
-                if (col.tag == "Road")
+                //if (col.tag == "Road")
                 {
                     emptySpot = false;
                     break;
@@ -91,21 +95,33 @@ public class BuildingGenerator : Generator
     {
         if (!gizmosEnabled)
             return;
+        // all pos
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1))
         {
-            Gizmos.DrawWireSphere(pos.pos, buffer * scale);
+            Gizmos.DrawWireSphere(pos.pos, buffer);
         }
+        // success pos
         Gizmos.color = Color.green;
         foreach (Transform trans in transform)
         {
-            Gizmos.DrawWireSphere(trans.position, buffer * scale);
+            Gizmos.DrawWireSphere(trans.position, buffer);
         }
+        // center
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(Vector3.zero, scale * centerBuffer);
+        Gizmos.DrawWireSphere(Vector3.zero, centerBuffer);
+        // tower
         foreach (PoissonPoint point in towerGenerator.GetPoisson().GetPoints(1))
         {
             // poisson.Inject(new PoissonPoint(point.pos, towerBuffer));
-            Gizmos.DrawWireSphere(point.pos, towerBuffer * scale);
+            Gizmos.DrawWireSphere(point.pos, towerBuffer);
         }
+
+        // player buffer
+        Gizmos.color = Color.magenta;
+        foreach (Vector3 pos in PlayerSpawnGenerator.playerSpawnPos)
+        {
+            Gizmos.DrawWireSphere(pos, playerBuffer);
+        }
+        Gizmos.DrawWireSphere(PlayerSpawnGenerator.hunterSpawnPos, playerBuffer);
     }
 }

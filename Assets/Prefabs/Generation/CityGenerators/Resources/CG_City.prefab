@@ -17,21 +17,6 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5518757484286636409, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: buffer
-      value: 0.181
-      objectReference: {fileID: 0}
-    - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: generators.Array.data[3].enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: generators.Array.data[4].enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5890597338796914725, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: m_LocalPosition.x
