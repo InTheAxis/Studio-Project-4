@@ -81,17 +81,10 @@ public class StateLogin : State
     }
 
 
-    public void quickHost()
+    public void useRandomName()
     {
-        tmStatus.text = "Connecting to Photon Servers";
-        NetworkClient.instance.Host("");
-    }
-
-    public void quickJoin()
-    {
-        tmStatus.text = "Connecting to Photon Servers";
-        tmUsername.text = getRandomGuestName();
-        NetworkClient.instance.Join("");
+        PhotonNetwork.NickName = getRandomGuestName();
+        StateController.showNext("Mainmenu");
     }
 
     private string getRandomGuestName()

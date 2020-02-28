@@ -25,8 +25,9 @@ public class StateMainmenuPlay : State
     private bool isConnecting = false;
     public override string Name { get { return "MainmenuPlay"; } }
 
-    private void Start()
+    private void Awake()
     {
+        StateController.Register(this);
         NetworkClient.instance.roomCreateFailedCallback = onCreateLobbyFailed;
         NetworkClient.instance.roomJoinFailedCallback = onJoinRoomFailed;
         NetworkClient.instance.randomRoomJoinFailedCallback = onJoinRandomRoomFailed;
