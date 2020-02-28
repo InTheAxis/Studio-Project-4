@@ -11,36 +11,40 @@ public class HumanAnimationSM : MonoBehaviour
 
 
     private DestructibleController destructible;
+    private CharLookTargetController lookTargetCtrl;
 
     private void Awake()
     {
         destructible = FindObjectOfType<DestructibleController>();
+        lookTargetCtrl = FindObjectOfType<CharLookTargetController>();
     }
 
     private void OnEnable()
     {
-        hitbox.OnHit += onHit;
+        hitbox.OnHit += OnHit;
         destructible.pullStatus += AttackHold;
         destructible.throwStatus += AttackRelease;
+        lookTargetCtrl.showMap += MiniMapToggle;
     }
 
     private void OnDisable()
     {
-        hitbox.OnHit -= onHit;
+        hitbox.OnHit -= OnHit;
         destructible.pullStatus -= AttackHold;
         destructible.throwStatus -= AttackRelease;
+        lookTargetCtrl.showMap -= MiniMapToggle;
     }
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
+        //if (GameManager.playerObj == null)
+        //    return;
+        //if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+        //    return;
 
 
-        //if (Input.GetMouseButtonDown(0))
-        //    IsSabotaging();
+        if (Input.GetMouseButtonDown(0))
+            MiniMapToggle(true);
         //if (Input.GetMouseButtonUp(0))
         //    SabotagingDone(false);
 
@@ -59,7 +63,7 @@ public class HumanAnimationSM : MonoBehaviour
     {
         Boolean("attackHolding", false);
     }
-    private void onHit(int i, float dot)
+    private void OnHit(int i, float dot)
     {
         if (!health.dead && dot < 0)
             Trigger("hit");
@@ -75,6 +79,12 @@ public class HumanAnimationSM : MonoBehaviour
     {
         animator.SetInteger("saboDone", finished ? 1 : 0);
         animator.ResetTrigger("sabo");
+    }
+
+    private void MiniMapToggle(bool b)
+    {
+        animator.SetLayerWeight(1, 1);
+        Trigger("map");
     }
 
     private void CalculateState()
