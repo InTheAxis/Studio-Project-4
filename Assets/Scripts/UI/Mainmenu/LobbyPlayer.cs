@@ -6,21 +6,21 @@ using TMPro;
 public class LobbyPlayer
 {
     public GameObject model;
-    public TextMeshPro tmName;
+    public TextMeshProUGUI tmName;
     public GameObject tick;
     public string name;
 
-    public LobbyPlayer(GameObject model)
+    public LobbyPlayer(GameObject parent)
     {
-        setModel(model);
+        setModel(parent);
     }
 
-    public void setModel(GameObject model)
+    public void setModel(GameObject parent)
     {
-        this.model = model;
-        tmName = model.transform.Find("Name").GetComponent<TextMeshPro>();
+        model = parent.transform.Find("Model").gameObject;
+        tmName = parent.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        tick = parent.transform.Find("Tick").gameObject;
         tmName.text = "";
-        tick = model.transform.Find("Tick").gameObject;
         tick.SetActive(false);
     }
 
