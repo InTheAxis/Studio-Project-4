@@ -11,6 +11,7 @@ public class InstantiateHandler : MonoBehaviour
     private void OnValidate()
     {
         sServerInstantiate = serverInstantiate;
+        Debug.Log("Server: " + sServerInstantiate);
     }
 
     private void Awake()

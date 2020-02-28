@@ -11,6 +11,7 @@ public class TowerGenerator : Generator
     [Min(0)]
     private float centerBuffer = 10.1f;
 
+    [SerializeField]
     [Range(0, 1)]
     private float offset = 0.55f;
 
@@ -49,11 +50,11 @@ public class TowerGenerator : Generator
     {
         if (!gizmosEnabled)
             return;
-        // Gizmos.DrawWireSphere(Vector3.zero, scale);
-        //Gizmos.color = Color.red;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Vector3.zero, centerBuffer);
         //Gizmos.DrawWireSphere(Vector3.zero, 0.2f * scale);
         Gizmos.color = Color.green;
-        foreach (PoissonPoint poissonPoint in poisson.GetPoints())
+        foreach (PoissonPoint poissonPoint in poisson.GetPoints(1))
         {
             Gizmos.DrawWireSphere(poissonPoint.pos, poissonPoint.radius);
         }
