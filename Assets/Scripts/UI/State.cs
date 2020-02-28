@@ -2,13 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateName
+public abstract class State : MonoBehaviour
 {
+    public abstract string Name { get; }
 
-}
 
-public class State
-{
-    public string name = "Name";
-    public int id = -1;
+    private void Awake()
+    {
+        StateController.Register(this);
+
+    }
+
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
+
+    }
+
+    public virtual void onShow()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void onHide()
+    {
+        gameObject.SetActive(false);
+
+    }
 }
