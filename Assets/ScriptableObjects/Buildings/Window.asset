@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Window
   m_EditorClassIdentifier: 
   meshList:
-  - mesh: {fileID: 1317415394708726544, guid: e5af12fbc4ba7d846a5bf966aa991a4b, type: 3}
+  - go: {fileID: 1317415394708726544, guid: e5af12fbc4ba7d846a5bf966aa991a4b, type: 3}
     weight: 1
     chance: 0.33333334
-  - mesh: {fileID: 9033440370978959629, guid: 1ce27fe95fc3d9f409b42eb671d99f79, type: 3}
+  - go: {fileID: 9033440370978959629, guid: 1ce27fe95fc3d9f409b42eb671d99f79, type: 3}
     weight: 1
     chance: 0.33333334
-  - mesh: {fileID: 5509202789515373459, guid: d018aa88ef4eca94785aa0dc280df90c, type: 3}
+  - go: {fileID: 5509202789515373459, guid: d018aa88ef4eca94785aa0dc280df90c, type: 3}
     weight: 1
     chance: 0.33333334
