@@ -32,7 +32,7 @@ public class CellBuildingGenerator : Generator
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();
             Vector3 pos = cell.pos;
             pos += cell.offSetDir * buildingRadius;
-            pos.y += 0.5f;
+            pos.y += 1.5f;
             // Instantitate
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
             building.GetComponent<ProceduralBuilding>().GenerateRandom();

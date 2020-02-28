@@ -1269,6 +1269,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TPCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 6849219650585456136, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849219650585456136, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849219650585456136, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6849219650585456137, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
         type: 3}
       propertyPath: m_Layer

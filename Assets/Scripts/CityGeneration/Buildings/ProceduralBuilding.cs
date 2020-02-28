@@ -22,6 +22,7 @@ public class ProceduralBuilding : MonoBehaviour
 
     public GameObject attachmentPositions;
 
+    [SerializeField]
     private bool gizmosEnabled = false;
 
     // private variables
@@ -97,7 +98,7 @@ public class ProceduralBuilding : MonoBehaviour
                 attachment.transform.localScale = slot.localScale;
                 FixedJoint joint = attachment.AddComponent<FixedJoint>();
                 joint.connectedBody = rigid;
-                joint.breakForce = 1;
+                joint.breakForce = 4;
                 if (attachment.GetComponent<ProceduralBuilding>())
                     attachment.GetComponent<ProceduralBuilding>().Generate();
             }

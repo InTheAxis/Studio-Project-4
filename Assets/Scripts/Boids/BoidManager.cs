@@ -23,8 +23,18 @@ public class BoidManager : ComponentSystem
                 EntityManager.DestroyEntity(ent);
             });
         }
-
         if (!receivedData)
+            return;
+        MonsterData md;
+        bool bmd = false;
+        Vector3 mPos = Vector3.zero;
+        Entities.ForEach((ref MonsterData data) =>
+        {
+            md = data;
+            mPos = md.monsterPos;
+            bmd = true;
+        });
+        if (!bmd)
             return;
         ++currentFrame;
         if (currentFrame >= split)
@@ -37,7 +47,7 @@ public class BoidManager : ComponentSystem
             currentFrame = 0;
         }
 
-        UpdatePos();
+        UpdatePos(mPos);
     }
 
     public void CleanUp()
@@ -48,17 +58,18 @@ public class BoidManager : ComponentSystem
         });
     }
 
-    private void UpdatePos()
+    private void UpdatePos(Vector3 start)
     {
+        start.y += 10;
         Entities.ForEach((ref BoidData data, ref Translation translation) =>
         {
-            if (translation.Value.y < 3)
+            if (translation.Value.y < managerData.minHeight|| translation.Value.y > managerData.maxHeight)
             {
-                translation.Value.y = 30;
+                translation.Value = start;
             }
-            if (Vector3.Magnitude(translation.Value) > 80)
+            if (Vector3.Distance(translation.Value, start) > managerData.range)
             {
-                translation.Value = new Vector3(0, 15, 0);
+                translation.Value = start;
                 data.vel = UnityEngine.Random.insideUnitSphere;
             }
             // update position
@@ -119,39 +130,15 @@ public class BoidManager : ComponentSystem
             Vector3 dir = posA - separatePos;
             dataA.vel += dir * managerData.separateRate; // update vel
         }
-        if (transA.Value.y < 3)
+        dataA.vel.Normalize(); // normalise vel
+        if (transA.Value.y < managerData.avoidGroundHeight)
         {
             dataA.vel += Vector3.up * managerData.avoidGroundRate; // update vel
         }
+        if (transA.Value.y > managerData.avoidCeilingHeight)
+        {
+            dataA.vel -= Vector3.up * managerData.avoidGroundRate; // update vel
+        }
         dataA.vel.Normalize(); // normalise vel
     }
-
-    //private float3 Normalise(float3 v)
-    //{
-    //    return v / Mag(v);
-    //}
-
-    //private float SqrDistanceBetween(float3 a, float3 b)
-    //{
-    //    float x = a.x - b.x;
-    //    float y = a.y - b.y;
-    //    float z = a.z - b.z;
-    //    float3 f = new float3(x, y, z);
-    //    return SqrMag(f);
-    //}
-
-    //private float SqrMag(float3 f)
-    //{
-    //    return f.x * f.x + f.y * f.y + f.z * f.z;
-    //}
-
-    //private float Mag(float3 f)
-    //{
-    //    return math.sqrt(f.x * f.x + f.y * f.y + f.z * f.z);
-    //}
-
-    //private float DistanceBetween(float3 a, float3 b)
-    //{
-    //    return math.sqrt(SqrDistanceBetween(a, b));
-    //}
 }

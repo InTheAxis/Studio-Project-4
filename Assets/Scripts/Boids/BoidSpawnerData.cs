@@ -9,5 +9,5 @@ public struct BoidSpawnerData : IComponentData
     public Entity boidRef;
     public int numSpawn;
     public int range;
-
+    public float buffer;
 }

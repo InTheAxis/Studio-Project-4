@@ -12,7 +12,7 @@ public class WalkAudioController : AudioController
         source = GetComponents<AudioSource>();
         // check terrain or misc
         RaycastHit hit;
-        if (!Physics.Raycast(transform.position + new Vector3(0, 1, 0), -Vector3.up, out hit, 2, layerMask))
+        if (!Physics.Raycast(transform.position + new Vector3(0, 2, 0), -Vector3.up, out hit, 3, layerMask))
             return;
 
         if (hit.transform.tag == "Terrain")
