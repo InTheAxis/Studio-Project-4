@@ -29,6 +29,9 @@ public class InteractableManagerLocal : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.playerObj == null)
+            return;
+
         bool hasClickedInteract = !interactDown && Input.GetAxisRaw("Interact") > 0.5f;
         interactDown = Input.GetAxisRaw("Interact") > 0.5f;
 
