@@ -273,6 +273,7 @@ public class DestructibleController : MonoBehaviourPun
                     Debug.Log("Reset throwables");
                     isPulling = false;
                     pullStatus?.Invoke(isPulling);
+                    playerController.GetComponent<ThrowableAudioController>()?.DropDebris();
                 }
                 else
                 {

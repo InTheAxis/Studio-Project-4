@@ -52,6 +52,11 @@ public class ThrowableAudioController : AudioController
     //    Play("sabotage0");
     //}
 
+    public void DropDebris()
+    {
+        SetAudio("held0", AudioState.Stop, 1);
+    }
+
     public void LaunchDebris()
     {
         Play("throw0");
