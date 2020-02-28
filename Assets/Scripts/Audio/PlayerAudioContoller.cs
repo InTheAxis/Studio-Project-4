@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowableAudioController : AudioController
+public class PlayerAudioContoller : AudioController
 {
     //[SerializeField]
     //private LayerMask layerMask;
