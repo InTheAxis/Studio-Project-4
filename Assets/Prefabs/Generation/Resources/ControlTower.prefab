@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: -5212480000998723040}
   - component: {fileID: -1308369214344310058}
   - component: {fileID: 6826552010628832027}
+  - component: {fileID: 42309553004755760}
   m_Layer: 13
   m_Name: ControlTower
   m_TagString: Untagged
@@ -541,6 +542,37 @@ MonoBehaviour:
   - {fileID: 3324763012130598010}
   - {fileID: 1392172009451672950}
   - {fileID: 6763361368798291018}
+--- !u!114 &42309553004755760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438366991310282751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c89fe04417f94a47892430b0bc96c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyed:
+  - {fileID: 4503148112339852282, guid: f400402e11ab25e46b77e42253d19790, type: 3}
+  - {fileID: 7741167488092653914, guid: dbcf4a76ab61016488c1f4af2d4702cd, type: 3}
+  - {fileID: 2218649470297873040, guid: 5efaba3ca2e7aa9489743434d7737c6a, type: 3}
+  - {fileID: 3524789439314028777, guid: 1c635c7c96543114da5f6c479d4551f7, type: 3}
+  - {fileID: 2117314344943722756, guid: 00d3f159baf5ef649a29362e3fc8711d, type: 3}
+  - {fileID: 9195566162794541635, guid: 7978ffcc1e2395b4496172a5ff8a68ba, type: 3}
+  - {fileID: 5502814620005994123, guid: 48d24566df694284680b521d55ec1df4, type: 3}
+  - {fileID: 6280005179948213760, guid: 4126dab272fbe7149bd76140215f5cce, type: 3}
+  hitParticle: {fileID: 9102254060579626214, guid: c5608d31d7574874f8be6de5454e26a1,
+    type: 3}
+  dustParticles: {fileID: 5512566975316411008, guid: 6f7ec1452d2d1384f80ad2230afeda8e,
+    type: 3}
+  hitParticleSpawnChance: 0.65
+  breakForce: -1
+  minExplosionDir: {x: -1, y: -1, z: -1}
+  maxExplosionDir: {x: 1, y: 1, z: 1}
+  minExplosionForce: {x: 1, y: 1, z: 1}
+  maxExplosionForce: {x: 2, y: 2, z: 2}
 --- !u!1001 &8141943979562819740
 PrefabInstance:
   m_ObjectHideFlags: 0

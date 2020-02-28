@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+[RequireComponent(typeof(PhotonView))]
 public class Destructible : MonoBehaviourPun
 {
     [Header("General")]
@@ -19,6 +20,7 @@ public class Destructible : MonoBehaviourPun
 
     [Header("Explosion")]
     [SerializeField]
+    [Tooltip("Force to Break - Negative for Infinity")]
     private float breakForce = 2.0f;
 
     //[SerializeField]
@@ -44,7 +46,10 @@ public class Destructible : MonoBehaviourPun
 
     private void Start()
     {
-        sqrBreakForce = breakForce * breakForce;
+        if (breakForce < 0.0f)
+            sqrBreakForce = -1.0f;
+        else
+            sqrBreakForce = breakForce * breakForce;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -52,17 +57,21 @@ public class Destructible : MonoBehaviourPun
         if (!PhotonNetwork.IsMasterClient)
             return;
 
+        // Negative break force is infinity. Never break.
+        if (sqrBreakForce < 0.0f)
+            return;
+
         if (!isDestroyed)
         {
             if (collision.relativeVelocity.magnitude >= sqrBreakForce)
             {
-                isDestroyed = true;
+                //isDestroyed = true;
                 Destruct(collision);
             }
             if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
             {
                 //TODO for elson :) , explode force based on velocity, maybe based on mass too
-                isDestroyed = true;
+                //isDestroyed = true;
                 Destruct(collision);
             }
         }
@@ -72,8 +81,56 @@ public class Destructible : MonoBehaviourPun
     {
     }
 
-    private void Destruct(Collision collision)
+    #region Destruct
+    public void Destruct(Collision collision)
     {
+        Destruct(collision?.GetContact(0).point ?? transform.position, collision?.GetContact(0).normal ?? -Vector3.up);
+    }
+    public void Destruct(Vector3 collisionPoint, Vector3 collisionNormal)
+    {
+        if (isDestroyed)
+            return;
+
+        if (PhotonNetwork.IsMasterClient)
+            rpcDestruct(collisionPoint, collisionNormal);
+        else
+        {
+            // Destruct request is by client. Only send RPC once
+            photonView.RPC("rpcDestruct", RpcTarget.MasterClient, collisionPoint, collisionNormal);
+            isDestroyed = true;
+        }
+    }
+    [PunRPC]
+    private void rpcDestruct(Vector3 collisionPoint, Vector3 collisionNormal)
+    {
+        if (isDestroyed)
+            return;
+        isDestroyed = true;
+
+        StartCoroutine(destructCourFunc(collisionPoint, collisionNormal));
+        // Retrieve control in order to execute the destruct coroutine
+        if (!(photonView.Owner == null || photonView.IsMine))
+            photonView.RPC("releaseControlToMasterRequest", photonView.Owner);
+    }
+    [PunRPC]
+    private void releaseControlToMasterRequest()
+    {
+        NetworkOwnership.instance.releaseOwnership(photonView, null, null);
+    }
+
+    // Should only be called on the master client
+    private IEnumerator destructCourFunc(Vector3 collisionPoint, Vector3 collisionNormal)
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogError("Destruct Coroutine called on non-master client! This should not be possible!");
+            yield break;
+        }
+
+        // Start destruct only when we've got control
+        while (!(photonView.Owner == null || photonView.IsMine))
+            yield return new WaitForFixedUpdate();
+
         /* Instantiate shattered clone */
         //GameObject target = destroyed;
         //GameObject clone = Instantiate(target, transform.position, transform.rotation);
@@ -106,11 +163,9 @@ public class Destructible : MonoBehaviourPun
 
         /* Instantiate particle hit */
         bool shouldSpawnParticles = Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance;
-        Vector3 point = collision.GetContact(0).point;
-        Vector3 normal = collision.GetContact(0).normal;
-        photonView.RPC("breakApart", RpcTarget.Others, shouldSpawnParticles, point, normal);
-        breakApart(shouldSpawnParticles, point, normal);
- 
+        photonView.RPC("breakApart", RpcTarget.Others, shouldSpawnParticles, collisionPoint, collisionNormal);
+        breakApart(shouldSpawnParticles, collisionPoint, collisionNormal);
+
         //if (Random.Range(0.0f, 1.0f) <= hitParticleSpawnChance)
         //{
         //    if (hitParticle != null)
@@ -162,4 +217,5 @@ public class Destructible : MonoBehaviourPun
 
         Destroy(this.gameObject);
     }
+    #endregion
 }

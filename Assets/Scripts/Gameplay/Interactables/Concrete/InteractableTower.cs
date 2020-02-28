@@ -15,6 +15,9 @@ public class InteractableTower : InteractableBase
     private bool wasInteracting = false;
     private float interactTime = 0.0f;
 
+    // In the process of being destroyed through Destructible script. Don't interact anymore once set
+    private bool isDestroyed = false;
+
 
     [Header("Tower Light Indicators")]
     [SerializeField]
@@ -58,6 +61,9 @@ public class InteractableTower : InteractableBase
 
     public override void interact()
     {
+        if (isDestroyed)
+            return;
+
         wasInteracting = true;
         Debug.Log("Interact");
     }
@@ -66,6 +72,8 @@ public class InteractableTower : InteractableBase
     {
         if (GameManager.playerObj)
             GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = wasInteracting;
+        if (isDestroyed)
+            return;
 
         // Is interacting this frame
         if (wasInteracting)
@@ -86,7 +94,12 @@ public class InteractableTower : InteractableBase
                     if (++currStage >= interactStagesLights.Count) // Finished all stages. Destroy
                     {
                         unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
-                        destroyThis(); // Can only be called inside interact
+
+                        Destructible thisDestuctibleComp = GetComponent<Destructible>();
+                        if (thisDestuctibleComp != null)
+                            thisDestuctibleComp.Destruct(null);
+                        else
+                            destroyThis(); // Can only be called inside interact
                     }
                     else // Has more stages. Go to next stage
                     {
