@@ -45,7 +45,7 @@ public class DamageData : MonoBehaviour, IPunObservable
             CharHitBox hitbox = collision.gameObject.GetComponent<CharHitBox>();
             if (hitbox)
             {
-                hitbox.OnHit?.Invoke(dmg);
+                hitbox.OnHit?.Invoke(dmg, Vector3.Dot(hitbox.transform.forward, (transform.position - hitbox.transform.position)));
                 damaging = false;
                 Debug.LogFormat("{0} hit player", gameObject.name);
             }

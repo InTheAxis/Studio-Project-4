@@ -38,6 +38,9 @@ public class InteractableTower : InteractableBase
 
     private PhotonView thisView;
 
+    private HumanAnimationSM humanAnim = null;
+    private MonsterAnimationSM monsterAnim = null;
+
     private void Awake()
     {
         thisView = PhotonView.Get(this);
@@ -70,6 +73,18 @@ public class InteractableTower : InteractableBase
             sparks.Play();
     }
 
+    private void Update()
+    {
+        if (humanAnim == null || monsterAnim == null)
+        {
+            if (GameManager.playerObj)
+            {
+                humanAnim = GameManager.playerObj.GetComponent<HumanAnimationSM>();
+                monsterAnim = GameManager.playerObj.GetComponent<MonsterAnimationSM>();
+            }
+        }
+    }
+
     private void LateUpdate()
     {
         // Is interacting this frame
@@ -82,7 +97,12 @@ public class InteractableTower : InteractableBase
             interactedOnce = true;
 
             if (GameManager.playerObj)
+            { 
                 GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = true;
+            }
+
+            if (humanAnim)
+                humanAnim.IsSabotaging();
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
@@ -96,6 +116,8 @@ public class InteractableTower : InteractableBase
                     if (++currStage >= interactStagesLights.Count) // Finished all stages. Destroy
                     {
                         unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
+                        if (humanAnim)
+                            humanAnim.SabotagingDone(true);
                         destroyThis(); // Can only be called inside interact
                     }
                     else // Has more stages. Go to next stage
@@ -127,7 +149,11 @@ public class InteractableTower : InteractableBase
                 interactedOnce = false;
 
                 if (GameManager.playerObj)
+                { 
                     GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
+                }
+                if (humanAnim)
+                    humanAnim.SabotagingDone(false);
             }
 
             // Stopped interacting. Set light back to current stage

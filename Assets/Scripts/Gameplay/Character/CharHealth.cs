@@ -78,12 +78,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        //TEMP ,DO THIS ELSEWHERE
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
             Respawn(1);
-
-        if (Input.GetKeyDown(KeyCode.P))
-            TakeDmg(1);
     }
 
     public void Respawn(float invulTime)
@@ -96,6 +92,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         Heal(999);
         OnRespawn?.Invoke();
         charControl.disableMovement = dead;
+        charControl.rb.isKinematic = false;
         SetInvulnerableTime(invulTime);
     }
     public void Respawn()
@@ -103,10 +100,12 @@ public class CharHealth : MonoBehaviour, IPunObservable
         Respawn(respawnInvulTime);
     }
 
-    public void TakeDmg(int dmg)
+    public void TakeDmg(int dmg, float dot)
     {
         if (dead || invulnerable)
             return;
+
+        StartCoroutine(HitStun());
 
         hp -= dmg;
 
@@ -137,6 +136,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
     private void Die()
     {
         charControl.disableMovement = dead;
+        charControl.rb.isKinematic = true;
 
         if (autoRespawnTime > 0)
         {
@@ -179,5 +179,17 @@ public class CharHealth : MonoBehaviour, IPunObservable
     {
         yield return new WaitForSeconds(dura);
         Respawn();
+    }
+
+    private IEnumerator HitStun()
+    {
+        charControl.disableMovement = true;
+        charControl.rb.isKinematic = true;
+        yield return new WaitForSeconds(1f);
+        if (!dead)
+        {
+            charControl.disableMovement = false;
+            charControl.rb.isKinematic = false;
+        }
     }
 }

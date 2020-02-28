@@ -8,70 +8,94 @@ public class HumanAnimationSM : MonoBehaviour
     public CharTPController charControl;
     public CharHealth health;
     public CharHitBox hitbox;
- 
-    private string curState;
-    
-    private void Start()
+
+
+    private DestructibleController destructible;
+
+    private void Awake()
     {
-        curState = "idle";
+        destructible = FindObjectOfType<DestructibleController>();
+    }
+
+    private void OnEnable()
+    {
+        hitbox.OnHit += onHit;
+        destructible.pullStatus += AttackHold;
+        destructible.throwStatus += AttackRelease;
+    }
+
+    private void OnDisable()
+    {
+        hitbox.OnHit -= onHit;
+        destructible.pullStatus -= AttackHold;
+        destructible.throwStatus -= AttackRelease;
     }
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj != null)
-        {
-            if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-                return;
-        }
-        else return;
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
+
+
+        //if (Input.GetMouseButtonDown(0))
+        //    IsSabotaging();
+        //if (Input.GetMouseButtonUp(0))
+        //    SabotagingDone(false);
 
         CalculateState();
     }
 
-    private void CalculateState()
+    private void AttackHold(bool b)
     {
-        if (curState == "died" && !health.dead)
-            StateChange("idle");
-
-        if (health.dead)
-            StateChange("died");
-        else if (hitbox.hit)
-            StateChange("hit");
-        else if (charControl.jumpChk.airborne)
-        {
-            if (charControl.velY > 0)
-            {
-                //if (charControl.velY < charControl.jumpForce)
-                //    StateChange("hang");
-                //else
-                StateChange("jump");
-            }
-            else
-                //StateChange("fall");
-                StateChange("jump");
-        }
-        else if (charControl.crouchChk.crouching)
-        {
-            if (charControl.displacement > 0)
-                StateChange("crouchWalk");
-            else
-                StateChange("crouch");
-        }
-        else if (charControl.displacement > 0)
-        {
-            StateChange("run");
-        }
-        else
-            StateChange("idle");
+        if (!b)
+            return;
+        Trigger("attack");
+        Boolean("attackHolding", true);
     }
 
-    public void StateChange(string next)
+    private void AttackRelease()
     {
-        if (curState == next)
-            return;
-        animator.ResetTrigger(curState);
-        curState = next;
-        animator.SetTrigger(curState);
-        Debug.Log("Human anim state: " + curState);
+        Boolean("attackHolding", false);
+    }
+    private void onHit(int i, float dot)
+    {
+        if (!health.dead && dot < 0)
+            Trigger("hit");
+    }
+
+    public void IsSabotaging()
+    {
+        Trigger("sabo");
+        animator.SetInteger("saboDone", -1);
+    }
+
+    public void SabotagingDone(bool finished)
+    {
+        animator.SetInteger("saboDone", finished ? 1 : 0);
+        animator.ResetTrigger("sabo");
+    }
+
+    private void CalculateState()
+    {
+        Boolean("dead", health.dead);
+        Boolean("moving", charControl.displacement > 0);
+        Boolean("crouching", charControl.crouchChk.crouching);        
+        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < 0);        
+        Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 0);
+    }
+
+    private void Boolean(string next, bool b)
+    {
+        animator.SetBool(next, b);
+    }
+
+
+
+    private void Trigger(string next)
+    {
+        animator.ResetTrigger(next);
+        animator.SetTrigger(next);
     }
 }
