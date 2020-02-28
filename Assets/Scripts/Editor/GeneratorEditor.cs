@@ -90,3 +90,25 @@ public class CellGeneratorEditor : Editor
         GUILayout.EndHorizontal();
     }
 }
+
+[CustomEditor(typeof(InteractableGenerator))]
+public class InteractableGeneratorEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        Generator script = (Generator)target;
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Generate"))
+        {
+            script.Generate();
+        }
+        if (GUILayout.Button("Clear"))
+        {
+            script.Clear();
+        }
+        GUILayout.EndHorizontal();
+    }
+}
