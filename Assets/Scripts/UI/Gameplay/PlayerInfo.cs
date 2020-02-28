@@ -14,6 +14,7 @@ public class PlayerInfo
     public string name = "";
     public int number = 0;
     public int health = -1;
+    public bool invulnerable = false;
 
     public PlayerInfo(Transform self)
     {
@@ -35,15 +36,27 @@ public class PlayerInfo
         barHolder = self.Find("Healthbars");
     }
 
-    public void setHealth(int health)
+    public void setHealth(int health, bool invulnerable)
     {
         this.health = health;
-        for(int i = 0; i < 3; ++i)
+        this.invulnerable = invulnerable;
+
+        if (invulnerable)
         {
-            if(i < health)
-                barHolder.GetChild(i).gameObject.SetActive(true);
-            else
+            for (int i = 0; i < 3; ++i)
                 barHolder.GetChild(i).gameObject.SetActive(false);
+            barHolder.GetChild(3).gameObject.SetActive(true);
+        }
+        else
+        {
+            for(int i = 0; i < 3; ++i)
+            {
+                if(i < health)
+                    barHolder.GetChild(i).gameObject.SetActive(true);
+                else
+                    barHolder.GetChild(i).gameObject.SetActive(false);
+            }
+            barHolder.GetChild(3).gameObject.SetActive(false);
         }
     }
 
@@ -59,11 +72,11 @@ public class PlayerInfo
         tmNumberCounter.text = number.ToString();
     }
 
-    public void setAll(int number, string name, int health)
+    public void setAll(int number, string name, int health, bool invulnerable)
     {
         setNumber(number);
         setName(name);
-        setHealth(health);
+        setHealth(health, invulnerable);
     }
 
     public void setActive(bool isActive)

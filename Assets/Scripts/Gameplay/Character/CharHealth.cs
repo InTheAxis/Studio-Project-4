@@ -15,17 +15,17 @@ public class CharHealth : MonoBehaviour, IPunObservable
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
 
-    public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow);
+    public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow, bool isInvulnerable);
     public delegate void OnDeadCallback();
     public delegate void OnRespawnCallback();
 
     public OnHealthChangeCallback OnHealthChange;
     public OnDeadCallback OnDead;
     public OnRespawnCallback OnRespawn;
-    public bool dead { private set; get; }
+    public bool dead { get; private set; }
     
-    private int hp;
-    private bool invulnerable;
+    public int hp { get; private set; }
+    public bool invulnerable { get; private set; }
     private IEnumerator invulCorr;
     private IEnumerator respawnCorr;
 
@@ -50,12 +50,13 @@ public class CharHealth : MonoBehaviour, IPunObservable
         else 
         {
             int newHp = (int)stream.ReceiveNext();
+            SetInvulnerable((bool)stream.ReceiveNext());
+            bool nextDead = (bool)stream.ReceiveNext();
+
             if (newHp != hp)
-                OnHealthChange?.Invoke(charControl, newHp);
+                OnHealthChange?.Invoke(charControl, newHp, invulnerable);
             hp = newHp;
 
-            invulnerable =  (bool)stream.ReceiveNext();
-            bool nextDead = (bool)stream.ReceiveNext();
             if (dead && !nextDead)
             {
                 dead = nextDead;
@@ -116,7 +117,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
             Die();
         }
 
-        OnHealthChange?.Invoke(charControl, hp);
+        OnHealthChange?.Invoke(charControl, hp, invulnerable);
         Debug.Log("Took dmg, hp is " + hp);
     }
 
@@ -129,7 +130,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
         if (hp > maxHp)
             hp = maxHp;
 
-        OnHealthChange?.Invoke(charControl, hp);
+        OnHealthChange?.Invoke(charControl, hp, invulnerable);
         Debug.Log("Healed by " + amt + " , current hp is " + hp);
     }
 
@@ -162,6 +163,7 @@ public class CharHealth : MonoBehaviour, IPunObservable
     public void SetInvulnerable(bool b)
     {
         invulnerable = b;
+        OnHealthChange?.Invoke(charControl, hp, invulnerable);
         if (invulCorr != null)
             StopCoroutine(invulCorr);
         invulCorr = null;
@@ -171,8 +173,10 @@ public class CharHealth : MonoBehaviour, IPunObservable
     private IEnumerator InvulTimeCor(float dura)
     {
         invulnerable = true;
+        OnHealthChange?.Invoke(charControl, hp, invulnerable);
         yield return new WaitForSeconds(dura);
         invulnerable = false;
+        OnHealthChange?.Invoke(charControl, hp, invulnerable);
     }
 
     private IEnumerator AutoRespawn(float dura)
