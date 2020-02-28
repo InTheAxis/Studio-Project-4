@@ -73,10 +73,7 @@ public static class StateController
     public static void Hide(string name)
     {
         if (!screenStates.ContainsKey(name))
-        {
-            Debug.LogError(name + " does not exist! (Hide)");
             return;
-        }
         Hide(screenStates[name]);
     }
 

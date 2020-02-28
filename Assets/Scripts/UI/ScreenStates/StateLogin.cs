@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using Photon.Pun;
 
 public class StateLogin : State
 {
@@ -50,7 +50,8 @@ public class StateLogin : State
         playfabAuthenticator.Login(tmUsername.text, tmPassword.text,
             playerName =>
             {
-                //setName(playerName);
+                PhotonNetwork.NickName = tmUsername.text;
+                PlayerSettings.playerName = tmUsername.text;
                 //setScene(ScreenStates.MAINMENU);
                 StateController.showNext("Mainmenu");
             }, (errorMsg, errorType) =>

@@ -30,7 +30,17 @@ public class StateMainmenuPlay : State
         NetworkClient.instance.roomCreateFailedCallback = onCreateLobbyFailed;
         NetworkClient.instance.roomJoinFailedCallback = onJoinRoomFailed;
         NetworkClient.instance.randomRoomJoinFailedCallback = onJoinRandomRoomFailed;
-        NetworkClient.instance.roomJoinedCallback += onJoinRoomSuccess;
+        NetworkClient.instance.roomJoinedCallback = onJoinRoomSuccess;
+
+    }
+
+    private void OnDestroy()
+    {
+        NetworkClient.instance.roomCreateFailedCallback = null;
+        NetworkClient.instance.roomJoinFailedCallback = null;
+        NetworkClient.instance.randomRoomJoinFailedCallback = null;
+        NetworkClient.instance.roomJoinedCallback = null;
+        StateController.Unregister(this);
 
     }
 
@@ -70,10 +80,14 @@ public class StateMainmenuPlay : State
 
     /* NETWORKING */
 
-    private void onJoinRoomSuccess(List<string> playersInRoom)
+    private void onJoinRoomSuccess(List<string> playersInLobby)
     {
-        if(isConnecting)
+        if (isConnecting)
+        {
+            Debug.Log("Players In Room (MAINMENUPLAY): " + playersInLobby.Count);
             StateController.showNext("MatchLobby");
+            FindObjectOfType<StateMatchLobby>()?.onJoinRoom(playersInLobby);
+        }
     }
 
     private void onCreateLobbyFailed()
