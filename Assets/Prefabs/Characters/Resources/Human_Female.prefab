@@ -199,6 +199,9 @@ MonoBehaviour:
   - {fileID: 2992711166229309273}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
+  targetCamDist: 1.4
+  cameraBobAmt: 0.02
+  cameraBobFreq: 9
   moveSpeed: 16
   kineticFriction: 1.4
   staticFriction: 10

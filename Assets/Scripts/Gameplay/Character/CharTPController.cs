@@ -11,6 +11,12 @@ public class CharTPController : MonoBehaviourPun
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+    [Header("Camera Settings")]    
+    public float targetCamDist;    
+    public float cameraBobAmt;
+    public float cameraBobFreq;    
+
+
     [Header("Speed settings")]
     [SerializeField]
     [Tooltip("Vertical and Horizontal movement speed")]
