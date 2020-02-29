@@ -224,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 1730360239650699216}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 227.8, y: 227.8, z: 227.8}
+  m_LocalScale: {x: 455.6, y: 455.6, z: 455.6}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
   m_RootOrder: 2
@@ -533,7 +533,7 @@ MonoBehaviour:
   subRoadWidth: 10.86
   minorRoadWidth: 5.02
   sprite: {fileID: 64814105939109950}
-  scaleMultiplier: 1
+  scaleMultiplier: 1.84
   resolution: 100
   centerBuffer: 0.302
   cleanUp: 1
@@ -599,7 +599,7 @@ MonoBehaviour:
     min: 0.25
     max: 0.4
   cellRadius:
-    min: 22.47
+    min: 20
     max: 27
   initialSpace: 7
   roadGenerator: {fileID: 5890597339044720963}
