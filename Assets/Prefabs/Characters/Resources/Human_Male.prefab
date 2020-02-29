@@ -261,33 +261,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 0}
-  ShowLayerWeightsInspector: 0
+  ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 1
-    Name: idle
-  - Type: 9
-    SynchronizeType: 1
-    Name: run
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouch
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouchWalk
-  - Type: 9
-    SynchronizeType: 1
-    Name: jump
   - Type: 9
     SynchronizeType: 1
     Name: map
   - Type: 9
     SynchronizeType: 1
     Name: attack
-  - Type: 9
-    SynchronizeType: 1
-    Name: died
   - Type: 9
     SynchronizeType: 1
     Name: hit
@@ -297,6 +279,27 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: throw
+  - Type: 4
+    SynchronizeType: 1
+    Name: moving
+  - Type: 4
+    SynchronizeType: 1
+    Name: dead
+  - Type: 4
+    SynchronizeType: 1
+    Name: crouching
+  - Type: 4
+    SynchronizeType: 1
+    Name: falling
+  - Type: 4
+    SynchronizeType: 1
+    Name: jumping
+  - Type: 4
+    SynchronizeType: 1
+    Name: attackHolding
+  - Type: 3
+    SynchronizeType: 1
+    Name: saboDone
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -321,10 +324,11 @@ MonoBehaviour:
   - {fileID: 2992711166229309273}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
-  moveSpeed: 70
-  deccel: 10
-  airMoveSpeed: 25
-  crouchSpeed: 35
+  moveSpeed: 16
+  kineticFriction: 1.4
+  staticFriction: 10
+  airMoveSpeed: 8
+  crouchSpeed: 7
   jumpSpeed: 6
   mouseSens: 2
   maxLookY: 0.9
@@ -415,7 +419,7 @@ MonoBehaviour:
   radius: 5
   include:
     serializedVersion: 2
-    m_Bits: 697344
+    m_Bits: 959488
   drawDebug: 0
 --- !u!114 &3115980858427028072
 MonoBehaviour:
@@ -434,7 +438,7 @@ MonoBehaviour:
   radius: 5
   include:
     serializedVersion: 2
-    m_Bits: 697344
+    m_Bits: 959488
   drawDebug: 0
 --- !u!114 &6627765806987455583
 MonoBehaviour:
@@ -449,13 +453,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
+  vfx: {fileID: 8048343591809281217, guid: 8ed3e21ceb60eb24eaa3870039402e2a, type: 3}
   cooldownTime: 1
   forceMagnitude: 20
   range: 10
   radius: 3
   include:
     serializedVersion: 2
-    m_Bits: 697344
+    m_Bits: 959488
   drawDebug: 0
 --- !u!114 &4536835405889547447
 MonoBehaviour:
@@ -470,12 +475,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
+  vfx: {fileID: 3158346633907567993, guid: f0c16511ffaf4b248901948128ec6e1c, type: 3}
   cooldownTime: 1
   forceMagnitude: 20
   radius: 5
   include:
     serializedVersion: 2
-    m_Bits: 689152
+    m_Bits: 951296
   drawDebug: 0
 --- !u!82 &-6912798697404563235
 AudioSource:

@@ -16,17 +16,20 @@ public static class StateController
         if (state == null || screenStates.ContainsKey(state.Name)) return;
 
         screenStates.Add(state.Name, state);
-
-        if (state.name != initialState)
+        if (!state.Name.ToLower().Equals(initialState.ToLower()))
+        {
             state.gameObject.SetActive(false);
+        }
         else
+        {
             currentState = state;
+            showNext(state.Name, false, false);
+        }
     }
 
     public static void Unregister(State state)
     {
         if (state == null || !screenStates.ContainsKey(state.Name)) return;
-
         screenStates.Remove(state.Name);
     }
 

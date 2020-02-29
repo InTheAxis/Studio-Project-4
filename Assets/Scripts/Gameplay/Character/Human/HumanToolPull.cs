@@ -8,6 +8,10 @@ public class HumanToolPull : MonoBehaviour
     [SerializeField]
     private CharTPController charControl;
 
+    [Header("VFX")]
+    [SerializeField]
+    private GameObject vfx = null;
+
     [Header("Tool Settings")]
     [SerializeField]
     private float cooldownTime;
@@ -23,6 +27,8 @@ public class HumanToolPull : MonoBehaviour
 
     private bool pressed;
     private float cooldown;
+    private bool playVFX = false;
+
     private void OnEnable()
     {
         //init & reset
@@ -35,6 +41,9 @@ public class HumanToolPull : MonoBehaviour
             return;
 
         pressed = Input.GetAxisRaw("Fire2") != 0;
+
+        if(Input.GetButtonDown("Fire2"))
+            playVFX = true;
     }
 
     private void FixedUpdate()
@@ -43,6 +52,17 @@ public class HumanToolPull : MonoBehaviour
             return;
         if (pressed && cooldown <= 0)
         {
+            /* Play VFX */
+            if (playVFX && vfx != null)
+            {
+                GameObject clone = Instantiate(vfx);
+                clone.transform.SetParent(Camera.main.transform);
+                clone.transform.localPosition = new Vector3(0.0f, 0.0f, 15.0f);
+                clone.transform.forward = -transform.forward;
+                Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
+                playVFX = false;
+            }
+
             cooldown = cooldownTime;
             Rigidbody[] rbs = RigidBodyExt.GetRigiBodiesInSphere(charControl.position, radius, include);
             RigidBodyExt.PullTowards(rbs, charControl.position, forceMagnitude);
