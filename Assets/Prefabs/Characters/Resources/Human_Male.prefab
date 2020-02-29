@@ -135,33 +135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 0}
-  ShowLayerWeightsInspector: 0
+  ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 1
-    Name: idle
-  - Type: 9
-    SynchronizeType: 1
-    Name: run
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouch
-  - Type: 9
-    SynchronizeType: 1
-    Name: crouchWalk
-  - Type: 9
-    SynchronizeType: 1
-    Name: jump
   - Type: 9
     SynchronizeType: 1
     Name: map
   - Type: 9
     SynchronizeType: 1
     Name: attack
-  - Type: 9
-    SynchronizeType: 1
-    Name: died
   - Type: 9
     SynchronizeType: 1
     Name: hit
@@ -171,6 +153,27 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: throw
+  - Type: 4
+    SynchronizeType: 1
+    Name: moving
+  - Type: 4
+    SynchronizeType: 1
+    Name: dead
+  - Type: 4
+    SynchronizeType: 1
+    Name: crouching
+  - Type: 4
+    SynchronizeType: 1
+    Name: falling
+  - Type: 4
+    SynchronizeType: 1
+    Name: jumping
+  - Type: 4
+    SynchronizeType: 1
+    Name: attackHolding
+  - Type: 3
+    SynchronizeType: 1
+    Name: saboDone
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
