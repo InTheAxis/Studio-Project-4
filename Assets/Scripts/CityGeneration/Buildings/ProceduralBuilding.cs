@@ -51,6 +51,7 @@ public class ProceduralBuilding : MonoBehaviour
 
     private void Start()
     {
+        gizmosEnabled = false;
         if (GenerateOnStart)
             Generate();
     }
