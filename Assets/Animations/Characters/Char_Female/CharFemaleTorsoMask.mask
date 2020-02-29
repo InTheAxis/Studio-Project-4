@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharFemaleTorsoMask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Main_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Spine_Cntrl1
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Spine_Cntrl1/Spine_Cntrl2
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Spine_Cntrl1/Spine_Cntrl2/Spine_Cntrl3
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Spine_Cntrl1/Spine_Cntrl2/Spine_Cntrl3/Neck_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/R_Wrist_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/R_Wrist_Cntrl/R_Arm_IK
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/R_Wrist_Cntrl/R_Finger_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/L_Wrist_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/L_Wrist_Cntrl/L_Arm_IK
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/L_Wrist_Cntrl/L_Finger_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/R_Elbow_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/L_Elbow_Cntrl
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/Neck
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/Neck/Head
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/Neck/Head/Scalp
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_Thumb01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_Thumb01/L_Thumb02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_Thumb01/L_Thumb02/L_Thumb03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_IndexFinger_01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_IndexFinger_01/L_IndexFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_IndexFinger_01/L_IndexFinger02/L_IndexFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_IndexFinger_01/L_IndexFinger02/L_IndexFinger03/L_IndexFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_MiddleFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_MiddleFinger01/L_MiddleFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_MiddleFinger01/L_MiddleFinger02/L_MiddleFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_MiddleFinger01/L_MiddleFinger02/L_MiddleFinger03/L_MiddleFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_RingFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_RingFinger01/L_RingFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_RingFinger01/L_RingFinger02/L_RingFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_RingFinger01/L_RingFinger02/L_RingFinger03/L_RingFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_PinkyFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_PinkyFinger01/L_PinkyFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_PinkyFinger01/L_PinkyFinger02/L_PinkyFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/L_Shoulder/L_Elbow/L_Wrist/L_Palm/L_PinkyFinger01/L_PinkyFinger02/L_PinkyFinger03/L_PinkyFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_Thumb01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_Thumb01/R_Thumb02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_Thumb01/R_Thumb02/R_Thumb03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_IndexFinger_01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_IndexFinger_01/R_IndexFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_IndexFinger_01/R_IndexFinger02/R_IndexFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_IndexFinger_01/R_IndexFinger02/R_IndexFinger03/R_IndexFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_MiddleFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_MiddleFinger01/R_MiddleFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_MiddleFinger01/R_MiddleFinger02/R_MiddleFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_MiddleFinger01/R_MiddleFinger02/R_MiddleFinger03/R_MiddleFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_RingFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_RingFinger01/R_RingFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_RingFinger01/R_RingFinger02/R_RingFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_RingFinger01/R_RingFinger02/R_RingFinger03/R_RingFinger04
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_PinkyFinger01
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_PinkyFinger01/R_PinkyFinger02
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_PinkyFinger01/R_PinkyFinger02/R_PinkyFinger03
+    m_Weight: 1
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/Spine01/Spine02/Spine03/R_Shoulder/R_Elbow/R_Wrist/R_Palm/R_PinkyFinger01/R_PinkyFinger02/R_PinkyFinger03/R_PinkyFinger04
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg/L_Knee
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg/L_Knee/L_Ankle
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg/L_Knee/L_Ankle/L_Foot01
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg/L_Knee/L_Ankle/L_Foot01/L_Foot02
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/L_Leg/L_Knee/L_Ankle/L_Foot01/L_Foot02/L_Foot03
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg/R_Knee
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg/R_Knee/R_Ankle
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg/R_Knee/R_Ankle/R_Foot01
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg/R_Knee/R_Ankle/R_Foot01/R_Foot02
+    m_Weight: 0
+  - m_Path: Main_Cntrl/Pelvis_Cntrl/Pelvis/R_Leg/R_Knee/R_Ankle/R_Foot01/R_Foot02/R_Foot03
+    m_Weight: 0
+  - m_Path: Main_Cntrl/L_Foot_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/L_Foot_Cntrl/L_Leg_IK
+    m_Weight: 0
+  - m_Path: Main_Cntrl/L_Foot_Cntrl/L_Foot_IK
+    m_Weight: 0
+  - m_Path: Main_Cntrl/L_Foot_Cntrl/L_Knee_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/R_Foot_Cntrl
+    m_Weight: 0
+  - m_Path: Main_Cntrl/R_Foot_Cntrl/R_Foot_IK
+    m_Weight: 0
+  - m_Path: Main_Cntrl/R_Foot_Cntrl/R_Leg_IK
+    m_Weight: 0
+  - m_Path: Main_Cntrl/R_Foot_Cntrl/R_Knee_Cntrl
+    m_Weight: 0
+  - m_Path: Char_Male
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_BagStrapL
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_EyeR
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_EyeL
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_BagStrapR
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_MaskStrap
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_Mask
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_MaskPartR
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_MaskPartL
+    m_Weight: 0
+  - m_Path: Char_Male/Char_Male_Body
+    m_Weight: 0
