@@ -7,6 +7,10 @@ public class HumanToolPush : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private CharTPController charControl;
+
+    [Header("VFX")]
+    [SerializeField]
+    private GameObject vfx = null;
     
     [Header("Tool Settings")]
     [SerializeField]
@@ -25,6 +29,7 @@ public class HumanToolPush : MonoBehaviour
 
     private bool pressed;
     private float cooldown;
+    private bool playVFX = false;
 
     private void OnEnable()
     {
@@ -37,6 +42,10 @@ public class HumanToolPush : MonoBehaviour
         if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
             return;
         pressed = Input.GetAxisRaw("Fire2") != 0;
+
+        if (Input.GetButtonDown("Fire2"))
+            playVFX = true;
+        
     }
 
     private void FixedUpdate()
@@ -45,6 +54,17 @@ public class HumanToolPush : MonoBehaviour
             return;
         if (pressed && cooldown <= 0)
         {
+            /* Play VFX */
+            if (playVFX && vfx != null)
+            {
+                GameObject clone = Instantiate(vfx);
+                clone.transform.SetParent(Camera.main.transform);
+                clone.transform.localPosition = Vector3.zero;
+                clone.transform.forward = Camera.main.transform.forward;
+                Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
+                playVFX = false;
+            }
+
             cooldown = cooldownTime;
             Vector3 lookDir = charControl.lookDir.normalized;
             Vector3 origin = charControl.position + lookDir * radius;
