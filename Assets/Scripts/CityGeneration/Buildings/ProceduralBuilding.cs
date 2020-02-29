@@ -11,6 +11,9 @@ public class ProceduralBuilding : MonoBehaviour
     [SerializeField]
     private float buildingRadius = 10;
 
+    [SerializeField]
+    private GameObject attachGo;
+
     // references
     public GameObject rootRef;
 
@@ -24,6 +27,9 @@ public class ProceduralBuilding : MonoBehaviour
 
     [SerializeField]
     private bool gizmosEnabled = false;
+
+    [SerializeField]
+    private float breakForce = 10;
 
     // private variables
     public float GetRadius()
@@ -84,6 +90,7 @@ public class ProceduralBuilding : MonoBehaviour
         // seed = Random.seed;
         Clear();
         attachmentRoot = InstantiateHandler.mInstantiate(rootRef, transform);
+
         foreach (Transform slot in attachmentPositions.transform)
         {
             if (!slot.gameObject.activeSelf)
@@ -97,9 +104,22 @@ public class ProceduralBuilding : MonoBehaviour
                 GameObject attachment = InstantiateHandler.mInstantiate(meshRef, slot.transform.position, Quaternion.identity, attachmentRoot.transform, "Environment");
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
-                FixedJoint joint = attachment.AddComponent<FixedJoint>();
-                joint.connectedBody = rigid;
-                joint.breakForce = 4;
+                if (attachGo)
+                {
+                    FixedJoint joint = attachment.GetComponent<FixedJoint>();
+                    if (joint)
+                    {
+                        joint.connectedBody = attachGo.GetComponent<Rigidbody>();
+
+                        joint.breakForce = breakForce;
+                        joint.breakTorque = breakForce;
+                    }
+                    else
+                    {
+                        Debug.LogError("no joint attached on" + attachment.name);
+                    }
+                }
+
                 if (attachment.GetComponent<ProceduralBuilding>())
                     attachment.GetComponent<ProceduralBuilding>().Generate();
             }
