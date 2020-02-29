@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterChargeAtk : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField]
     private CharTPController charControl;
     [SerializeField]
@@ -27,6 +28,10 @@ public class MonsterChargeAtk : MonoBehaviour
     [SerializeField]
     private TrailRenderer trail;
 
+    [Header("VFX")]
+    [SerializeField]
+    private ParticleSystem vfx = null;
+
     private float timer;
     private IEnumerator chargeCorr;
 
@@ -34,7 +39,7 @@ public class MonsterChargeAtk : MonoBehaviour
     {
         timer = cooldown + duration;
         chargeCorr = null;
-        trail.emitting = false;
+        //trail.emitting = false;
     }
 
     private void OnEnable()
@@ -68,7 +73,7 @@ public class MonsterChargeAtk : MonoBehaviour
             StopCoroutine(chargeCorr);
         chargeCorr = null;
         charControl.disableMovement = false;
-        trail.emitting = false;
+        //trail.emitting = false;
         CharTPCamera.Instance.LookAtPlayer();
     }
 
@@ -77,8 +82,10 @@ public class MonsterChargeAtk : MonoBehaviour
         if (ener.UseUp(enerConsumption))
         {
             yield return new WaitForSeconds(delay);
+            if(vfx != null && !vfx.isEmitting)
+                vfx.Play();
             charControl.disableMovement = true;
-            trail.emitting = true;
+            //trail.emitting = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
             Vector3 dir = charControl.forward + Vector3.down * 0.1f;
@@ -98,6 +105,6 @@ public class MonsterChargeAtk : MonoBehaviour
 
         chargeCorr = null;
         yield return new WaitForSeconds(0.1f);
-        trail.emitting = false;
+        //trail.emitting = false;
     }
 }
