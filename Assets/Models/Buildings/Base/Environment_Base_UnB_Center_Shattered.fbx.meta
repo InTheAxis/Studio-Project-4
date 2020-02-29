@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4020e2b348690e5449667d78670695db
+guid: 1bdbc3cfaf807bd469c9ff2f31c876c1
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -7,18 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Environment_Base_UnB_Center1_shardMaterial
-    second: {fileID: 2100000, guid: fa6cbbdcdcc0a904e8b573603fbf2e85, type: 2}
+      name: Default_Material
+    second: {fileID: 2100000, guid: 3ee8981915f97fd40ab51f4d59908b12, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: StingrayPBS2
-    second: {fileID: 2100000, guid: 6af27abffa4dce34fb92080968f765fa, type: 2}
+      name: Environment_Base_UnB_Center1_shardMaterial
+    second: {fileID: 2100000, guid: 66cb5502c8e5bd3468ff098f265d1163, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS1
+    second: {fileID: 2100000, guid: 4b0ceeec98299f84bbabe1e7c3f3d413, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: c0a342996f839f547af6cc81958aa28e, type: 2}
+    second: {fileID: 2100000, guid: 42fd67cb43f618249ab4a030e3a1b1eb, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
