@@ -104,7 +104,6 @@ public class DestructibleController : MonoBehaviourPun
 
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
 
         heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
         if (heldMaskLayer == -1)
@@ -244,7 +243,7 @@ public class DestructibleController : MonoBehaviourPun
                         playerController.disableKeyInput = true;
                         pullStatus?.Invoke(isPulling);
                         // audio
-                        playerController.GetComponent<ThrowableAudioController>()?.PickUpDebris();
+                        playerController.GetComponent<PlayerAudioContoller>()?.PickUpDebris();
                     }
                 }
                 else
@@ -273,7 +272,7 @@ public class DestructibleController : MonoBehaviourPun
                     Debug.Log("Reset throwables");
                     isPulling = false;
                     pullStatus?.Invoke(isPulling);
-                    playerController.GetComponent<ThrowableAudioController>()?.DropDebris();
+                    playerController.GetComponent<PlayerAudioContoller>()?.DropDebris();
                 }
                 else
                 {
@@ -335,7 +334,7 @@ public class DestructibleController : MonoBehaviourPun
                     canThrow = false;
                     throwStatus?.Invoke();
                     // audio
-                    playerController.GetComponent<ThrowableAudioController>()?.LaunchDebris();
+                    playerController.GetComponent<PlayerAudioContoller>()?.LaunchDebris();
                 }
                 playerController.disableKeyInput = false;
             }

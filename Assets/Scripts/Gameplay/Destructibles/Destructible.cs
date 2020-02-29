@@ -98,6 +98,7 @@ public class Destructible : MonoBehaviourPun
             // Destruct request is by client. Only send RPC once
             photonView.RPC("rpcDestruct", RpcTarget.MasterClient, collisionPoint, collisionNormal);
             isDestroyed = true;
+            GetComponent<DestructibleAudioController>().DestructAudio();
         }
     }
     [PunRPC]

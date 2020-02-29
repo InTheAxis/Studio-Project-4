@@ -34,7 +34,7 @@ public struct BoidManagerData : IComponentData
     [Range(0, 0.1f)]
     public float separateRate;
 
-    [Range(0, 2.0f)]
+    [Range(0, 1.0f)]
     public float avoidGroundRate;
 
     public float viewRadius;
@@ -43,4 +43,10 @@ public struct BoidManagerData : IComponentData
     public bool align;
     public bool cohese;
     public bool separate;
+
+    public float range;
+    public float avoidGroundHeight;
+    public float avoidCeilingHeight;
+    public float minHeight;
+    public float maxHeight;
 }

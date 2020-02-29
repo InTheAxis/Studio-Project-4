@@ -11,6 +11,7 @@ public class TerrainManager : MonoBehaviour
         WOOD,
         DIRT,
         STONE,
+        Gravel,
     }
 
     [SerializeField]

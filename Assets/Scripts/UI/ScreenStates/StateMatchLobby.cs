@@ -38,6 +38,8 @@ public class StateMatchLobby : State
             Transform t = playerHolder.transform.GetChild(i);
             players.Add(new LobbyPlayer(t.gameObject));
         }
+
+        worldCanvas.SetActive(false);
     }
 
     private void Update()
@@ -74,11 +76,7 @@ public class StateMatchLobby : State
         if (PhotonNetwork.IsMasterClient)
         {
             NetworkClient.instance.setRoomVisibility(false);
-            //mainmenuModel.SetActive(false);
-            //lobbyModels.SetActive(false);
-            //setScene(ScreenStates.LOADING);
-            //screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
-            //NetworkClient.instance.goInGame();
+
             StateController.showNext("GameLoading");
             FindObjectOfType<StateGameLoading>().loadPhoton("Gameplay");
         }
@@ -88,10 +86,22 @@ public class StateMatchLobby : State
         }
     }
 
+    public void Leave()
+    {
+        NetworkClient.instance.DisconnectFromRoom();
+        StateController.showPrevious();
+    }
+
     public override void onShow()
     {
         worldCanvas.SetActive(true);
         base.onShow();
+    }
+
+    public override void onHide()
+    {
+        worldCanvas.SetActive(false);
+        base.onHide();
     }
 
     /* NETWORKING */
