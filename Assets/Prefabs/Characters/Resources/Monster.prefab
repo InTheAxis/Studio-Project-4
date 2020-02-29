@@ -468,8 +468,9 @@ MonoBehaviour:
   - {fileID: 886516775757303319}
   jumpChk: {fileID: 3402467720299827767}
   crouchChk: {fileID: 3402467720941865846}
-  moveSpeed: 50
-  deccel: 10
+  moveSpeed: 20
+  kineticFriction: 1
+  staticFriction: 10
   airMoveSpeed: 20
   crouchSpeed: 25
   jumpSpeed: 5

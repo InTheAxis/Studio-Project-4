@@ -968,6 +968,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9117360599836359451, guid: 18e7df20976080a449f3929f71bdbd98,
+        type: 3}
+      propertyPath: deccel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9117360599836359460, guid: 18e7df20976080a449f3929f71bdbd98,
         type: 3}
       propertyPath: m_LocalPosition.x
