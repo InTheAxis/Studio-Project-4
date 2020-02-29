@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviourPun
 
         if (PhotonNetwork.IsMasterClient) //override camera values here
         {
-            CharTPCamera.Instance.SetTargetDist(8); //if monster, set to further away
+            CharTPCamera.Instance.SetTargetDist(3.5f); //if monster, set to further away
             CharTPCamera.Instance.SetCameraBob(0.01f, 10);
         }
     }

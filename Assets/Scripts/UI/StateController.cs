@@ -9,7 +9,7 @@ public static class StateController
 
     private static State currentState = null;
 
-    private const string initialState = "Death";
+    private const string initialState = "Login";
 
     public static void Register(State state)
     {

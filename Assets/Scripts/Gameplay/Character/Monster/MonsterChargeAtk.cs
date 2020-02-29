@@ -69,6 +69,7 @@ public class MonsterChargeAtk : MonoBehaviour
         chargeCorr = null;
         charControl.disableMovement = false;
         trail.emitting = false;
+        CharTPCamera.Instance.LookAtPlayer();
     }
 
     private IEnumerator Charge()
