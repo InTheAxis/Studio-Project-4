@@ -10,10 +10,6 @@ public class StateSpectate : State
 
     public override string Name { get { return "Spectate"; } }
 
-    public void Spectate(string username)
-    {
-
-    }
 
     public void selectPrevious()
     {

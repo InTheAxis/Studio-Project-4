@@ -76,11 +76,7 @@ public class StateMatchLobby : State
         if (PhotonNetwork.IsMasterClient)
         {
             NetworkClient.instance.setRoomVisibility(false);
-            //mainmenuModel.SetActive(false);
-            //lobbyModels.SetActive(false);
-            //setScene(ScreenStates.LOADING);
-            //screens[(int)ScreenStates.LOADING].GetComponent<Loading>().LoadPhoton("Gameplay");
-            //NetworkClient.instance.goInGame();
+
             StateController.showNext("GameLoading");
             FindObjectOfType<StateGameLoading>().loadPhoton("Gameplay");
         }
