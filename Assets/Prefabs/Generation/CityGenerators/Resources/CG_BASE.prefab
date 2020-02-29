@@ -115,12 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64666023ba933e7458ba45b6d293aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 0
-  hunterBuffer: 0.286
+  gizmosEnabled: 1
+  hunterBuffer: 0.283
   playerBuffer: 0.131
   towerGenerator: {fileID: 899756740256859345}
-  towerBuffer: 0.099
-  centerBuffer: 0.163
+  towerBuffer: 0.124
+  centerBuffer: 0.228
   spawnTogether: 0
   spawnTogetherRadius: 9.17
 --- !u!1 &1284325392231104113
@@ -684,7 +684,7 @@ TerrainCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7267570085808643220}
   m_Material: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 18483ed191097364cab513104fb3066c, type: 2}
   m_EnableTreeColliders: 1
 --- !u!65 &5787342658206292428
@@ -696,7 +696,7 @@ BoxCollider:
   m_GameObject: {fileID: 7267570085808643220}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 500, y: 2.8371067, z: 500}
   m_Center: {x: 250, y: -1.021332, z: 250}
