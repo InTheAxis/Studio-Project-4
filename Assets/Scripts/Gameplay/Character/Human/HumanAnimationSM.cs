@@ -45,6 +45,8 @@ public class HumanAnimationSM : MonoBehaviour
 
         //if (Input.GetMouseButtonDown(0))
         //    MiniMapToggle(true);
+        //if (Input.GetMouseButtonDown(1))
+        //    MiniMapToggle(false);
         //if (Input.GetMouseButtonUp(0))
         //    SabotagingDone(false);
 
@@ -83,8 +85,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void MiniMapToggle(bool b)
     {
-        if (!b)
-            return;
+        //if (!b)
+        //    return;
         animator.SetLayerWeight(1, 1);
         Trigger("map");
     }
