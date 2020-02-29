@@ -199,11 +199,11 @@ MonoBehaviour:
   - {fileID: 2992711166229309273}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
-  moveSpeed: 30
-  kineticFriction: 1
+  moveSpeed: 16
+  kineticFriction: 1.4
   staticFriction: 10
-  airMoveSpeed: 25
-  crouchSpeed: 35
+  airMoveSpeed: 8
+  crouchSpeed: 7
   jumpSpeed: 6
   mouseSens: 2
   maxLookY: 0.9
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
+  vfx: {fileID: 8048343591809281217, guid: 8ed3e21ceb60eb24eaa3870039402e2a, type: 3}
   cooldownTime: 1
   forceMagnitude: 20
   range: 10
@@ -349,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
+  vfx: {fileID: 3158346633907567993, guid: f0c16511ffaf4b248901948128ec6e1c, type: 3}
   cooldownTime: 1
   forceMagnitude: 20
   radius: 5

@@ -35,36 +35,36 @@ public class PropGenerator : ComponentSystem
             poisson.Scale(data.range);
             foreach (PoissonPoint point in poisson.GetPoints())
             {
-                Entity entRef = data.rock0;
+                Entity entRef = data.decal0;
                 int index = UnityEngine.Random.Range(0, data.numRock);
                 switch (index)
                 {
                     case 0:
-                        entRef = data.rock0;
+                        entRef = data.decal0;
                         break;
 
                     case 1:
-                        entRef = data.rock1;
+                        entRef = data.decal1;
                         break;
 
                     case 2:
-                        entRef = data.rockC;
+                        entRef = data.decal2;
                         break;
 
                     case 3:
-                        entRef = data.rockD;
+                        entRef = data.decal3;
                         break;
 
                     case 4:
-                        entRef = data.rockE;
+                        entRef = data.decal4;
                         break;
 
                     case 5:
-                        entRef = data.rockF;
+                        entRef = data.decal5;
                         break;
 
                     case 6:
-                        entRef = data.rockG;
+                        entRef = data.decal6;
                         break;
 
                     case 7:
