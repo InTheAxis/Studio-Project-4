@@ -104,7 +104,6 @@ public class DestructibleController : MonoBehaviourPun
 
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
 
         heldMaskLayer = LayerMask.NameToLayer(heldMaskName);
         if (heldMaskLayer == -1)
