@@ -7,6 +7,8 @@ public class StateGameplay : State
     [SerializeField]
     private GameObject hud = null;
 
+    private IEnumerator registrationCour = null;
+
     public override string Name { get { return "Gameplay"; } }
 
     private void Start()
@@ -23,6 +25,59 @@ public class StateGameplay : State
     {
         Cursor.lockState = CursorLockMode.Locked;
         hud.SetActive(true);
+
         base.onShow();
+
+        if (registrationCour != null)
+            StopCoroutine(registrationCour);
+        registrationCour = registerCallbacks();
+        StartCoroutine(registrationCour);
+    }
+
+    public override void onHide()
+    {
+        if (registrationCour != null)
+            StopCoroutine(registrationCour);
+        deregisterCallbacks();
+
+        base.onHide();
+    }
+
+    private IEnumerator registerCallbacks()
+    {
+        while (WinLose.instance == null || GameManager.playerObj == null)
+            yield return null;
+
+        WinLose.instance.winLossCallback += winLoss;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            playerHealthComp.OnDead += playerDied;
+        }
+        else
+            Debug.LogError("No player object");
+    }
+
+    private void deregisterCallbacks()
+    {
+        if (WinLose.instance != null)
+            WinLose.instance.winLossCallback -= winLoss;
+        if (GameManager.playerObj != null)
+        {
+            CharHealth playerHealthComp = GameManager.playerObj.GetComponent<CharHealth>();
+            playerHealthComp.OnDead -= playerDied;
+        }
+    }
+
+    private void playerDied()
+    {
+        Debug.Log("Gameplay received player death");
+        StateController.showNext("Death");
+    }
+
+    private void winLoss(bool isHunterWin)
+    {
+        /* To set to end screen */
+        Debug.Log("New HUD Received WinLoss");
     }
 }
