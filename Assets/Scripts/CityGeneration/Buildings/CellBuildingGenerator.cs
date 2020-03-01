@@ -34,7 +34,7 @@ public class CellBuildingGenerator : Generator
             pos += cell.offSetDir * buildingRadius;
             pos.y += 2f;
             // Instantitate
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform);
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             //building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
             buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot));

@@ -5,13 +5,16 @@ using UnityEngine;
 public class TowerGenerator : Generator
 {
     public PoissonGenerator poisson = new PoissonGenerator();
-    public GameObject towerRef;
+    public GameObject[] towerRef;
+    public List<GameObject> towers { get; private set; } = new List<GameObject>();
 
     [SerializeField]
     [Min(0)]
     private float centerBuffer = 10.1f;
 
     [SerializeField]
+    public float towerRange  = 70;
+
     [Range(0, 1)]
     private float offset = 0.55f;
 
@@ -37,12 +40,34 @@ public class TowerGenerator : Generator
         poisson.Scale(scale);
         CreateTowers();
     }
-
+    //private void Update()
+    //{
+    //    foreach (GameObject tower in towers)
+    //    {
+    //        Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange, LayerMask.NameToLayer("Road"));
+    //        foreach (Collider col in coll)
+    //        {
+    //            DestroyImmediate(col.gameObject);
+    //        }
+    //    }
+    //    this.enabled = false;
+    //}
     private void CreateTowers()
     {
+        int counter = 0;
         foreach (PoissonPoint point in poisson.GetPoints(1))
         {
-            InstantiateHandler.mInstantiate(towerRef, point.pos, Quaternion.identity, transform, "Interactable");
+            towers.Add(InstantiateHandler.mInstantiate(towerRef[counter], point.pos, Quaternion.identity, transform));
+            counter++;
+        }
+        foreach (GameObject tower in towers)
+        {
+            Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange*1f);
+            foreach (Collider col in coll)
+            {
+                if (col.gameObject.layer == LayerMask.NameToLayer("Road"))
+                    DestroyImmediate(col.gameObject);
+            }
         }
     }
 

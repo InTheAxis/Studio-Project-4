@@ -41,6 +41,8 @@ public class RoadGenerator : Generator
     private List<RoadPath> roadSubPaths = new List<RoadPath>();
     private List<RoadPath> roadMinorPaths = new List<RoadPath>();
 
+    public List<GameObject> roads { get; set; } = new List<GameObject>();
+
     private struct IntersectionNode
     {
         public Vector3 pos;
@@ -408,8 +410,6 @@ public class RoadGenerator : Generator
         //}
     }
 
-    private List<GameObject> roads = new List<GameObject>();
-
     public static bool LineLineIntersection(out Vector3 intersection, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
     {
         Vector3 lineVec3 = linePoint2 - linePoint1;
@@ -434,6 +434,7 @@ public class RoadGenerator : Generator
 
     public override void Clear()
     {
+        roads.Clear();
         roadOuterPaths.Clear();
         roadInnerPaths.Clear();
         roadSubPaths.Clear();
@@ -459,7 +460,7 @@ public class RoadGenerator : Generator
             pos.y += 0.001f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment") as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
             road.transform.localScale = new Vector3(centralRoadWidth, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -469,7 +470,7 @@ public class RoadGenerator : Generator
             pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment") as GameObject;
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
             road.transform.localScale = new Vector3(mainRoadWidth, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -479,7 +480,7 @@ public class RoadGenerator : Generator
             pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment");
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);
             road.transform.localScale = new Vector3(subRoadWidth, 1, path.Length() * length);
             roads.Add(road);
         }
@@ -489,7 +490,7 @@ public class RoadGenerator : Generator
             pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
-            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform, "Environment");
+            GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);
             road.transform.localScale = new Vector3(minorRoadWidth, 1, path.Length() * length);
             roads.Add(road);
         }
