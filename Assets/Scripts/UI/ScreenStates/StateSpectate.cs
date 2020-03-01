@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using TMPro;
 
 public class StateSpectate : State
@@ -56,14 +57,33 @@ public class StateSpectate : State
         // Edge case: Only one player is in game. Don't change the camera
         if (CharTPController.PlayerControllerRefs.Count == 1)
             return;
+        // There is only one monster, and that's the host. If host, don't change camera
+        if (PhotonNetwork.IsMasterClient)
+            return;
 
         int currIndex = CharTPController.PlayerControllerRefs.FindIndex(obj => obj.controller == CharTPCamera.Instance.charControl);
         currIndex += offset;
 
-        while (currIndex < 0)
-            currIndex += CharTPController.PlayerControllerRefs.Count;
-        while (currIndex >= CharTPController.PlayerControllerRefs.Count)
-            currIndex -= CharTPController.PlayerControllerRefs.Count;
+        System.Func<int, bool> checkMonster = (int index) =>
+        {
+            if (CharTPController.PlayerControllerRefs[index].controller.GetComponent<MonsterEnergy>() == null)
+                return true;
+
+            if (offset > 0)
+                ++currIndex;
+            else
+                --currIndex;
+            return false;
+        };
+
+        do
+        {
+            while (currIndex < 0)
+                currIndex += CharTPController.PlayerControllerRefs.Count;
+            while (currIndex >= CharTPController.PlayerControllerRefs.Count)
+                currIndex -= CharTPController.PlayerControllerRefs.Count;
+        }
+        while (!checkMonster(currIndex));
 
         GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex].controller);
     }
