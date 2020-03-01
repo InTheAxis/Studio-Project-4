@@ -94,6 +94,18 @@ public class PropGenerator : ComponentSystem
                     case 13:
                         entRef = data.decal13;
                         break;
+
+                    case 14:
+                        entRef = data.decal14;
+                        break;
+
+                    case 15:
+                        entRef = data.decal15;
+                        break;
+
+                    case 16:
+                        entRef = data.decal16;
+                        break;
                 }
                 Entity spawned = EntityManager.Instantiate(entRef);
                 EntityManager.AddComponent<DecalTag>(spawned);
