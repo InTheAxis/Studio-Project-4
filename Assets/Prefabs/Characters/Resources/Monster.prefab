@@ -536,7 +536,7 @@ MonoBehaviour:
   chargeChk: {fileID: 3353481281967616732}
   enerConsumption: 10
   duration: 0.8
-  chargeDist: 300
+  chargeDist: 100
   delay: 0.3
   acceleration: 0.5
   cameraDist: 12
@@ -1794,17 +1794,17 @@ PrefabInstance:
     - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.48
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.16
+      value: 5.37
       objectReference: {fileID: 0}
     - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.79
+      value: 3.69
       objectReference: {fileID: 0}
     - target: {fileID: 5613017976917537797, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
