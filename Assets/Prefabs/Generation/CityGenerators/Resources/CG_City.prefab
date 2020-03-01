@@ -78,24 +78,6 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1415029070478976314, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
-      propertyPath: decal9
-      value: 
-      objectReference: {fileID: -927199367670048503, guid: fca958fd2c705e34aa07cf5bba2b2cb1,
-        type: 3}
-    - target: {fileID: 1415029070478976314, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: decal10
-      value: 
-      objectReference: {fileID: -927199367670048503, guid: 492021975a74636438f179f3d615f299,
-        type: 3}
-    - target: {fileID: 1415029070478976314, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
-      propertyPath: decal11
-      value: 
-      objectReference: {fileID: -927199367670048503, guid: b8e4f7ede9d4928409de9413c1937d6c,
-        type: 3}
-    - target: {fileID: 1415029070478976314, guid: 6c45f9aa9d148a444b3e52a6ef582933,
-        type: 3}
       propertyPath: numRock
       value: 12
       objectReference: {fileID: 0}
@@ -109,6 +91,12 @@ PrefabInstance:
       propertyPath: range
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 1415029070478976314, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: decal9
+      value: 
+      objectReference: {fileID: -927199367670048503, guid: fca958fd2c705e34aa07cf5bba2b2cb1,
+        type: 3}
     - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: generators.Array.size
