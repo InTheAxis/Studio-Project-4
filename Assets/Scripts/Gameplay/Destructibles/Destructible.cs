@@ -82,15 +82,18 @@ public class Destructible : MonoBehaviourPun
     }
 
     #region Destruct
+
     public void Destruct(Collision collision)
     {
         Destruct(collision?.GetContact(0).point ?? transform.position, collision?.GetContact(0).normal ?? -Vector3.up);
     }
+
     public void Destruct(Vector3 collisionPoint, Vector3 collisionNormal)
     {
         if (isDestroyed)
             return;
 
+        GetComponent<DestructibleAudioController>().DestructAudio();
         if (PhotonNetwork.IsMasterClient)
             rpcDestruct(collisionPoint, collisionNormal);
         else
@@ -98,9 +101,9 @@ public class Destructible : MonoBehaviourPun
             // Destruct request is by client. Only send RPC once
             photonView.RPC("rpcDestruct", RpcTarget.MasterClient, collisionPoint, collisionNormal);
             isDestroyed = true;
-            GetComponent<DestructibleAudioController>().DestructAudio();
         }
     }
+
     [PunRPC]
     private void rpcDestruct(Vector3 collisionPoint, Vector3 collisionNormal)
     {
@@ -113,6 +116,7 @@ public class Destructible : MonoBehaviourPun
         if (!(photonView.Owner == null || photonView.IsMine))
             photonView.RPC("releaseControlToMasterRequest", photonView.Owner);
     }
+
     [PunRPC]
     private void releaseControlToMasterRequest()
     {
@@ -158,8 +162,6 @@ public class Destructible : MonoBehaviourPun
                 //velocity.z *= Random.Range(minExplosionForce.z, maxExplosionForce.z);
                 cloneRigidbody.velocity = Vector3.zero;
             }
-
-
         }
 
         /* Instantiate particle hit */
@@ -218,5 +220,6 @@ public class Destructible : MonoBehaviourPun
 
         Destroy(this.gameObject);
     }
-    #endregion
+
+    #endregion Destruct
 }

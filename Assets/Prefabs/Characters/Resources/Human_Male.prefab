@@ -324,6 +324,9 @@ MonoBehaviour:
   - {fileID: 2992711166229309273}
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
+  targetCamDist: 1.4
+  cameraBobAmt: 0.02
+  cameraBobFreq: 9
   moveSpeed: 16
   kineticFriction: 1.4
   staticFriction: 10
@@ -1434,6 +1437,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 5613017976917537797, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}

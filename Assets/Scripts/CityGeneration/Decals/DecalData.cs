@@ -24,13 +24,13 @@ public struct DecalData : IComponentData
 
     public int density;
     public int range;
-    public Entity rock0;
-    public Entity rock1;
-    public Entity rockC;
-    public Entity rockD;
-    public Entity rockE;
-    public Entity rockF;
-    public Entity rockG;
+    public Entity decal0;
+    public Entity decal1;
+    public Entity decal2;
+    public Entity decal3;
+    public Entity decal4;
+    public Entity decal5;
+    public Entity decal6;
     public Entity decal7;
     public Entity decal8;
     public Entity decal9;
@@ -39,5 +39,7 @@ public struct DecalData : IComponentData
     public Entity decal12;
     public Entity decal13;
     public Entity decal14;
+    public Entity decal15;
+    public Entity decal16;
     //public Entity rockC;
 }

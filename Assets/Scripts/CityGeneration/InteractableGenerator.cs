@@ -29,7 +29,9 @@ public class InteractableGenerator : Generator
         poisson.Scale(scale);
         foreach (PoissonPoint point in poisson.GetPoints())
         {
-            interactables.Add(InstantiateHandler.mInstantiate(dropList.SelectGO(), point.pos, transform));
+            Vector3 pos = point.pos;
+            pos.y += 2f;
+            interactables.Add(InstantiateHandler.mInstantiate(dropList.SelectGO(), pos, transform));
         }
         Debug.Log("Done Interactables");
     }

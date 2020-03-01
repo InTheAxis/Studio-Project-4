@@ -69,10 +69,11 @@ public class BuildingGenerator : Generator
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
-            vpos.y += 1.5f;
+            vpos.y += 2f;
             // check for road
             bool emptySpot = true;
-            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer, LayerMask.NameToLayer("Road"));
+            GameObject buildingRef = cityGenerator.city.SelectMesh();
+            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buildingRef.GetComponent<ProceduralBuilding>().GetRadius() * 1.2f, LayerMask.NameToLayer("Road"));
             foreach (Collider col in colls)
             {
                 //if (col.tag == "Road")
@@ -83,7 +84,6 @@ public class BuildingGenerator : Generator
             }
             if (emptySpot)
             {
-                GameObject buildingRef = cityGenerator.city.SelectMesh();
                 GameObject building = InstantiateHandler.mInstantiate(buildingRef, vpos, Quaternion.identity, transform, "Environment");
                 building.GetComponent<ProceduralBuilding>().GenerateRandom();
                 building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
