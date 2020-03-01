@@ -88,17 +88,17 @@ MonoBehaviour:
   detectMask:
     serializedVersion: 2
     m_Bits: 262144
-  pickUpMaxDistance: 6
+  pickUpMaxDistance: 7.5
   detectionRadius: 4.5
   pullSpeed: 2.5
   heldMask:
     serializedVersion: 2
     m_Bits: 524288
-  holdPosTolerance: 1
+  holdPosTolerance: 2.5
   holdRotateSpeed: 5
   holdPosOffsetX: {x: -0.25, y: 0.9}
   holdPosOffsetY: {x: -0.1, y: 0.8}
-  throwForce: 80
+  throwForce: 90
   enableAimAssist: 1
   aimMask:
     serializedVersion: 2
