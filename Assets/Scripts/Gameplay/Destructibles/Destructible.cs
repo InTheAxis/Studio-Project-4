@@ -93,7 +93,7 @@ public class Destructible : MonoBehaviourPun
         if (isDestroyed)
             return;
 
-        GetComponent<DestructibleAudioController>().DestructAudio();
+        GetComponent<DestructibleAudioController>()?.DestructAudio();
         if (PhotonNetwork.IsMasterClient)
             rpcDestruct(collisionPoint, collisionNormal);
         else
