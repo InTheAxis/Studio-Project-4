@@ -118,7 +118,18 @@ public class CellGenerator : Generator
                 while (currDist < path.Length())    // main cell loop
                 {
                     // float currCellRadius = cellRadius.Get();
-                    float currCellRadius = cityGenerator.city.SelectMesh().GetComponent<ProceduralBuilding>().GetRadius();
+                    GameObject building = cityGenerator.city.SelectMesh();
+                    if (!building)
+                    {
+                        Debug.LogError("Building is null: " + gameObject.name);
+                        return;
+                    }
+                    if (!building.GetComponent<ProceduralBuilding>())
+                    {
+                        Debug.LogError("Building is not a PB: " + building.name);
+                        return;
+                    }
+                    float currCellRadius = building.GetComponent<ProceduralBuilding>().GetRadius();
                     //float cellWidth = width.Get();
                     float spacing = buffer.Get();
                     currDist += currCellRadius;
