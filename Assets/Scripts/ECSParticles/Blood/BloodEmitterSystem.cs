@@ -179,14 +179,14 @@
                     data._endGravity = data.endGravity + rand.NextFloat3(-data.gravityRandom, data.gravityRandom);
 
                     //set internal vals
-                    data.emitSource = pos + rand.NextFloat3(-posRandom, posRandom);
+                    data.emitSource = pos;
                     data.emitDir = emitDir;
                     data.rot = data._startRot;
                     data.vel = data._startVel;
                     data.gravity = data._startGravity;
                     data.life = data.lifeTime + rand.NextFloat(-data.lifeTimeRandom, data.lifeTimeRandom);
                     
-                    t.Value = data.emitSource;
+                    t.Value = data.emitSource + rand.NextFloat3(-posRandom, posRandom);
                     r.Value = quaternion.Euler(data.rot);
                     s.Value = data._startScale;
 
@@ -312,7 +312,11 @@
                         data.gravity = math.lerp(data._startGravity, data._endGravity, percentLife);
 
                     if (data.gravTowardsSource)
-                        data.vel += math.length(data.gravity) * -data.emitDir * dt;
+                    {
+                        float3 dir = t.Value - data.emitSource;
+                        if (math.length(dir) > 0.1)
+                            data.vel += math.length(data.gravity) * -math.normalize(dir) * dt;
+                    }
                     else
                         data.vel += data.gravity * dt;
                     t.Value += data.vel * dt;

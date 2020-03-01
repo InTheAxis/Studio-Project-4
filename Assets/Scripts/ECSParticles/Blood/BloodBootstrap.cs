@@ -4,27 +4,12 @@ public struct BloodTag : IComponentData { }
 public class BloodBootstrap : ParticleBootstrap
 {
     [Header("Emit Source and Direction")]
-    //[SerializeField]
-    private Transform emitter;
-    private CharHitBox charHitbox;
+    [SerializeField]
+    private Transform emitter = null;
 
     private void Start()
     {
         Init(typeof(BloodTag));
-
-        emitter = GameManager.playerObj?.transform;
-        if (emitter)
-            charHitbox = emitter.GetComponent<CharHitBox>();
-        Debug.Log(charHitbox);
-    }
-
-    private void OnEnable()
-    {
-        if (charHitbox) charHitbox.OnHit += BloodSpray;
-    }
-    private void OnDisable()
-    {
-        if (charHitbox) charHitbox.OnHit -= BloodSpray;        
     }
 
     protected override void DestroyEntities()
@@ -37,23 +22,19 @@ public class BloodBootstrap : ParticleBootstrap
     {
         if (emitter == null)
         {
-            emitter = GameManager.playerObj?.transform;
-            if (emitter)
-                charHitbox = emitter.GetComponent<CharHitBox>();
-            else
+            emitter = GameManager.monsterObj?.transform;
+            if (emitter == null)
                 return;
         }
 
         SetEmitterSource(emitter.position, emitter.forward);
+
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.B))
-            BloodSpray(0, 0);
+        {
+            if (isEmitting) StopEmit();
+            else Emit();
+        }
 #endif
-    }
-
-    private void BloodSpray(int dmg, float dot) 
-    {
-        Debug.Log("Blood should Spray");
-        Emit();
     }
 }

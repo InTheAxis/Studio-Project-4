@@ -57,6 +57,9 @@ public class HumanAnimationSM : MonoBehaviour
         //if (Input.GetMouseButtonUp(0))
         //    AttackRelease();
 
+        //if (Input.GetMouseButtonDown(0))
+        //    OnHit(0, -1);
+
         CalculateState();
     }
 
