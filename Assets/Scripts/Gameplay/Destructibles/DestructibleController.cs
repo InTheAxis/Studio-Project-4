@@ -130,10 +130,6 @@ public class DestructibleController : MonoBehaviourPun
             holdDestructibles = playerController.transform.Find("BaseChar").Find("HoldDestructibles");
     }
 
-    private void OnDestroy()
-    {
-        //Cursor.lockState = CursorLockMode.None;
-    }
 
     private void Update()
     {

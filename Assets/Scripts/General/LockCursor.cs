@@ -8,12 +8,14 @@ public class LockCursor : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Debug.LogError("LockCursor has been deprecated");
+        //Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     private void OnDestroy()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Debug.LogError("LockCursor has been deprecated");
+        //Cursor.lockState = CursorLockMode.None;
     }
 
 #if UNITY_EDITOR
@@ -25,8 +27,8 @@ public class LockCursor : MonoBehaviour
             lockCursor = !lockCursor;
         }
 #endif
-
-        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Debug.LogError("LockCursor has been deprecated");
+        //Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
     }
 #endif
     }
