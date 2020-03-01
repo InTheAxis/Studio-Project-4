@@ -11,7 +11,7 @@ public class StateGameplay : State
 
     private void Start()
     {
-        
+        StateController.showNext(Name);
     }
 
     private void Update()
