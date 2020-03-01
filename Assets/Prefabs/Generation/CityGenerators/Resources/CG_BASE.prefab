@@ -369,10 +369,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gizmosEnabled: 0
   towerRef:
-  - {fileID: 7438366991310282751, guid: 2f474fe128ee42e4eaa2431f513be027, type: 3}
-  - {fileID: 7438366991310282751, guid: 2f474fe128ee42e4eaa2431f513be027, type: 3}
-  - {fileID: 7438366991310282751, guid: 2f474fe128ee42e4eaa2431f513be027, type: 3}
-  - {fileID: 7438366991310282751, guid: 2f474fe128ee42e4eaa2431f513be027, type: 3}
+  - {fileID: 5322482850725886471, guid: fc4c3bc368288f14898f904563e4f6ca, type: 3}
+  - {fileID: 5322482850725886471, guid: fc4c3bc368288f14898f904563e4f6ca, type: 3}
+  - {fileID: 5322482850725886471, guid: fc4c3bc368288f14898f904563e4f6ca, type: 3}
+  - {fileID: 5322482850725886471, guid: fc4c3bc368288f14898f904563e4f6ca, type: 3}
   centerBuffer: 51.7
   towerRange: 70
 --- !u!1 &5890597338796914779
@@ -451,7 +451,6 @@ MonoBehaviour:
   - generator: {fileID: 5518757484286636409}
     enabled: 1
   scale: 227.8
-  generateOnStart: 0
 --- !u!114 &209473482974403629
 MonoBehaviour:
   m_ObjectHideFlags: 0
