@@ -39,5 +39,7 @@ public struct DecalData : IComponentData
     public Entity decal12;
     public Entity decal13;
     public Entity decal14;
+    public Entity decal15;
+    public Entity decal16;
     //public Entity rockC;
 }
