@@ -143,15 +143,16 @@ public class StateMatchLobby : State
     private void onPlayerJoin(string name)
     {
         Debug.Log(name + "with ID: " + playerIDs.Count + " joined!");
-        players[playerIDs.Count].setActive(name);
         playerIDs.Add(name, playerIDs.Count);
+        players[playerIDs.Count-1].setActive(name);
     }
 
     private void onPlayerLeave(string name)
     {
         Debug.Log(name + "with ID: " + playerIDs.Count + " left!");
         playerIDs.Remove(name);
-        players[playerIDs.Count].setInactive();
+        if(players[playerIDs.Count] != null)
+            players[playerIDs.Count].setInactive();
 
     }
 
