@@ -11,14 +11,24 @@ public class CharTPController : MonoBehaviourPun
     public CharJumpCheck jumpChk;
     public CharCrouchCheck crouchChk;
 
+    [Header("Camera Settings")]    
+    public float targetCamDist;    
+    public float cameraBobAmt;
+    public float cameraBobFreq;    
+
+
     [Header("Speed settings")]
     [SerializeField]
     [Tooltip("Vertical and Horizontal movement speed")]
-    private float moveSpeed = 50;
+    private float moveSpeed = 30;
 
     [SerializeField]
-    [Tooltip("How fast to deccelerate after letting go of movement key")]
-    private float deccel = 10;
+    [Tooltip("How fast to deccelerate while moving, keep this low")]
+    private float kineticFriction = 1;
+    
+    [SerializeField]
+    [Tooltip("How fast to deccelerate after letting go of movement key, keep this very high")]
+    private float staticFriction = 10;
 
     [SerializeField]
     [Tooltip("Higher means able to move more in air")]
@@ -215,8 +225,15 @@ public class CharTPController : MonoBehaviourPun
 
         //deccelerate to 0
         Vector3 temp = rb.velocity;
-        temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * deccel);
+        temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * kineticFriction);
         temp.y = rb.velocity.y;
         rb.velocity = temp;
+        if (displacement <= Mathf.Epsilon)
+        {
+            temp = rb.velocity;
+            temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * staticFriction);
+            temp.y = rb.velocity.y;
+            rb.velocity = temp;
+        }
     }
 }

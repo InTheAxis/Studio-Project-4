@@ -16,10 +16,10 @@ public class CharTPCamera : MonoBehaviour
     //[Tooltip("What the camera should look at and follow")]
     private List<Transform> lookTargets;
 
-    [Header("Distance to Target")]
-    [SerializeField]
-    [Tooltip("How far the camera should be away from look target")]
-    private float targetCamDist;
+    //[Header("Distance to Target")]
+    //[SerializeField]
+    //[Tooltip("How far the camera should be away from look target")]
+    private float targetCamDist = 3;
 
     [SerializeField]
     [Tooltip("At what distance away should the camera start")]
@@ -56,12 +56,12 @@ public class CharTPCamera : MonoBehaviour
     [Tooltip("How frequent to shake cam")]
     private float shakeFrequency = 0.5f;    
     
-    [SerializeField]
-    [Tooltip("How much the camera bobs")]
+    //[SerializeField]
+    //[Tooltip("How much the camera bobs")]
     private float cameraBobAmt = 0.1f;
 
-    [SerializeField]
-    [Tooltip("How frequent the camera bobs")]
+    //[SerializeField]
+    //[Tooltip("How frequent the camera bobs")]
     private float cameraBobFreq = 0.1f;
 
     [Header("Crosshair")]
@@ -96,6 +96,11 @@ public class CharTPCamera : MonoBehaviour
         target = go.transform;
         target.position = lookTargets[0].position;
         nextTarget = lookTargets[0];
+
+
+        defaultCamDist = targetCamDist = cc.targetCamDist;
+        cameraBobAmt = cc.cameraBobAmt;
+        cameraBobFreq = cc.cameraBobFreq;
     }
 
     //use me to look at the transform at index of the target array

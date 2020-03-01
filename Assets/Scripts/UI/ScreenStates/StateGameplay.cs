@@ -21,6 +21,7 @@ public class StateGameplay : State
 
     public override void onShow()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         hud.SetActive(true);
         base.onShow();
     }
