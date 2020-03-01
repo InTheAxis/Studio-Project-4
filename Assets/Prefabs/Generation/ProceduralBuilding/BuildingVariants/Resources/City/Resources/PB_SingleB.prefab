@@ -84,13 +84,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737e7c27e0b0f014b8fafcabf93865a7, type: 3}
---- !u!4 &5840369600809742092 stripped
+--- !u!4 &503189455367314015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6338421826290787504, guid: 737e7c27e0b0f014b8fafcabf93865a7,
     type: 3}
   m_PrefabInstance: {fileID: 503189455367310268}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4801425590794505074 stripped
+--- !u!4 &503189455367314257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4925151311837708494, guid: 737e7c27e0b0f014b8fafcabf93865a7,
     type: 3}
@@ -101,7 +101,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4801425590794505074}
+    m_TransformParent: {fileID: 503189455367314257}
     m_Modifications:
     - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}
@@ -201,7 +201,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4801425590794505074}
+    m_TransformParent: {fileID: 503189455367314257}
     m_Modifications:
     - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}
@@ -301,7 +301,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5840369600809742092}
+    m_TransformParent: {fileID: 503189455367314015}
     m_Modifications:
     - target: {fileID: 655913171883718365, guid: c614df646b08a6845b4d82d798a771c5,
         type: 3}
@@ -375,7 +375,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4801425590794505074}
+    m_TransformParent: {fileID: 503189455367314257}
     m_Modifications:
     - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}
@@ -475,7 +475,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4801425590794505074}
+    m_TransformParent: {fileID: 503189455367314257}
     m_Modifications:
     - target: {fileID: 4246182842161864649, guid: 9c0848edf4b1fd44bb8419f5b6340829,
         type: 3}
