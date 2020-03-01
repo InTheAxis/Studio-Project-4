@@ -111,7 +111,14 @@ public class MonsterApproach : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Vector3 monsterPos = Vector3.zero;
+        if (monsterObj == null)
+        {
+            if (!GameManager.monsterObj)
+                return;
+            monsterObj = GameManager.monsterObj;
+        }
+
+        Vector3 monsterPos = monsterObj.transform.position;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(monsterPos, outerRange);
         Gizmos.color = Color.red;
