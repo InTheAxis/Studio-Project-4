@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: ForestRockPile
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
+    weight: 100
+    chance: 0.13440861
+  - go: {fileID: 6990274515055898977, guid: 14a8836d4a722404690ebb99a7b3ae75, type: 3}
+    weight: 46
+    chance: 0.061827958
+  - go: {fileID: 5152396125636253989, guid: 0ab196057a76ba847a11a8c627760d95, type: 3}
+    weight: 48
+    chance: 0.06451613
+  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
+    weight: 49
+    chance: 0.06586021
+  - go: {fileID: 3202216801028584327, guid: d4da86894e463254a8c533c8a59e93a4, type: 3}
+    weight: 49
+    chance: 0.06586021
+  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
+    weight: 52
+    chance: 0.06989247
+  - go: {fileID: 7991573148552811218, guid: 144a1325d391c1b40bd8c3df8d668c90, type: 3}
+    weight: 100
+    chance: 0.13440861
+  - go: {fileID: 3945273138713688359, guid: 765df7fa8fa52e64eac49fec7f968888, type: 3}
+    weight: 100
+    chance: 0.13440861
+  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
+    weight: 100
+    chance: 0.13440861
+  - go: {fileID: 8159327852960417195, guid: 3c998800ad54c1c43b066d12a0021e33, type: 3}
+    weight: 100
+    chance: 0.13440861
