@@ -96,5 +96,4 @@ public static class StateController
     {
         return currentState;
     }
-
 }

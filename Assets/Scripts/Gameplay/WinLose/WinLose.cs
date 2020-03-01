@@ -89,7 +89,7 @@ public class WinLose : MonoBehaviourPun
             if (backToLobbyTimer >= delayToLobbyTime && !hasSentLoadRequest)
             {
                 hasSentLoadRequest = true;
-                PhotonNetwork.LoadLevel("Mainmenu");
+                PhotonNetwork.LoadLevel("NewMainmenu");
             }
         }
     }
