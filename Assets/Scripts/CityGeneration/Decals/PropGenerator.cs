@@ -107,6 +107,11 @@ public class PropGenerator : ComponentSystem
                         entRef = data.decal16;
                         break;
                 }
+                if(entRef == Entity.Null)
+                {
+                    Debug.LogError("Decal is null.");
+                    continue;
+                }
                 Entity spawned = EntityManager.Instantiate(entRef);
                 EntityManager.AddComponent<DecalTag>(spawned);
                 EntityManager.SetComponentData(spawned, new Translation { Value = new float3(point.pos) });
