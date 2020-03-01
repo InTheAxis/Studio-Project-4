@@ -21,19 +21,31 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Environment_DigitalSignboards
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ca83a8ea98f30574299b4431977c29e9,
+    type: 3}
   m_ShaderKeywords: _EMISSION _OCCLUSIONMAP
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3050
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_5D5FD3FD:
+        m_Texture: {fileID: 2800000, guid: ac3eef32fdab8064684de3fc29d14eda, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_93CEDE08:
+        m_Texture: {fileID: 2800000, guid: 9375bf6564da86547bcfecbca958a22b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_B798E2A9:
+        m_Texture: {fileID: 2800000, guid: f86906fb62e48c84c8fae663b2e69a41, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 9e008f8a08e5ded42b564e11f48124fc, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -63,6 +75,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_444C18FD: 0.1
+    - Vector1_628109A8: 0.02
+    - Vector1_6B98BE53: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -91,6 +106,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
+    - Color_5A7AA5EB: {r: 0, g: 2.406746, b: 4, a: 0}
+    - Color_C6620304: {r: 2, g: 0.5026376, b: 0, a: 0}
+    - Vector2_D23C9D59: {r: 1, g: 5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 0}

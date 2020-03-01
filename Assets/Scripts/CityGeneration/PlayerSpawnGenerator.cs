@@ -62,8 +62,6 @@ public class PlayerSpawnGenerator : Generator
             poisson.Inject(new PoissonPoint(point.pos / scale, towerBuffer));
         }
         bool successA = poisson.Generate(4, playerBuffer, 200000);
-        if (!successA || poisson.GetPoints().Count < 9)
-            Debug.LogError("Failed to generate player spawn location");
         // hunter
         PoissonGenerator hunterPoisson = new PoissonGenerator();
         hunterPoisson.Inject(new PoissonPoint(Vector3.zero, centerBuffer));
@@ -77,7 +75,7 @@ public class PlayerSpawnGenerator : Generator
             hunterPoisson.Inject(new PoissonPoint(point.pos, point.radius));
         }
         if (playerSpawnPos.Count < 4)
-            Debug.LogError("Failed to generate player spawn locationB");
+            Debug.LogError("Failed to generate player spawn location");
         bool success = hunterPoisson.Generate(1, hunterBuffer, 200000);
         if (!success)
             Debug.LogError("Failed to generate hunter spawn location");

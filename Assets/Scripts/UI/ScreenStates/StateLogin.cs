@@ -84,6 +84,7 @@ public class StateLogin : State
     public void useRandomName()
     {
         PhotonNetwork.NickName = getRandomGuestName();
+        PlayerSettings.playerName = PhotonNetwork.NickName;
         StateController.showNext("Mainmenu");
     }
 
