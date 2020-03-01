@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 3a7b7781e69b4f445ab7d6ea940ddad7
+guid: 043fbfcd73e4aca459931a988e16ac8c
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: 5539831331247536789
-    second: Jump
+      74: 6720303635017113406
+    second: AttackHold
   - first:
-      74: 5917537482288442099
-    second: Fall
+      74: 5070568910744482447
+    second: AttackEnd
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -20,7 +20,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: Main_Ctrl
+    motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
-      takeName: Jump
+      name: AttackHold
+      takeName: Attack
       internalID: 0
-      firstFrame: 134
-      lastFrame: 174
+      firstFrame: 326
+      lastFrame: 346
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -65,13 +65,13 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 326
     - serializedVersion: 16
-      name: Fall
-      takeName: Jump
+      name: AttackEnd
+      takeName: Attack
       internalID: 0
-      firstFrame: 134
-      lastFrame: 174
+      firstFrame: 346
+      lastFrame: 376
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -94,7 +94,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 326
     isReadable: 0
   meshes:
     lODScreenPercentages: []

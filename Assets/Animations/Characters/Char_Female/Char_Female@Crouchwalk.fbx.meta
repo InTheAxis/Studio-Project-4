@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: d1454dac738fbda43a6d8a13a6a3b8b6
+guid: e5a0e10c4cb84fe4495ee9790b67bb2e
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: -7813635296899823279
-    second: Crouch
+      74: 3414407925988256910
+    second: Crouchwalk
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -33,7 +33,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Crouchwalk
+      takeName: Crouchwalk
+      internalID: 0
+      firstFrame: 230
+      lastFrame: 262
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

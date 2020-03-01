@@ -47,8 +47,15 @@ public class HumanAnimationSM : MonoBehaviour
         //    MiniMapToggle(true);
         //if (Input.GetMouseButtonDown(1))
         //    MiniMapToggle(false);
+        //if (Input.GetMouseButtonDown(0))
+        //    IsSabotaging();
         //if (Input.GetMouseButtonUp(0))
-        //    SabotagingDone(false);
+        //    SabotagingDone(true);
+
+        //if (Input.GetMouseButtonDown(0))
+        //    AttackHold(true);
+        //if (Input.GetMouseButtonUp(0))
+        //    AttackRelease();
 
         CalculateState();
     }
