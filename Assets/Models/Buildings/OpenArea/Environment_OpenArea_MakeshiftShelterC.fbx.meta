@@ -8,32 +8,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Environment_Deadtrees
-    second: {fileID: 2100000, guid: d8dbcc09773c5954f93318871174e08d, type: 2}
+    second: {fileID: 2100000, guid: 5b700875a99aa0942aa8d6e7e9b5936b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Environment_Debrispiles
-    second: {fileID: 2100000, guid: 314af7c2cdfb631419b48c63fca53956, type: 2}
+    second: {fileID: 2100000, guid: 377f47c1aa9426b4e86fcb87590e64c8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Environment_MakeshiftshelterB
-    second: {fileID: 2100000, guid: 4b515607ab448e64bbe924668c1c0602, type: 2}
+    second: {fileID: 2100000, guid: 881f2b0a5fcc37645b3a9193f4e9bd09, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Environment_Natureplantlife
-    second: {fileID: 2100000, guid: c37d43056e222a14abbc743577a49605, type: 2}
+    second: {fileID: 2100000, guid: b29e314a067c23f4a8f75b141ae6e3f3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Environment_StonesandBoulders
-    second: {fileID: 2100000, guid: 06e763b9edef60449871f145aa088de0, type: 2}
+    second: {fileID: 2100000, guid: d8aa795eff3ae1142b8d15dd3f8fe0aa, type: 2}
   materials:
     materialImportMode: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -105,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
