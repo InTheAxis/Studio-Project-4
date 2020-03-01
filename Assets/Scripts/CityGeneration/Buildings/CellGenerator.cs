@@ -122,12 +122,12 @@ public class CellGenerator : Generator
                     if (!building)
                     {
                         Debug.LogError("Building is null: " + gameObject.name);
-                        return;
+                        break;
                     }
                     if (!building.GetComponent<ProceduralBuilding>())
                     {
                         Debug.LogError("Building is not a PB: " + building.name);
-                        return;
+                        break;
                     }
                     float currCellRadius = building.GetComponent<ProceduralBuilding>().GetRadius();
                     //float cellWidth = width.Get();

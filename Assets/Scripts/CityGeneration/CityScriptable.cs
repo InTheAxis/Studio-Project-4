@@ -55,6 +55,8 @@ public class CityScriptable : ScriptableObject
         // meshList.Sort((p1, p2) => p1.chance.CompareTo(p2.chance));
         foreach (GoDropListItem meshData in meshList)
         {
+            if (meshData.go == null)
+                continue;
             float currentRange = meshData.go.GetComponent<ProceduralBuilding>().GetRadius();
             if (currentRange > range)
                 continue;
