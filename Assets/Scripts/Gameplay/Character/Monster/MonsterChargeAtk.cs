@@ -54,6 +54,9 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private void Update()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
+
         timer += Time.deltaTime;
 
         if (timer > cooldown + duration && !charControl.disableKeyInput && Input.GetAxisRaw("ChargeAttack") != 0)
