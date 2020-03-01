@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleAudioController : AudioController
+public class DestructibleAudioController : MonoBehaviour
 {
-    protected override void Awake()
+    private GameObject audioGO;
+    private Sound sound;
+
+    protected void Awake()
     {
         // init audio
-        Sound sound = new Sound();
-        sound.clip = (AudioClip)Resources.Load("impact0", typeof(AudioClip));
+        sound = new Sound();
+        sound.clip = (AudioClip)Resources.Load("destruct0", typeof(AudioClip));
         sound.pitch = 1;
         sound.volume = 0.5f;
-        sounds.Add(sound);
-        base.Awake();
     }
 
     public void DestructAudio()
     {
-        Play("impact0");
+        audioGO = Instantiate(new GameObject("BuildingAudio"), transform.position, Quaternion.identity);
+        audioGO.AddComponent<AudioSource>();
+        audioGO.AddComponent<AudioController>();
+        audioGO.GetComponent<AudioController>().Add(sound);
+        audioGO.GetComponent<AudioController>().Play("destruct0");
     }
 }

@@ -13,8 +13,8 @@ public class ShardAudioController : AudioController
         // init audio
         Sound sound = new Sound();
         sound.clip = (AudioClip)Resources.Load("impact0", typeof(AudioClip));
-        sound.pitch = 1;
-        sound.volume = 0.5f;
+        sound.pitch = 0.8f;
+        sound.volume = 0.2f;
         sounds.Add(sound);
     }
 

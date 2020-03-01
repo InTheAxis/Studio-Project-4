@@ -19,6 +19,11 @@ public class AudioController : MonoBehaviour
         Stop,
     }
 
+    public void Add(Sound sound)
+    {
+        sounds.Add(sound);
+    }
+
     protected virtual void Awake()
     {
         source = GetComponents<AudioSource>();
