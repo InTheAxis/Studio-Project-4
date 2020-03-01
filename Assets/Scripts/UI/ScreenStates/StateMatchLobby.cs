@@ -77,6 +77,7 @@ public class StateMatchLobby : State
         {
             NetworkClient.instance.setRoomVisibility(false);
 
+            ScreenStateHelperNetwork.instance.sendLoadingGameMsg();
             StateController.showNext("GameLoading");
             FindObjectOfType<StateGameLoading>().loadPhoton("Gameplay");
         }
@@ -127,7 +128,8 @@ public class StateMatchLobby : State
             }
         }
 
-        if (playersInLobby.Count <= 0) return;
+        if (playersInLobby.Count <= 0)
+            return;
         tmReady.text = PhotonNetwork.IsMasterClient ? "Start" : "Ready";
 
         if (PhotonNetwork.IsMasterClient)
