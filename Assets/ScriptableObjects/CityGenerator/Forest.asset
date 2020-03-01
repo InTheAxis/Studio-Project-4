@@ -15,10 +15,13 @@ MonoBehaviour:
   meshList:
   - go: {fileID: 1168967427960051775, guid: 4f929b12632f414458596d8225d39708, type: 3}
     weight: 100
-    chance: 0.33333334
+    chance: 0.25
   - go: {fileID: 7004277075182819476, guid: 2824e42f9b7419744a130dbff3275f71, type: 3}
     weight: 100
-    chance: 0.33333334
+    chance: 0.25
   - go: {fileID: 7004277075182819476, guid: b9cc6eb3afe192e48b728b82b6f1f257, type: 3}
     weight: 100
-    chance: 0.33333334
+    chance: 0.25
+  - go: {fileID: 1369143751210786211, guid: 0d15b9941238e24439ca2202ea91d355, type: 3}
+    weight: 100
+    chance: 0.25
