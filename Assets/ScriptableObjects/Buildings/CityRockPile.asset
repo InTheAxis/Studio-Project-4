@@ -13,39 +13,39 @@ MonoBehaviour:
   m_Name: CityRockPile
   m_EditorClassIdentifier: 
   meshList:
-  - go: {fileID: 4575892591728313958, guid: a5807932d695fb548b2c74194a26b1cb, type: 3}
+  - go: {fileID: 579254461299767444, guid: e916b1640b08deb419ead3bb24dc1e61, type: 3}
+    weight: 25
+    chance: 0.0287687
+  - go: {fileID: 6990274515055898977, guid: 14a8836d4a722404690ebb99a7b3ae75, type: 3}
     weight: 46
-    chance: 0.046231154
-  - go: {fileID: 6580184411012512059, guid: f133a8fd053146440a66f48641fe2e79, type: 3}
+    chance: 0.05293441
+  - go: {fileID: 5152396125636253989, guid: 0ab196057a76ba847a11a8c627760d95, type: 3}
     weight: 48
-    chance: 0.048241206
-  - go: {fileID: 5072571951382580295, guid: b4d3716680ac15e44804bd94813a4cc2, type: 3}
+    chance: 0.055235904
+  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
     weight: 49
-    chance: 0.049246233
-  - go: {fileID: 2792056498359908156, guid: 40631d31cb7be624d8a60b6de0b5b2d1, type: 3}
+    chance: 0.05638665
+  - go: {fileID: 3202216801028584327, guid: d4da86894e463254a8c533c8a59e93a4, type: 3}
+    weight: 49
+    chance: 0.05638665
+  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
     weight: 52
-    chance: 0.052261308
-  - go: {fileID: 7080266513377224856, guid: 9f2484db1619e0344941cb9ed8ab58df, type: 3}
+    chance: 0.059838895
+  - go: {fileID: 7991573148552811218, guid: 144a1325d391c1b40bd8c3df8d668c90, type: 3}
     weight: 100
-    chance: 0.10050251
-  - go: {fileID: 2705690800711151341, guid: 10b90c3b09ba77e4ab1e72d17e672d52, type: 3}
+    chance: 0.1150748
+  - go: {fileID: 3945273138713688359, guid: 765df7fa8fa52e64eac49fec7f968888, type: 3}
     weight: 100
-    chance: 0.10050251
-  - go: {fileID: 754615288684786705, guid: f5fc0d10c27c8c642b81e8963d1874f4, type: 3}
+    chance: 0.1150748
+  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
     weight: 100
-    chance: 0.10050251
-  - go: {fileID: 2898217249050636530, guid: ca1bc9ad66bb6814dac3cc6229c56acf, type: 3}
+    chance: 0.1150748
+  - go: {fileID: 8159327852960417195, guid: 3c998800ad54c1c43b066d12a0021e33, type: 3}
     weight: 100
-    chance: 0.10050251
-  - go: {fileID: 6197089433662494532, guid: cf1f0a95d1e17bd42bcc2f8695ab6e78, type: 3}
-    weight: 100
-    chance: 0.10050251
-  - go: {fileID: 4364924817374123316, guid: 51439e90375db764789fda96fdddd6c8, type: 3}
-    weight: 100
-    chance: 0.10050251
+    chance: 0.1150748
   - go: {fileID: 3711397206209767995, guid: 009ff2026fac1b6409dadb798c5716b4, type: 3}
     weight: 100
-    chance: 0.10050251
+    chance: 0.1150748
   - go: {fileID: 3762170171003902730, guid: 3e0a4a30b20ef91479f085d95c41d463, type: 3}
     weight: 100
-    chance: 0.10050251
+    chance: 0.1150748

@@ -28,7 +28,10 @@ public class CellBuildingGenerator : Generator
         {
             GameObject buildingRef = cityGenerator.city.SelectMesh(cell.radius);
             if (buildingRef == null)
+            {
+                Debug.LogError("building is null: " + gameObject.name);
                 continue;
+            }
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();
             Vector3 pos = cell.pos;
             pos += cell.offSetDir * buildingRadius;

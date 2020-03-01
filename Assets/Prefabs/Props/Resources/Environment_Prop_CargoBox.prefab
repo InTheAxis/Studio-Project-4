@@ -165,7 +165,7 @@ MonoBehaviour:
   dustParticles: {fileID: 5512566975316411008, guid: 6f7ec1452d2d1384f80ad2230afeda8e,
     type: 3}
   hitParticleSpawnChance: 0.65
-  breakForce: 2
+  breakForce: 8
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
@@ -333,4 +333,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda17c5a86d1db34691457076664aaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []

@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7841431485085244249
 MonoBehaviour:
@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2030239545
 MonoBehaviour:
@@ -281,59 +281,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2310421827137940302
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6810114148622695814}
-  - component: {fileID: 3933138305584994868}
-  m_Layer: 13
-  m_Name: StoneGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6810114148622695814
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2310421827137940302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5890597338796914725}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3933138305584994868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2310421827137940302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a61d0471dfe4a4c857fed612198a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmosEnabled: 0
-  numInteractables: 238
-  dropList:
-    list:
-    - go: {fileID: 1246991786913321935, guid: 144a1325d391c1b40bd8c3df8d668c90, type: 3}
-      weight: 52
-      chance: 0.5
-    - go: {fileID: 3850442332114564071, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
-      weight: 14
-      chance: 0.5
 --- !u!1 &4426278858588160164
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +415,6 @@ Transform:
   - {fileID: 2224494683591326669}
   - {fileID: 3485190985421793018}
   - {fileID: 7963160226327104656}
-  - {fileID: 6810114148622695814}
   - {fileID: 1970345592454583450}
   - {fileID: 8310847097019195986}
   - {fileID: 2351430515451839087}
@@ -504,10 +450,8 @@ MonoBehaviour:
     enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
-  - generator: {fileID: 3933138305584994868}
-    enabled: 1
   scale: 227.8
-  generateOnStart: 1
+  generateOnStart: 0
 --- !u!114 &209473482974403629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,7 +844,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5890597338796914725}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6648731099496901041
 MonoBehaviour:
@@ -1031,12 +975,12 @@ MonoBehaviour:
   numInteractables: 19
   dropList:
     list:
-    - go: {fileID: 3251071314885177336, guid: 036c348fc082063459a1ef42a71463e4, type: 3}
-      weight: 52
-      chance: 0.5
     - go: {fileID: 3251071314885177336, guid: e4ea7e176b9a31f4da2d7125d49856ee, type: 3}
       weight: 14
-      chance: 0.5
+      chance: 0.21212122
+    - go: {fileID: 3251071314885177336, guid: 036c348fc082063459a1ef42a71463e4, type: 3}
+      weight: 52
+      chance: 0.7878788
 --- !u!1001 &3286293993113212449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1082,7 +1026,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ff0c36dcfa827df44bc8b95a8448349a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ff0c36dcfa827df44bc8b95a8448349a,
         type: 3}

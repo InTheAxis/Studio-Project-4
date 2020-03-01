@@ -13,7 +13,7 @@ public class TowerGenerator : Generator
     private float centerBuffer = 10.1f;
 
     [SerializeField]
-    public float towerRange  = 70;
+    public float towerRange = 70;
 
     [Range(0, 1)]
     private float offset = 0.55f;
@@ -25,6 +25,7 @@ public class TowerGenerator : Generator
 
     public override void Clear()
     {
+        towers.Clear();
         while (transform.childCount > 0)
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
@@ -40,6 +41,7 @@ public class TowerGenerator : Generator
         poisson.Scale(scale);
         CreateTowers();
     }
+
     //private void Update()
     //{
     //    foreach (GameObject tower in towers)
@@ -62,7 +64,9 @@ public class TowerGenerator : Generator
         }
         foreach (GameObject tower in towers)
         {
-            Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange*1f);
+            if (!tower)
+                continue;
+            Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange * 1f);
             foreach (Collider col in coll)
             {
                 if (col.gameObject.layer == LayerMask.NameToLayer("Road"))
