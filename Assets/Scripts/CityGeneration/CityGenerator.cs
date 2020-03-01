@@ -18,7 +18,7 @@ public class CityGenerator : MonoBehaviour
 
     // public bool serverInstantiate = false;
 
-    public bool generateOnStart = false;
+    private bool generateOnStart = true;
 
     private bool generated = false;
     private List<Player> spawnRequestingPlayers = new List<Player>();

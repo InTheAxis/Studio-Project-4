@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class InstantiateHandler : MonoBehaviour
 {
-    public static bool sServerInstantiate = true;
+    public static bool sServerInstantiate = false;
 
     public static GameObject mInstantiate(GameObject go)
     {
@@ -79,11 +79,11 @@ public class InstantiateHandler : MonoBehaviour
         return instantiated;
     }
 
-    public static GameObject mInstantiate(GameObject go, Vector3 pos, Quaternion rot, Transform parent, string layer)
-    {
-        GameObject instantiated = mInstantiate(go, pos, rot);
-        instantiated.transform.parent = parent;
-        instantiated.layer = LayerMask.NameToLayer(layer);
-        return instantiated;
-    }
+    //public static GameObject mInstantiate(GameObject go, Vector3 pos, Quaternion rot, Transform parent, string layer)
+    //{
+    //    GameObject instantiated = mInstantiate(go, pos, rot);
+    //    instantiated.transform.parent = parent;
+    //    instantiated.layer = LayerMask.NameToLayer(layer);
+    //    return instantiated;
+    //}
 }

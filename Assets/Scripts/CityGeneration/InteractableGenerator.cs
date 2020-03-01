@@ -31,7 +31,13 @@ public class InteractableGenerator : Generator
         {
             Vector3 pos = point.pos;
             pos.y += 2f;
-            interactables.Add(InstantiateHandler.mInstantiate(dropList.SelectGO(), pos, transform));
+            GameObject selected = dropList.SelectGO();
+            if(!selected)
+            {
+                Debug.LogError("Object is null: " + gameObject.name);
+                continue;
+            }
+            interactables.Add(InstantiateHandler.mInstantiate(selected, pos, transform));
         }
         Debug.Log("Done Interactables");
     }
