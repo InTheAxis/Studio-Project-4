@@ -6,7 +6,7 @@ using TMPro;
 
 public class StateMainmenu : State
 {
-    [Header("References")]
+    [Header("Navigation")]
     [SerializeField]
     [Tooltip("The indicator that shows which sub-menu is showing.")]
     private RectTransform indicator = null;
