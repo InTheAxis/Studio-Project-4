@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: 934e5a39cf1792f4d861ff135447d06b
+guid: 06c24ff08e094264eacba7a32500a371
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: 5522812681064789136
-    second: Run
+      74: 8644993156642295495
+    second: SabotageHold
+  - first:
+      74: 2371964481659796968
+    second: SabotagePull
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,18 +38,47 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
-      takeName: Run
+      name: SabotageHold
+      takeName: Sabotage
       internalID: 0
-      firstFrame: 186
-      lastFrame: 206
+      firstFrame: 264
+      lastFrame: 280
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SabotagePull
+      takeName: Sabotage
+      internalID: 0
+      firstFrame: 280
+      lastFrame: 324
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
