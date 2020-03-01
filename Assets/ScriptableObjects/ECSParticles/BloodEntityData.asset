@@ -15,21 +15,21 @@ MonoBehaviour:
   mesh: {fileID: -9204119058436590431, guid: d5bcfdd52f6a63b4684e3ffb373adf68, type: 3}
   material: {fileID: 2100000, guid: 99d703aa5c880e642af371326798d298, type: 2}
   startRot: {x: 0, y: 0, z: 0}
-  rotRandom: {x: 2, y: 2, z: 2}
+  rotRandom: {x: 4, y: 4, z: 4}
   rotOverTime: 0
   endRot: {x: 0, y: 0, z: 0}
-  startScale: 0.3
-  scaleRandom: 0
+  startScale: 0.5
+  scaleRandom: 0.1
   scaleOverTime: 1
-  endScale: 0.5
-  startSpeed: 5
+  endScale: 0.1
+  startSpeed: 1
   velRandom: {x: 0, y: 0, z: 0}
   velOverTime: 0
   endVel: {x: 0, y: 0, z: 0}
-  startGravity: {x: 0, y: -9, z: 0}
+  startGravity: {x: 0, y: 10, z: 0}
   gravityRandom: {x: 0, y: 0, z: 0}
-  gravTowardsSource: 0
-  gravityOverTime: 0
-  endGravity: {x: 0, y: 0, z: 0}
-  lifeTime: 0.4
+  gravTowardsSource: 1
+  gravityOverTime: 1
+  endGravity: {x: 0, y: 20, z: 0}
+  lifeTime: 3
   lifeTimeRandom: 0.2

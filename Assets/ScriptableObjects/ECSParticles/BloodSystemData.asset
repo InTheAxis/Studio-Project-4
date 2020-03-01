@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enabledOnAwake: 0
   maxNumParticles: 1000
-  numJobBatch: 5
-  emitPosRandom: {x: 0, y: 0, z: 0}
+  numJobBatch: 3
+  emitPosRandom: {x: 1, y: 1, z: 1}
   emitDirType: 1
-  numPerUpdate: 30
-  rate: 0.01
-  loop: 0
+  numPerUpdate: 50
+  rate: 0.05
+  loop: 1
   duration: 0.3
   delay: 0
