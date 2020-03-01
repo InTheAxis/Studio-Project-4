@@ -609,6 +609,19 @@ MonoBehaviour:
   playerSpawnGenerator: {fileID: 5596241166495700578}
   playerBuffer: 16.03
   towerBuffer: 27.61
+--- !u!65 &2684253959959210196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6825961629638463272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 37.47345, y: 114.11912, z: 32.637634}
+  m_Center: {x: 0, y: 57.05956, z: 0}
 --- !u!1 &7267570085808643220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1047,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff0c36dcfa827df44bc8b95a8448349a, type: 3}
+--- !u!1 &6825961629638463272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ff0c36dcfa827df44bc8b95a8448349a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3286293993113212449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7557592366435728699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ff0c36dcfa827df44bc8b95a8448349a,
