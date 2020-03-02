@@ -19,7 +19,7 @@ public class StateSplashscreen : State
 
     private IEnumerator showSplashScreen()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(0.50f);
         StateController.showNext("Login");
     }
 
