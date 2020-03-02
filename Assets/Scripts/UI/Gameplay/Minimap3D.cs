@@ -38,8 +38,10 @@ public class Minimap3D : MonoBehaviour
     private GameObject simpleHologram = null;
     [SerializeField]
     private GameObject complexHologram = null;
-
-
+    [SerializeField]
+    private GameObject humanMaleHologram = null;
+    [SerializeField]
+    private GameObject humanFemaleHologram = null;
 
     [SerializeField]
     private string controlTowerTag = "Landmark";
@@ -158,15 +160,30 @@ public class Minimap3D : MonoBehaviour
         if (!inactive.ContainsKey(go))
         {
 
-            clone = Instantiate(complexHologram);
-            clone.GetComponent<MeshFilter>().mesh = go.GetComponent<MeshFilter>().mesh;
+            
 
-            if (go.CompareTag("Landmark"))
-                clone.GetComponent<MeshRenderer>().material = hologramLandmarkMat;
+            if (go.transform.root.CompareTag("Human"))
+            {
+                Transform goRoot = go.transform.root;
+                if(goRoot.name.ToLower().Contains("female"))
+                    clone = Instantiate(humanFemaleHologram);
+                else
+                    clone = Instantiate(humanMaleHologram);
+            }
             else
-                clone.GetComponent<MeshRenderer>().material = hologramMat;
+            {
+                clone = Instantiate(complexHologram);
 
-            Debug.Log(go.name + " Y: " + go.GetComponent<MeshCollider>().bounds.size.y);
+
+                clone.GetComponent<MeshFilter>().mesh = go.GetComponent<MeshFilter>().mesh;
+
+                if (go.CompareTag("Landmark"))
+                    clone.GetComponent<MeshRenderer>().material = hologramLandmarkMat;
+                else
+                    clone.GetComponent<MeshRenderer>().material = hologramMat;
+
+                Debug.Log(go.name + " Y: " + go.GetComponent<MeshCollider>().bounds.size.y);
+            }
 
             clone.name = go.name + " Hologram";
             holograms.Add(go, clone);
@@ -234,7 +251,19 @@ public class Minimap3D : MonoBehaviour
         //float colliderYScale = collider.bounds.size.y;
         //colliderYScale = Mathf.Min(colliderYScale, worldMaxHeight);
         //float yRatio = colliderYScale / worldMaxHeight;
-        Vector3 relativePlaneScale = go.transform.localScale * 0.055f;
+        Vector3 relativePlaneScale = go.transform.localScale;
+
+        if (go.transform.root.CompareTag("Human"))
+        {
+            go.transform.localScale *= 0.12f;
+        }
+        else
+        {
+            go.transform.localScale *= 0.055f;
+        }
+
+
+
         //relativePlaneScale.y = scaleFactor * transform.localScale.y;
 
 

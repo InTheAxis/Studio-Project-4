@@ -106,7 +106,7 @@ PrefabInstance:
         type: 3}
       propertyPath: generators.Array.data[7].generator
       value: 
-      objectReference: {fileID: 407918317781434270}
+      objectReference: {fileID: 407918317781433896}
     - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: generators.Array.data[7].enabled
@@ -172,9 +172,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CG_City
       objectReference: {fileID: 0}
+    - target: {fileID: 6825961629638463272, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: m_TagString
+      value: Landmark
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c45f9aa9d148a444b3e52a6ef582933, type: 3}
---- !u!114 &407918317781434270 stripped
+--- !u!114 &407918317781433896 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5518757484286636409, guid: 6c45f9aa9d148a444b3e52a6ef582933,
     type: 3}

@@ -20,9 +20,9 @@ GameObject:
   - component: {fileID: 7096496782143684703}
   - component: {fileID: 3636720428368460213}
   - component: {fileID: 2024383012829332539}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Environment_Whole_CentralTower
-  m_TagString: Untagged
+  m_TagString: Landmark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,4 +342,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda17c5a86d1db34691457076664aaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
