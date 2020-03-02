@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64666023ba933e7458ba45b6d293aeae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 0
-  hunterBuffer: 0.15
-  playerBuffer: 0.11
+  gizmosEnabled: 1
+  hunterBuffer: 0.217
+  playerBuffer: 0.127
   towerGenerator: {fileID: 899756740256859345}
   towerBuffer: 0.108
   centerBuffer: 0.228
@@ -437,17 +437,17 @@ MonoBehaviour:
   city: {fileID: 11400000, guid: c1c95daf303dd46419f90fe17773f71d, type: 2}
   generators:
   - generator: {fileID: 899756740256859345}
-    enabled: 0
+    enabled: 1
   - generator: {fileID: 5890597339044720963}
     enabled: 1
   - generator: {fileID: 5596241166495700578}
-    enabled: 0
+    enabled: 1
   - generator: {fileID: 4866337199736129184}
     enabled: 1
   - generator: {fileID: 8961182708676070527}
     enabled: 1
   - generator: {fileID: 7412882576633699929}
-    enabled: 0
+    enabled: 1
   - generator: {fileID: 5518757484286636409}
     enabled: 1
   scale: 227.8
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae179f9963a1934a882b64c0267c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   cityGenerator: {fileID: 5890597338796914724}
   towerGenerator: {fileID: 899756740256859345}
   cellGenerator: {fileID: 8961182708676070527}
