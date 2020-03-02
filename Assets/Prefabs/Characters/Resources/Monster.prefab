@@ -407,6 +407,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: throw
+  - Type: 4
+    SynchronizeType: 0
+    Name: charge
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -490,6 +493,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   health: {fileID: 5071471449440821494}
   hitbox: {fileID: 4173598710368709281}
+  chargeAtk: {fileID: 3023660623748070}
 --- !u!114 &4943199071075631875
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,7 +34,8 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private float timer;
     private IEnumerator chargeCorr;
-
+    
+    public bool isCharging { private set; get; }
     private void Start()
     {
         timer = cooldown + duration;
@@ -76,6 +77,7 @@ public class MonsterChargeAtk : MonoBehaviour
             StopCoroutine(chargeCorr);
         chargeCorr = null;
         charControl.disableMovement = false;
+        isCharging = false;
         //trail.emitting = false;
         CharTPCamera.Instance.LookAtPlayer();
     }
@@ -89,6 +91,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 vfx.Play();
             charControl.disableMovement = true;
             //trail.emitting = true;
+            isCharging = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
             Vector3 dir = charControl.forward + Vector3.down * 0.1f;
@@ -107,6 +110,7 @@ public class MonsterChargeAtk : MonoBehaviour
         }
 
         chargeCorr = null;
+        isCharging = false;
         yield return new WaitForSeconds(0.1f);
         //trail.emitting = false;
     }

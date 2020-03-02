@@ -8,6 +8,7 @@ public class MonsterAnimationSM : MonoBehaviour
     public CharTPController charControl;
     public CharHealth health;
     public CharHitBox hitbox;
+    public MonsterChargeAtk chargeAtk;
 
 
     private DestructibleController destructible;
@@ -21,26 +22,18 @@ public class MonsterAnimationSM : MonoBehaviour
 
     private void OnEnable()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         hitbox.OnHit += OnHit;
         destructible.pullStatus += AttackHold;
         destructible.throwStatus += AttackRelease;
-        lookTargetCtrl.showMap += MiniMapToggle;
+        //lookTargetCtrl.showMap += MiniMapToggle;
     }
 
     private void OnDisable()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         hitbox.OnHit -= OnHit;
         destructible.pullStatus -= AttackHold;
         destructible.throwStatus -= AttackRelease;
-        lookTargetCtrl.showMap -= MiniMapToggle;
+        //lookTargetCtrl.showMap -= MiniMapToggle;
     }
 
     private void LateUpdate()
@@ -73,6 +66,10 @@ public class MonsterAnimationSM : MonoBehaviour
 
     private void AttackHold(bool b)
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         if (!b)
             return;
         Trigger("attack");
@@ -81,42 +78,59 @@ public class MonsterAnimationSM : MonoBehaviour
 
     private void AttackRelease()
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         Boolean("attackHolding", false);
         animator.ResetTrigger("attack");
     }
     private void OnHit(int i, float dot)
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         if (!health.dead && dot < 0)
             Trigger("hit");
     }
 
     public void IsSabotaging()
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         Trigger("sabo");
         animator.SetInteger("saboDone", -1);
     }
 
     public void SabotagingDone(bool finished)
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         animator.SetInteger("saboDone", finished ? 1 : 0);
         animator.ResetTrigger("sabo");
     }
 
-    private void MiniMapToggle(bool b)
-    {
-        //if (!b)
-        //    return;
-        animator.SetLayerWeight(1, 1);
-        Trigger("map");
-    }
+    //private void MiniMapToggle(bool b)
+    //{
+    //    //if (!b)
+    //    //    return;
+    //    animator.SetLayerWeight(1, 1);
+    //    Trigger("map");
+    //}
 
     private void CalculateState()
     {
+        Boolean("charge", chargeAtk.isCharging);
         Boolean("dead", health.dead);
         Boolean("moving", charControl.displacement > 0);
-        Boolean("crouching", charControl.crouchChk.crouching);
-        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < -1f);
-        Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 0);
+        //Boolean("crouching", charControl.crouchChk.crouching);
+        //Boolean("falling", charControl.jumpChk.airborne && charControl.velY < -1f);
+        //Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 0);
     }
 
     private void Boolean(string next, bool b)
