@@ -9,7 +9,7 @@ public static class StateController
 
     private static State currentState = null;
 
-    private const string initialState = "Login";
+    private const string initialState = "Splashscreen";
 
     public static void Register(State state)
     {
