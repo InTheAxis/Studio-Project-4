@@ -64,6 +64,13 @@ public class AudioController : MonoBehaviour
             Debug.LogError("[Audio] " + name + " sound does not exist!");
             return;
         }
+
+        if (index >= source.Length)
+        {
+            Debug.LogError("[Audio] " + name + " sound does not exist! (Index=" + index + ")");
+            return;
+        }
+
         source[index].clip = s.clip;
         source[index].clip = s.clip;
         source[index].volume = s.volume;
