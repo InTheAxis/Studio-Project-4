@@ -18,12 +18,20 @@ public class StateGameplay : State
 
     private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+            StateController.showNext("GamePause");
     }
 
     public override void onShow()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (GameManager.playerObj != null)
+        {
+            GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
+            GameManager.playerObj.GetComponent<CharTPController>().disableMouseInput = false;
+            GameManager.playerObj.GetComponent<CharTPController>().disableMovement = false;
+        }
         hud.SetActive(true);
 
         base.onShow();

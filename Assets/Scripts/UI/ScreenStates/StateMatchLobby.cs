@@ -28,8 +28,8 @@ public class StateMatchLobby : State
     private void Awake()
     {
         StateController.Register(this);
-        NetworkClient.instance.playerJoinedCallback = onPlayerJoin;
-        NetworkClient.instance.playerLeftCallback = onPlayerLeave;
+
+
 
         players = new List<LobbyPlayer>();
         playerIDs = new Dictionary<string, int>();
@@ -89,12 +89,18 @@ public class StateMatchLobby : State
 
     public void Leave()
     {
-        NetworkClient.instance.DisconnectFromRoom();
+        if (NetworkClient.instance != null)
+            NetworkClient.instance.DisconnectFromRoom();
         StateController.showPrevious();
     }
 
     public override void onShow()
     {
+        if (NetworkClient.instance != null)
+        {
+            NetworkClient.instance.playerJoinedCallback = onPlayerJoin;
+            NetworkClient.instance.playerLeftCallback = onPlayerLeave;
+        }
         worldCanvas.SetActive(true);
         base.onShow();
     }

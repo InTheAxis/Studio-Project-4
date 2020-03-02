@@ -66,7 +66,19 @@ public class Shard : MonoBehaviour
             clone.transform.position = collision.contacts[0].point;
             clone.transform.forward = collision.contacts[0].normal;
             Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
-            Debug.Log("MONSTER HIT");
+        }
+        else if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Human"))
+        {
+            if (survivorHit == null)
+            {
+                Debug.LogError("Add survivorHit particle to this shard: " + gameObject.name);
+                return;
+            }
+
+            GameObject clone = Instantiate(survivorHit);
+            clone.transform.position = collision.contacts[0].point;
+            clone.transform.forward = collision.contacts[0].normal;
+            Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
         }
     }
 }
