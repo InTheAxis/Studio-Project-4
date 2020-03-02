@@ -449,7 +449,7 @@ MonoBehaviour:
   - generator: {fileID: 7412882576633699929}
     enabled: 0
   - generator: {fileID: 5518757484286636409}
-    enabled: 0
+    enabled: 1
   scale: 227.8
 --- !u!114 &209473482974403629
 MonoBehaviour:
@@ -533,8 +533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gizmosEnabled: 0
   towerGenerator: {fileID: 899756740256859345}
-  centralRoadWidth: 10.84
-  mainRoadWidth: 12.33
+  centralRoadWidth: 18
+  mainRoadWidth: 23.3
   subRoadWidth: 10.86
   minorRoadWidth: 5.02
   sprite: {fileID: 64814105939109950}
@@ -544,15 +544,15 @@ MonoBehaviour:
   cleanUp: 1
   RoadRef: {fileID: 8483622626547749704, guid: f53b1005619653e4f8f72268fbbea74b, type: 3}
   density: 12
-  length: 82.9
+  length: 66.05
   sub:
     minDist: 0.335
     maxDist: 0.526
     minLength: 0.513
     maxLength: 0.825
   minor:
-    minDist: 0.019
-    maxDist: 0.059
+    minDist: 0.328
+    maxDist: 0.405
     minLength: 0.388
     maxLength: 0.64
 --- !u!1 &6755987637206372688
@@ -598,15 +598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c862ec7e1c8d83d4d869eb0eeee8170e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 1
+  gizmosEnabled: 0
   cityGenerator: {fileID: 5890597338796914724}
   buffer:
-    min: 0.1
-    max: 0.2
-  cellRadius:
-    min: 14.86
-    max: 37.2
-  initialSpace: 7
+    min: 0
+    max: 0
+  initialSpace: 11.47
   roadGenerator: {fileID: 5890597339044720963}
   towerGenerator: {fileID: 899756740256859345}
   playerSpawnGenerator: {fileID: 5596241166495700578}
@@ -918,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae179f9963a1934a882b64c0267c001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmosEnabled: 0
+  gizmosEnabled: 1
   cityGenerator: {fileID: 5890597338796914724}
   towerGenerator: {fileID: 899756740256859345}
   cellGenerator: {fileID: 8961182708676070527}

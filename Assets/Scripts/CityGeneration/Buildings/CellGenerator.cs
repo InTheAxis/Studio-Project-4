@@ -99,7 +99,26 @@ public class CellGenerator : Generator
         Clear();
         foreach (RoadGenerator.RoadPath path in roadGenerator.GetRoadOuterPaths())
         {
-            int id = path.GetHashCode();
+            int id = path.GetHashCode() +Random.Range(-int.MaxValue, int.MaxValue);
+
+            {
+                GameObject building = cityGenerator.city.SelectMesh();
+                if (!building)
+                {
+                    Debug.LogError("Building is null: " + gameObject.name);
+                    break;
+                }
+                if (!building.GetComponent<ProceduralBuilding>())
+                {
+                    Debug.LogError("Building is not a PB: " + building.name);
+                    break;
+                }
+                float currCellRadius = building.GetComponent<ProceduralBuilding>().GetRadius();
+                // add building at end of road
+                cells.Add(new BuildingCell(path.end, currCellRadius, path.dir, false, Quaternion.identity, id));
+                //
+
+            }
             Vector3 dir = path.dir;
             Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
             Quaternion rot = Quaternion.LookRotation(pDir, Vector3.up);
@@ -155,7 +174,7 @@ public class CellGenerator : Generator
                     {
                         if (cell.id == id)
                             continue;
-                        if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius)
+                        if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius*1.4f)
                         {
                             isAvailable = false;
                             break;
