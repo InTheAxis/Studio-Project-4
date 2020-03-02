@@ -106,6 +106,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
         if (dead || invulnerable)
             return;
 
+        if (charControl.photonView.IsMine && PhotonNetwork.IsConnected)
+            CharTPCamera.Instance.Shake();
+
         StartCoroutine(HitStun());
 
         hp -= dmg;

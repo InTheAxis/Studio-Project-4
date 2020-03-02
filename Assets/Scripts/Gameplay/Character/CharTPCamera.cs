@@ -215,8 +215,8 @@ public class CharTPCamera : MonoBehaviour
         if (charControl == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.T))
-            Shake();
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    Shake();
         if(!target)
         {
             Debug.LogError("No target");
