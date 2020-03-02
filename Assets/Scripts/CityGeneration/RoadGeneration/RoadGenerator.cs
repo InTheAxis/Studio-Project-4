@@ -41,7 +41,7 @@ public class RoadGenerator : Generator
     private Voronoi voronoi = new Voronoi();
     private List<RoadPath> roadInnerPaths = new List<RoadPath>();
     private List<RoadPath> roadOuterPaths = new List<RoadPath>();
-    private List<RoadPath> roadSubPaths = new List<RoadPath>();
+    public List<RoadPath> roadSubPaths { get; private set; } = new List<RoadPath>();
     private List<RoadPath> roadMinorPaths = new List<RoadPath>();
 
     public List<GameObject> roads { get; set; } = new List<GameObject>();
@@ -457,10 +457,12 @@ public class RoadGenerator : Generator
         }
         roads.Clear();
         float length = 1f;
+        float yoffset = 0;
         foreach (RoadPath path in roadInnerPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.2f;
+            pos.y += 0.2f + yoffset;
+            yoffset += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;

@@ -58,8 +58,8 @@ public class CellGenerator : Generator
     [SerializeField]
     private MinMax buffer;
 
-    [SerializeField]
-    private MinMax cellRadius;
+    //[SerializeField]
+    //private MinMax cellRadius;
 
     //[SerializeField]
     //private MinMax width;
@@ -139,8 +139,18 @@ public class CellGenerator : Generator
                     currPos = currDist * dir + startPos;
                     //Vector3 end = currPos + dir * cellLength;
                     //Vector3 cellMax = end + pDir * cellWidth;
-                    // check for other cell
+
                     bool isAvailable = true;
+                    // check for road
+                    foreach (RoadGenerator.RoadPath road in roadGenerator.roadSubPaths)
+                    {
+                        if (Vector3.Distance((road.start + road.end) / 2, currPos) < currCellRadius)
+                        {
+                            isAvailable = false;
+                            break;
+                        }
+                    }
+                    // check for other cell
                     foreach (BuildingCell cell in cells)
                     {
                         if (cell.id == id)

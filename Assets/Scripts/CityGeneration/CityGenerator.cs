@@ -57,6 +57,7 @@ public class CityGenerator : MonoBehaviour
 
     public void Generate()
     {
+        //float startTime = Time.time;
         Debug.Log("Generation began");
         Clear();
         foreach (GeneratorData generator in generators)
@@ -76,6 +77,7 @@ public class CityGenerator : MonoBehaviour
         foreach (Player player in spawnRequestingPlayers)
             sendSpawnDirective(player);
         spawnRequestingPlayers.Clear();
+        //Debug.Log("Time to generate: " + (Time.time - startTime));
     }
 
     private void sendSpawnDirective(Player player)
