@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ebfe4f7bbf8c1544a0844e0b71c6bc8, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 7004277075182819476, guid: 2824e42f9b7419744a130dbff3275f71, type: 3}
+    weight: 50
+    chance: 0.2
+  - go: {fileID: 7004277075182819476, guid: b9cc6eb3afe192e48b728b82b6f1f257, type: 3}
+    weight: 50
+    chance: 0.2
+  - go: {fileID: 1369143751210786211, guid: 0d15b9941238e24439ca2202ea91d355, type: 3}
+    weight: 50
+    chance: 0.2
+  - go: {fileID: 1168967427960051775, guid: 4f929b12632f414458596d8225d39708, type: 3}
+    weight: 50
+    chance: 0.2
+  - go: {fileID: 6586770471572314638, guid: e9b2e3eb41089e94d8fef74ff78ae7cc, type: 3}
+    weight: 50
+    chance: 0.2

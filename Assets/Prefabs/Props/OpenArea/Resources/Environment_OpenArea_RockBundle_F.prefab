@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4238801148425378932}
   - component: {fileID: 6086544230821216143}
   - component: {fileID: 4300840772664131717}
-  - component: {fileID: 3695887481656381108}
   - component: {fileID: 9198345919175363641}
   - component: {fileID: 668342376580990699}
   - component: {fileID: 9197572080031555994}
@@ -118,27 +117,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4370698776643171474, guid: b7165c659cbbc87429420a4b9c35d65e, type: 3}
---- !u!114 &3695887481656381108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2517487053273016488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &9198345919175363641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +169,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 9197572080031555994}

@@ -73,15 +73,15 @@ public class BuildingGenerator : Generator
             // check for road
             bool emptySpot = true;
             GameObject buildingRef = cityGenerator.city.SelectMesh();
-            if(!buildingRef)
+            if (!buildingRef)
             {
                 Debug.LogError("building is null: " + gameObject.name);
                 continue;
             }
-            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buildingRef.GetComponent<ProceduralBuilding>().GetRadius() * 1.5f, LayerMask.NameToLayer("Road"));
+            Collider[] colls = Physics.OverlapSphere(new Vector3(vpos.x, 0, vpos.z), buffer / 4, LayerMask.NameToLayer("Road"));
             foreach (Collider col in colls)
             {
-                //if (col.tag == "Road")
+                if (col.tag == "Road")
                 {
                     emptySpot = false;
                     break;
