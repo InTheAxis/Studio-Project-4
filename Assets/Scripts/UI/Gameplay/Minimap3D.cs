@@ -255,11 +255,11 @@ public class Minimap3D : MonoBehaviour
 
         if (go.transform.root.CompareTag("Human"))
         {
-            go.transform.localScale *= 0.12f;
+            relativePlaneScale *= 2.0f;
         }
         else
         {
-            go.transform.localScale *= 0.055f;
+            relativePlaneScale *= 0.055f;
         }
 
 

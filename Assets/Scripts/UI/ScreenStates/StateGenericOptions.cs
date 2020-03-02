@@ -152,6 +152,47 @@ public abstract class StateGenericOptions : State
     #endregion
 
 
+    private void Awake()
+    {
+        StateController.Register(this);
+        /* Populate supported video resolutions */
+        if (resolutions == null)
+        {
+            resolutions = Screen.resolutions;
+            tmResolution.ClearOptions();
+            List<string> options = new List<string>();
+
+            int currentIndex = 0;
+            for (int i = 0; i < resolutions.Length; ++i)
+            {
+                string option = resolutions[i].width + " x " + resolutions[i].height + " " + resolutions[i].refreshRate + "hz";
+                options.Add(option);
+
+                /* Find current resolution's index */
+                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                    currentIndex = i;
+            }
+            tmResolution.AddOptions(options);
+            tmResolution.value = currentIndex;
+            tmResolution.RefreshShownValue();
+        }
+
+        /* Update fullscreen status */
+        tmFullscreen.value = Screen.fullScreen ? 1 : 0;
+        tmFullscreen.RefreshShownValue();
+
+        /* Update quality settings */
+        tmQuality.value = QualitySettings.GetQualityLevel();
+        tmQuality.RefreshShownValue();
+
+        /* Update V-Sync Status */
+        setVSync(QualitySettings.vSyncCount != 0);
+
+        tmMasterVolume.text = "100%";
+        tmEffectVolume.text = "100%";
+        tmMusicVolume.text = "100%";
+    }
+
     public override void onShow()
     {
         /* Reset sub menu states */
