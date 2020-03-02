@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class InstantiateHandler : MonoBehaviour
 {
-    public static bool sServerInstantiate = false;
+    public static bool sServerInstantiate = true;
 
     public static GameObject mInstantiate(GameObject go)
     {
