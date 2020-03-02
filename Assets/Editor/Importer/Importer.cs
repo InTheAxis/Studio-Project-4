@@ -27,6 +27,8 @@ public class Importer : EditorWindow
     private bool isIncludeDestructible = false;
     private string targetFileDir = "";
 
+    private bool importerEnabled = false;
+
     /* Jobs for linking materials and textures */
     private List<ImportBind> bindJobs = new List<ImportBind>();
     private List<ImportBind> deletedJobs = new List<ImportBind>();
@@ -44,7 +46,7 @@ public class Importer : EditorWindow
 
     private void OnEnable()
     {
-        FBXCustomImporter.customImport = true;
+        FBXCustomImporter.customImport = false;
 
 #if UNITY_EDITOR
         EditorApplication.update += OnEditorUpdate;
@@ -93,104 +95,111 @@ public class Importer : EditorWindow
         EditorGUILayout.HelpBox("Select the appropriate types and setting then click Export. Send the exported package to the programmers.", MessageType.Info);
         EditorGUILayout.Space();
 
-        mainCategoryIndex = EditorGUILayout.Popup("Main Category", mainCategoryIndex, mainCategory);
-        subCategoryIndex = EditorGUILayout.Popup("Sub Category", subCategoryIndex, subCategory);
 
-
-
-        /* File Properties */
-        inputFileMethodIndex = EditorGUILayout.Popup("Number of Files", inputFileMethodIndex, inputFileMethod);
-        EditorGUILayout.Space();
-        isOverwrite = EditorGUILayout.Toggle("Overwrite Existing Assets", isOverwrite);
-        FBXCustomImporter.customImport = EditorGUILayout.Toggle("Custom FBX Import", FBXCustomImporter.customImport);
-        FBXCustomImporter.autoScale = EditorGUILayout.Toggle("Autoscale FBX (x100)", FBXCustomImporter.autoScale);
-
-        if (inputFileMethod[inputFileMethodIndex] == "Directory")
-            isIncludeDestructible = EditorGUILayout.Toggle("Include Shattered", isIncludeDestructible);
-
-        EditorGUILayout.Space();
-
-
-
-        /* Input File */
-        if (inputFileMethod[inputFileMethodIndex] == "Single")
+        importerEnabled = EditorGUILayout.Toggle("Enabled", importerEnabled);
+        if (importerEnabled)
         {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Input File", inputFilePath, GUILayout.MinWidth(150));
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Browse", GUILayout.MinWidth(80)))
-                inputFilePath = EditorUtility.OpenFilePanel("Import Assets", inputFilePath, "");
 
-            EditorGUILayout.EndHorizontal();
-        }
-        else if (inputFileMethod[inputFileMethodIndex] == "Directory")
-        {
-            isRecursiveImport = EditorGUILayout.Toggle("Recursive Import", isRecursiveImport);
-            isLayoutCopied = EditorGUILayout.Toggle("Copy Directory's Layout", isLayoutCopied);
+            mainCategoryIndex = EditorGUILayout.Popup("Main Category", mainCategoryIndex, mainCategory);
+            subCategoryIndex = EditorGUILayout.Popup("Sub Category", subCategoryIndex, subCategory);
+
+
+
+            /* File Properties */
+            inputFileMethodIndex = EditorGUILayout.Popup("Number of Files", inputFileMethodIndex, inputFileMethod);
             EditorGUILayout.Space();
+            isOverwrite = EditorGUILayout.Toggle("Overwrite Existing Assets", isOverwrite);
+            FBXCustomImporter.customImport = EditorGUILayout.Toggle("Custom FBX Import", FBXCustomImporter.customImport);
+            FBXCustomImporter.autoScale = EditorGUILayout.Toggle("Autoscale FBX (x100)", FBXCustomImporter.autoScale);
+
+            if (inputFileMethod[inputFileMethodIndex] == "Directory")
+                isIncludeDestructible = EditorGUILayout.Toggle("Include Shattered", isIncludeDestructible);
+
+            EditorGUILayout.Space();
+
+
+
+            /* Input File */
+            if (inputFileMethod[inputFileMethodIndex] == "Single")
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Input File", inputFilePath, GUILayout.MinWidth(150));
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Browse", GUILayout.MinWidth(80)))
+                    inputFilePath = EditorUtility.OpenFilePanel("Import Assets", inputFilePath, "");
+
+                EditorGUILayout.EndHorizontal();
+            }
+            else if (inputFileMethod[inputFileMethodIndex] == "Directory")
+            {
+                isRecursiveImport = EditorGUILayout.Toggle("Recursive Import", isRecursiveImport);
+                isLayoutCopied = EditorGUILayout.Toggle("Copy Directory's Layout", isLayoutCopied);
+                EditorGUILayout.Space();
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Input Directory", inputFilePath, GUILayout.MinWidth(150));
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Browse", GUILayout.MinWidth(80)))
+                    inputFilePath = EditorUtility.OpenFolderPanel("Import Assets From", inputFilePath, "");
+                EditorGUILayout.EndHorizontal();
+            }
+
+
+
+
+
+
+            /* Output Directory*/
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Input Directory", inputFilePath, GUILayout.MinWidth(150));
+            EditorGUILayout.LabelField("Output Directory", outputFilePath, GUILayout.MinWidth(150));
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Browse", GUILayout.MinWidth(80)))
-                inputFilePath = EditorUtility.OpenFolderPanel("Import Assets From", inputFilePath, "");
+                outputFilePath = EditorUtility.SaveFilePanel("Save As", Application.dataPath, "Exported", "unitypackage");
             EditorGUILayout.EndHorizontal();
-        }
 
 
 
 
+            EditorGUILayout.Space();
 
 
-        /* Output Directory*/
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Output Directory", outputFilePath, GUILayout.MinWidth(150));
-        GUILayout.FlexibleSpace();
-        if (GUILayout.Button("Browse", GUILayout.MinWidth(80)))
-            outputFilePath = EditorUtility.SaveFilePanel("Save As", Application.dataPath, "Exported", "unitypackage");
-        EditorGUILayout.EndHorizontal();
-
-
-
-
-        EditorGUILayout.Space();
-
-
-        if (GUILayout.Button("Import"))
-        {
-            Import();
-            AssetDatabase.Refresh();
-            if (FBXCustomImporter.customImport)
-                importFBX();
-        }
-
-
-
-        if (GUILayout.Button("Export"))
-            ExportAll();
-
-
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        EditorGUILayout.LabelField("Programmer's Only", GUILayout.MinWidth(150));
-
-        if (GUILayout.Button("Export Imported Files"))
-            Export();
-
-        if (GUILayout.Button("Package"))
-        {
-
-            Import();
-            AssetDatabase.Refresh();
-
-            if (FBXCustomImporter.customImport)
+            if (GUILayout.Button("Import"))
             {
-                importFBX();
-                shouldExport = true;
+                Import();
+                AssetDatabase.Refresh();
+                if (FBXCustomImporter.customImport)
+                    importFBX();
             }
-            else
-            {
+
+
+
+            if (GUILayout.Button("Export"))
+                ExportAll();
+
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            EditorGUILayout.LabelField("Programmer's Only", GUILayout.MinWidth(150));
+
+            if (GUILayout.Button("Export Imported Files"))
                 Export();
+
+            if (GUILayout.Button("Package"))
+            {
+
+                Import();
+                AssetDatabase.Refresh();
+
+                if (FBXCustomImporter.customImport)
+                {
+                    importFBX();
+                    shouldExport = true;
+                }
+                else
+                {
+                    Export();
+                }
+
             }
 
         }
