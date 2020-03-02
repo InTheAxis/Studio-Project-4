@@ -205,8 +205,10 @@ MonoBehaviour:
   timeBeforeDespawn: 20
   smallShardScaleThreshold: 1
   shardSettleVelocityThreshold: 0.1
-  monsterHit: {fileID: 0}
-  survivorHit: {fileID: 0}
+  monsterHit: {fileID: 2944282429862756807, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
+    type: 3}
+  survivorHit: {fileID: 8259417810444761745, guid: 8efd2b3a8423889429033060e60d7760,
+    type: 3}
 --- !u!82 &2982951439578636806
 AudioSource:
   m_ObjectHideFlags: 0
@@ -216,7 +218,8 @@ AudioSource:
   m_GameObject: {fileID: 3929699415433209360}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6320639218105242795, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

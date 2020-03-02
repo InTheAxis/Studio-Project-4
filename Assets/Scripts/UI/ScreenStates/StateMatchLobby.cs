@@ -17,6 +17,9 @@ public class StateMatchLobby : State
     [SerializeField]
     [Tooltip("The button used to indicate whether a player is a ready (shows Start for Host)")]
     private TextMeshProUGUI tmReady = null;
+    [SerializeField]
+    [Tooltip("The button for accessing Map")]
+    private GameObject mapMenuButton = null;
     
 
     /* Keep track of players and their IDS */
@@ -56,12 +59,12 @@ public class StateMatchLobby : State
             if (NetworkClient.instance.areAllReady())
             {
                 btnReady.enabled = true;
-                //tmReady.GetComponent<TextMeshProUGUI>().color = successColor;
+                tmReady.GetComponent<TextMeshProUGUI>().color = ThemeColors.positive;
             }
             else
             {
                 btnReady.enabled = false;
-                //tmReady.GetComponent<TextMeshProUGUI>().color = failColor;
+                tmReady.GetComponent<TextMeshProUGUI>().color = ThemeColors.neutral;
             }
 
             //disable character select
@@ -94,6 +97,13 @@ public class StateMatchLobby : State
         StateController.showPrevious();
     }
 
+    public void selectSubMenu(GameObject go)
+    {
+        StateController.Show(go.name);
+    }
+
+   
+
     public override void onShow()
     {
         if (NetworkClient.instance != null)
@@ -101,6 +111,8 @@ public class StateMatchLobby : State
             NetworkClient.instance.playerJoinedCallback = onPlayerJoin;
             NetworkClient.instance.playerLeftCallback = onPlayerLeave;
         }
+
+        mapMenuButton.SetActive(PhotonNetwork.IsMasterClient);
         worldCanvas.SetActive(true);
         base.onShow();
     }

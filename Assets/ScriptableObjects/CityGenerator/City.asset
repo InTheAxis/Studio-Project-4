@@ -15,16 +15,22 @@ MonoBehaviour:
   meshList:
   - go: {fileID: 4062964256427729690, guid: 8d11fcddf11712f40a263945c9ffafbe, type: 3}
     weight: 21
-    chance: 0.06140351
-  - go: {fileID: 4506293217939224818, guid: 0d2ba450282f3984f92a4313a72cdc9e, type: 3}
-    weight: 100
-    chance: 0.29239765
-  - go: {fileID: 7073769449221674024, guid: e39f74782461e9041bcfee74f23fe4fc, type: 3}
-    weight: 100
-    chance: 0.29239765
+    chance: 0.04347826
   - go: {fileID: 7098931322866199806, guid: 80bad517df1dc694db4d01079de3da61, type: 3}
     weight: 21
-    chance: 0.06140351
+    chance: 0.04347826
   - go: {fileID: 7004277075182819476, guid: 08f6656e179340f499e05e4955cd6b7e, type: 3}
+    weight: 41
+    chance: 0.084886126
+  - go: {fileID: 4506293217939224818, guid: 0d2ba450282f3984f92a4313a72cdc9e, type: 3}
     weight: 100
-    chance: 0.29239765
+    chance: 0.20703934
+  - go: {fileID: 7073769449221674024, guid: e39f74782461e9041bcfee74f23fe4fc, type: 3}
+    weight: 100
+    chance: 0.20703934
+  - go: {fileID: 102298922851625452, guid: e4ac73c5f9e2d764b86cdf6406805ba5, type: 3}
+    weight: 100
+    chance: 0.20703934
+  - go: {fileID: 141756311558996259, guid: 45948751c6ba7e2429013a22b9a80c51, type: 3}
+    weight: 100
+    chance: 0.20703934

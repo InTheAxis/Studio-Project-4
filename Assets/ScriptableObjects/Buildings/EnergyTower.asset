@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: EnergyTower
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 6076096997253536621, guid: 7cc2aabc9bac0144f8c33b4c01692ea4, type: 3}
+    weight: 100
+    chance: 0.5
+  - go: {fileID: 29789520862174488, guid: 29e56ff0f8f92e9409d6bd9fd3884754, type: 3}
+    weight: 100
+    chance: 0.5

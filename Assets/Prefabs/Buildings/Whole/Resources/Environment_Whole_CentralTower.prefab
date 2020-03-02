@@ -20,9 +20,9 @@ GameObject:
   - component: {fileID: 7096496782143684703}
   - component: {fileID: 3636720428368460213}
   - component: {fileID: 2024383012829332539}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Environment_Whole_CentralTower
-  m_TagString: Untagged
+  m_TagString: Landmark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,7 +243,8 @@ AudioSource:
   m_GameObject: {fileID: 888520542400854970}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1991051408208092147, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -342,4 +343,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda17c5a86d1db34691457076664aaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
