@@ -96,4 +96,12 @@ public static class StateController
     {
         return currentState;
     }
+
+    public static State getState(string name)
+    {
+        if (!screenStates.ContainsKey(name))
+            return null;
+        else
+            return screenStates[name];
+    }
 }
