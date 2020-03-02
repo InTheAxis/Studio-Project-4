@@ -1,8 +1,9 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 
 public class StateMatchLobby : State
@@ -78,15 +79,38 @@ public class StateMatchLobby : State
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            NetworkClient.instance.setRoomVisibility(false);
+            Player toBeMasterClient;
+            string chkValidMsg = checkValidCharSelection(out toBeMasterClient);
+            if (chkValidMsg.Length != 0)
+            {
+                Debug.Log(chkValidMsg);
+                return;
+            }
 
-            ScreenStateHelperNetwork.instance.sendLoadingGameMsg();
-            StateController.showNext("GameLoading");
-            FindObjectOfType<StateGameLoading>().loadPhoton("Gameplay");
+            ScreenStateHelperNetwork.instance.startGame(toBeMasterClient);
         }
         else
         {
             NetworkClient.instance.toggleReady(PlayerSettings.playerName);
+        }
+    }
+    private string checkValidCharSelection(out Player playerToBeMaster)
+    {
+        playerToBeMaster = null;
+        Player monsterPlayer = null;
+        foreach (var p in PhotonNetwork.PlayerList)
+            if ((int)NetworkClient.getPlayerProperty(p, "charModel") == 0)
+                if (monsterPlayer == null)
+                    monsterPlayer = p;
+                else
+                    return "Only 1 Player may be the Monster";
+
+        if (monsterPlayer == null)
+            return "There must be 1 Player who is the Monster";
+        else
+        {
+            playerToBeMaster = monsterPlayer;
+            return "";
         }
     }
 

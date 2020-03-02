@@ -9,6 +9,18 @@ public class StateMatchLobbyCharacter : State
     public void selectCharacter(GameObject go)
     {
         Debug.Log("Selected " + go.name);
+        switch (go.name)
+        {
+            case "Monster":
+                NetworkClient.setPlayerProperty("charModel", 0);
+                break;
+            case "Male":
+                NetworkClient.setPlayerProperty("charModel", 1);
+                break;
+            case "Female":
+                NetworkClient.setPlayerProperty("charModel", 2);
+                break;
+        }
     }
 
     public void Cancel()
