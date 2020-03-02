@@ -34,7 +34,8 @@ public class Revive : MonoBehaviour
             scale.Scale(newObj.transform.localScale);
             newObj.transform.localScale = scale;
             newObj.GetComponent<InteractableRevive>().SetPlayerToRevive(id);
-            Debug.Log("Revive obj spawned");
+            Debug.Log("Revive obj spawned(Master)");
         }
+            Debug.Log("Revive obj spawned");
     }
 }
