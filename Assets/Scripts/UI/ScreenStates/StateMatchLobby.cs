@@ -21,7 +21,9 @@ public class StateMatchLobby : State
     [SerializeField]
     [Tooltip("The button for accessing Map")]
     private GameObject mapMenuButton = null;
-    
+
+    [SerializeField]
+    private StateMatchLobbyCharacter stateLobbyChar;
 
     /* Keep track of players and their IDS */
     private static List<LobbyPlayer> players;
@@ -138,12 +140,25 @@ public class StateMatchLobby : State
 
         mapMenuButton.SetActive(PhotonNetwork.IsMasterClient);
         worldCanvas.SetActive(true);
+
         base.onShow();
+
+        StartCoroutine(registerCallbackCour());
+    }
+    private IEnumerator registerCallbackCour()
+    {
+        while (ScreenStateHelperNetwork.instance == null)
+            yield return null;
+
+        ScreenStateHelperNetwork.instance.modelChangeCallback += receivedCharModelChange;
     }
 
     public override void onHide()
     {
         worldCanvas.SetActive(false);
+
+        if (ScreenStateHelperNetwork.instance != null)
+            ScreenStateHelperNetwork.instance.modelChangeCallback -= receivedCharModelChange;
         base.onHide();
     }
 
@@ -157,17 +172,34 @@ public class StateMatchLobby : State
         playerIDs.Clear();
         btnReady = tmReady.GetComponent<Button>();
 
+        string playerName = PhotonNetwork.LocalPlayer.NickName;
+        // Set this client as Model 0
+        players[0].setActive(playerName);
+        playerIDs.Add(playerName, 0);
+        stateLobbyChar.setModel(0, (int)NetworkClient.getPlayerProperty("charModel"));
+
+        // Set all other players starting from Model 1
+        var networkPlayerList = PhotonNetwork.PlayerList;
+        int offset = 1;
         for (int i = 0; i < 5; ++i)
         {
             if (i < playersInLobby.Count)
             {
-                players[i].setActive(playersInLobby[i]);
-                playerIDs.Add(playersInLobby[i], i);
+                if (playersInLobby[i] == playerName)
+                    offset = 0;
+                else
+                {
+                    // Offset model index
+                    players[i + offset].setActive(playersInLobby[i]);
+                    stateLobbyChar.setModel(i + offset, (int)NetworkClient.getPlayerProperty(networkPlayerList[i], "charModel"));
+                    playerIDs.Add(playersInLobby[i], i + offset);
+                }
             }
             else
             {
                 players[i].setInactive();
             }
+
         }
 
         if (playersInLobby.Count <= 0)
@@ -185,7 +217,10 @@ public class StateMatchLobby : State
     private void onPlayerJoin(string name)
     {
         Debug.Log(name + "with ID: " + playerIDs.Count + " joined!");
+        Player newPlayer = PhotonNetwork.PlayerList[PhotonNetwork.PlayerList.Length - 1];
+
         players[playerIDs.Count].setActive(name);
+        stateLobbyChar.setModel(playerIDs.Count, (int)NetworkClient.getPlayerProperty(newPlayer, "charModel"));
         playerIDs.Add(name, playerIDs.Count);
     }
 
@@ -199,5 +234,10 @@ public class StateMatchLobby : State
 
     #endregion
 
+    // Received character model change from remote client
+    public void receivedCharModelChange(string playerName, int modelIndex)
+    {
+        stateLobbyChar.setModel(playerIDs[playerName], modelIndex);
+    }
 
 }

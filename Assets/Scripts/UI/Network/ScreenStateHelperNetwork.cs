@@ -47,6 +47,23 @@ public class ScreenStateHelperNetwork : MonoBehaviourPun
 
     #endregion
 
+    #region Lobby Character
+
+    public delegate void ModelChangeCallback(string playerName, int modelIndex);
+    public ModelChangeCallback modelChangeCallback;
+
+    public void sendModelChange(int modelIndex)
+    {
+        photonView.RPC("receiveModelChangeRpc", RpcTarget.Others, modelIndex);
+    }
+    [PunRPC]
+    private void receiveModelChangeRpc(int modelIndex, PhotonMessageInfo messageInfo)
+    {
+        modelChangeCallback?.Invoke(messageInfo.Sender.NickName, modelIndex);
+    }
+
+    #endregion
+
     #region Loading
 
     private void Awake()

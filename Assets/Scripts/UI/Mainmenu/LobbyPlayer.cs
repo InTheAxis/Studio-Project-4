@@ -5,7 +5,8 @@ using TMPro;
 
 public class LobbyPlayer
 {
-    public GameObject model;
+    //public GameObject model;
+    public GameObject parent;
     public TextMeshProUGUI tmName;
     public GameObject tick;
     public string name;
@@ -17,7 +18,8 @@ public class LobbyPlayer
 
     public void setModel(GameObject parent)
     {
-        model = parent.transform.Find("Model").gameObject;
+        this.parent = parent;
+        //model = parent.transform.Find("Model").gameObject;
         tmName = parent.transform.Find("Name").GetComponent<TextMeshProUGUI>();
         tick = parent.transform.Find("Tick").gameObject;
         tmName.text = "";
@@ -32,14 +34,16 @@ public class LobbyPlayer
 
     public void setActive(string name)
     {
-        model.SetActive(true);
+        //model.SetActive(true);
         this.name = name;
         tmName.text = name;
     }
 
     public void setInactive()
     {
-        model.SetActive(false);
+        //model.SetActive(false);
+        for (int i = 0; i < 3; ++i)
+            parent.transform.GetChild(i).gameObject.SetActive(false);
         this.name = "";
         tmName.text = "";
     }
