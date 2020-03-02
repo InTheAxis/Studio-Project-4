@@ -159,7 +159,7 @@ public abstract class StateGenericOptions : State
         if (resolutions == null)
         {
             resolutions = Screen.resolutions;
-            tmResolution.ClearOptions();
+
             List<string> options = new List<string>();
 
             int currentIndex = 0;
@@ -172,25 +172,42 @@ public abstract class StateGenericOptions : State
                 if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
                     currentIndex = i;
             }
-            tmResolution.AddOptions(options);
-            tmResolution.value = currentIndex;
-            tmResolution.RefreshShownValue();
+
+            if (tmResolution != null)
+            {
+                tmResolution.ClearOptions();
+                tmResolution.AddOptions(options);
+                tmResolution.value = currentIndex;
+                tmResolution.RefreshShownValue();
+            }
+            Debug.Log("Called");
         }
 
         /* Update fullscreen status */
-        tmFullscreen.value = Screen.fullScreen ? 1 : 0;
-        tmFullscreen.RefreshShownValue();
+        if (tmFullscreen != null)
+        {
+            tmFullscreen.value = Screen.fullScreen ? 1 : 0;
+            tmFullscreen.RefreshShownValue();
+        }
 
         /* Update quality settings */
-        tmQuality.value = QualitySettings.GetQualityLevel();
-        tmQuality.RefreshShownValue();
+        if (tmQuality != null)
+        {
+            tmQuality.value = QualitySettings.GetQualityLevel();
+            tmQuality.RefreshShownValue();
+        }
 
         /* Update V-Sync Status */
-        setVSync(QualitySettings.vSyncCount != 0);
+        if(vSyncOn != null && vSyncOff != null)
+            setVSync(QualitySettings.vSyncCount != 0);
 
-        tmMasterVolume.text = "100%";
-        tmEffectVolume.text = "100%";
-        tmMusicVolume.text = "100%";
+        /* Update volume */
+        if (tmMasterVolume != null)
+        {
+            tmMasterVolume.text = "100%";
+            tmEffectVolume.text = "100%";
+            tmMusicVolume.text = "100%";
+        }
     }
 
     public override void onShow()

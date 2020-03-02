@@ -1,11 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class StateGameplay : State
 {
     [SerializeField]
     private GameObject hud = null;
+
+    [Header("Abilities")]
+    [SerializeField]
+    private Image abilityImageHolder = null;
+    [SerializeField]
+    private TextMeshProUGUI abilityText = null;
+    [SerializeField]
+    private Sprite[] abilityImages = null;
 
     private IEnumerator registrationCour = null;
 
@@ -87,5 +97,15 @@ public class StateGameplay : State
     {
         /* To set to end screen */
         Debug.Log("New HUD Received WinLoss");
+    }
+
+    public void gainNewAbility(HumanUnlockTool.TYPE type)
+    {
+        int index = (int) type;
+        if (index >= abilityImages.Length) return;
+        abilityImageHolder.sprite = abilityImages[index];
+        string rawLower = type.ToString().ToLower();
+        abilityText.text = "New Ability Unlocked: " + char.ToUpper(rawLower[0]) + rawLower.Substring(1);
+        hud.GetComponent<Animator>().Play("NewAbility");
     }
 }

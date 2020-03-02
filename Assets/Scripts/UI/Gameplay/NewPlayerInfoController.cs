@@ -16,9 +16,15 @@ public class NewPlayerInfoController : MonoBehaviour
     [SerializeField]
     private Color invulnerableColor;
 
+    [Header("Sprite List")]
+    [SerializeField]
+    private List<Sprite> abilitySprites;
+
     private void Start()
     {
         playerInfo = new List<NewPlayerInfo>();
+
+        NewPlayerInfo.referenceAbilitySprites = new List<Sprite>(abilitySprites);
 
         for (int i = 0; i < transform.childCount; ++i)
             transform.GetChild(i).gameObject.SetActive(false);
@@ -42,23 +48,25 @@ public class NewPlayerInfoController : MonoBehaviour
 
     private NewPlayerInfo setupPlayerInfo(CharTPController player)
     {
-        return setupPlayerInfo(player.photonView.Owner.NickName, player.GetComponent<CharHealth>());
+        return setupPlayerInfo(player.photonView.Owner.NickName, player.GetComponent<CharHealth>(), player.GetComponent<HumanUnlockTool>());
     }
-    private NewPlayerInfo setupPlayerInfo(string playerName, CharHealth playerHealth)
+    private NewPlayerInfo setupPlayerInfo(string playerName, CharHealth playerHealth, HumanUnlockTool playerUnlockTool)
     {
-        return setupPlayerInfo(playerName, playerHealth.hp, playerHealth.invulnerable);
+        return setupPlayerInfo(playerName, playerHealth.hp, playerHealth.invulnerable, playerUnlockTool);
     }
-    private NewPlayerInfo setupPlayerInfo(string playerName, int health, bool invulnerable)
+    private NewPlayerInfo setupPlayerInfo(string playerName, int health, bool invulnerable, HumanUnlockTool playerUnlockTool)
     {
-        return setupPlayerInfo(playerName, playerInfo.Count, health, invulnerable);
+        return setupPlayerInfo(playerName, playerInfo.Count, health, invulnerable, playerUnlockTool);
     }
-    private NewPlayerInfo setupPlayerInfo(string playerName, int index, int health, bool invulnerable)
+    private NewPlayerInfo setupPlayerInfo(string playerName, int index, int health, bool invulnerable, HumanUnlockTool playerUnlockTool)
     {
         Transform t = transform.GetChild(index);
         t.gameObject.SetActive(true);
         NewPlayerInfo newPlayer = new NewPlayerInfo(t, playerName);
         newPlayer.setHealthbarColor(healthColor, drainedColor, invulnerableColor);
         newPlayer.setHealth(health, invulnerable);
+        if (playerUnlockTool != null)
+            newPlayer.registerAbilityUnlockHandler(playerUnlockTool);
         return newPlayer;
     }
 
@@ -84,13 +92,13 @@ public class NewPlayerInfoController : MonoBehaviour
             if (i >= playerInfo.Count) // No player occupies this Player HUD slot. Set as inactive
                 transform.GetChild(i).gameObject.SetActive(false);
             else if (foundPlayer) // Replace old NewPlayerInfo with a new one targeting the Player HUD child above its current one
-                playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i, playerInfo[i].health, playerInfo[i].invulnerable);
+                playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i, playerInfo[i].health, playerInfo[i].invulnerable, playerInfo[i].attachedUnlockTool);
             else if (playerInfo[i].name == name) // Remove and replace the NewPlayerInfo that takes over its place
             {
                 foundPlayer = true;
                 playerInfo.RemoveAt(i);
                 if (i < playerInfo.Count)
-                    playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i, playerInfo[i].health, playerInfo[i].invulnerable);
+                    playerInfo[i] = setupPlayerInfo(playerInfo[i].name, i, playerInfo[i].health, playerInfo[i].invulnerable, playerInfo[i].attachedUnlockTool);
                 else
                     transform.GetChild(i).gameObject.SetActive(false);
             }
