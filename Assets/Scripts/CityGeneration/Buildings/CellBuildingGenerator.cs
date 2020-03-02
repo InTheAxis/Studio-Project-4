@@ -40,7 +40,7 @@ public class CellBuildingGenerator : Generator
             GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform);
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             //building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
-            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot));
+            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot, cell.id));
         }
     }
 }

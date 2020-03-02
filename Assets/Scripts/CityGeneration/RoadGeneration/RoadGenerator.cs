@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RoadGenerator : Generator
 {
+    [SerializeField]
+    private TowerGenerator towerGenerator;
+
     //
     public float centralRoadWidth = 2;
 
@@ -38,7 +41,7 @@ public class RoadGenerator : Generator
     private Voronoi voronoi = new Voronoi();
     private List<RoadPath> roadInnerPaths = new List<RoadPath>();
     private List<RoadPath> roadOuterPaths = new List<RoadPath>();
-    private List<RoadPath> roadSubPaths = new List<RoadPath>();
+    public List<RoadPath> roadSubPaths { get; private set; } = new List<RoadPath>();
     private List<RoadPath> roadMinorPaths = new List<RoadPath>();
 
     public List<GameObject> roads { get; set; } = new List<GameObject>();
@@ -454,10 +457,12 @@ public class RoadGenerator : Generator
         }
         roads.Clear();
         float length = 1f;
+        float yoffset = 0;
         foreach (RoadPath path in roadInnerPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.001f;
+            pos.y += 0.2f + yoffset;
+            yoffset += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
@@ -467,7 +472,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadOuterPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.01f;
+            pos.y += 0.15f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
@@ -477,7 +482,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadSubPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.01f;
+            pos.y += 0.1f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);
@@ -487,7 +492,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadMinorPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.01f;
+            pos.y += 0.05f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);
@@ -513,7 +518,14 @@ public class RoadGenerator : Generator
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(sub.minLength, sub.maxLength) * scale * scaleMultiplier;
-                roadSubPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, subRoadWidth));
+                bool isEmpty = true;
+                foreach (GameObject tower in towerGenerator.towers)
+                {
+                    if (Vector3.Distance(pos, tower.transform.position) < towerGenerator.towerRange)
+                        isEmpty = false;
+                }
+                if (isEmpty)
+                    roadSubPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, subRoadWidth));
             }
         }
     }
@@ -536,7 +548,14 @@ public class RoadGenerator : Generator
                 Vector3 pos = path.start + currentLength * path.dir;
                 Vector3 perpen = Vector3.Cross(path.dir, Vector3.up).normalized;
                 float subpathLength = Random.Range(subdivision.minLength, subdivision.maxLength) * scale * scaleMultiplier;
-                roadMinorPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, minorRoadWidth));
+                bool isEmpty = true;
+                foreach (GameObject tower in towerGenerator.towers)
+                {
+                    if (Vector3.Distance(pos, tower.transform.position) < towerGenerator.towerRange)
+                        isEmpty = false;
+                }
+                if (isEmpty)
+                    roadMinorPaths.Add(new RoadPath(pos - perpen * subpathLength / 2, pos + perpen * subpathLength / 2, minorRoadWidth));
             }
         }
     }
@@ -599,7 +618,14 @@ public class RoadGenerator : Generator
                 }
                 if (counter > 1)
                 {
-                    roadOuterPaths.Add(new RoadPath(vertice.pos, other.pos, mainRoadWidth));
+                    bool isEmpty = true;
+                    foreach (GameObject tower in towerGenerator.towers)
+                    {
+                        if (Vector3.Distance(vertice.pos, tower.transform.position) < towerGenerator.towerRange)
+                            isEmpty = false;
+                    }
+                    if (isEmpty)
+                        roadOuterPaths.Add(new RoadPath(vertice.pos, other.pos, mainRoadWidth));
                     break;
                 }
             }

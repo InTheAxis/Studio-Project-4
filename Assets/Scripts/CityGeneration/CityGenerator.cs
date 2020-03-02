@@ -6,6 +6,11 @@ using Photon.Realtime;
 
 public class CityGenerator : MonoBehaviour
 {
+    private static int seed;
+    private static bool seeded;
+
+    [SerializeField]
+    private int inputSeed = 0;
     public static CityGenerator instance = null;
 
     [SerializeField]
@@ -24,7 +29,15 @@ public class CityGenerator : MonoBehaviour
     private List<Player> spawnRequestingPlayers = new List<Player>();
 
     private List<Vector3> freePlayerSpawnPos = new List<Vector3>();
-
+    public static void SetSeed(int _seed)
+    {
+        seed = _seed;
+        seeded = true;
+    }
+    public static int GetSeed()
+    {
+        return seed;
+    }
     private void Awake()
     {
         if (instance == null)
@@ -57,7 +70,16 @@ public class CityGenerator : MonoBehaviour
 
     public void Generate()
     {
+        //float startTime = Time.time;
         Debug.Log("Generation began");
+        if (inputSeed != 0)
+            seeded = true;
+        if (seeded)
+            Random.InitState(seed);
+        else
+            seed = Random.seed;
+        Debug.Log("Generation seed: " + seed);
+
         Clear();
         foreach (GeneratorData generator in generators)
         {
@@ -76,6 +98,7 @@ public class CityGenerator : MonoBehaviour
         foreach (Player player in spawnRequestingPlayers)
             sendSpawnDirective(player);
         spawnRequestingPlayers.Clear();
+        //Debug.Log("Time to generate: " + (Time.time - startTime));
     }
 
     private void sendSpawnDirective(Player player)
