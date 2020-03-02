@@ -42,18 +42,6 @@ public class TowerGenerator : Generator
         CreateTowers();
     }
 
-    //private void Update()
-    //{
-    //    foreach (GameObject tower in towers)
-    //    {
-    //        Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange, LayerMask.NameToLayer("Road"));
-    //        foreach (Collider col in coll)
-    //        {
-    //            DestroyImmediate(col.gameObject);
-    //        }
-    //    }
-    //    this.enabled = false;
-    //}
     private void CreateTowers()
     {
         int counter = 0;
@@ -62,17 +50,17 @@ public class TowerGenerator : Generator
             towers.Add(InstantiateHandler.mInstantiate(towerRef[counter], point.pos, Quaternion.identity, transform));
             counter++;
         }
-        foreach (GameObject tower in towers)
-        {
-            if (!tower)
-                continue;
-            Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange * 1f);
-            foreach (Collider col in coll)
-            {
-                if (col.gameObject.layer == LayerMask.NameToLayer("Road"))
-                    DestroyImmediate(col.gameObject);
-            }
-        }
+        //foreach (GameObject tower in towers)
+        //{
+        //    if (!tower)
+        //        continue;
+        //    Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange * 1f);
+        //    foreach (Collider col in coll)
+        //    {
+        //        if (col.gameObject.layer == LayerMask.NameToLayer("Road"))
+        //            DestroyImmediate(col.gameObject);
+        //    }
+        //}
     }
 
     private void OnDrawGizmos()
