@@ -23,6 +23,8 @@ public class CharLookTargetController : MonoBehaviour
     {
         if (GameManager.playerObj == null)
             return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
 
         if (minimap == null)
         {
