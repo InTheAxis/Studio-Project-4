@@ -5,13 +5,16 @@ using UnityEngine;
 public class TowerGenerator : Generator
 {
     public PoissonGenerator poisson = new PoissonGenerator();
-    public GameObject towerRef;
+    public GameObject[] towerRef;
+    public List<GameObject> towers { get; private set; } = new List<GameObject>();
 
     [SerializeField]
     [Min(0)]
     private float centerBuffer = 10.1f;
 
     [SerializeField]
+    public float towerRange = 70;
+
     [Range(0, 1)]
     private float offset = 0.55f;
 
@@ -22,6 +25,7 @@ public class TowerGenerator : Generator
 
     public override void Clear()
     {
+        towers.Clear();
         while (transform.childCount > 0)
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
@@ -40,10 +44,25 @@ public class TowerGenerator : Generator
 
     private void CreateTowers()
     {
+        int counter = 0;
         foreach (PoissonPoint point in poisson.GetPoints(1))
         {
-            InstantiateHandler.mInstantiate(towerRef, point.pos, Quaternion.identity, transform, "Interactable");
+            Vector3 pos = point.pos;
+            pos.y += 3;
+            towers.Add(InstantiateHandler.mInstantiate(towerRef[counter], pos, Quaternion.identity, transform));
+            counter++;
         }
+        //foreach (GameObject tower in towers)
+        //{
+        //    if (!tower)
+        //        continue;
+        //    Collider[] coll = Physics.OverlapSphere(tower.transform.position, towerRange * 1f);
+        //    foreach (Collider col in coll)
+        //    {
+        //        if (col.gameObject.layer == LayerMask.NameToLayer("Road"))
+        //            DestroyImmediate(col.gameObject);
+        //    }
+        //}
     }
 
     private void OnDrawGizmos()
@@ -52,11 +71,15 @@ public class TowerGenerator : Generator
             return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Vector3.zero, centerBuffer);
-        //Gizmos.DrawWireSphere(Vector3.zero, 0.2f * scale);
-        Gizmos.color = Color.green;
-        foreach (PoissonPoint poissonPoint in poisson.GetPoints(1))
+        //Gizmos.color = Color.green;
+        //foreach (GameObject tower in towers)
+        //{
+        //    Gizmos.DrawWireSphere(tower.transform.position, buff);
+        //}
+        Gizmos.color = Color.red;
+        foreach (GameObject tower in towers)
         {
-            Gizmos.DrawWireSphere(poissonPoint.pos, poissonPoint.radius);
+            Gizmos.DrawWireSphere(tower.transform.position, towerRange);
         }
     }
 }

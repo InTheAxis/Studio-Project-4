@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: OpenAreaRock
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 171693820740056268, guid: c3f3b2f15063b614e8509fe489b4059d, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 2033752182287425830, guid: 6e0b17e5d7158824195419e22f915822, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 1388561309027647433, guid: a50f4bfb61558474b9f4aac0adcd9c7a, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 4756891145143796707, guid: fc5f81bda49096c438f52162ccf92e8e, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 6558472493968458878, guid: 3483d59cb42ac75469f834b5808c6e51, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 2517487053273016488, guid: fdb5d3cf876dad4449576fcc6bfab77a, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 2242189551944628174, guid: e03c56f2c9596cc479cf6f01df171f9e, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 1565237986281282399, guid: 43e90e6430f96324aa962a9aa1ad5968, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 3316864967347438313, guid: a028fa2936891fe4780e2e011fdd5637, type: 3}
+    weight: 100
+    chance: 0.1
+  - go: {fileID: 6573991326869861644, guid: 049b7b541b5d4a84c9df08e86bfc708c, type: 3}
+    weight: 100
+    chance: 0.1

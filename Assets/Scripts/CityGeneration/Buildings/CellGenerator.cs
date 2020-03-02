@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct BuildingCell
 {
-    public BuildingCell(Vector3 pos, float size, Vector3 offSetDir, bool isLeft, Quaternion rot)
+    public BuildingCell(Vector3 pos, float size, Vector3 offSetDir, bool isLeft, Quaternion rot, int id)
     {
         this.pos = pos;
         //this.min = min;
@@ -14,6 +14,7 @@ public struct BuildingCell
         this.offSetDir = offSetDir;
         this.isLeft = isLeft;
         this.rot = rot;
+        this.id = id;
     }
 
     public Vector3 pos;
@@ -27,6 +28,7 @@ public struct BuildingCell
 
     public Quaternion rot;
     public float radius;
+    public int id;
 }
 
 [System.Serializable]
@@ -56,8 +58,8 @@ public class CellGenerator : Generator
     [SerializeField]
     private MinMax buffer;
 
-    [SerializeField]
-    private MinMax cellRadius;
+    //[SerializeField]
+    //private MinMax cellRadius;
 
     //[SerializeField]
     //private MinMax width;
@@ -97,6 +99,26 @@ public class CellGenerator : Generator
         Clear();
         foreach (RoadGenerator.RoadPath path in roadGenerator.GetRoadOuterPaths())
         {
+            int id = path.GetHashCode() +Random.Range(-int.MaxValue, int.MaxValue);
+
+            {
+                GameObject building = cityGenerator.city.SelectMesh();
+                if (!building)
+                {
+                    Debug.LogError("Building is null: " + gameObject.name);
+                    break;
+                }
+                if (!building.GetComponent<ProceduralBuilding>())
+                {
+                    Debug.LogError("Building is not a PB: " + building.name);
+                    break;
+                }
+                float currCellRadius = building.GetComponent<ProceduralBuilding>().GetRadius();
+                // add building at end of road
+                cells.Add(new BuildingCell(path.end, currCellRadius, path.dir, false, Quaternion.identity, id));
+                //
+
+            }
             Vector3 dir = path.dir;
             Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
             Quaternion rot = Quaternion.LookRotation(pDir, Vector3.up);
@@ -118,18 +140,41 @@ public class CellGenerator : Generator
                 while (currDist < path.Length())    // main cell loop
                 {
                     // float currCellRadius = cellRadius.Get();
-                    float currCellRadius = cityGenerator.city.SelectMesh().GetComponent<ProceduralBuilding>().GetRadius();
+                    GameObject building = cityGenerator.city.SelectMesh();
+                    if (!building)
+                    {
+                        Debug.LogError("Building is null: " + gameObject.name);
+                        break;
+                    }
+                    if (!building.GetComponent<ProceduralBuilding>())
+                    {
+                        Debug.LogError("Building is not a PB: " + building.name);
+                        break;
+                    }
+                    float currCellRadius = building.GetComponent<ProceduralBuilding>().GetRadius();
                     //float cellWidth = width.Get();
                     float spacing = buffer.Get();
                     currDist += currCellRadius;
                     currPos = currDist * dir + startPos;
                     //Vector3 end = currPos + dir * cellLength;
                     //Vector3 cellMax = end + pDir * cellWidth;
-                    // check for other cell
+
                     bool isAvailable = true;
+                    // check for road
+                    foreach (RoadGenerator.RoadPath road in roadGenerator.roadSubPaths)
+                    {
+                        if (Vector3.Distance((road.start + road.end) / 2, currPos) < currCellRadius)
+                        {
+                            isAvailable = false;
+                            break;
+                        }
+                    }
+                    // check for other cell
                     foreach (BuildingCell cell in cells)
                     {
-                        if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius)
+                        if (cell.id == id)
+                            continue;
+                        if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius*1.4f)
                         {
                             isAvailable = false;
                             break;
@@ -161,7 +206,7 @@ public class CellGenerator : Generator
                     if (isAvailable)
                     {
                         // create cell
-                        cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot));
+                        cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot, id));
                     }
                     currDist += spacing + currCellRadius;
                 }

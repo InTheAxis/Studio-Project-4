@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: TallEnTower
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 3248058880139022213, guid: f865c336d182a174baad33d3131883f7, type: 3}
+    weight: 100
+    chance: 0.5
+  - go: {fileID: 3995520167881701004, guid: d257257127cbd9d49aa7cb0aa96fdc42, type: 3}
+    weight: 100
+    chance: 0.5

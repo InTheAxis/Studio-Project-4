@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 2290165426260310095}
   m_Layer: 8
   m_Name: Human_Female
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +369,8 @@ AudioSource:
   m_GameObject: {fileID: 9117360599836359461}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6320639218105242795, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -465,7 +466,8 @@ AudioSource:
   m_GameObject: {fileID: 9117360599836359461}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6320639218105242795, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -646,6 +648,11 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 261478650461546613, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 290801650247039275, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -845,6 +852,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2063035325151220600, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2138041882405486565, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
@@ -901,6 +913,18 @@ PrefabInstance:
       propertyPath: complexHologram
       value: 
       objectReference: {fileID: 5331565749110258536, guid: 1d695e5b730160546b76e211cb393a10,
+        type: 3}
+    - target: {fileID: 2518563266708644907, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: humanMaleHologram
+      value: 
+      objectReference: {fileID: 1364084901609587453, guid: 08a5f4655f140974ea060b5fcc99bf52,
+        type: 3}
+    - target: {fileID: 2518563266708644907, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: humanFemaleHologram
+      value: 
+      objectReference: {fileID: 6493468149581758943, guid: e79633ba0a6228a458177adea69363fb,
         type: 3}
     - target: {fileID: 2588142538017183777, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
@@ -1033,6 +1057,11 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3931344548298802415, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951996951586444282, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1271,6 +1300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160507328154275831, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5240488494053784233, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
@@ -1547,6 +1581,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7526110890709870311, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: buildingMask.m_Bits
+      value: 8448
+      objectReference: {fileID: 0}
     - target: {fileID: 7532128083191369476, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
@@ -1682,6 +1721,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8552241693379437787, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Radius
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 8647876278781379960, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
@@ -1738,6 +1782,11 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8885905168420820835, guid: 04d3b3f968afea34790a69675508fe73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8903799649457534384, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1866,6 +1915,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9117360599678648190}
     m_Modifications:
+    - target: {fileID: -8709455722471484303, guid: 7865fdd99492d044386241a7373ade45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 7865fdd99492d044386241a7373ade45,
         type: 3}
       propertyPath: m_Controller
@@ -1930,6 +1984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Char_Female
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7865fdd99492d044386241a7373ade45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7865fdd99492d044386241a7373ade45, type: 3}

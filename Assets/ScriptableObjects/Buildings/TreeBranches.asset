@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: TreeBranches
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 782499778097897224, guid: 0333c75c31a3e8e42a77dfc47b724992, type: 3}
+    weight: 100
+    chance: 0.30674848
+  - go: {fileID: 666706040482052627, guid: 432ca8e651fb1084d9f2dde968ef8fcd, type: 3}
+    weight: 100
+    chance: 0.30674848
+  - go: {fileID: 7343820278930768306, guid: e328c6413ffd13d4791fd6cb5f618450, type: 3}
+    weight: 62
+    chance: 0.19018404
+  - go: {fileID: 6965022133076942070, guid: 48c9a1674bca73f46a24e7a7b7ed2064, type: 3}
+    weight: 64
+    chance: 0.19631901

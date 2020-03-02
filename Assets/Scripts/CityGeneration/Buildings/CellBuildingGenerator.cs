@@ -28,16 +28,19 @@ public class CellBuildingGenerator : Generator
         {
             GameObject buildingRef = cityGenerator.city.SelectMesh(cell.radius);
             if (buildingRef == null)
+            {
+                Debug.LogError("building is null: " + gameObject.name);
                 continue;
+            }
             float buildingRadius = buildingRef.GetComponent<ProceduralBuilding>().GetRadius();
             Vector3 pos = cell.pos;
             pos += cell.offSetDir * buildingRadius;
             pos.y += 2f;
             // Instantitate
-            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform, "Environment");
+            GameObject building = InstantiateHandler.mInstantiate(buildingRef, pos, cell.rot, transform);
             building.GetComponent<ProceduralBuilding>().GenerateRandom();
             //building.transform.rotation = Quaternion.Euler(0, Random.Range(0, 359), 0);
-            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot));
+            buildingCells.Add(new BuildingCell(pos, buildingRadius, cell.offSetDir, cell.isLeft, cell.rot, cell.id));
         }
     }
 }
