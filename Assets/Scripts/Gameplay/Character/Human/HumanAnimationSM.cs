@@ -21,6 +21,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit += OnHit;
         destructible.pullStatus += AttackHold;
         destructible.throwStatus += AttackRelease;
@@ -29,6 +31,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit -= OnHit;
         destructible.pullStatus -= AttackHold;
         destructible.throwStatus -= AttackRelease;
@@ -37,9 +41,7 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
             return;
 
 
@@ -65,10 +67,6 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void AttackHold(bool b)
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         if (!b)
             return;
         Trigger("attack");
@@ -77,20 +75,11 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void AttackRelease()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         Boolean("attackHolding", false);
         animator.ResetTrigger("attack");
     }
     private void OnHit(int i, float dot)
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
-
         if (health.invulnerable)
             return;
         if (!health.dead && dot < 0)
@@ -99,30 +88,18 @@ public class HumanAnimationSM : MonoBehaviour
 
     public void IsSabotaging()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         Trigger("sabo");
         animator.SetInteger("saboDone", -1);
     }
 
     public void SabotagingDone(bool finished)
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         animator.SetInteger("saboDone", finished ? 1 : 0);
         animator.ResetTrigger("sabo");
     }
 
     private void MiniMapToggle(bool b)
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
-            return;
         //if (!b)
         //    return;
         animator.SetLayerWeight(1, 1);
