@@ -21,6 +21,10 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnEnable()
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit += OnHit;
         destructible.pullStatus += AttackHold;
         destructible.throwStatus += AttackRelease;
@@ -29,6 +33,10 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnDisable()
     {
+        if (GameManager.playerObj == null)
+            return;
+        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit -= OnHit;
         destructible.pullStatus -= AttackHold;
         destructible.throwStatus -= AttackRelease;
