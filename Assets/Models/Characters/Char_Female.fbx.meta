@@ -8,10 +8,55 @@ ModelImporter:
     second: Idle
   externalObjects:
   - first:
+      type: UnityEngine:Cubemap
+      assembly: UnityEngine.CoreModule
+      name: diffuse_cube
+    second: {fileID: 8900000, guid: 35b18206af9561a4493e211ca866f45f, type: 3}
+  - first:
+      type: UnityEngine:Cubemap
+      assembly: UnityEngine.CoreModule
+      name: specular_cube
+    second: {fileID: 8900000, guid: 5f7d65d1f2575dd45ad0ecbf5a6facbf, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Char_Female
+    second: {fileID: 2100000, guid: 6c051860f10bdf247a1ee69f155aaa83, type: 2}
+  - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
     second: {fileID: 2100000, guid: ff33c7ec6528c9748b021589fbc22c47, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_AO
+    second: {fileID: 2800000, guid: 9142d4e8e38993c4c91b76747d2bccde, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_Color
+    second: {fileID: 2800000, guid: a1ec3ea7b56b2ac48856e634108d2c8f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_Emissive
+    second: {fileID: 2800000, guid: b2c5c9383912eb543866de9a1847c6e9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_Metallic
+    second: {fileID: 2800000, guid: e143bb7b516fd9c4fba56fec5bdcc143, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_Normal
+    second: {fileID: 2800000, guid: a7c5eb5e86e09064dac657109e8c29d9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Char_Female_Rough
+    second: {fileID: 2800000, guid: 8474f314f52bfff4589f3de6c02cb8ee, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
