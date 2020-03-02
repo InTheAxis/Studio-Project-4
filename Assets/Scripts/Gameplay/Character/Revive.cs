@@ -7,22 +7,23 @@ public class Revive : MonoBehaviour
 {
     [SerializeField]
     private GameObject reviveInteractable;
+    [SerializeField]
+    private CharHealth health;
 
     private void OnEnable()
     {
         if (!PhotonNetwork.IsMasterClient)
             return;
 
-        foreach (var p in CharTPController.PlayerControllerRefs)
-            p.controller.GetComponent<CharHealth>().OnDead += SpawnPlayerRevive;
+        Debug.Log("callback attached");
+        health.OnDead += SpawnPlayerRevive;
     }
     private void OnDisable()
     {
         if (!PhotonNetwork.IsMasterClient)
             return;
-
-        foreach (var p in CharTPController.PlayerControllerRefs)
-            p.controller.GetComponent<CharHealth>().OnDead -= SpawnPlayerRevive;
+        
+        health.OnDead -= SpawnPlayerRevive;
     }
 
     private void SpawnPlayerRevive(int id)

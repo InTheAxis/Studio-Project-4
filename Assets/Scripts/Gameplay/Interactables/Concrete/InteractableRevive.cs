@@ -36,7 +36,7 @@ public class InteractableRevive : InteractableBase
 
     public override void interact()
     {
-        if (!Photon.Pun.PhotonNetwork.IsMasterClient)
+        if (Photon.Pun.PhotonNetwork.IsMasterClient)
             return;
 
         if (isDestroyed)
@@ -91,7 +91,7 @@ public class InteractableRevive : InteractableBase
                 Debug.Log("Revive interaction finished!");
                 if (humanAnim)
                     humanAnim.SabotagingDone(true);
-                thisView.RPC("revivePlayer", RpcTarget.Others, playerViewId);
+                thisView.RPC("revivePlayer", RpcTarget.All, playerViewId);
                 destroyThis(); // Can only be called inside interact
             }
         }
@@ -149,5 +149,6 @@ public class InteractableRevive : InteractableBase
             target.GetComponent<CharHealth>().Respawn(1);
             Debug.LogFormat("Respawned {0}", target.name);
         }
+        Debug.Log("cant find player");
     }
 }
