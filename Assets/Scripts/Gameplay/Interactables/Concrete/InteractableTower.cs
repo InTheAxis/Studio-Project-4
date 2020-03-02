@@ -123,6 +123,8 @@ public class InteractableTower : InteractableBase
                     // Advance stage
                     if (++currStage >= interactStagesLights.Count) // Finished all stages. Destroy
                     {
+                        isDestroyed = true;
+
                         unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
                         if (humanAnim)
                             humanAnim.SabotagingDone(true);

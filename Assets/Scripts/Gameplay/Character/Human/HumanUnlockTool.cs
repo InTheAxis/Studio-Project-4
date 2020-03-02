@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class HumanUnlockTool : MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class HumanUnlockTool : MonoBehaviourPun
 {
     [Header("References")]
     [SerializeField]
@@ -11,6 +13,9 @@ public class HumanUnlockTool : MonoBehaviour
     [SerializeField]
     private List<TYPE> types;
 
+    public delegate void AbilityGainCallback(TYPE type);
+
+    public AbilityGainCallback abilityGainCallback;
 
     public enum TYPE
     { 
@@ -40,6 +45,16 @@ public class HumanUnlockTool : MonoBehaviour
         DisableAll();
         tools[_type].enabled = true;
         Debug.LogFormat("Unlocked Tool of {0}", _type.ToString());
+
+        photonView.RPC("abilityUnlockedRpc", RpcTarget.Others, (int)_type);
+        abilityGainCallback?.Invoke(_type);
+    }
+
+    [PunRPC]
+    private void abilityUnlockedRpc(int type)
+    {
+        TYPE abilityType = (TYPE)type;
+        abilityGainCallback?.Invoke(abilityType);
     }
 
     public void DisableAll()
