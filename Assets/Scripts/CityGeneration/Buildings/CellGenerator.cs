@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct BuildingCell
 {
-    public BuildingCell(Vector3 pos, float size, Vector3 offSetDir, bool isLeft, Quaternion rot)
+    public BuildingCell(Vector3 pos, float size, Vector3 offSetDir, bool isLeft, Quaternion rot, int id)
     {
         this.pos = pos;
         //this.min = min;
@@ -14,6 +14,7 @@ public struct BuildingCell
         this.offSetDir = offSetDir;
         this.isLeft = isLeft;
         this.rot = rot;
+        this.id = id;
     }
 
     public Vector3 pos;
@@ -27,6 +28,7 @@ public struct BuildingCell
 
     public Quaternion rot;
     public float radius;
+    public int id;
 }
 
 [System.Serializable]
@@ -97,6 +99,7 @@ public class CellGenerator : Generator
         Clear();
         foreach (RoadGenerator.RoadPath path in roadGenerator.GetRoadOuterPaths())
         {
+            int id = path.GetHashCode();
             Vector3 dir = path.dir;
             Vector3 pDir = Vector3.Cross(dir, Vector3.up).normalized;
             Quaternion rot = Quaternion.LookRotation(pDir, Vector3.up);
@@ -140,6 +143,8 @@ public class CellGenerator : Generator
                     bool isAvailable = true;
                     foreach (BuildingCell cell in cells)
                     {
+                        if (cell.id == id)
+                            continue;
                         if (Vector3.Distance(cell.pos, currPos) < currCellRadius + cell.radius)
                         {
                             isAvailable = false;
@@ -172,7 +177,7 @@ public class CellGenerator : Generator
                     if (isAvailable)
                     {
                         // create cell
-                        cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot));
+                        cells.Add(new BuildingCell(currPos, currCellRadius, pDir, isLeft, rot, id));
                     }
                     currDist += spacing + currCellRadius;
                 }
