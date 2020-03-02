@@ -28,19 +28,17 @@ public class StateMainmenuPlay : State
     private void Awake()
     {
         StateController.Register(this);
-        NetworkClient.instance.roomCreateFailedCallback = onCreateLobbyFailed;
-        NetworkClient.instance.roomJoinFailedCallback = onJoinRoomFailed;
-        NetworkClient.instance.randomRoomJoinFailedCallback = onJoinRandomRoomFailed;
-        NetworkClient.instance.roomJoinedCallback = onJoinRoomSuccess;
-
     }
 
     private void OnDestroy()
     {
-        NetworkClient.instance.roomCreateFailedCallback = null;
-        NetworkClient.instance.roomJoinFailedCallback = null;
-        NetworkClient.instance.randomRoomJoinFailedCallback = null;
-        NetworkClient.instance.roomJoinedCallback = null;
+        if (NetworkClient.instance != null)
+        {
+            NetworkClient.instance.roomCreateFailedCallback = null;
+            NetworkClient.instance.roomJoinFailedCallback = null;
+            NetworkClient.instance.randomRoomJoinFailedCallback = null;
+            NetworkClient.instance.roomJoinedCallback = null;
+        }
         StateController.Unregister(this);
 
     }
@@ -74,6 +72,13 @@ public class StateMainmenuPlay : State
 
     public override void onShow()
     {
+        if (NetworkClient.instance != null)
+        {
+            NetworkClient.instance.roomCreateFailedCallback = onCreateLobbyFailed;
+            NetworkClient.instance.roomJoinFailedCallback = onJoinRoomFailed;
+            NetworkClient.instance.randomRoomJoinFailedCallback = onJoinRandomRoomFailed;
+            NetworkClient.instance.roomJoinedCallback = onJoinRoomSuccess;
+        }
         isConnecting = false;
         base.onShow();
     }

@@ -5889,7 +5889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5637c0ceb8a0574c8bc3bf9b33915fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingameSceneName: Destructibles
+  ingameSceneName: Gameplay
 --- !u!4 &416938325
 Transform:
   m_ObjectHideFlags: 0
@@ -5902,7 +5902,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417264575
 GameObject:
@@ -12436,7 +12436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891242676
 GameObject:
@@ -21792,7 +21792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 127.099976, y: -35}
+  m_AnchoredPosition: {x: 127.1001, y: -35}
   m_SizeDelta: {x: 128.97, y: 4.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611131105
@@ -25392,7 +25392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -12.499023, y: 77.19995}
+  m_AnchoredPosition: {x: -12.499039, y: 77.19995}
   m_SizeDelta: {x: 308.3919, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1873573793

@@ -106,7 +106,7 @@ PrefabInstance:
         type: 3}
       propertyPath: generators.Array.data[7].generator
       value: 
-      objectReference: {fileID: 5278121169823888467}
+      objectReference: {fileID: 407918317781434271}
     - target: {fileID: 5890597338796914724, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: generators.Array.data[7].enabled
@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c45f9aa9d148a444b3e52a6ef582933, type: 3}
---- !u!114 &5278121169823888467 stripped
+--- !u!114 &407918317781434271 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5518757484286636409, guid: 6c45f9aa9d148a444b3e52a6ef582933,
     type: 3}

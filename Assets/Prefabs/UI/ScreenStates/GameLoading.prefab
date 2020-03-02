@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &759395407980552495
+--- !u!1 &1460860007042454119
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2780316544161601304}
-  - component: {fileID: 3908067576729170239}
-  m_Layer: 0
-  m_Name: MapSelector
+  - component: {fileID: 1460860007042454118}
+  - component: {fileID: 1460860007042454117}
+  m_Layer: 5
+  m_Name: GameLoading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2780316544161601304
-Transform:
+--- !u!224 &1460860007042454118
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759395407980552495}
+  m_GameObject: {fileID: 1460860007042454119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,20 +31,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3908067576729170239
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1460860007042454117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759395407980552495}
+  m_GameObject: {fileID: 1460860007042454119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef67410bd788e247b71e330b3673d21, type: 3}
+  m_Script: {fileID: 11500000, guid: b0887685c48d74a41ab652ec81e1a020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapGenerators:
-  - {fileID: 407918317781421037, guid: 541f675711a01c04787e7d16797af83f, type: 3}
-  - {fileID: 1632007519578326019, guid: 85a8fb60e3e19374496e51e78b162c0b, type: 3}
-  - {fileID: 4105684848861817808, guid: bd8feaafa8229044f833b3204aacb50d, type: 3}
-  map: 0
+  loadingIndicator: {fileID: 0}
+  usePseudoLoading: 0
