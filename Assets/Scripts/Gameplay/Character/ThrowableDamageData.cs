@@ -7,16 +7,12 @@ using Photon.Pun;
 //put this on things that can hit stuff, on same level as collider.
 
 [RequireComponent(typeof(Collider))]
-public class DamageData : MonoBehaviour
+public class ThrowableDamageData : MonoBehaviour
 {
     public int dmg = 1;
     //public bool damaging;
     public bool damaging { private set; get; }
 
-    [SerializeField]
-    [Tooltip("Sets to not damaging when object stop moving \n Set this to true for throwables")]
-    private bool autoSetNotDamaging = true;
-    
     private Rigidbody rb;
     private bool moving;
     private GameObject ignoreGo;
@@ -33,12 +29,6 @@ public class DamageData : MonoBehaviour
         Debug.LogFormat("{0} is now damaging, ignoring {1}", gameObject.name, ignore.name);
         damaging = true;
         ignoreGo = ignore;
-    }
-
-    public void SetNotDamaging()
-    {
-        Debug.LogFormat("{0} is not damaging", gameObject.name);
-        damaging = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,9 +55,6 @@ public class DamageData : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!autoSetNotDamaging)
-            return;
-
         moving = rb && rb.velocity.sqrMagnitude > 4;
 
         if (damaging && !moving)

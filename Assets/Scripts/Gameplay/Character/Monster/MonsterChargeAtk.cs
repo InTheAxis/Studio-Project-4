@@ -29,8 +29,6 @@ public class MonsterChargeAtk : MonoBehaviour
     //[SerializeField]
     //private TrailRenderer trail;
     [SerializeField]
-    private DamageData dmgData;
-    [SerializeField]
     private Collider attackColl;
 
     [Header("VFX")]
@@ -87,7 +85,7 @@ public class MonsterChargeAtk : MonoBehaviour
         chargeCorr = null;
         charControl.disableMovement = false;
         isCharging = false;
-        dmgData.SetNotDamaging();
+        //atkData.SetNotDamaging();
         attackColl.enabled = false;
         //trail.emitting = false;
         CharTPCamera.Instance.LookAtPlayer();
@@ -102,7 +100,7 @@ public class MonsterChargeAtk : MonoBehaviour
             charControl.disableMovement = true;
             //trail.emitting = true;
             isCharging = true;
-            dmgData.SetIsDamaging(gameObject);
+            //atkData.SetIsDamaging(gameObject);
             attackColl.enabled = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
@@ -123,7 +121,7 @@ public class MonsterChargeAtk : MonoBehaviour
 
         chargeCorr = null;
         isCharging = false;
-        dmgData.SetNotDamaging();
+        //atkData.SetNotDamaging();
         attackColl.enabled = false;
         yield return new WaitForSeconds(0.1f);
         //trail.emitting = false;

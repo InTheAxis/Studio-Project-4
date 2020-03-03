@@ -325,7 +325,7 @@ public class DestructibleController : MonoBehaviourPun
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
 
                         //enable DamageData if have
-                        DamageData damageData = collider.gameObject.GetComponent<DamageData>();
+                        ThrowableDamageData damageData = collider.gameObject.GetComponent<ThrowableDamageData>();
                         if (damageData) damageData.SetIsDamaging(playerController.gameObject);
                     }
 
