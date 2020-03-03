@@ -155,6 +155,7 @@ public abstract class StateGenericOptions : State
     private void Awake()
     {
         StateController.Register(this);
+
         /* Populate supported video resolutions */
         if (resolutions == null)
         {
@@ -191,6 +192,10 @@ public abstract class StateGenericOptions : State
         tmMasterVolume.text = "100%";
         tmEffectVolume.text = "100%";
         tmMusicVolume.text = "100%";
+    }
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
     }
 
     public override void onShow()

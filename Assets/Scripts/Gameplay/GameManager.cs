@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void Spawn(Vector3 pos)
     {
+        // Preset as gameover so if we switch back to main menu before we receive game end RPC, we're set correctly
+        StateGameover.isGameover = true;
+
         pos.y = 5; //< spawn in the air
         int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
         Debug.Log("Got prefab index " + prefabIndex);

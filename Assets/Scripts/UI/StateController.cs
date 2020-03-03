@@ -9,6 +9,7 @@ public static class StateController
 
     private static State currentState = null;
 
+    private static bool firstStart = true;
     private const string initialState = "Login";
 
     public static void Register(State state)
@@ -16,12 +17,14 @@ public static class StateController
         if (state == null || screenStates.ContainsKey(state.Name)) return;
 
         screenStates.Add(state.Name, state);
-        if (!state.Name.ToLower().Equals(initialState.ToLower()))
+        if (!(firstStart && state.Name.ToLower().Equals(initialState.ToLower())))
         {
             state.gameObject.SetActive(false);
         }
         else
         {
+            firstStart = false;
+
             currentState = state;
             showNext(state.Name, false, false);
         }
