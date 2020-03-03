@@ -72,8 +72,7 @@ public class InteractableTower : InteractableBase
         wasInteracting = true;
         Debug.Log("Interact");
 
-        if (!sparks.isEmitting)
-            sparks.Play();
+        thisView.RPC("playVFX", RpcTarget.All, true);
     }
 
     private void Update()
@@ -181,8 +180,7 @@ public class InteractableTower : InteractableBase
             if (interactTime > 0.0f)
                 turnOnLight(currStage, currStage);
 
-            if (sparks.isEmitting)
-                sparks.Stop();
+            thisView.RPC("playVFX", RpcTarget.All, false);
 
             interactTime = 0.0f;
             interactDone = false;
@@ -278,5 +276,14 @@ public class InteractableTower : InteractableBase
             return beingInteractedWithSurvivorLight;
         else
             return null;
+    }
+
+    [PunRPC]
+    private void playVFX(bool b)
+    {
+        if (b && !sparks.isEmitting)
+            sparks.Play();
+        else if (!b && sparks.isEmitting)
+            sparks.Stop();
     }
 }
