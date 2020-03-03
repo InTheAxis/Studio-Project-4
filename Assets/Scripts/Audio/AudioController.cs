@@ -11,6 +11,22 @@ public class AudioController : MonoBehaviour
 
     protected AudioSource[] source;
 
+    public void SetSFX()
+    {
+        foreach (AudioSource audio in source)
+        {
+            audio.outputAudioMixerGroup = AudioInstance.instance.sfxMixer;
+        }
+    }
+
+    public void SetMusic()
+    {
+        foreach (AudioSource audio in source)
+        {
+            audio.outputAudioMixerGroup = AudioInstance.instance.musicMixer;
+        }
+    }
+
     public enum AudioState
     {
         Play,

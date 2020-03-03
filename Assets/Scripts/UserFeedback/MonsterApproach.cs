@@ -31,6 +31,7 @@ public class MonsterApproach : MonoBehaviour
         minimap = GetComponentInChildren<Minimap3D>();
         if (PhotonNetwork.IsMasterClient)
             enabled = false;
+        audioController.SetMusic();
     }
 
     // Update is called once per frame
