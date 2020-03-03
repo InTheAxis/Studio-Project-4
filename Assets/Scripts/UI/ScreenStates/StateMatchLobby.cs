@@ -21,6 +21,10 @@ public class StateMatchLobby : State
     [SerializeField]
     [Tooltip("The button for accessing Map")]
     private GameObject mapMenuButton = null;
+    [SerializeField]
+    [Tooltip("The sliding indicator that shows what sub-menu is opened at the moment.")]
+    private RectTransform indicator = null;
+    
 
     [SerializeField]
     private StateMatchLobbyCharacter stateLobbyChar;
@@ -29,6 +33,8 @@ public class StateMatchLobby : State
     private static List<LobbyPlayer> players;
     private static Dictionary<string, int> playerIDs;
     private Button btnReady = null;
+    private IEnumerator iSlideIndicator = null;
+
     public override string Name { get { return "MatchLobby"; } }
 
     private void Awake()
@@ -69,12 +75,8 @@ public class StateMatchLobby : State
                 btnReady.enabled = false;
                 tmReady.GetComponent<TextMeshProUGUI>().color = ThemeColors.neutral;
             }
-
-            //disable character select
-            //charSelectButton.SetActive(false);
         }
-        //else
-        //    charSelectButton.SetActive(true);
+
     }
 
     public void Ready()
@@ -123,8 +125,37 @@ public class StateMatchLobby : State
         StateController.showPrevious();
     }
 
+    public void showTutorial()
+    {
+        StateController.Show("Tutorial");
+    }
+
+    /* Slides the indicator up and down based on the nav button pressed */
+    private void selectNavButton(GameObject go)
+    {
+        indicator.gameObject.SetActive(true);
+        if (iSlideIndicator != null)
+            StopCoroutine(iSlideIndicator);
+        iSlideIndicator = slideIndicator(go.GetComponent<RectTransform>().anchoredPosition.y);
+        StartCoroutine(iSlideIndicator);
+    }
+
+    /* Animate the sliding of the indicator in the Y axis */
+    private IEnumerator slideIndicator(float targetY)
+    {
+        Vector2 anchoredPos = indicator.anchoredPosition;
+        while (Mathf.Abs(targetY - anchoredPos.y) > 0.005f)
+        {
+            anchoredPos.y = Mathf.Lerp(anchoredPos.y, targetY, Time.deltaTime * 12.0f);
+            indicator.anchoredPosition = anchoredPos;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        indicator.anchoredPosition = anchoredPos;
+    }
+
     public void selectSubMenu(GameObject go)
     {
+        selectNavButton(go);
         StateController.Show(go.name);
     }
 
@@ -140,6 +171,8 @@ public class StateMatchLobby : State
 
         mapMenuButton.SetActive(PhotonNetwork.IsMasterClient);
         worldCanvas.SetActive(true);
+        StateController.Hide("LobbyCharacter");
+        StateController.Hide("LobbyMap");
 
         base.onShow();
 
@@ -168,7 +201,6 @@ public class StateMatchLobby : State
 
     public void onJoinRoom(List<string> playersInLobby)
     {
-        Debug.Log("WORKS");
         playerIDs.Clear();
         btnReady = tmReady.GetComponent<Button>();
 

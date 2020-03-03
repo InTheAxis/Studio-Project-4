@@ -11,6 +11,9 @@ public class StateLogin : State
     [SerializeField]
     [Tooltip("The status message that shows while logging in")]
     private TextMeshProUGUI tmStatus = null;
+    [SerializeField]
+    [Tooltip("The canvas group for the overlay")]
+    private CanvasGroup loginOverlay = null;
 
     [Header("Inputs")]
     [SerializeField]
@@ -20,7 +23,7 @@ public class StateLogin : State
     [Tooltip("Password Input Field")]
     private TMP_InputField tmPassword = null;
 
-
+    
     
 
     public override string Name { get { return "Login"; } }
@@ -43,7 +46,7 @@ public class StateLogin : State
         Debug.Log("Password: " + tmPassword.text);
 
         /* Playfab Login */
-        //tmStatus.color = busyColor;
+        tmStatus.color = ThemeColors.busy;
         tmStatus.text = "Connecting...";
 
         PlayfabAuthenticator playfabAuthenticator = (PlayfabAuthenticator)DoNotDestroySingleton<PlayfabAuthenticator>.instance;
@@ -52,11 +55,11 @@ public class StateLogin : State
             {
                 PhotonNetwork.NickName = tmUsername.text;
                 PlayerSettings.playerName = tmUsername.text;
-                //setScene(ScreenStates.MAINMENU);
                 StateController.showNext("Mainmenu");
             }, (errorMsg, errorType) =>
             {
                 tmStatus.text = "Connection Failed";
+                tmStatus.color = ThemeColors.error;
             });
     }
 
@@ -99,8 +102,13 @@ public class StateLogin : State
         tmStatus.text = "";
         tmPassword.text = "";
         base.onShow();
+        StartCoroutine(StateController.fadeCanvasGroup(loginOverlay, true, 10.0f));
     }
 
+    public override void onHide()
+    {
+        StartCoroutine(StateController.fadeCanvasGroupAndHide(gameObject, loginOverlay, false, 8.0f));
+    }
 
 
     /* NETWORKING */
@@ -109,4 +117,5 @@ public class StateLogin : State
     {
         tmStatus.text = "";
     }
+
 }

@@ -59,5 +59,6 @@ public class StateMatchLobbyMap : State
         currentMapIndex = 0;
         selectMap();
         base.onShow();
+        StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
     }
 }
