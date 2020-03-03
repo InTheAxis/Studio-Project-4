@@ -29,6 +29,7 @@ public class StateMatchLobby : State
     [SerializeField]
     private StateMatchLobbyCharacter stateLobbyChar;
 
+    public static bool toReturnToThis;
     /* Keep track of players and their IDS */
     private static List<LobbyPlayer> players;
     private static Dictionary<string, int> playerIDs;
@@ -41,17 +42,48 @@ public class StateMatchLobby : State
     {
         StateController.Register(this);
 
-
-
-        players = new List<LobbyPlayer>();
-        playerIDs = new Dictionary<string, int>();
-        for (int i = 0; i < playerHolder.transform.childCount; ++i)
-        {
-            Transform t = playerHolder.transform.GetChild(i);
-            players.Add(new LobbyPlayer(t.gameObject));
-        }
-
         worldCanvas.SetActive(false);
+
+        if (!toReturnToThis)
+        {
+            players = new List<LobbyPlayer>();
+            playerIDs = new Dictionary<string, int>();
+            for (int i = 0; i < playerHolder.transform.childCount; ++i)
+            {
+                Transform t = playerHolder.transform.GetChild(i);
+                players.Add(new LobbyPlayer(t.gameObject));
+            }
+        }
+        else
+        {
+            toReturnToThis = false;
+
+            List<LobbyPlayer> newPlayers = new List<LobbyPlayer>();
+            int noOfPlayers = PhotonNetwork.PlayerList.Length;
+            for (int i = 0; i < playerHolder.transform.childCount; ++i)
+            {
+                Transform t = playerHolder.transform.GetChild(i);
+                LobbyPlayer newPlayer = new LobbyPlayer(t.gameObject);
+                if (i < noOfPlayers)
+                    newPlayer.setActive(players[i].name);
+                else
+                    newPlayer.setInactive();
+                newPlayers.Add(newPlayer);
+            }
+            players = newPlayers;
+
+            StateController.showNext(Name);
+        }
+    }
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
+
+        if (NetworkClient.instance != null)
+        {
+            NetworkClient.instance.playerJoinedCallback = null;
+            NetworkClient.instance.playerLeftCallback = null;
+        }
     }
 
     private void Update()
@@ -91,6 +123,8 @@ public class StateMatchLobby : State
                 return;
             }
 
+
+            ScreenStateHelperNetwork.instance.modelChangeCallback -= receivedCharModelChange;
             ScreenStateHelperNetwork.instance.startGame(toBeMasterClient);
         }
         else

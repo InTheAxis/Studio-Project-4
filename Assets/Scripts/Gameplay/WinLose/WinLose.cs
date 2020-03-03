@@ -97,22 +97,29 @@ public class WinLose : MonoBehaviourPun
     // Should only ever be called by the master client
     private void gameEnd(bool isHunterWin)
     {
-        gameEnded = true;
-        ScreenStateController.ReturningFromInGame = true;
+        //gameEnded = true;
+        //ScreenStateController.ReturningFromInGame = true;
         Debug.Log("Sending game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
         photonView.RPC("receiveGameEnd", RpcTarget.Others, isHunterWin);
 
-        winLossCallback(isHunterWin);
+        //winLossCallback(isHunterWin);
+        receiveGameEnd(isHunterWin);
     }
 
     // Should only ever be called on remote clients
     [PunRPC]
-    private void receiveGameEnd(bool isHunterWin)
+    public void receiveGameEnd(bool isHunterWin)
     {
         gameEnded = true;
         ScreenStateController.ReturningFromInGame = true;
-        Debug.Log("Received game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
 
         winLossCallback(isHunterWin);
+
+        // Note: Gameover is also set in GameManager
+        StateGameover.isGameover = true;
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel("NewMainMenu");
+
+        Debug.Log("Received game end with " + (isHunterWin ? "Hunter" : "Survivors") + " winning");
     }
 }

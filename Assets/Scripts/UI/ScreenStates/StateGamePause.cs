@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.UI;
+using Photon.Pun;
 using TMPro;
 
 public class StateGamePause : State
@@ -33,12 +35,14 @@ public class StateGamePause : State
 
     public void Disconnect()
     {
-        Debug.Log("This should be changed to Disconnect.");
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        Debug.Log("Disconnect.");
+
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.sendForceGameEnd(false);
+        StateMainmenu.isReturningFromGame = true;
+        StateGameover.isGameover = false;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("NewMainMenu");
     }
 
     public override void onShow()
