@@ -7,6 +7,11 @@ public class WalkAudioController : AudioController
     [SerializeField]
     private LayerMask layerMask;
 
+    private void Start()
+    {
+        SetSFX();
+    }
+
     public void Step()
     {
         source = GetComponents<AudioSource>();
@@ -21,24 +26,24 @@ public class WalkAudioController : AudioController
             switch (type)
             {
                 case TerrainManager.TerrainType.STONE:
-                    Play("footstep_stone0");
+                    PlayIndex(0);
                     break;
 
                 case TerrainManager.TerrainType.DIRT:
-                    Play("footstep_dirt0");
+                    PlayIndex(1);
                     break;
 
                 case TerrainManager.TerrainType.Gravel:
-                    Play("footstep_dirt0");
+                    PlayIndex(1);
                     break;
 
                 default:
-                    Play("footstep_stone0");
+                    PlayIndex(0);
                     Debug.LogError("Terrain footstep audio not set.");
                     break;
             }
         }
         else
-            Play("footstep_stone0");
+            PlayIndex(0);
     }
 }

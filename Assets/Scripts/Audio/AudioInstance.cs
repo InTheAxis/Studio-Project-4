@@ -13,8 +13,9 @@ public class AudioInstance : MonoBehaviour
     [SerializeField]
     public AudioMixerGroup musicMixer;
 
-    //private void Awake()
-    //{
-    //    DontDestroyOnLoad(gameObject);
-    //}
+    private void Awake()
+    {
+        if (!instance)
+            instance = this;
+    }
 }

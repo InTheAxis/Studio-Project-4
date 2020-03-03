@@ -24,7 +24,7 @@ public class MonsterApproach : MonoBehaviour
     private bool flickering;
     private Minimap3D minimap;
 
-    private void Start()
+    private void Awake()
     {
         audioController = BGAudioController.instance;
         offsetRange = outerRange - innerRange;
