@@ -99,6 +99,11 @@ public class ProceduralBuilding : MonoBehaviour
             if (!slot.gameObject.activeSelf)
                 continue;
             AttachmentSlot attachmentSlotScript = slot.GetComponent<AttachmentSlot>();
+            if (!attachmentSlotScript)
+            {
+                Debug.Log("no attachment slot");
+                continue;
+            }
             if (Random.value <= attachmentSlotScript.chance)
             {
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
