@@ -57,16 +57,14 @@ public class DamageData : MonoBehaviour, IPunObservable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return;
         if (damaging && collision.gameObject != ignoreGo)
         {
-            CharHitBox hitbox = collision.gameObject.GetComponent<CharHitBox>();
-            if (hitbox)
+            CharHitBox hitbox = collision.gameObject.GetComponent<CharHitBox>();            
+            if (hitbox && PhotonView.Get(hitbox) && PhotonView.Get(hitbox).IsMine)
             {
                 hitbox.OnHit?.Invoke(dmg, Vector3.Dot(hitbox.transform.forward, (transform.position - hitbox.transform.position)));
                 damaging = false;
-                Debug.LogFormat("{0} hit player on layer", gameObject.name);
+                Debug.LogFormat("{0} hit player, ignoredGo is {1}", gameObject.name, ignoreGo?.name);
             }
         }
         if (damaging && collision.gameObject == ignoreGo)
@@ -77,8 +75,6 @@ public class DamageData : MonoBehaviour, IPunObservable
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return;
         if (!autoSetNotDamaging)
             return;
 
