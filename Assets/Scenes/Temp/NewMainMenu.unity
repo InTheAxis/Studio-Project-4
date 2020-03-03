@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14839,7 +14839,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: If you throw the stone fast enough, you can hit yourself!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 48914d500c1cd894a8e9f50bd5a2cb95, type: 2}
   m_sharedMaterial: {fileID: -9190150999269243267, guid: 48914d500c1cd894a8e9f50bd5a2cb95,
@@ -14909,13 +14909,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 894059056}
-    characterCount: 0
+    characterCount: 57
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -30641,7 +30641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -12.499039, y: 77.19995}
+  m_AnchoredPosition: {x: -12.499023, y: 77.19995}
   m_SizeDelta: {x: 308.3919, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1873573793

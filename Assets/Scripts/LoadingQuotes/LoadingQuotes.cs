@@ -39,7 +39,6 @@ public class LoadingQuotes : MonoBehaviour
 
     private void Start()
     {
-        displayText.text = "null";
         GetQuote(type);
     }
 
