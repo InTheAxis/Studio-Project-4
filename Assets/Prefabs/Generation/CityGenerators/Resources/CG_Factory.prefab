@@ -354,6 +354,11 @@ PrefabInstance:
       propertyPath: dropList.list.Array.data[1].chance
       value: 0.8095238
       objectReference: {fileID: 0}
+    - target: {fileID: 7514756674811960669, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c45f9aa9d148a444b3e52a6ef582933, type: 3}
 --- !u!4 &4105684848861817774 stripped
