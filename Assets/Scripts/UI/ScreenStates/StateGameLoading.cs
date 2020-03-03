@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class StateGameLoading : State
 {
-    [SerializeField]
-    private GameObject loadingIndicator = null;
+
     [SerializeField]
     private bool usePseudoLoading = false;
 
@@ -26,7 +25,7 @@ public class StateGameLoading : State
 
     public void loadPhoton(string targetScene)
     {
-        loadingIndicator.SetActive(true);
+
         //if (tmTips.text == "null")
         //    tmTips.text = tips[Random.Range(0, tips.Length)];
 
