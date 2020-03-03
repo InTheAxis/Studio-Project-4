@@ -17,9 +17,9 @@ public class InteractableRevive : InteractableBase
     private bool isDestroyed = false;
 
 
-    [Header("VFX")]
-    [SerializeField]
-    private ParticleSystem vfx = null;
+    //[Header("VFX")]
+    //[SerializeField]
+    //private ParticleSystem vfx = null;
 
     private PhotonView thisView;
 
@@ -43,10 +43,10 @@ public class InteractableRevive : InteractableBase
             return;
 
         wasInteracting = true;
-        Debug.Log("Reviving");
+        //Debug.Log("Reviving");
 
-        if (!vfx.isEmitting)
-            vfx.Play();
+        //if (!vfx.isEmitting)
+        //    vfx.Play();
     }
 
     private void Update()
@@ -109,8 +109,8 @@ public class InteractableRevive : InteractableBase
                     humanAnim.SabotagingDone(false);
             }
 
-            if (vfx.isEmitting)
-                vfx.Stop();
+            //if (vfx.isEmitting)
+            //    vfx.Stop();
 
             interactTime = 0.0f;
             interactDone = false;
@@ -131,6 +131,7 @@ public class InteractableRevive : InteractableBase
 
     public void SetPlayerToRevive(int _viewId)
     {
+        //might not have thisView yet
         PhotonView.Get(this).RPC("setPlayerID", RpcTarget.All, _viewId);
     }
 
