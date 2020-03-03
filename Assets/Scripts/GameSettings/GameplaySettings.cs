@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class GameplaySettings : Singleton<GameplaySettings>
+public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
 {
     [SerializeField]
     private AudioMixer audioMixer = null;
