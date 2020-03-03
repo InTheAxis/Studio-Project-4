@@ -13323,6 +13323,11 @@ PrefabInstance:
       propertyPath: sounds.Array.data[0].loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3795174014460326120, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.072
+      objectReference: {fileID: 0}
     - target: {fileID: 6705662069046097736, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
         type: 3}
       propertyPath: crosshair
