@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 211941994660900550}
   - component: {fileID: 596521216702095957}
   - component: {fileID: 2290165426260310095}
+  - component: {fileID: 5906827360941392456}
   m_Layer: 8
   m_Name: Human_Female
   m_TagString: Human
@@ -199,8 +200,8 @@ MonoBehaviour:
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
   targetCamDist: 1.4
-  cameraBobAmt: 0.001
-  cameraBobFreq: 1
+  cameraBobAmt: 0.015
+  cameraBobFreq: 6
   moveSpeed: 16
   kineticFriction: 1.4
   staticFriction: 10
@@ -605,6 +606,21 @@ MonoBehaviour:
   flickerRate:
     min: 0.3
     max: 1.2
+--- !u!114 &5906827360941392456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7db6a8df164a4449b2b6b137947669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveInteractable: {fileID: 3251071314885177336, guid: 0f528f6986cc1c249a1ee999361f3cd8,
+    type: 3}
+  health: {fileID: 5071471449440821494}
 --- !u!1001 &2565709116428265765
 PrefabInstance:
   m_ObjectHideFlags: 0

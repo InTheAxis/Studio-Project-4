@@ -15,8 +15,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
 
-    public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow, bool isInvulnerable);
-    public delegate void OnDeadCallback();
+public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow, bool isInvulnerable);
+    public delegate void OnDeadCallback(int viewId);
     public delegate void OnRespawnCallback();
 
     public OnHealthChangeCallback OnHealthChange;
@@ -106,6 +106,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
         if (dead || invulnerable)
             return;
 
+        if (charControl.photonView.IsMine && PhotonNetwork.IsConnected)
+            CharTPCamera.Instance.Shake();
+
         StartCoroutine(HitStun());
 
         hp -= dmg;
@@ -147,7 +150,8 @@ public class CharHealth : MonoBehaviour, IPunObservable
             StartCoroutine(respawnCorr);
         }
 
-        OnDead?.Invoke();
+        OnDead?.Invoke(PhotonView.Get(charControl).ViewID);
+        Debug.LogFormat("Sending ID, {0}", PhotonView.Get(charControl).ViewID);
 
         Debug.Log("Dieded");
     } 

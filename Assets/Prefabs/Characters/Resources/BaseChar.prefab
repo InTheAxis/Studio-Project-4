@@ -1374,6 +1374,8 @@ MonoBehaviour:
   hologramLandmarkMat: {fileID: 0}
   simpleHologram: {fileID: 0}
   complexHologram: {fileID: 0}
+  humanMaleHologram: {fileID: 0}
+  humanFemaleHologram: {fileID: 0}
   controlTowerTag: Landmark
   activeHolder: {fileID: 7166891302723178332}
   inactiveHolder: {fileID: 2399878575869177083}
@@ -1656,7 +1658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignore:
     serializedVersion: 2
-    m_Bits: 3894
+    m_Bits: 212864822
 --- !u!1 &6709349634691835508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1719,7 @@ MonoBehaviour:
   charTop: {fileID: 2565709116632961811}
   ignore:
     serializedVersion: 2
-    m_Bits: 692023
+    m_Bits: 263884599
 --- !u!1 &6983675178248315331
 GameObject:
   m_ObjectHideFlags: 0

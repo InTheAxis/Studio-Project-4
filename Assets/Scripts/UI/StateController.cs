@@ -10,7 +10,7 @@ public static class StateController
     private static State currentState = null;
 
     private static bool firstStart = true;
-    private const string initialState = "Splashscreen";
+    private const string initialState = "Login";
 
     public static void Register(State state)
     {
@@ -108,10 +108,10 @@ public static class StateController
             return screenStates[name];
     }
 
-    public static IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed)
+    public static IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed, float initialAlpha=0.0f)
     {
         float targetAlpha = fadeIn ? 1.0f : 0.0f;
-        canvas.alpha = 1.0f - targetAlpha;
+        canvas.alpha = initialAlpha;
         while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
         {
             canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);

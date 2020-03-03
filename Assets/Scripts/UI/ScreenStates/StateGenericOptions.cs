@@ -182,9 +182,9 @@ public abstract class StateGenericOptions : State
         /* Update V-Sync Status */
         setVSync(settings.vSync);
 
-        tmMasterVolume.text = ((int)settings.masterVol * 100.0f).ToString() + "%";
-        tmEffectVolume.text = ((int)settings.effectVol * 100.0f).ToString() + "%";
-        tmMusicVolume.text = ((int)settings.musicVol * 100.0f).ToString() + "%";
+        tmMasterVolume.text = ((int)settings.masterVol).ToString() + "%";
+        tmEffectVolume.text = ((int)settings.effectVol).ToString() + "%";
+        tmMusicVolume.text = ((int)settings.musicVol).ToString() + "%";
 
         base.onShow();
     }

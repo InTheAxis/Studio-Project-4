@@ -92,7 +92,7 @@ public class StateGameplay : State
         }
     }
 
-    private void playerDied()
+    private void playerDied(int i)
     {
         Debug.Log("Gameplay received player death");
         StateController.showNext("Death");

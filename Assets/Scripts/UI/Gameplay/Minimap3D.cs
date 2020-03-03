@@ -164,11 +164,14 @@ public class Minimap3D : MonoBehaviour
 
             if (go.transform.root.CompareTag("Human"))
             {
-                Transform goRoot = go.transform.root;
-                if(goRoot.name.ToLower().Contains("female"))
-                    clone = Instantiate(humanFemaleHologram);
-                else
-                    clone = Instantiate(humanMaleHologram);
+                if (!PhotonNetwork.IsMasterClient)
+                {
+                    Transform goRoot = go.transform.root;
+                    if (goRoot.name.ToLower().Contains("female"))
+                        clone = Instantiate(humanFemaleHologram);
+                    else
+                        clone = Instantiate(humanMaleHologram);
+                }
             }
             else
             {
@@ -255,7 +258,7 @@ public class Minimap3D : MonoBehaviour
 
         if (go.transform.root.CompareTag("Human"))
         {
-            relativePlaneScale *= 2.0f;
+            relativePlaneScale *= 0.75f;
         }
         else
         {
