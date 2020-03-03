@@ -15407,7 +15407,6 @@ MonoBehaviour:
   tmResolution: {fileID: 908698381}
   vSyncOn: {fileID: 1568570072}
   vSyncOff: {fileID: 1401880011}
-  audioMixer: {fileID: 24100000, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e, type: 2}
   tmMasterVolume: {fileID: 85607079}
   tmEffectVolume: {fileID: 237709455}
   tmMusicVolume: {fileID: 1778835397}
@@ -17923,7 +17922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerators:
-  - {fileID: 407918317781421046, guid: 541f675711a01c04787e7d16797af83f, type: 3}
+  - {fileID: 6059220141556989297, guid: 541f675711a01c04787e7d16797af83f, type: 3}
   - {fileID: 1632007519578326019, guid: 85a8fb60e3e19374496e51e78b162c0b, type: 3}
   - {fileID: 4105684848861817808, guid: bd8feaafa8229044f833b3204aacb50d, type: 3}
   map: 0
