@@ -459,7 +459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2ff168d8252b741a92d3fe4ae601e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charControl: {fileID: 9117360599836359451}
   dmgData: {fileID: 1761029257603288200}
+  attackDuration: 0.3
+  attackRate: 0.3
 --- !u!82 &7337002632542305905
 AudioSource:
   m_ObjectHideFlags: 0

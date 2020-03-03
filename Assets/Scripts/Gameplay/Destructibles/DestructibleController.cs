@@ -183,6 +183,7 @@ public class DestructibleController : MonoBehaviourPun
             {
                 Collider[] collisions;
                 collisions = Physics.OverlapSphere(hit.transform.position, detectionRadius, detectMask);
+
                 throwables = new List<Collider>(collisions);
 
                 /* Gets all surrounding throwables */
@@ -310,7 +311,7 @@ public class DestructibleController : MonoBehaviourPun
                         }
                         else
                         {
-                            targetDir = GameManager.playerObj.transform.forward;
+                            targetDir = cameraTransform.forward;
                         }
 
                         // Tell master client to release ownership back to scene
@@ -374,6 +375,7 @@ public class DestructibleController : MonoBehaviourPun
             }
         }
     }
+
 
     private void setupThrowable(Collider collider)
     {
