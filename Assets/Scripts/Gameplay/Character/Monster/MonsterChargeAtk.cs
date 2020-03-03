@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MonsterChargeAtk : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class MonsterChargeAtk : MonoBehaviour
     private float cameraDist = 12;
     [SerializeField]
     private float cooldown = 1;
-    [SerializeField]
-    private TrailRenderer trail;
+    //[SerializeField]
+    //private TrailRenderer trail;
 
     [Header("VFX")]
     [SerializeField]
@@ -34,12 +35,16 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private float timer;
     private IEnumerator chargeCorr;
+    private PhotonView thisView;
 
+    public bool isCharging { private set; get; }
     private void Start()
     {
         timer = cooldown + duration;
         chargeCorr = null;
         //trail.emitting = false;
+
+        thisView = PhotonView.Get(this);
     }
 
     private void OnEnable()
@@ -76,6 +81,7 @@ public class MonsterChargeAtk : MonoBehaviour
             StopCoroutine(chargeCorr);
         chargeCorr = null;
         charControl.disableMovement = false;
+        isCharging = false;
         //trail.emitting = false;
         CharTPCamera.Instance.LookAtPlayer();
     }
@@ -85,10 +91,10 @@ public class MonsterChargeAtk : MonoBehaviour
         if (ener.UseUp(enerConsumption))
         {
             yield return new WaitForSeconds(delay);
-            if(vfx != null && !vfx.isEmitting)
-                vfx.Play();
+            thisView.RPC("playVFX", RpcTarget.All, true);
             charControl.disableMovement = true;
             //trail.emitting = true;
+            isCharging = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
             Vector3 dir = charControl.forward + Vector3.down * 0.1f;
@@ -107,7 +113,15 @@ public class MonsterChargeAtk : MonoBehaviour
         }
 
         chargeCorr = null;
+        isCharging = false;
         yield return new WaitForSeconds(0.1f);
         //trail.emitting = false;
+    }
+
+    [PunRPC]
+    private void playVFX(bool play)
+    {
+        if (vfx != null && !vfx.isEmitting)
+            vfx.Play();
     }
 }

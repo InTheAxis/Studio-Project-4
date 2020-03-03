@@ -111,6 +111,8 @@ public class InteractableTower : InteractableBase
 
             if (humanAnim)
                 humanAnim.IsSabotaging();
+            if (monsterAnim)
+                monsterAnim.IsSabotaging();
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
@@ -143,6 +145,8 @@ public class InteractableTower : InteractableBase
                 }
                 else if (recharge) // Is Monster
                 {
+                    if (monsterAnim)
+                        monsterAnim.SabotagingDone(true);
                     recharge.RechargePercent(interactTime / timeToFinishInteraction);
                     interactDone = true;
                     Debug.Log("Recharged");
@@ -169,6 +173,8 @@ public class InteractableTower : InteractableBase
                 }
                 if (humanAnim)
                     humanAnim.SabotagingDone(false);
+                if (monsterAnim)
+                    monsterAnim.SabotagingDone(false);
             }
 
             // Stopped interacting. Set light back to current stage

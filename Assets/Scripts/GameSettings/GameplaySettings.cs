@@ -9,9 +9,9 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
     private AudioMixer audioMixer = null;
 
     public bool vSync = false;
-    public float masterVol = 100.0f;
-    public float effectVol = 100.0f;
-    public float musicVol = 100.0f;
+    public float masterVol = 1.0f;
+    public float effectVol = 1.0f;
+    public float musicVol = 1.0f;
 
     public List<string> options;
     public int currentResIndex = 0;
@@ -62,9 +62,9 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
         else
         {
             vSync = QualitySettings.vSyncCount >= 1;
-            masterVol = 100.0f;
-            effectVol = 100.0f;
-            musicVol = 100.0f;
+            masterVol = 1.0f;
+            effectVol = 1.0f;
+            musicVol = 1.0f;
             qualityIndex = QualitySettings.GetQualityLevel();
             fullscreen = Screen.fullScreen;
         }

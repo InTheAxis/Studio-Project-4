@@ -68,5 +68,9 @@ MonoBehaviour:
   - setVel
   - Spawn
   - startGameRpc
+  - receiveModelChangeRpc
+  - revivePlayer
+  - setPlayerID
+  - playVFX
   DisableAutoOpenWizard: 1
   ShowSettings: 0
