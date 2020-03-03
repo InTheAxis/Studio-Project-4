@@ -34,6 +34,12 @@ public abstract class StateGenericOptions : State
 
     [Header("Sound")]
     [SerializeField]
+    private Slider sliderMaster = null;
+    [SerializeField]
+    private Slider sliderEffects = null;
+    [SerializeField]
+    private Slider sliderMusic = null;
+    [SerializeField]
     private TextMeshProUGUI tmMasterVolume = null;
     [SerializeField]
     private TextMeshProUGUI tmEffectVolume = null;
@@ -182,9 +188,13 @@ public abstract class StateGenericOptions : State
         /* Update V-Sync Status */
         setVSync(settings.vSync);
 
-        tmMasterVolume.text = ((int)settings.masterVol).ToString() + "%";
-        tmEffectVolume.text = ((int)settings.effectVol).ToString() + "%";
-        tmMusicVolume.text = ((int)settings.musicVol).ToString() + "%";
+        sliderMaster.value = settings.masterVol;
+        sliderEffects.value = settings.effectVol;
+        sliderMusic.value = settings.musicVol;
+
+        tmMasterVolume.text = ((int)(settings.masterVol * 100.0f)).ToString() + "%";
+        tmEffectVolume.text = ((int)(settings.effectVol * 100.0f)).ToString() + "%";
+        tmMusicVolume.text = ((int)(settings.musicVol * 100.0f)).ToString() + "%";
 
         base.onShow();
     }

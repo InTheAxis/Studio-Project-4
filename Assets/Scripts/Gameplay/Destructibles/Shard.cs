@@ -50,17 +50,21 @@ public class Shard : MonoBehaviour
         }
 
 
+        if(GetComponents<PhotonView>().Length > 1)
+        {
+            Debug.LogError("Multiple Photon Views: " + gameObject.name);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.sqrMagnitude < 5.0f) return;
+        if (collision.relativeVelocity.sqrMagnitude < 10.0f) return;
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             if (monsterHit == null)
             {
-                Debug.LogError("Add monsterHit particle to this shard: " + gameObject.name);
+                Debug.LogWarning("Add monsterHit particle to this shard: " + gameObject.name);
                 return;
             }
 
@@ -73,7 +77,7 @@ public class Shard : MonoBehaviour
         {
             if (survivorHit == null)
             {
-                Debug.LogError("Add survivorHit particle to this shard: " + gameObject.name);
+                Debug.LogWarning("Add survivorHit particle to this shard: " + gameObject.name);
                 return;
             }
 

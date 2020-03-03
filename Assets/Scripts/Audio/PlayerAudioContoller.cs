@@ -35,6 +35,10 @@ public class PlayerAudioContoller : AudioController
     //    else
     //        Play("footstep_stone0");
     //}
+    private void Start()
+    {
+        SetSFX();
+    }
 
     public void PickUpDebris()
     {

@@ -117,7 +117,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4604776798679289285}
@@ -173,6 +173,8 @@ MonoBehaviour:
   timeBeforeDespawn: 20
   smallShardScaleThreshold: 1
   shardSettleVelocityThreshold: 0.1
+  monsterHit: {fileID: 0}
+  survivorHit: {fileID: 0}
 --- !u!64 &103643506980009725
 MeshCollider:
   m_ObjectHideFlags: 0

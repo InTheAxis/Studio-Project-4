@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2962832828229675826}
   - component: {fileID: 1205625347423382832}
   - component: {fileID: 8962560555371870867}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_Base_UnB_Leg6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81d856b66e492e049b8325895c9c9991, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 5428156b0e655274988630fb8dcff8dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 3275573586967143306}

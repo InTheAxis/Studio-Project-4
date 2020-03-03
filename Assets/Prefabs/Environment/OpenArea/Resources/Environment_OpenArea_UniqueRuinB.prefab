@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 3261868577107999961}
   - component: {fileID: 2362476821423483240}
   - component: {fileID: 7299784621749088188}
-  - component: {fileID: 7869973385153259263}
   - component: {fileID: 6401341022045748823}
-  - component: {fileID: 4237921788447274898}
+  - component: {fileID: 7869973385153259263}
   - component: {fileID: 3169308958035666970}
   - component: {fileID: 1818469366585770451}
   - component: {fileID: 6982427334993758612}
@@ -118,27 +117,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8887850519325302215, guid: 3ba709208bddb4c44ac8545317185626, type: 3}
---- !u!114 &7869973385153259263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3853016659767183365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &6401341022045748823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +156,7 @@ MonoBehaviour:
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
---- !u!114 &4237921788447274898
+--- !u!114 &7869973385153259263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,7 +171,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 3169308958035666970}

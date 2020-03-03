@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5626152240468042194}
   - component: {fileID: 402515219938546069}
   - component: {fileID: 6019039690467349542}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_TallEnergyTowerC6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 5399318299753731518}

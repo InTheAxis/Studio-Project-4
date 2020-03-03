@@ -13,14 +13,13 @@ GameObject:
   - component: {fileID: 5507466982557970353}
   - component: {fileID: 2568995655727870875}
   - component: {fileID: 2243508795922025311}
-  - component: {fileID: 7739552662650650233}
   - component: {fileID: 201373878803963916}
-  - component: {fileID: 8734249093195869103}
+  - component: {fileID: 7739552662650650233}
   - component: {fileID: 7657985257132116736}
   - component: {fileID: 5313929175577067045}
   - component: {fileID: 1786584743758143625}
   - component: {fileID: 7756563960565807444}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_SmallEnergyTowerA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +95,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6076096997253536621}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -118,27 +117,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6654861242538051218, guid: 8d038405e4b2d6343b564ff466de4c32, type: 3}
---- !u!114 &7739552662650650233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6076096997253536621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &201373878803963916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,12 +147,12 @@ MonoBehaviour:
   dustParticles: {fileID: 5512566975316411008, guid: 6f7ec1452d2d1384f80ad2230afeda8e,
     type: 3}
   hitParticleSpawnChance: 0.65
-  breakForce: 100
+  breakForce: 5
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
---- !u!114 &8734249093195869103
+--- !u!114 &7739552662650650233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +167,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 7657985257132116736}

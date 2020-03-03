@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5841005133187941141}
   - component: {fileID: 6391669880685799594}
   - component: {fileID: 9055577508528719176}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_SmallEnergyTowerA6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4709962760025115196}

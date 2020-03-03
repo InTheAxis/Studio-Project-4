@@ -10,6 +10,25 @@ public class AudioController : MonoBehaviour
     protected List<Sound> sounds = new List<Sound>();
 
     protected AudioSource[] source;
+    private bool mixerSet = false;
+
+    public void SetSFX()
+    {
+        foreach (AudioSource audio in source)
+        {
+            audio.outputAudioMixerGroup = AudioInstance.instance.sfxMixer;
+        }
+        mixerSet = true;
+    }
+
+    public void SetMusic()
+    {
+        foreach (AudioSource audio in source)
+        {
+            audio.outputAudioMixerGroup = AudioInstance.instance.musicMixer;
+        }
+        mixerSet = true;
+    }
 
     public enum AudioState
     {
@@ -51,6 +70,13 @@ public class AudioController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!mixerSet)
+            Debug.LogError("Mixer not set: " + gameObject.name);
+        SetSFX();
+    }
+
     public void Stop(int index = 0)
     {
         source[index].Stop();
@@ -67,7 +93,7 @@ public class AudioController : MonoBehaviour
 
         if (index >= source.Length)
         {
-            Debug.LogError("[Audio] " + name + " sound does not exist! (Index=" + index + ")");
+            Debug.LogError("index out of range (Index=" + index + ")");
             return;
         }
 
@@ -109,5 +135,10 @@ public class AudioController : MonoBehaviour
     public void Play(string name, int index = 0)
     {
         SetAudio(name, AudioState.Play, index);
+    }
+
+    public void PlayIndex(int audioIndex, int index = 0)
+    {
+        SetAudio(sounds[audioIndex].clip.name, AudioState.Play, index);
     }
 }

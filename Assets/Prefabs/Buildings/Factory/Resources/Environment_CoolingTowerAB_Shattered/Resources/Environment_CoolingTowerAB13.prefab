@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6189051036849070561}
   - component: {fileID: 4136652309474322297}
   - component: {fileID: 235411504820554212}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_CoolingTowerAB13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 6951977133176834333}
