@@ -34,19 +34,27 @@ public abstract class StateGenericOptions : State
 
     [Header("Sound")]
     [SerializeField]
-    private AudioMixer audioMixer = null;
-    [SerializeField]
     private TextMeshProUGUI tmMasterVolume = null;
     [SerializeField]
     private TextMeshProUGUI tmEffectVolume = null;
     [SerializeField]
     private TextMeshProUGUI tmMusicVolume = null;
 
-    private Resolution[] resolutions = null;
 
 
     private IEnumerator iSlideIndicator = null;
     private GameObject currentSubMenu = null;
+
+    private GameplaySettings settings = null;
+
+    private void Awake()
+    {
+        StateController.Register(this);
+        settings = FindObjectOfType<GameplaySettings>();
+
+        if (settings == null)
+            Debug.Log("Could not find GameplaySettings!");
+    }
 
     #region Navigation
 
@@ -95,17 +103,17 @@ public abstract class StateGenericOptions : State
 
     public void setQuality(int index)
     {
-        QualitySettings.SetQualityLevel(index);
+        settings.setQuality(index);
     }
 
     public void setFullscreen(int index)
     {
-        Screen.fullScreen = index != 0;
+        settings.setFullscreen(index);
     }
 
     public void setResolution(int index)
     {
-        Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+        settings.setResolution(index);
     }
 
     public void setVSync(bool state)
@@ -114,15 +122,14 @@ public abstract class StateGenericOptions : State
         {
             vSyncOn.color = ThemeColors.positive;
             vSyncOff.color = ThemeColors.negative;
-            QualitySettings.vSyncCount = 1;
         }
         else
         {
             vSyncOn.color = ThemeColors.negative;
             vSyncOff.color = ThemeColors.positive;
-            QualitySettings.vSyncCount = 0;
-
         }
+
+        settings.setVSync(state);
     }
 
     #endregion
@@ -132,71 +139,24 @@ public abstract class StateGenericOptions : State
     public void onMasterVolumeChange(float value)
     {
         tmMasterVolume.text = ((int)(value * 100.0f)).ToString() + "%";
-        audioMixer.SetFloat("MasterVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
+        settings.setMasterVolume(value);
     }
 
 
     public void onEffectVolumeChange(float value)
     {
         tmEffectVolume.text = ((int)(value * 100.0f)).ToString() + "%";
-        audioMixer.SetFloat("SFXVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
+        settings.setEffectsVolume(value);
     }
 
 
     public void onMusicVolumeChange(float value)
     {
         tmMusicVolume.text = ((int)(value * 100.0f)).ToString() + "%";
-        audioMixer.SetFloat("MusicVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
+        settings.setMusicVolume(value);
     }
 
     #endregion
-
-
-    private void Awake()
-    {
-        StateController.Register(this);
-
-        /* Populate supported video resolutions */
-        if (resolutions == null)
-        {
-            resolutions = Screen.resolutions;
-            tmResolution.ClearOptions();
-            List<string> options = new List<string>();
-
-            int currentIndex = 0;
-            for (int i = 0; i < resolutions.Length; ++i)
-            {
-                string option = resolutions[i].width + " x " + resolutions[i].height + " " + resolutions[i].refreshRate + "hz";
-                options.Add(option);
-
-                /* Find current resolution's index */
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-                    currentIndex = i;
-            }
-            tmResolution.AddOptions(options);
-            tmResolution.value = currentIndex;
-            tmResolution.RefreshShownValue();
-        }
-
-        /* Update fullscreen status */
-        tmFullscreen.value = Screen.fullScreen ? 1 : 0;
-        tmFullscreen.RefreshShownValue();
-
-        /* Update quality settings */
-        tmQuality.value = QualitySettings.GetQualityLevel();
-        tmQuality.RefreshShownValue();
-
-        /* Update V-Sync Status */
-        setVSync(QualitySettings.vSyncCount != 0);
-
-        tmMasterVolume.text = "100%";
-        tmEffectVolume.text = "100%";
-        tmMusicVolume.text = "100%";
-    }
-    private void OnDestroy()
-    {
-        StateController.Unregister(this);
-    }
 
     public override void onShow()
     {
@@ -206,45 +166,29 @@ public abstract class StateGenericOptions : State
         for (int i = 1; i < subMenuHolder.childCount; ++i)
             subMenuHolder.GetChild(i).gameObject.SetActive(false);
 
-        /* Populate supported video resolutions */
-        if (resolutions == null)
-        {
-            resolutions = Screen.resolutions;
-            tmResolution.ClearOptions();
-            List<string> options = new List<string>();
-
-            int currentIndex = 0;
-            for (int i = 0; i < resolutions.Length; ++i)
-            {
-                string option = resolutions[i].width + " x " + resolutions[i].height + " " + resolutions[i].refreshRate + "hz";
-                options.Add(option);
-
-                /* Find current resolution's index */
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-                    currentIndex = i;
-            }
-            tmResolution.AddOptions(options);
-            tmResolution.value = currentIndex;
-            tmResolution.RefreshShownValue();
-        }
+        tmResolution.ClearOptions();
+        tmResolution.AddOptions(settings.options);
+        tmResolution.value = settings.currentResIndex;
+        tmResolution.RefreshShownValue();
 
         /* Update fullscreen status */
-        tmFullscreen.value = Screen.fullScreen ? 1 : 0;
+        tmFullscreen.value = settings.fullscreen ? 1 : 0;
         tmFullscreen.RefreshShownValue();
 
         /* Update quality settings */
-        tmQuality.value = QualitySettings.GetQualityLevel();
+        tmQuality.value = settings.qualityIndex;
         tmQuality.RefreshShownValue();
 
         /* Update V-Sync Status */
-        setVSync(QualitySettings.vSyncCount != 0);
+        setVSync(settings.vSync);
 
-        tmMasterVolume.text = "100%";
-        tmEffectVolume.text = "100%";
-        tmMusicVolume.text = "100%";
-
+        tmMasterVolume.text = ((int)settings.masterVol * 100.0f).ToString() + "%";
+        tmEffectVolume.text = ((int)settings.effectVol * 100.0f).ToString() + "%";
+        tmMusicVolume.text = ((int)settings.musicVol * 100.0f).ToString() + "%";
 
         base.onShow();
     }
 }
+
+
 

@@ -60,6 +60,8 @@ public class StateMainmenu : State
     public void toggleObject(GameObject go)
     {
         go.SetActive(!go.activeSelf);
+        if(go.activeSelf)
+            StartCoroutine(StateController.fadeCanvasGroup(go.GetComponent<CanvasGroup>(), true, 10.0f));
     }
 
     /* Animate the sliding of the indicator in the Y axis */

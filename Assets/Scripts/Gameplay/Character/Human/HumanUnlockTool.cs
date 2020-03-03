@@ -38,6 +38,7 @@ public class HumanUnlockTool : MonoBehaviourPun
 
         DisableAll();
     }
+
     public void Unlock(TYPE _type)
     {
         if (_type == TYPE.RANDOM)
@@ -45,6 +46,10 @@ public class HumanUnlockTool : MonoBehaviourPun
         DisableAll();
         tools[_type].enabled = true;
         Debug.LogFormat("Unlocked Tool of {0}", _type.ToString());
+
+        StateGameplay gameplay = StateController.getState("Gameplay") as StateGameplay;
+        if(gameplay != null)
+            gameplay.gainNewAbility(_type);
 
         photonView.RPC("abilityUnlockedRpc", RpcTarget.Others, (int)_type);
         abilityGainCallback?.Invoke(_type);
