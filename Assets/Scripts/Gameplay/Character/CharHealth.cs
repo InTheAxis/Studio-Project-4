@@ -150,7 +150,8 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
             StartCoroutine(respawnCorr);
         }
 
-        OnDead?.Invoke(PhotonView.Get(this).ViewID);
+        OnDead?.Invoke(PhotonView.Get(charControl).ViewID);
+        Debug.LogFormat("Sending ID, {0}", PhotonView.Get(charControl).ViewID);
 
         Debug.Log("Dieded");
     } 

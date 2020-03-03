@@ -68,5 +68,7 @@ MonoBehaviour:
   - Spawn
   - startGameRpc
   - receiveModelChangeRpc
+  - revivePlayer
+  - setPlayerID
   DisableAutoOpenWizard: 1
   ShowSettings: 1

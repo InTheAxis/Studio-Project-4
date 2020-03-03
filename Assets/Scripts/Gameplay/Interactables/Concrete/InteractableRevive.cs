@@ -131,7 +131,14 @@ public class InteractableRevive : InteractableBase
 
     public void SetPlayerToRevive(int _viewId)
     {
+        PhotonView.Get(this).RPC("setPlayerID", RpcTarget.All, _viewId);
+    }
+
+    [PunRPC]
+    private void setPlayerID(int _viewId)
+    {        
         playerViewId = _viewId;
+        Debug.LogFormat("Setting ID, {0}", playerViewId);
     }
 
     [PunRPC]
@@ -144,11 +151,13 @@ public class InteractableRevive : InteractableBase
             if (viewID == p.controller.photonView.ViewID)
                 target = p.controller;
         }
+        Debug.LogFormat("Recieved ID, {0}", viewID);
         if (target)
         { 
             target.GetComponent<CharHealth>().Respawn(1);
             Debug.LogFormat("Respawned {0}", target.name);
         }
-        Debug.Log("cant find player");
+        else
+            Debug.Log("cant find player");
     }
 }

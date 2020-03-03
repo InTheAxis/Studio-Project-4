@@ -130,8 +130,8 @@ Transform:
   m_Children:
   - {fileID: 3965659011430020964}
   - {fileID: 7920049456435621461}
-  - {fileID: 6723694920928197127}
-  - {fileID: 6862646314395203483}
+  - {fileID: 712030795307549071}
+  - {fileID: 463937934800392579}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
   cameraDist: 12
   cooldown: 1
   trail: {fileID: 0}
-  vfx: {fileID: 4206094659610911450}
+  vfx: {fileID: 463937934800399088}
 --- !u!82 &7337002632542305905
 AudioSource:
   m_ObjectHideFlags: 0
@@ -614,13 +614,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78a2fa57bfc8aa14a9c52ee3217f3684, type: 3}
---- !u!4 &6862646314395203483 stripped
+--- !u!4 &463937934800392579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6434862533323026467, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}
   m_PrefabInstance: {fileID: 463937934800390072}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &4206094659610911450 stripped
+--- !u!198 &463937934800399088 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4336739774868858210, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}
@@ -695,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f02098677631c04885bd03b63908a5d, type: 3}
---- !u!4 &6723694920928197127 stripped
+--- !u!4 &712030795307549071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6102088136487595396, guid: 3f02098677631c04885bd03b63908a5d,
     type: 3}
