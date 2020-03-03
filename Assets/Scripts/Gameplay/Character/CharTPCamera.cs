@@ -58,11 +58,11 @@ public class CharTPCamera : MonoBehaviour
     
     //[SerializeField]
     //[Tooltip("How much the camera bobs")]
-    private float cameraBobAmt = 0.1f;
+    private float cameraBobAmt = 0;
 
     //[SerializeField]
     //[Tooltip("How frequent the camera bobs")]
-    private float cameraBobFreq = 0.1f;
+    private float cameraBobFreq = 0;
 
     [Header("Crosshair")]
     [SerializeField]
@@ -173,16 +173,16 @@ public class CharTPCamera : MonoBehaviour
         StartCoroutine(camShakeCorr);
     }
 
-    public void SetTargetDist(float dist) //replaces the default set in inspector
-    {
-        defaultCamDist = targetCamDist = dist;
-    }
+    //public void SetTargetDist(float dist) //replaces the default set in inspector
+    //{
+    //    defaultCamDist = targetCamDist = dist;
+    //}
 
-    public void SetCameraBob(float bobAmt, float bobFreq) //replaces the default set in inspector
-    {
-        cameraBobAmt = bobAmt;
-        cameraBobFreq = bobFreq;
-    }
+    //public void SetCameraBob(float bobAmt, float bobFreq) //replaces the default set in inspector
+    //{
+    //    cameraBobAmt = bobAmt;
+    //    cameraBobFreq = bobFreq;
+    //}
 
     #endregion private Calls
 

@@ -326,7 +326,7 @@ public class DestructibleController : MonoBehaviourPun
 
                         //enable DamageData if have
                         DamageData damageData = collider.gameObject.GetComponent<DamageData>();
-                        if (damageData) damageData.SetIsDamaging();
+                        if (damageData) damageData.SetIsDamaging(playerController.gameObject);
                     }
 
                     Debug.Log("Throw!" + throwables.Count);

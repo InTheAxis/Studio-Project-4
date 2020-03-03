@@ -34,12 +34,12 @@ public class CharCrouchCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotInMask(ignore, other.gameObject.layer))
             canUnCrouch = false;
     }
     private void OnTriggerStay(Collider other)
     {
-        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotInMask(ignore, other.gameObject.layer))
             canUnCrouch = false;
     }
 

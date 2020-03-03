@@ -47,6 +47,12 @@ public class InteractableRevive : InteractableBase
 
         //if (!vfx.isEmitting)
         //    vfx.Play();
+
+        if (!BloodBootstrap.Instance.isEmitting)
+        { 
+            BloodBootstrap.Instance.SetEmitterSource(transform.position, transform.forward);
+            BloodBootstrap.Instance.Emit();
+        }
     }
 
     private void Update()
@@ -87,6 +93,8 @@ public class InteractableRevive : InteractableBase
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
+                if (BloodBootstrap.Instance.isEmitting)
+                    BloodBootstrap.Instance.StopEmit();
                 interactTime = timeToFinishInteraction;
                 Debug.Log("Revive interaction finished!");
                 if (humanAnim)
@@ -107,10 +115,14 @@ public class InteractableRevive : InteractableBase
                 }
                 if (humanAnim)
                     humanAnim.SabotagingDone(false);
+
+                if (BloodBootstrap.Instance.isEmitting)
+                    BloodBootstrap.Instance.StopEmit();
             }
 
             //if (vfx.isEmitting)
             //    vfx.Stop();
+
 
             interactTime = 0.0f;
             interactDone = false;

@@ -121,7 +121,7 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
         }
 
         OnHealthChange?.Invoke(charControl, hp, invulnerable);
-        Debug.Log("Took dmg, hp is " + hp);
+        Debug.LogFormat("{0} took dmg, hp is {1}", charControl.gameObject.name, hp);
     }
 
     public void Heal(int amt)
@@ -199,5 +199,11 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
             charControl.disableMovement = false;
             charControl.rb.isKinematic = false;
         }
+    }
+
+    [PunRPC]
+    public void takeDmgRPC(int dmg, float dot)
+    {
+        TakeDmg(dmg, dot);
     }
 }

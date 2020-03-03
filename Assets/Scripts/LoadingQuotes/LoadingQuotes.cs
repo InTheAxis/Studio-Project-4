@@ -11,18 +11,18 @@ public class LoadingQuotes : MonoBehaviour
     private TextMeshProUGUI displayText;
 
     [SerializeField]
-    private TYPE type = TYPE.ANY;
+    private List<TYPE> types;
 
     public enum TYPE
     {
-        ANY = 0,
+        //ANY = 0,
         WEATHER,
         TEMPERATURE,
         NUMBERS,
         JOKE,
         INSPIRATION,
 
-        Count,
+        //Count,
     };
 
     private Dictionary<TYPE, string> uris;
@@ -39,18 +39,30 @@ public class LoadingQuotes : MonoBehaviour
 
     private void Start()
     {
-        GetQuote(type);
+        //displayText.text = "null";
+        GetQuote(types);
     }
 
-    public void GetQuote(TYPE type = TYPE.ANY)
-    {
-        if (type == TYPE.ANY)
-            type = (TYPE)Random.Range((int)TYPE.ANY + 1, (int)TYPE.Count);
+    //public void GetQuote(TYPE type = TYPE.ANY)
+    //{
+    //    if (type == TYPE.ANY)
+    //        type = (TYPE)Random.Range((int)TYPE.ANY + 1, (int)TYPE.Count);
 
+    //    Debug.Log("Getting quote...");
+
+    //    if (uris.ContainsKey(type))
+    //        StartCoroutine(GetRequest(uris[type], type));
+    //    else
+    //        Debug.LogError("Missing uri");
+    //}
+
+    public void GetQuote(List<TYPE> types)
+    {
+        TYPE chosen = types[Random.Range(0, types.Count)];
         Debug.Log("Getting quote...");
 
-        if (uris.ContainsKey(type))
-            StartCoroutine(GetRequest(uris[type], type));
+        if (uris.ContainsKey(chosen))
+            StartCoroutine(GetRequest(uris[chosen], chosen));
         else
             Debug.LogError("Missing uri");
     }

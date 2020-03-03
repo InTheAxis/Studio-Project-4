@@ -14,13 +14,13 @@ public class CharJumpCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotInMask(ignore, other.gameObject.layer))
             airborne = false;        
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotInMask(ignore, other.gameObject.layer))
             airborne = false;
     }
 }

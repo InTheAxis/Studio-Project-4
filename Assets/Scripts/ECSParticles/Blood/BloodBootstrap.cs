@@ -1,11 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Unity.Entities;
 public struct BloodTag : IComponentData { }
 public class BloodBootstrap : ParticleBootstrap
 {
-    [Header("Emit Source and Direction")]
-    [SerializeField]
-    private Transform emitter = null;
+    public static BloodBootstrap Instance = null;
+        
+    //[SerializeField]
+    //private uint numEmitters = 1;
+
+    //public List<Transform> emitters;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -20,21 +30,9 @@ public class BloodBootstrap : ParticleBootstrap
 
     private void LateUpdate()
     {
-        if (emitter == null)
-        {
-            emitter = GameManager.monsterObj?.transform;
-            if (emitter == null)
-                return;
-        }
-
-        SetEmitterSource(emitter.position, emitter.forward);
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (isEmitting) StopEmit();
-            else Emit();
-        }
-#endif
+        //if (emitters.Count <= 0)
+        //    return;
+        //if (emitters[0])
+        //    SetEmitterSource(emitters[0].position, emitters[0].forward);
     }
 }
