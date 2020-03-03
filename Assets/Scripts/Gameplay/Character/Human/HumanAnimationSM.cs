@@ -111,7 +111,7 @@ public class HumanAnimationSM : MonoBehaviour
         Boolean("dead", health.dead);
         Boolean("moving", charControl.displacement > 0);
         Boolean("crouching", charControl.crouchChk.crouching);        
-        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < -1f);
+        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < Mathf.Epsilon);
         Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 1f);
     }
 
