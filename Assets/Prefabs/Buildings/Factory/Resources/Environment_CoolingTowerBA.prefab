@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2391902894852363759}
   - component: {fileID: 4100586642260438808}
   - component: {fileID: 7692220049492425211}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_CoolingTowerBA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7584663844631794089}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
   dustParticles: {fileID: 5512566975316411008, guid: 6f7ec1452d2d1384f80ad2230afeda8e,
     type: 3}
   hitParticleSpawnChance: 0.65
-  breakForce: 100
+  breakForce: 5
   minExplosionDir: {x: -1, y: -1, z: -1}
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}

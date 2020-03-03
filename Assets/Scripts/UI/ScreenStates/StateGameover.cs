@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 using TMPro;
 
 public class StateGameover : State
@@ -17,9 +18,26 @@ public class StateGameover : State
     [SerializeField]
     private int countSpeed = 1;
 
-
+    public static bool isGameover;
 
     public override string Name { get { return "Gameover"; } }
+
+    private void Awake()
+    {
+        StateController.Register(this);
+
+        if (isGameover)
+        {
+            isGameover = false;
+            PhotonNetwork.LeaveRoom();
+
+            StateController.showNext(Name);
+        }
+    }
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
+    }
 
     private void Update()
     {
@@ -28,7 +46,7 @@ public class StateGameover : State
 
     public void backToLobby()
     {
-
+        StateController.showNext("Mainmenu");
     }
 
     public void Quit()
@@ -58,11 +76,11 @@ public class StateGameover : State
 
     public override void onShow()
     {
+        base.onShow();
 
         StartCoroutine(countScore(tmInteraction, 3000));
         StartCoroutine(countScore(tmItems, 500));
         StartCoroutine(countScore(tmRevives, 1200));
         StartCoroutine(countScore(tmTotalScore, 3000+500+1200, 1.8f));
-        base.onShow();
     }
 }

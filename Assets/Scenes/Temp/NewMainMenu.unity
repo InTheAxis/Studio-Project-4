@@ -6165,6 +6165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378732803}
   - component: {fileID: 378732802}
+  - component: {fileID: 378732804}
   m_Layer: 0
   m_Name: GameplaySettings
   m_TagString: Untagged
@@ -6207,6 +6208,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378732804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378732801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea1be8bac7c69b4db18818360f8290c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxMixer: {fileID: -6320639218105242795, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
+  musicMixer: {fileID: -1991051408208092147, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e,
+    type: 2}
 --- !u!1 &381471626
 GameObject:
   m_ObjectHideFlags: 0

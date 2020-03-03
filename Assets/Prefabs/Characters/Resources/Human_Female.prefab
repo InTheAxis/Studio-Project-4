@@ -570,21 +570,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - clip: {fileID: 8300000, guid: 0f2757d8c31d9f5469d0b4367f95d6e2, type: 3}
-    volume: 0.5
+    volume: 0.19
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 405099c5ec01fdd47a52f9dc5db6c01b, type: 3}
-    volume: 0.5
+    volume: 0.287
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
-    volume: 0.5
+    volume: 0.625
     pitch: 1
     loop: 1
     playOnAwake: 0
@@ -1463,7 +1463,7 @@ PrefabInstance:
     - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.44
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5584791643462493646, guid: 04d3b3f968afea34790a69675508fe73,
         type: 3}

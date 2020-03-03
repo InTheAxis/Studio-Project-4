@@ -58,6 +58,7 @@ MonoBehaviour:
   - queryReleaseConstantUse
   - receiveGameEnd
   - receiveLoadingGameMsg
+  - receiveModelChangeRpc
   - receiveReadyList
   - receiveToggle
   - releaseControlToMasterRequest
@@ -68,8 +69,9 @@ MonoBehaviour:
   - Spawn
   - startGameRpc
   - receiveModelChangeRpc
+  - receivedForceGameEndRpc
   - revivePlayer
   - setPlayerID
   - playVFX
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0

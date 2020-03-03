@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShardAudioController : AudioController
 {
-    private float audioBuffer = 1;
+    private float audioBuffer = 2;
     private float lastAudio = 0;
 
     protected override void Awake()
@@ -14,8 +14,13 @@ public class ShardAudioController : AudioController
         Sound sound = new Sound();
         sound.clip = (AudioClip)Resources.Load("impact0", typeof(AudioClip));
         sound.pitch = 0.8f;
-        sound.volume = 0.2f;
+        sound.volume = 0.1f;
         sounds.Add(sound);
+    }
+
+    private void Start()
+    {
+        SetSFX();
     }
 
     public void CollideAudio()

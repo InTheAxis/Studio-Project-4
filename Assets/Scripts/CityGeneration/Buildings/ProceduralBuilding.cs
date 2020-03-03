@@ -9,6 +9,9 @@ public class ProceduralBuilding : MonoBehaviour
     //public values
     // public int seed = 0;
     [SerializeField]
+    public bool unbreakableAttachments = false;
+
+    [SerializeField]
     private float buildingRadius = 10;
 
     [SerializeField]
@@ -101,7 +104,7 @@ public class ProceduralBuilding : MonoBehaviour
                 GameObject meshRef = attachmentSlotScript.SelectMesh();
                 //if (!meshRef.GetComponent<PhotonView>())
                 //    meshRef.AddComponent<PhotonView>();
-                if(!meshRef)
+                if (!meshRef)
                 {
                     Debug.LogError("mesh is null on: " + gameObject.name);
                     continue;
@@ -109,7 +112,7 @@ public class ProceduralBuilding : MonoBehaviour
                 GameObject attachment = InstantiateHandler.mInstantiate(meshRef, slot.transform.position, Quaternion.identity, attachmentRoot.transform);
                 attachment.transform.rotation = slot.rotation;
                 attachment.transform.localScale = slot.localScale;
-                if (attachGo)
+                if (attachGo && unbreakableAttachments)
                 {
                     FixedJoint joint = attachment.GetComponent<FixedJoint>();
                     if (joint)

@@ -25,10 +25,15 @@ public class StateGameplay : State
     {
         StateController.showNext(Name);
     }
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
             StateController.showNext("GamePause");
     }
 

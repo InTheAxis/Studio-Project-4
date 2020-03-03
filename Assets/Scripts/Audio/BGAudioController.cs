@@ -11,4 +11,9 @@ public class BGAudioController : AudioController
         base.Awake();
         instance = this;
     }
+
+    private void Start()
+    {
+        SetMusic();
+    }
 }

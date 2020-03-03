@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MonsterApproach : MonoBehaviour
 {
@@ -23,11 +24,14 @@ public class MonsterApproach : MonoBehaviour
     private bool flickering;
     private Minimap3D minimap;
 
-    private void Start()
+    private void Awake()
     {
         audioController = BGAudioController.instance;
         offsetRange = outerRange - innerRange;
         minimap = GetComponentInChildren<Minimap3D>();
+        if (PhotonNetwork.IsMasterClient)
+            enabled = false;
+        audioController.SetMusic();
     }
 
     // Update is called once per frame

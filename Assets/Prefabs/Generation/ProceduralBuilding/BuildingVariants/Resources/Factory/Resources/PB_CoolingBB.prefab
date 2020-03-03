@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment_CoolingTowerBB
       objectReference: {fileID: 0}
+    - target: {fileID: 4843455771062167158, guid: c5218fb6a6a41294da55661f6ffdc68c,
+        type: 3}
+      propertyPath: breakForce
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5218fb6a6a41294da55661f6ffdc68c, type: 3}
 --- !u!1001 &7256697762796461998

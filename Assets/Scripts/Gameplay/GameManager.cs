@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void Spawn(Vector3 pos)
     {
+        // Preset as gameover so if we switch back to main menu before we receive game end RPC, we're set correctly
+        StateGameover.isGameover = true;
+
         pos.y = 5; //< spawn in the air
         int prefabIndex = (int)NetworkClient.getPlayerProperty("charModel");
         Debug.Log("Got prefab index " + prefabIndex);
@@ -60,6 +63,19 @@ public class GameManager : MonoBehaviourPun
         }
 
         setCamera(playerObj);
+    }
+
+    public void sendForceGameEnd(bool isHunterWin)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC("receivedForceGameEndRpc", RpcTarget.Others, isHunterWin);
+        else
+            Debug.LogError("sendForceGameEnd called on non-master client! This should not happen");
+    }
+    [PunRPC]
+    private void receivedForceGameEndRpc(bool isHunterWin)
+    {
+        WinLose.instance?.receiveGameEnd(isHunterWin);
     }
 
     private IEnumerator retrieveMonsterRef()
