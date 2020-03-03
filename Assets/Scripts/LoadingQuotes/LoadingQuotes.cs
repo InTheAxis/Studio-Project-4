@@ -39,7 +39,7 @@ public class LoadingQuotes : MonoBehaviour
 
     private void Start()
     {
-        displayText.text = "null";
+        //displayText.text = "null";
         GetQuote(type);
     }
 
