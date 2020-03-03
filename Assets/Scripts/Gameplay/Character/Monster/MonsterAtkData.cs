@@ -20,6 +20,7 @@ public class MonsterAtkData : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //i hate this .root
         CharHitBox hitbox = other.transform.root.gameObject.GetComponent<CharHitBox>();
         if (hitbox)
         {
@@ -31,7 +32,5 @@ public class MonsterAtkData : MonoBehaviour
             c.enabled = false;
             Debug.LogFormat("{0} hit player", gameObject.name);
         }
-          else
-            Debug.LogFormat("herllo");
     }
 }
