@@ -37,6 +37,5 @@ public class CharRevive : MonoBehaviour
             newObj.GetComponent<InteractableRevive>().SetPlayerToRevive(id);
             Debug.Log("Revive obj spawned(Master)");
         }
-            Debug.Log("Revive obj spawned");
     }
 }

@@ -17,11 +17,6 @@ public class ParticleBootstrap : MonoBehaviour
     protected Entity emitter;
     protected ParticleSystemData data;
 
-    private void Awake()
-    {
-        em = World.DefaultGameObjectInjectionWorld.EntityManager;
-    }
-
     private void OnDestroy()
     {
         DestroyEntities();
@@ -29,6 +24,7 @@ public class ParticleBootstrap : MonoBehaviour
 
     protected void Init(ComponentType systemTag)
     {
+        em = World.DefaultGameObjectInjectionWorld.EntityManager;
         EntityArchetype arch = em.CreateArchetype(
             //for transform
             typeof(Translation),
