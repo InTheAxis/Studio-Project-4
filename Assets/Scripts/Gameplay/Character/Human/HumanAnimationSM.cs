@@ -21,6 +21,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit += OnHit;
         destructible.pullStatus += AttackHold;
         destructible.throwStatus += AttackRelease;
@@ -29,6 +31,8 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+            return;
         hitbox.OnHit -= OnHit;
         destructible.pullStatus -= AttackHold;
         destructible.throwStatus -= AttackRelease;
@@ -37,9 +41,7 @@ public class HumanAnimationSM : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj == null)
-            return;
-        if (!GameManager.playerObj.GetComponent<CharTPController>().photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
+        if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
             return;
 
 
@@ -78,6 +80,8 @@ public class HumanAnimationSM : MonoBehaviour
     }
     private void OnHit(int i, float dot)
     {
+        if (health.invulnerable)
+            return;
         if (!health.dead && dot < 0)
             Trigger("hit");
     }
@@ -107,8 +111,8 @@ public class HumanAnimationSM : MonoBehaviour
         Boolean("dead", health.dead);
         Boolean("moving", charControl.displacement > 0);
         Boolean("crouching", charControl.crouchChk.crouching);        
-        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < -1f);        
-        Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 0);
+        Boolean("falling", charControl.jumpChk.airborne && charControl.velY < Mathf.Epsilon);
+        Boolean("jumping", charControl.jumpChk.airborne && charControl.velY > 1f);
     }
 
     private void Boolean(string next, bool b)

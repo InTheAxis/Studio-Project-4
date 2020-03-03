@@ -48,7 +48,7 @@ public class WinLose : MonoBehaviourPun
     {
         newPlayer.controller.GetComponent<CharHealth>().OnDead += onPlayerDied;
     }
-    private void onPlayerDied()
+    private void onPlayerDied(int viewId)
     {
         bool isHunterAlive = false;
         bool isSurvivorAlive = false;

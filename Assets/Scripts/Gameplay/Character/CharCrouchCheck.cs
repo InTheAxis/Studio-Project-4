@@ -23,15 +23,13 @@ public class CharCrouchCheck : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (canUnCrouch)
-        { 
-            crouching = keyPressed;
-        }
-        else        
+    {        
+        if (crouching && !canUnCrouch)
             crouching = true;
-        
-        charTop.enabled = !crouching;
+        else
+            crouching = keyPressed;
+        if (charTop)
+            charTop.enabled = !crouching;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,6 +37,12 @@ public class CharCrouchCheck : MonoBehaviour
         if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
             canUnCrouch = false;
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+            canUnCrouch = false;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         canUnCrouch = true;
