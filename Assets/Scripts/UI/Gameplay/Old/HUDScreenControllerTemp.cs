@@ -68,7 +68,7 @@ public class HUDScreenControllerTemp : Singleton<HUDScreenControllerTemp>
         GameManager.setCamera(GameManager.playerObj);
     }
 
-    private void playerDied()
+    private void playerDied(int i)
     {
         deadScreen.SetActive(true);
     }
