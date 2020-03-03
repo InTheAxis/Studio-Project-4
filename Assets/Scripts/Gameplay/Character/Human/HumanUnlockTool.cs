@@ -42,7 +42,7 @@ public class HumanUnlockTool : MonoBehaviourPun
     public void Unlock(TYPE _type)
     {
         if (_type == TYPE.RANDOM)
-            _type = (TYPE)Random.Range((int)TYPE.PULL, (int)TYPE.RANDOM);
+            _type = (TYPE)Random.Range((int)TYPE.PULL, (int)TYPE.PUSH + 1); //dont use stop and slow for now
         DisableAll();
         tools[_type].enabled = true;
         Debug.LogFormat("Unlocked Tool of {0}", _type.ToString());
