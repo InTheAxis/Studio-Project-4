@@ -66,5 +66,7 @@ MonoBehaviour:
   - setLight
   - setVel
   - Spawn
+  - startGameRpc
+  - receiveModelChangeRpc
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
