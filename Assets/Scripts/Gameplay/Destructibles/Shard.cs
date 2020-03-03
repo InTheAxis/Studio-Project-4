@@ -54,7 +54,9 @@ public class Shard : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        if (collision.relativeVelocity.sqrMagnitude < 5.0f) return;
+
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             if (monsterHit == null)
             {

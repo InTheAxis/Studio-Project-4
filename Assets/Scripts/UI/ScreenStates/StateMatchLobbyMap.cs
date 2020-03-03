@@ -23,7 +23,7 @@ public class StateMatchLobbyMap : State
 
     public override string Name { get { return "LobbyMap"; } }
 
-    private int currentMapIndex = 0;
+    public static int currentMapIndex { get; private set; } = 0;
 
     public void selectPrevious()
     {
@@ -45,6 +45,8 @@ public class StateMatchLobbyMap : State
     {
         mapDisplayImage.sprite = mapImages[currentMapIndex];
         tmMapTitle.text = mapTitles[currentMapIndex];
+
+        MapSelector.SelectMap((MapSelector.Maps)currentMapIndex);
     }
 
     public void Cancel()
@@ -57,5 +59,6 @@ public class StateMatchLobbyMap : State
         currentMapIndex = 0;
         selectMap();
         base.onShow();
+        StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
     }
 }

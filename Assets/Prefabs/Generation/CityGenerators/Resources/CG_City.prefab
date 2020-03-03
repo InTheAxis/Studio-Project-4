@@ -17,6 +17,24 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 899756740256859345, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: towerRef.Array.data[1]
+      value: 
+      objectReference: {fileID: 1473918356014582701, guid: 10c0409c94d2c384990548294fdb7980,
+        type: 3}
+    - target: {fileID: 899756740256859345, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: towerRef.Array.data[2]
+      value: 
+      objectReference: {fileID: 2890427126101484971, guid: e23a7236d540aad4b97d3b4dfd90e08a,
+        type: 3}
+    - target: {fileID: 899756740256859345, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: towerRef.Array.data[3]
+      value: 
+      objectReference: {fileID: 8479782126457469979, guid: c3c9681d6c1eb814aaaddf45cdfba88e,
+        type: 3}
     - target: {fileID: 1295911177967918045, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: numSpawn

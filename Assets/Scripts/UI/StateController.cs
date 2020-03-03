@@ -9,7 +9,7 @@ public static class StateController
 
     private static State currentState = null;
 
-    private const string initialState = "Login";
+    private const string initialState = "Splashscreen";
 
     public static void Register(State state)
     {
@@ -95,5 +95,39 @@ public static class StateController
     public static State getCurrentState()
     {
         return currentState;
+    }
+
+    public static State getState(string name)
+    {
+        if (!screenStates.ContainsKey(name))
+            return null;
+        else
+            return screenStates[name];
+    }
+
+    public static IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed)
+    {
+        float targetAlpha = fadeIn ? 1.0f : 0.0f;
+        canvas.alpha = 1.0f - targetAlpha;
+        while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
+        {
+            canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        canvas.alpha = targetAlpha;
+    }
+
+    public static IEnumerator fadeCanvasGroupAndHide(GameObject go, CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed)
+    {
+        float targetAlpha = fadeIn ? 1.0f : 0.0f;
+        canvas.alpha = 1.0f - targetAlpha;
+        while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
+        {
+            canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        canvas.alpha = targetAlpha;
+        go.SetActive(false);
+
     }
 }

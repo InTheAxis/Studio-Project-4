@@ -30,6 +30,7 @@ public class MapSelector : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
         if (sMap != Maps.NONE)
             map = sMap;
         if (map == Maps.MAX)

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 408108479153088121}
   - component: {fileID: 8715277547328347215}
   - component: {fileID: 3156578774166429878}
+  - component: {fileID: 2057672720101733542}
   m_Layer: 0
   m_Name: Environment_City_DigitalSignboardB_2
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2057672720101733542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743262765493015658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0833282, y: 2.6644042, z: 2.0833302}
+  m_Center: {x: -0.00000023841858, y: 1.3322021, z: -0.0000019073486}
