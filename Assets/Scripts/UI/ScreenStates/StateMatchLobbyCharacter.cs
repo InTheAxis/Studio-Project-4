@@ -46,10 +46,4 @@ public class StateMatchLobbyCharacter : State
     {
         StateController.Hide(Name);
     }
-
-    public override void onShow()
-    {
-        base.onShow();
-        StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
-    }
 }

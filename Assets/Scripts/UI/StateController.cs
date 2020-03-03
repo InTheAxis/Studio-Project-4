@@ -104,30 +104,4 @@ public static class StateController
         else
             return screenStates[name];
     }
-
-    public static IEnumerator fadeCanvasGroup(CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed)
-    {
-        float targetAlpha = fadeIn ? 1.0f : 0.0f;
-        canvas.alpha = 1.0f - targetAlpha;
-        while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
-        {
-            canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        canvas.alpha = targetAlpha;
-    }
-
-    public static IEnumerator fadeCanvasGroupAndHide(GameObject go, CanvasGroup canvas, bool fadeIn, float canvasFadeSpeed)
-    {
-        float targetAlpha = fadeIn ? 1.0f : 0.0f;
-        canvas.alpha = 1.0f - targetAlpha;
-        while (Mathf.Abs(targetAlpha - canvas.alpha) > 0.05f)
-        {
-            canvas.alpha = Mathf.Lerp(canvas.alpha, targetAlpha, Time.deltaTime * canvasFadeSpeed);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        canvas.alpha = targetAlpha;
-        go.SetActive(false);
-
-    }
 }
