@@ -65,6 +65,19 @@ public class GameManager : MonoBehaviourPun
         setCamera(playerObj);
     }
 
+    public void sendForceGameEnd(bool isHunterWin)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC("receivedForceGameEndRpc", RpcTarget.Others, isHunterWin);
+        else
+            Debug.LogError("sendForceGameEnd called on non-master client! This should not happen");
+    }
+    [PunRPC]
+    private void receivedForceGameEndRpc(bool isHunterWin)
+    {
+        WinLose.instance?.receiveGameEnd(isHunterWin);
+    }
+
     private IEnumerator retrieveMonsterRef()
     {
         MonsterEnergy comp = null;

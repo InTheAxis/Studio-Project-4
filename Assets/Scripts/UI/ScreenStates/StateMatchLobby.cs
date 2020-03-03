@@ -78,6 +78,12 @@ public class StateMatchLobby : State
     private void OnDestroy()
     {
         StateController.Unregister(this);
+
+        if (NetworkClient.instance != null)
+        {
+            NetworkClient.instance.playerJoinedCallback = null;
+            NetworkClient.instance.playerLeftCallback = null;
+        }
     }
 
     private void Update()
@@ -117,6 +123,8 @@ public class StateMatchLobby : State
                 return;
             }
 
+
+            ScreenStateHelperNetwork.instance.modelChangeCallback -= receivedCharModelChange;
             ScreenStateHelperNetwork.instance.startGame(toBeMasterClient);
         }
         else

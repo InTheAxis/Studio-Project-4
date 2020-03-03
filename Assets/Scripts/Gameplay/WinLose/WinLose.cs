@@ -108,7 +108,7 @@ public class WinLose : MonoBehaviourPun
 
     // Should only ever be called on remote clients
     [PunRPC]
-    private void receiveGameEnd(bool isHunterWin)
+    public void receiveGameEnd(bool isHunterWin)
     {
         gameEnded = true;
         ScreenStateController.ReturningFromInGame = true;
