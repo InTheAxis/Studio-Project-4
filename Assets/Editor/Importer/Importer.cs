@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Linq;
-
+using Photon.Pun;
+using Photon.Realtime;
 
 
 public class Importer : EditorWindow
@@ -94,6 +95,7 @@ public class Importer : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.HelpBox("Select the appropriate types and setting then click Export. Send the exported package to the programmers.", MessageType.Info);
         EditorGUILayout.Space();
+
 
 
         importerEnabled = EditorGUILayout.Toggle("Enabled", importerEnabled);
@@ -204,6 +206,9 @@ public class Importer : EditorWindow
 
         }
 
+        if (GUILayout.Button("Clean up PhotonViews"))
+            Cleanup();
+
     }
 
     public string getCategoryDir(bool relativeToProject)
@@ -243,8 +248,95 @@ public class Importer : EditorWindow
         int lastPos = line.LastIndexOf('/');
         line = line.Substring(1, lastPos);
         firstPos = line.IndexOf('/');
-        line = line.Substring(firstPos+1, line.Length - firstPos-2);
+        line = line.Substring(firstPos + 1, line.Length - firstPos - 2);
         return line;
+    }
+
+    public void Cleanup()
+    {
+        string[] dirToClean = { "Assets/Prefabs/Buildings", "Assets/Prefabs/Environment", "Assets/Prefabs/Props", "Assets/Prefabs/Generation/Areas" };
+
+        int count = 0;
+        foreach (string path in dirToClean)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+            FileInfo[] info = dir.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo f in info)
+            {
+                if (!f.ToString().EndsWith(".meta"))
+                {
+                    string assetPath = getRelativePath(f.ToString());
+                    GameObject test = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
+                    PrefabUtility.UnpackPrefabInstance(test, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
+                    Transform[] children = test.GetComponentsInChildren<Transform>();
+
+                    foreach (Transform t in children)
+                    {
+                        PhotonView[] views = t.GetComponents<PhotonView>();
+
+                        foreach(PhotonView v in views)
+                        {
+                            v.Synchronization = ViewSynchronization.UnreliableOnChange;
+                        }
+
+                        if (views.Length > 1)
+                        {
+                            //foreach(PhotonView view in views)
+                            //{
+                            //    if(view.ObservedComponents.Count == 0)
+                            //}
+                            if (views[0].ObservedComponents.Count == 0 && views[1].ObservedComponents.Count == 0)
+                            {
+                                Debug.Log("Something wrong: " + t.name);
+                            }
+                            else if (views[0].ObservedComponents.Count == 2 && views[1].ObservedComponents.Count == 2)
+                            {
+                                Debug.Log("Duplicate: " + t.name);
+                            }
+                            else
+                            {
+                                int toDelete = -1;
+
+                                for (int i = 0; i < views.Length; ++i)
+                                {
+                                    if (views[i].ObservedComponents.Count == 0 || (views[i].ObservedComponents.Count == 1 && views[i].ObservedComponents[0] == null))
+                                    {
+                                        toDelete = i;
+                                        break;
+                                    }
+                                }
+
+                                if (toDelete == -1)
+                                {
+                                    Debug.Log("Multiple full: " + t.name);
+                                    for (int i = 0; i < views.Length; ++i)
+                                    {
+                                        Debug.Log(i + ": " + views[i].ObservedComponents.Count);
+                                        if (views[i].ObservedComponents.Count == 1)
+                                            Debug.Log("Comp: " + views[i].ObservedComponents[0]);
+                                    }
+
+                                }
+                                else
+                                {
+                                    ++count;
+                                    Debug.Log("Cleaned: " + t.name);
+                                    DestroyImmediate(views[toDelete]);
+
+
+                                }
+                            }
+
+                        }
+
+                    }
+                    PrefabUtility.SaveAsPrefabAssetAndConnect(test, assetPath, InteractionMode.AutomatedAction);
+                    DestroyImmediate(test);
+                }
+            }
+        }
+        Debug.Log("Cleaned up: " + count);
     }
 
     public void Import()
@@ -288,8 +380,8 @@ public class Importer : EditorWindow
         shouldExport = false;
 
         addDirToExport("Assets/Prefabs/ProceduralBuilding/BuildingVariants");
-        for(int i = 0; i < mainCategory.Length; ++i)
-            for(int j = 0; j < subCategory.Length; ++j)
+        for (int i = 0; i < mainCategory.Length; ++i)
+            for (int j = 0; j < subCategory.Length; ++j)
                 addDirToExport("Assets/" + mainCategory[i] + "/" + subCategory[j]);
 
         string[] assetNames = exportAssetNames.ToArray();
@@ -422,7 +514,7 @@ public class Importer : EditorWindow
 
         if (isIncludeDestructible)
         {
-            if(destinationPath.EndsWith("_Shattered"))
+            if (destinationPath.EndsWith("_Shattered"))
             {
 
                 /* Instantiate shattered version */
@@ -431,7 +523,7 @@ public class Importer : EditorWindow
                 if (!Directory.Exists(shatteredPrefabPath))
                     Directory.CreateDirectory(shatteredPrefabPath);
 
-                GameObject shattered = (GameObject) PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
+                GameObject shattered = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
                 PrefabUtility.UnpackPrefabInstance(shattered, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
                 string nonShatteredName = rawName.Substring(0, rawName.LastIndexOf("_"));
@@ -468,7 +560,7 @@ public class Importer : EditorWindow
 
                 /* Save non-shattered prefab */
                 PrefabUtility.SaveAsPrefabAssetAndConnect(nonShattered, nonShatteredPrefabPath, InteractionMode.AutomatedAction);
-                
+
                 /* Destroy both GameObjects in scene */
                 DestroyImmediate(shattered);
                 DestroyImmediate(nonShattered);
@@ -480,7 +572,7 @@ public class Importer : EditorWindow
         }
 
 
-        if(!destinationPath.EndsWith("_Shattered"))
+        if (!destinationPath.EndsWith("_Shattered"))
         {
             /* Instantiate clone in scene */
             GameObject clone = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));

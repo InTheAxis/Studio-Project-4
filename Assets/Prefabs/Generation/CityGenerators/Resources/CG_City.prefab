@@ -33,7 +33,7 @@ PrefabInstance:
         type: 3}
       propertyPath: towerRef.Array.data[3]
       value: 
-      objectReference: {fileID: 8479782126457469979, guid: c3c9681d6c1eb814aaaddf45cdfba88e,
+      objectReference: {fileID: 8479782126457469979, guid: 01000000000000003021daed00000000,
         type: 3}
     - target: {fileID: 1295911177967918045, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
@@ -175,6 +175,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: CG_City
       objectReference: {fileID: 0}
+    - target: {fileID: 5890597339044720963, guid: 6c45f9aa9d148a444b3e52a6ef582933,
+        type: 3}
+      propertyPath: RoadRef
+      value: 
+      objectReference: {fileID: 8483622626547749704, guid: ff9d7f4308c74ad479bf1f7418ce004e,
+        type: 3}
     - target: {fileID: 6825961629638463272, guid: 6c45f9aa9d148a444b3e52a6ef582933,
         type: 3}
       propertyPath: m_TagString
