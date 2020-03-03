@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Revive : MonoBehaviour
+public class CharRevive : MonoBehaviour
 {
     [SerializeField]
     private GameObject reviveInteractable;
