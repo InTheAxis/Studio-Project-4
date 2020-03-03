@@ -22,11 +22,12 @@ public class MonsterMeleeAtk : MonoBehaviour
     {
         corr = null;
         timer = 0;
+        Debug.LogWarning("Remove charcontrol==null");
     }
 
     private void Update()
     {
-        if (!charControl.photonView.IsMine && PhotonNetwork.IsConnected)
+        if (charControl == null || (!charControl.photonView.IsMine && PhotonNetwork.IsConnected))
             return;
 
         pressed = Input.GetAxisRaw("Fire2") != 0;

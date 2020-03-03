@@ -231,8 +231,8 @@ public class CharTPCamera : MonoBehaviour
 
         if (charControl.displacement > 1)
         {
-            cameraBobTimer += Time.deltaTime * cameraBobFreq;
-            target.position += Vector3.up * cameraBobAmt * Mathf.Sin(cameraBobTimer);
+            cameraBobTimer += Time.deltaTime * charControl.cameraBobFreq;
+            target.position += Vector3.up * charControl.cameraBobAmt * Mathf.Sin(cameraBobTimer);
         }
         else
             cameraBobTimer = 0;

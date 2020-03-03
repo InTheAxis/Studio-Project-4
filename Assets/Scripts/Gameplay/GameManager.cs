@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviourPun
 
     public static void setCamera(CharTPController playerController)
     {
+        Debug.Log(PlayerSettings.playerName + " => " + playerController.transform.name);
         CharTPCamera.Instance?.SetCharController(playerController);
     }
 }

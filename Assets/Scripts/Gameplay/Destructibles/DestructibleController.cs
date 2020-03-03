@@ -304,9 +304,9 @@ public class DestructibleController : MonoBehaviourPun
                             Vector3 offset = hitPoint - collider.transform.position;
 
                             /* Add slight variations for aim assist fairness */
-                            offset.x += UnityEngine.Random.Range(aimAssistOffsetMin.x, aimAssistOffsetMax.x);
-                            offset.y += UnityEngine.Random.Range(aimAssistOffsetMin.y, aimAssistOffsetMax.y);
-                            offset.z += UnityEngine.Random.Range(aimAssistOffsetMin.z, aimAssistOffsetMax.z);
+                            //offset.x += UnityEngine.Random.Range(aimAssistOffsetMin.x, aimAssistOffsetMax.x);
+                            //offset.y += UnityEngine.Random.Range(aimAssistOffsetMin.y, aimAssistOffsetMax.y);
+                            //offset.z += UnityEngine.Random.Range(aimAssistOffsetMin.z, aimAssistOffsetMax.z);
                             targetDir = offset.normalized;
                         }
                         else
