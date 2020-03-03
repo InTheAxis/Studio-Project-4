@@ -46,7 +46,7 @@ public class HumanToolPush : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             //playVFX = true;
-            charControl.photonView.RPC("playVfxRpc", RpcTarget.All, true);
+            charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, true);
         }
         
     }
@@ -65,7 +65,7 @@ public class HumanToolPush : MonoBehaviour
                 clone.transform.localPosition = Vector3.zero;
                 clone.transform.forward = Camera.main.transform.forward;
                 Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
-                charControl.photonView.RPC("playVfxRpc", RpcTarget.All, false);
+                charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, false);
                 //playVFX = false;
             }
 
@@ -80,7 +80,7 @@ public class HumanToolPush : MonoBehaviour
     }
 
     [PunRPC]
-    private void playVfxRpc(bool b)
+    private void playVfxRpcPush(bool b)
     {
         playVFX = b;
     }

@@ -46,7 +46,7 @@ public class HumanToolPull : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         { 
             //playVFX = true;
-            charControl.photonView.RPC("playVfxRpc", RpcTarget.All, true);
+            charControl.photonView.RPC("playVfxRpcPull", RpcTarget.All, true);
         }
     }
 
@@ -64,7 +64,7 @@ public class HumanToolPull : MonoBehaviour
                 clone.transform.localPosition = new Vector3(0.0f, 0.0f, 15.0f);
                 clone.transform.forward = -transform.forward;
                 Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
-                charControl.photonView.RPC("playVfxRpc", RpcTarget.All, false);
+                charControl.photonView.RPC("playVfxRpcPull", RpcTarget.All, false);
                 //playVFX = false;
             }
 
@@ -76,7 +76,7 @@ public class HumanToolPull : MonoBehaviour
     }
 
     [PunRPC]
-    private void playVfxRpc(bool b)
+    private void playVfxRpcPull(bool b)
     {
         playVFX = b;
     }

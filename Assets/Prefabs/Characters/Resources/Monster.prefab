@@ -13,6 +13,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1761029257603288200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3402467719055927091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609993bc6d7866543b7eb6164bbb67f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 1
+  autoSetNotDamaging: 0
 --- !u!65 &6859369553275149879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,6 +165,7 @@ GameObject:
   - component: {fileID: 6066984036327698655}
   - component: {fileID: 4943199071075631875}
   - component: {fileID: 3023660623748070}
+  - component: {fileID: 3519577131178216787}
   - component: {fileID: 7337002632542305905}
   - component: {fileID: 8938800285176809476}
   - component: {fileID: 6057761047314330220}
@@ -430,7 +445,21 @@ MonoBehaviour:
   acceleration: 0.5
   cameraDist: 12
   cooldown: 1
+  dmgData: {fileID: 1761029257603288200}
   vfx: {fileID: 4206094659610911450}
+--- !u!114 &3519577131178216787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9117360599836359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2ff168d8252b741a92d3fe4ae601e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgData: {fileID: 1761029257603288200}
 --- !u!82 &7337002632542305905
 AudioSource:
   m_ObjectHideFlags: 0
@@ -597,10 +626,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9117360599836359460}
     m_Modifications:
+    - target: {fileID: 2336947021412082206, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2944282429862756807, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
         type: 3}
       propertyPath: m_Name
       value: MonsterChargeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944282429862756807, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6434862533323026467, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
         type: 3}
@@ -682,6 +721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterHitImpact
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098789413650356396, guid: 3f02098677631c04885bd03b63908a5d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6102088136487595396, guid: 3f02098677631c04885bd03b63908a5d,
         type: 3}
@@ -2254,12 +2298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8226b53aa1aa2e48b3930cd179609a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &886516775757303319 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9107986963222061843, guid: 04d3b3f968afea34790a69675508fe73,
-    type: 3}
-  m_PrefabInstance: {fileID: 8226840309704502532}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1094558408789626849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9014865867432764133, guid: 04d3b3f968afea34790a69675508fe73,
@@ -2281,6 +2319,12 @@ GameObject:
 --- !u!4 &8662849283538314104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 725928543837572732, guid: 04d3b3f968afea34790a69675508fe73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226840309704502532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &886516775757303319 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9107986963222061843, guid: 04d3b3f968afea34790a69675508fe73,
     type: 3}
   m_PrefabInstance: {fileID: 8226840309704502532}
   m_PrefabAsset: {fileID: 0}

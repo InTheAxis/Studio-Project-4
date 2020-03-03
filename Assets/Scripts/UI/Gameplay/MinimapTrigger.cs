@@ -25,13 +25,13 @@ public class MinimapTrigger : MonoBehaviour
     /* TODO: Ignore all ground */
     private void OnTriggerEnter(Collider collider)
     {
-        if (LayerMaskExt.CheckIfIgnored(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
+        if (LayerMaskExt.CheckIfInMask(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
             showHologram?.Invoke(collider.gameObject);
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        if (LayerMaskExt.CheckIfIgnored(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
+        if (LayerMaskExt.CheckIfInMask(buildingMask, collider.gameObject.layer) && collider.gameObject.name != "Ground")
             hideHologram?.Invoke(collider.gameObject);
     }
 }

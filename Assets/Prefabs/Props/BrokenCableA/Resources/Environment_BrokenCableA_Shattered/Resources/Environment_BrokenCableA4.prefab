@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 1
+  damaging: 0
+  autoSetNotDamaging: 1
 --- !u!114 &1360328708463698966
 MonoBehaviour:
   m_ObjectHideFlags: 0
