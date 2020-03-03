@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MonsterApproach : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class MonsterApproach : MonoBehaviour
         audioController = BGAudioController.instance;
         offsetRange = outerRange - innerRange;
         minimap = GetComponentInChildren<Minimap3D>();
+        if (PhotonNetwork.IsMasterClient)
+            enabled = false;
     }
 
     // Update is called once per frame
