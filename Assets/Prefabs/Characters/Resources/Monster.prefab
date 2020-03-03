@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7568851054981347502}
   - component: {fileID: 2592693972958539280}
-  - component: {fileID: 8221582588598173443}
+  - component: {fileID: 2168311854806717454}
   m_Layer: 10
   m_Name: Attack
   m_TagString: Hitbox
@@ -131,7 +131,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8221582588598173443
+--- !u!114 &2168311854806717454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,13 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5331770412846550240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 609993bc6d7866543b7eb6164bbb67f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1137aa44f18655b4ab97a9351033a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 1
-  damaging: 1
-  autoSetNotDamaging: 0
-  useTrigger: 1
 --- !u!1 &5949288199745249712
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +489,7 @@ MonoBehaviour:
   acceleration: 0.5
   cameraDist: 12
   cooldown: 1
-  dmgData: {fileID: 8221582588598173443}
+  atkData: {fileID: 0}
   attackColl: {fileID: 2592693972958539280}
   vfx: {fileID: 4206094659610911450}
 --- !u!114 &3519577131178216787
@@ -509,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
-  dmgData: {fileID: 8221582588598173443}
+  atkData: {fileID: 0}
   attackDuration: 0.3
   attackRate: 0.3
   attackColl: {fileID: 2592693972958539280}

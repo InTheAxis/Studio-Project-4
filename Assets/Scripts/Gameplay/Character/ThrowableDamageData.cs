@@ -7,19 +7,11 @@ using Photon.Pun;
 //put this on things that can hit stuff, on same level as collider.
 
 [RequireComponent(typeof(Collider))]
-public class DamageData : MonoBehaviour
+public class ThrowableDamageData : MonoBehaviour
 {
     public int dmg = 1;
-    public bool damaging;
-    //public bool damaging { private set; get; }
-
-    [SerializeField]
-    [Tooltip("Sets to not damaging when object stop moving \n Set this to true for throwables")]
-    private bool autoSetNotDamaging = true;
-
-    [SerializeField]
-    [Tooltip("Whether to check onTrigger")]
-    private bool useTrigger = false;
+    //public bool damaging;
+    public bool damaging { private set; get; }
 
     private Rigidbody rb;
     private bool moving;
@@ -37,34 +29,6 @@ public class DamageData : MonoBehaviour
         Debug.LogFormat("{0} is now damaging, ignoring {1}", gameObject.name, ignore.name);
         damaging = true;
         ignoreGo = ignore;
-    }
-
-    public void SetNotDamaging()
-    {
-        Debug.LogFormat("{0} is not damaging", gameObject.name);
-        damaging = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (damaging && other.gameObject != ignoreGo)
-        {
-            CharHitBox hitbox = other.gameObject.GetComponent<CharHitBox>();
-            if (hitbox)
-            {
-                float dot = Vector3.Dot(hitbox.transform.forward, (transform.position - hitbox.transform.position));
-                PhotonView view = PhotonView.Get(hitbox);
-                if (view)
-                    view.RPC("takeDmgRPC", RpcTarget.Others, dmg, dot);
-                hitbox.OnHit?.Invoke(dmg, dot);
-                damaging = false;
-                Debug.LogFormat("{0} hit player, ignoredGo is {1}", gameObject.name, ignoreGo?.name);
-            }
-        }
-        if (damaging && other.gameObject == ignoreGo)
-        {
-            Debug.LogFormat("Ignored, because ignoreGo is {0}", ignoreGo?.name);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -91,9 +55,6 @@ public class DamageData : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!autoSetNotDamaging)
-            return;
-
         moving = rb && rb.velocity.sqrMagnitude > 4;
 
         if (damaging && !moving)

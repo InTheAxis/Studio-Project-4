@@ -8,11 +8,9 @@ public class MonsterMeleeAtk : MonoBehaviour
     [SerializeField]
     private CharTPController charControl;
     [SerializeField]
-    private DamageData dmgData;
+    private float attackDuration = 0.1f;
     [SerializeField]
-    private float attackDuration = 0.3f;
-    [SerializeField]
-    private float attackRate = 0.3f;
+    private float attackCooldown = 0.3f;
     [SerializeField]
     private Collider attackColl;
     [SerializeField]
@@ -38,7 +36,7 @@ public class MonsterMeleeAtk : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (pressed && timer >= attackRate)
+        if (pressed && timer >= attackCooldown)
         {
             timer = 0;
             if (corr != null)
@@ -50,11 +48,9 @@ public class MonsterMeleeAtk : MonoBehaviour
 
     private IEnumerator StartDmg()
     {
-        dmgData.SetIsDamaging(gameObject);
         attackColl.enabled = true;
         monsterAnim.AttackHold(true);
         yield return new WaitForSeconds(attackDuration);
-        dmgData.SetNotDamaging();
         attackColl.enabled = false;
         monsterAnim.AttackRelease();
     }
