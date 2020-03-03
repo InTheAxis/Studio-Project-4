@@ -129,7 +129,7 @@ public class StateMatchLobby : State
         }
         else
         {
-            NetworkClient.instance.toggleReady(PlayerSettings.playerName);
+            NetworkClient.instance.toggleReady(PhotonNetwork.LocalPlayer.NickName);
         }
     }
     private string checkValidCharSelection(out Player playerToBeMaster)
