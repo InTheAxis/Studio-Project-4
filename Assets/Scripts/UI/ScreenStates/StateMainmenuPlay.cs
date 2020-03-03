@@ -43,11 +43,6 @@ public class StateMainmenuPlay : State
 
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void hostRoom()
     {
         isConnecting = true;
@@ -81,6 +76,7 @@ public class StateMainmenuPlay : State
         }
         isConnecting = false;
         base.onShow();
+        StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
     }
 
 

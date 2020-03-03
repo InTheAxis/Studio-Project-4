@@ -12384,6 +12384,7 @@ MonoBehaviour:
   playerHolder: {fileID: 429199189}
   tmReady: {fileID: 1853215447}
   mapMenuButton: {fileID: 1113465204}
+  indicator: {fileID: 0}
   stateLobbyChar: {fileID: 1603657904}
 --- !u!1 &854216191
 GameObject:
@@ -13961,6 +13962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmStatus: {fileID: 441556427}
+  loginOverlay: {fileID: 1171634516}
   tmUsername: {fileID: 1247493335}
   tmPassword: {fileID: 94076532}
 --- !u!1 &995693957
@@ -20850,7 +20852,6 @@ MonoBehaviour:
   tmResolution: {fileID: 906103944}
   vSyncOn: {fileID: 1818414870}
   vSyncOff: {fileID: 325388772}
-  audioMixer: {fileID: 24100000, guid: 29089bb3bf6a90e4d8fc7d8c7ff9dc5e, type: 2}
   tmMasterVolume: {fileID: 371507794}
   tmEffectVolume: {fileID: 733368462}
   tmMusicVolume: {fileID: 297975223}
