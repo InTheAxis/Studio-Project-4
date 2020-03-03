@@ -106,7 +106,7 @@ public class NewPlayerInfoController : MonoBehaviour
     }
     private void updateHealth(CharTPController player, int newAmt, bool invulnerable)
     {
-        getTargetPlayerInfo(player.photonView.Owner.NickName)?.setHealth(newAmt, invulnerable);
+        getTargetPlayerInfo(player.photonView.Owner?.NickName)?.setHealth(newAmt, invulnerable);
     }
 
     private NewPlayerInfo getTargetPlayerInfo(string name)

@@ -68,6 +68,7 @@ MonoBehaviour:
   - Spawn
   - startGameRpc
   - receiveModelChangeRpc
+  - receivedForceGameEndRpc
   - revivePlayer
   - setPlayerID
   - playVFX

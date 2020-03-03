@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using TMPro;
 
@@ -47,6 +48,13 @@ public class StateSpectate : State
     public void Disconnect()
     {
         Debug.Log("Disconnect");
+
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.sendForceGameEnd(false);
+        StateMainmenu.isReturningFromGame = true;
+        StateGameover.isGameover = false;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("NewMainMenu");
     }
 
     private void setNextPlayerSpectate(int offset)

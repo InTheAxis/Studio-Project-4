@@ -22,6 +22,23 @@ public class StateMainmenu : State
     private IEnumerator iSlideIndicator = null;
     private GameObject currentSubMenu = null;
 
+    public static bool isReturningFromGame = false;
+
+    private void Awake()
+    {
+        StateController.Register(this);
+        if (isReturningFromGame)
+        {
+            isReturningFromGame = false;
+
+            StateController.showNext(Name);
+        }
+    }
+    private void OnDestroy()
+    {
+        StateController.Unregister(this);
+    }
+
     public void Logout()
     {
         PlayerSettings.playerName = null;

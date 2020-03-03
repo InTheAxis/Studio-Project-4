@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using Photon.Pun;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -37,6 +39,13 @@ public class StateDeath : State
     public void Disconnect()
     {
         Debug.Log("Disconnect");
+
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.sendForceGameEnd(false);
+        StateMainmenu.isReturningFromGame = true;
+        StateGameover.isGameover = false;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("NewMainMenu");
     }
 
     public override void onShow()
