@@ -50,5 +50,23 @@ MonoBehaviour:
   - rpcDestroy
   - breakApart
   - destructibleEnsureOwnerIsReleased
+  - abilityUnlockedRpc
+  - applyForce
+  - helloRequest
+  - onRequestFail
+  - queryConstantUse
+  - queryReleaseConstantUse
+  - receiveGameEnd
+  - receiveLoadingGameMsg
+  - receiveReadyList
+  - receiveToggle
+  - releaseControlToMasterRequest
+  - remoteRequestSpawn
+  - rpcDestruct
+  - setLight
+  - setVel
+  - Spawn
+  - startGameRpc
+  - receiveModelChangeRpc
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
