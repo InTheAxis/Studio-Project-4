@@ -15,6 +15,8 @@ public class MonsterMeleeAtk : MonoBehaviour
     private float attackRate = 0.3f;
     [SerializeField]
     private Collider attackColl;
+    [SerializeField]
+    private MonsterAnimationSM monsterAnim;
 
     private bool pressed;
     private IEnumerator corr;
@@ -50,8 +52,10 @@ public class MonsterMeleeAtk : MonoBehaviour
     {
         dmgData.SetIsDamaging(gameObject);
         attackColl.enabled = true;
+        monsterAnim.AttackHold(true);
         yield return new WaitForSeconds(attackDuration);
-        attackColl.enabled = false;
         dmgData.SetNotDamaging();
+        attackColl.enabled = false;
+        monsterAnim.AttackRelease();
     }
 }

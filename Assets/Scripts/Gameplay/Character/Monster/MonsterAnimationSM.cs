@@ -65,7 +65,7 @@ public class MonsterAnimationSM : MonoBehaviour
         CalculateState();
     }
 
-    private void AttackHold(bool b)
+    public void AttackHold(bool b)
     {
         if (!b)
             return;
@@ -73,7 +73,7 @@ public class MonsterAnimationSM : MonoBehaviour
         Boolean("attackHolding", true);
     }
 
-    private void AttackRelease()
+    public void AttackRelease()
     {
         Boolean("attackHolding", false);
         animator.ResetTrigger("attack");
