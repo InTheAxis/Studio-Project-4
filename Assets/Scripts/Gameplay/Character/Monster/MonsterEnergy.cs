@@ -56,8 +56,8 @@ public class MonsterEnergy : MonoBehaviour
     }
     public bool UseUp(float amt)
     {
-        //if (energy < amt)
-        //    return false;
+        if (energy <= 0)
+            return false;
 
         energy -= amt;
         if (energy <= 0)

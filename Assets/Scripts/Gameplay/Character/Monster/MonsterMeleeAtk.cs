@@ -13,6 +13,10 @@ public class MonsterMeleeAtk : MonoBehaviour
     private float attackDuration = 0.3f;
     [SerializeField]
     private float attackRate = 0.3f;
+    [SerializeField]
+    private Collider attackColl;
+    [SerializeField]
+    private MonsterAnimationSM monsterAnim;
 
     private bool pressed;
     private IEnumerator corr;
@@ -22,12 +26,12 @@ public class MonsterMeleeAtk : MonoBehaviour
     {
         corr = null;
         timer = 0;
-        Debug.LogWarning("Remove charcontrol==null");
+        attackColl.enabled = false;
     }
 
     private void Update()
     {
-        if (charControl == null || (!charControl.photonView.IsMine && PhotonNetwork.IsConnected))
+        if (!charControl.photonView.IsMine && PhotonNetwork.IsConnected)
             return;
 
         pressed = Input.GetAxisRaw("Fire2") != 0;
@@ -47,7 +51,11 @@ public class MonsterMeleeAtk : MonoBehaviour
     private IEnumerator StartDmg()
     {
         dmgData.SetIsDamaging(gameObject);
+        attackColl.enabled = true;
+        monsterAnim.AttackHold(true);
         yield return new WaitForSeconds(attackDuration);
         dmgData.SetNotDamaging();
+        attackColl.enabled = false;
+        monsterAnim.AttackRelease();
     }
 }
