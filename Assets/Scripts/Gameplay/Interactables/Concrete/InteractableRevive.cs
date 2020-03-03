@@ -143,7 +143,7 @@ public class InteractableRevive : InteractableBase
     }
 
     [PunRPC]
-    private void revivePlayer(int viewID, PhotonMessageInfo messageInfo)
+    private void revivePlayer(int viewID)
     {
         //respawn player
         CharTPController target = null;
