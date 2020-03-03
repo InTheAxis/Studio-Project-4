@@ -13,7 +13,7 @@ public class DestructibleAudioController : MonoBehaviour
         sound = new Sound();
         sound.clip = (AudioClip)Resources.Load("destruct0", typeof(AudioClip));
         sound.pitch = 1;
-        sound.volume = 0.5f;
+        sound.volume = 0.2f;
     }
 
     public void DestructAudio()
@@ -21,6 +21,7 @@ public class DestructibleAudioController : MonoBehaviour
         audioGO = Instantiate(new GameObject("BuildingAudio"), transform.position, Quaternion.identity);
         audioGO.AddComponent<AudioSource>();
         audioGO.AddComponent<AudioController>();
+        audioGO.GetComponent<AudioController>().SetSFX();
         audioGO.GetComponent<AudioController>().Add(sound);
         audioGO.GetComponent<AudioController>().Play("destruct0");
     }

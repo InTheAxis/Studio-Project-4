@@ -50,6 +50,8 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
 
         }
 
+        
+
         if(PlayerPrefs.HasKey("settings-vsync"))
         {
             vSync = PlayerPrefs.GetInt("settings-vsync") >= 1;
@@ -62,9 +64,9 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
         else
         {
             vSync = QualitySettings.vSyncCount >= 1;
-            masterVol = 1.0f;
-            effectVol = 1.0f;
-            musicVol = 1.0f;
+            masterVol = 0.25f;
+            effectVol = 0.50f;
+            musicVol = 0.30f;
             qualityIndex = QualitySettings.GetQualityLevel();
             fullscreen = Screen.fullScreen;
         }
@@ -102,23 +104,23 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
 
     public void setMasterVolume(float value)
     {
-        audioMixer.SetFloat("MasterVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
         masterVol = value;
         PlayerPrefs.SetFloat("settings-mastervol", masterVol);
+        audioMixer.SetFloat("MasterVolume", masterVol * 80.0f - 80.0f);
     }
 
     public void setEffectsVolume(float value)
     {
-        audioMixer.SetFloat("SFXVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
         effectVol = value;
         PlayerPrefs.SetFloat("settings-effectvol", effectVol);
+        audioMixer.SetFloat("SFXVolume", effectVol * 80.0f - 80.0f);
     }
 
     public void setMusicVolume(float value)
     {
-        audioMixer.SetFloat("MusicVolume", value.Remap(0.0f, 1.0f, -80.0f, 0.0f));
         musicVol = value;
         PlayerPrefs.SetFloat("settings-musicvol", musicVol);
+        audioMixer.SetFloat("MusicVolume", musicVol * 80.0f - 80.0f);
     }
 
     public void applyCurrentSettings()
@@ -126,9 +128,9 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
         QualitySettings.SetQualityLevel(qualityIndex);
         Screen.SetResolution(resolutions[currentResIndex].width, resolutions[currentResIndex].height, fullscreen);
         QualitySettings.vSyncCount = vSync ? 1 : 0;
-        audioMixer.SetFloat("MasterVolume", masterVol.Remap(0.0f, 1.0f, -80.0f, 0.0f));
-        audioMixer.SetFloat("SFXVolume", effectVol.Remap(0.0f, 1.0f, -80.0f, 0.0f));
-        audioMixer.SetFloat("MusicVolume", musicVol.Remap(0.0f, 1.0f, -80.0f, 0.0f));
+        audioMixer.SetFloat("MasterVolume", masterVol * 80.0f - 80.0f);
+        audioMixer.SetFloat("SFXVolume", effectVol * 80.0f - 80.0f);
+        audioMixer.SetFloat("MusicVolume", musicVol * 80.0f - 80.0f);
     }
 
     public void saveAll()
@@ -147,5 +149,20 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
         saveAll();
     }
 
+
+    private float Remap(float from, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        var fromAbs = from - fromMin;
+        var fromMaxAbs = fromMax - fromMin;
+
+        var normal = fromAbs / fromMaxAbs;
+
+        var toMaxAbs = toMax - toMin;
+        var toAbs = toMaxAbs * normal;
+
+        var to = toAbs + toMin;
+
+        return to;
+    }
 
 }

@@ -279,7 +279,7 @@ public class DestructibleController : MonoBehaviourPun
                     /* Make held objects fly towards target object */
                     if (enableAimAssist)
                     {
-                        aimHits = Physics.RaycastAll(cameraTransform.position, cameraTransform.forward, 50.0f, aimMask);
+                        aimHits = Physics.RaycastAll(cameraTransform.position, cameraTransform.forward, 100.0f, aimMask);
 
                         if (aimHits.Length > 0)
                         {
@@ -310,7 +310,7 @@ public class DestructibleController : MonoBehaviourPun
                         }
                         else
                         {
-                            targetDir = cameraTransform.forward;
+                            targetDir = GameManager.playerObj.transform.forward;
                         }
 
                         // Tell master client to release ownership back to scene
@@ -319,6 +319,8 @@ public class DestructibleController : MonoBehaviourPun
                         collider.attachedRigidbody.isKinematic = false;
                         collider.attachedRigidbody.useGravity = true;
                         NetworkOwnership.instance.releaseOwnership(colliderView, null, null);
+
+                        Debug.Log(targetDir * throwForce);
                         photonView.RPC("destructibleReleaseOwner", RpcTarget.MasterClient, colliderView.ViewID, targetDir * throwForce);
 
                         //enable DamageData if have
@@ -326,7 +328,7 @@ public class DestructibleController : MonoBehaviourPun
                         if (damageData) damageData.SetIsDamaging(playerController.gameObject);
                     }
 
-                    Debug.Log("Throw!");
+                    Debug.Log("Throw!" + throwables.Count);
                     canThrow = false;
                     throwStatus?.Invoke();
                     // audio

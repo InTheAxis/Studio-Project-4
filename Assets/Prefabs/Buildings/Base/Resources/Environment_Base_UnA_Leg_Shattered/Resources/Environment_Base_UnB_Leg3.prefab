@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4667378429833271865}
   - component: {fileID: 5804595979226335204}
   - component: {fileID: 1190640915314886689}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Environment_Base_UnB_Leg3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81d856b66e492e049b8325895c9c9991, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 5428156b0e655274988630fb8dcff8dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
