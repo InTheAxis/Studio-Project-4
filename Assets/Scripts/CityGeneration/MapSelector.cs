@@ -16,7 +16,7 @@ public class MapSelector : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject[] mapGenerators;
+    private List<GameObject> mapGenerators;
 
     [SerializeField]
     private Maps map;
