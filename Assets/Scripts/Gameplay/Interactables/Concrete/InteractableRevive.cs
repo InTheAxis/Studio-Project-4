@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 [RequireComponent(typeof(PhotonView))]
 public class InteractableRevive : InteractableBase
@@ -30,10 +31,21 @@ public class InteractableRevive : InteractableBase
     
     private int playerViewId = -1;
     private float timeoutCounter;
+    private bool isLocalDead = false;
+
+    private TextMeshProUGUI tmCountdown = null;
 
     private void Start()
     {
         thisView = PhotonView.Get(this);
+        isLocalDead = (playerViewId == GameManager.playerObj.GetPhotonView().ViewID);
+        tmCountdown = StateController.getState("Death").transform.Find("Countdown").GetComponent<TextMeshProUGUI>();
+
+        if(tmCountdown == null)
+        {
+            Debug.LogError("Countdown UI not set!");
+            return;
+        }
     }
     public override string getInteractableName() { return "Revive"; }
 
@@ -55,6 +67,8 @@ public class InteractableRevive : InteractableBase
             thisView.RPC("playEcsVfx", RpcTarget.All, true);
 
         timeoutCounter = 0;
+
+
     }
 
     private void Update()
@@ -69,9 +83,15 @@ public class InteractableRevive : InteractableBase
         }
         timeoutCounter += Time.deltaTime;
         
+
         if (timeoutCounter > timeout)
         {
-            //REVIVE GUNNA DISAPPEAR HERE ELSON
+            if(isLocalDead)
+            {
+                int timer = (int)timeoutCounter;
+                timer = Mathf.Max(0, timer);
+                tmCountdown.text = timer.ToString() + "s";
+            }
             destroyThis(); 
         }
     }

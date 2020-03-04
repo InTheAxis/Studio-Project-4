@@ -132,6 +132,7 @@ public class StateMatchLobby : State
                 return;
             }
 
+            // RPC to original master client to start game
             ScreenStateHelperNetwork.instance.modelChangeCallback -= receivedCharModelChange;
             ScreenStateHelperNetwork.instance.startGame(toBeMasterClient);
         }
@@ -272,7 +273,7 @@ public class StateMatchLobby : State
     private void onModelSelect(int index, bool isSelf)
     {
 
-        /* LOCAL SELECTION */
+        /* Local selection */
         if (isSelf)
         {
             /* I am now the monster*/
@@ -292,7 +293,7 @@ public class StateMatchLobby : State
             mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
         }
 
-        /* VALIDITY CHECK */
+        /* Validity check */
         string result = quickCheckValidSelection();
         if(result.Length != 0)
         {
