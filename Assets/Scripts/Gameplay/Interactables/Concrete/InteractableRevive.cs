@@ -29,7 +29,7 @@ public class InteractableRevive : InteractableBase
     private MonsterAnimationSM monsterAnim = null;
     
     private int playerViewId = -1;
-    private float timer;
+    private float timeoutCounter;
 
     private void Start()
     {
@@ -53,6 +53,8 @@ public class InteractableRevive : InteractableBase
 
         if (!BloodBootstrap.Instance.isEmitting)
             thisView.RPC("playEcsVfx", RpcTarget.All, true);
+
+        timeoutCounter = 0;
     }
 
     private void Update()
@@ -65,9 +67,9 @@ public class InteractableRevive : InteractableBase
                 monsterAnim = GameManager.playerObj.GetComponent<MonsterAnimationSM>();
             }
         }
-        timer += Time.deltaTime;
+        timeoutCounter += Time.deltaTime;
         
-        if (timer > timeout)
+        if (timeoutCounter > timeout)
         {
             //REVIVE GUNNA DISAPPEAR HERE ELSON
             destroyThis(); 
@@ -169,7 +171,7 @@ public class InteractableRevive : InteractableBase
     {
         //might not have thisView yet
         PhotonView.Get(this).RPC("setPlayerID", RpcTarget.All, _viewId);
-        timer = 0;
+        timeoutCounter = 0;
     }
 
     [PunRPC]
