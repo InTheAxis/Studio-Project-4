@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: TreeBranches
   m_EditorClassIdentifier: 
   meshList:
-  - go: {fileID: 782499778097897224, guid: 0333c75c31a3e8e42a77dfc47b724992, type: 3}
+  - go: {fileID: 7343820278930768306, guid: 4f4f91ded7e5c1d458e81d5217d2365d, type: 3}
     weight: 100
-    chance: 0.30674848
-  - go: {fileID: 666706040482052627, guid: 432ca8e651fb1084d9f2dde968ef8fcd, type: 3}
+    chance: 0.25
+  - go: {fileID: 6965022133076942070, guid: 02d9284e0e6e6c74184ac129bd9ab66d, type: 3}
     weight: 100
-    chance: 0.30674848
-  - go: {fileID: 7343820278930768306, guid: e328c6413ffd13d4791fd6cb5f618450, type: 3}
-    weight: 62
-    chance: 0.19018404
-  - go: {fileID: 6965022133076942070, guid: 48c9a1674bca73f46a24e7a7b7ed2064, type: 3}
-    weight: 64
-    chance: 0.19631901
+    chance: 0.25
+  - go: {fileID: 782499778097897224, guid: c44f7a95326a2174a8d5d551cf967f91, type: 3}
+    weight: 100
+    chance: 0.25
+  - go: {fileID: 666706040482052627, guid: a715b591ca64e214ebd01c297e6d7ae3, type: 3}
+    weight: 100
+    chance: 0.25

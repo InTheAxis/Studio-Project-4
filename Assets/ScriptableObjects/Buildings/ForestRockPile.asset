@@ -13,33 +13,21 @@ MonoBehaviour:
   m_Name: ForestRockPile
   m_EditorClassIdentifier: 
   meshList:
-  - go: {fileID: 6990274515055898977, guid: 14a8836d4a722404690ebb99a7b3ae75, type: 3}
+  - go: {fileID: 7343820278930768306, guid: 4f4f91ded7e5c1d458e81d5217d2365d, type: 3}
     weight: 14
-    chance: 0.023140496
-  - go: {fileID: 5152396125636253989, guid: 0ab196057a76ba847a11a8c627760d95, type: 3}
-    weight: 17
-    chance: 0.028099174
-  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
-    weight: 12
-    chance: 0.01983471
-  - go: {fileID: 3202216801028584327, guid: d4da86894e463254a8c533c8a59e93a4, type: 3}
-    weight: 49
-    chance: 0.08099174
-  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
-    weight: 13
-    chance: 0.021487603
-  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
-    weight: 100
-    chance: 0.16528925
-  - go: {fileID: 7991573148552811218, guid: 144a1325d391c1b40bd8c3df8d668c90, type: 3}
-    weight: 100
-    chance: 0.16528925
-  - go: {fileID: 3945273138713688359, guid: 765df7fa8fa52e64eac49fec7f968888, type: 3}
-    weight: 100
-    chance: 0.16528925
-  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
-    weight: 100
-    chance: 0.16528925
+    chance: 0.08383234
+  - go: {fileID: 782499778097897224, guid: c44f7a95326a2174a8d5d551cf967f91, type: 3}
+    weight: 41
+    chance: 0.24550898
+  - go: {fileID: 666706040482052627, guid: a715b591ca64e214ebd01c297e6d7ae3, type: 3}
+    weight: 38
+    chance: 0.2275449
+  - go: {fileID: 6965022133076942070, guid: 02d9284e0e6e6c74184ac129bd9ab66d, type: 3}
+    weight: 22
+    chance: 0.13173653
   - go: {fileID: 8159327852960417195, guid: 3c998800ad54c1c43b066d12a0021e33, type: 3}
-    weight: 100
-    chance: 0.16528925
+    weight: 13
+    chance: 0.077844314
+  - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
+    weight: 39
+    chance: 0.23353294
