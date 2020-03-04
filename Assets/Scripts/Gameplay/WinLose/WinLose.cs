@@ -78,10 +78,10 @@ public class WinLose : MonoBehaviourPun
 
         if (!gameEnded)
         {
-            if (Input.GetKeyDown(KeyCode.K))
-                gameEnd(true);
-            else if (Input.GetKeyDown(KeyCode.J))
-                gameEnd(false);
+            //if (Input.GetKeyDown(KeyCode.K))
+            //    gameEnd(true);
+            //else if (Input.GetKeyDown(KeyCode.J))
+                //gameEnd(false);
         }
         else
         {
