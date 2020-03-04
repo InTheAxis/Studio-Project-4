@@ -209,6 +209,8 @@ public class Importer : EditorWindow
         if (GUILayout.Button("Clean up PhotonViews"))
             Cleanup();
 
+        if (GUILayout.Button("Clean up DamageData"))
+            CleanUpDamageData();
     }
 
     public string getCategoryDir(bool relativeToProject)
@@ -329,6 +331,58 @@ public class Importer : EditorWindow
                             }
 
                         }
+
+                    }
+                    PrefabUtility.SaveAsPrefabAssetAndConnect(test, assetPath, InteractionMode.AutomatedAction);
+                    DestroyImmediate(test);
+                }
+            }
+        }
+        Debug.Log("Cleaned up: " + count);
+    }
+
+    public void CleanUpDamageData()
+    {
+        string[] dirToClean = { "Assets/Prefabs/Buildings", "Assets/Prefabs/Environment", "Assets/Prefabs/Props", "Assets/Prefabs/Generation/Areas" };
+
+        int count = 0;
+        foreach (string path in dirToClean)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+            FileInfo[] info = dir.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo f in info)
+            {
+                if (!f.ToString().EndsWith(".meta"))
+                {
+                    string assetPath = getRelativePath(f.ToString());
+                    GameObject test = (GameObject)PrefabUtility.InstantiatePrefab((GameObject)AssetDatabase.LoadMainAssetAtPath(assetPath));
+                    PrefabUtility.UnpackPrefabInstance(test, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
+                    Transform[] children = test.GetComponentsInChildren<Transform>();
+
+                    foreach (Transform t in children)
+                    {
+                        PhotonView[] views = t.GetComponents<PhotonView>();
+
+                        foreach (PhotonView v in views)
+                        {
+                            List<Component> components = v.ObservedComponents;
+                            if(components.Count > 0)
+                            {
+                                foreach(Component c in components)
+                                {
+                                    ThrowableDamageData damageData = c as ThrowableDamageData;
+                                    if (damageData != null)
+                                    {
+                                        ++count;
+                                        components.Remove(damageData);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        
 
                     }
                     PrefabUtility.SaveAsPrefabAssetAndConnect(test, assetPath, InteractionMode.AutomatedAction);
