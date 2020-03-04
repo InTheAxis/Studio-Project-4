@@ -33,7 +33,7 @@ public class CharLookTargetController : MonoBehaviour
         }
 
         inp.map = Input.GetKeyDown(KeyCode.M);
-        inp.front = Input.GetKeyDown(KeyCode.O);
+        inp.front = Input.GetKeyDown(KeyCode.Alpha5);
 
         if (inp.map)
         {
@@ -55,9 +55,9 @@ public class CharLookTargetController : MonoBehaviour
         else if (inp.front)
         {
             if (tpCam.IsLookingAtIdx() == 0)
-                tpCam.LookAt("Front", 2);
+                tpCam.LookAt("Front", 4);
             else if (tpCam.IsLookingAt() == "Front")
-                tpCam.LookAt("FrontSide", 2);
+                tpCam.LookAt("FrontSide", 4);
             else if (tpCam.IsLookingAt() == "FrontSide")
                 tpCam.LookAtPlayer();
         }

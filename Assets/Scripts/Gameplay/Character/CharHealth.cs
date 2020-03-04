@@ -81,8 +81,9 @@ public class CharHealth : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-            Respawn(1);
+        if (charControl.photonView.IsMine && PhotonNetwork.IsConnected)
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+                Respawn(1);
     }
 
     public void Respawn(float invulTime)
