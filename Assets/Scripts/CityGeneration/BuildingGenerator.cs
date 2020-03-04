@@ -69,7 +69,7 @@ public class BuildingGenerator : Generator
         foreach (PoissonPoint pos in poisson.GetPoints(towerGenerator.GetPoisson().GetPoints(1).Count + cellGenerator.buildingCells.Count + 1 + 5))
         {
             Vector3 vpos = pos.pos;
-            vpos.y += 2f;
+            vpos.y += 0.1f;
             // check for road
             bool emptySpot = true;
             GameObject buildingRef = cityGenerator.city.SelectMesh();
