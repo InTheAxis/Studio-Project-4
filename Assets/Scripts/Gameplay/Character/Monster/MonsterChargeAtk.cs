@@ -15,9 +15,9 @@ public class MonsterChargeAtk : MonoBehaviour
     [SerializeField]
     private float enerConsumption = 10;
     [SerializeField]
-    private float duration = 1;
+    private float duration = 2;
     [SerializeField]
-    private float chargeDist = 20;
+    private float speed = 10;   
     [SerializeField]
     private float delay = 0.5f;
     [SerializeField]
@@ -47,7 +47,7 @@ public class MonsterChargeAtk : MonoBehaviour
         //trail.emitting = false;
 
         thisView = PhotonView.Get(this);
-        attackColl.enabled = false;               
+        attackColl.enabled = false;
     }
 
     private void OnEnable()
@@ -84,6 +84,7 @@ public class MonsterChargeAtk : MonoBehaviour
             StopCoroutine(chargeCorr);
         chargeCorr = null;
         charControl.DisableMovement(false);
+        charControl.DisableFriction(false);
         isCharging = false;
         //atkData.SetNotDamaging();
         attackColl.enabled = false;
@@ -98,6 +99,7 @@ public class MonsterChargeAtk : MonoBehaviour
             yield return new WaitForSeconds(delay);
             thisView.RPC("playVFX", RpcTarget.All, true);
             charControl.DisableMovement(true);
+            charControl.DisableFriction(true);
             //trail.emitting = true;
             isCharging = true;
             //atkData.SetIsDamaging(gameObject);
@@ -105,10 +107,8 @@ public class MonsterChargeAtk : MonoBehaviour
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
             Vector3 dir = charControl.forward + Vector3.down * 0.1f;
-            float sqrDist = chargeDist * chargeDist;
-            float speed = chargeDist / duration;
-            Vector3 pos = charControl.position;
-            while (timer < duration && Mathf.Abs((pos - charControl.position).sqrMagnitude - sqrDist) >= 0.1f)
+            float speed = this.speed;
+            while (timer < duration)
             {
                 timer += Time.deltaTime;
                 speed += acceleration * Time.deltaTime;
@@ -116,6 +116,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 yield return null;
             }
             charControl.DisableMovement(false);
+            charControl.DisableFriction(false);
             CharTPCamera.Instance.LookAtPlayer();
         }
 

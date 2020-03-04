@@ -36,7 +36,7 @@ public class MonsterMeleeAtk : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (pressed && timer >= attackCooldown)
+        if (pressed && timer >= attackCooldown + attackDuration)
         {
             timer = 0;
             if (corr != null)

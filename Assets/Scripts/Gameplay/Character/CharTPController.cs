@@ -58,6 +58,7 @@ public class CharTPController : MonoBehaviourPun
     public bool disableMovement { private set; get; }
     public bool disableKeyInput { private set; get; }
     public bool disableMouseInput { private set; get; }
+    public bool disableFriction { private set; get; }
 
     public Vector3 position { get { return transform.position; } }
     public Vector3 forward { get { return transform.forward; } }
@@ -215,17 +216,20 @@ public class CharTPController : MonoBehaviourPun
             transform.rotation = Quaternion.LookRotation(pforward, Vector3.up);
         }
 
-        //deccelerate to 0
-        Vector3 temp = rb.velocity;
-        temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * kineticFriction);
-        temp.y = rb.velocity.y;
-        rb.velocity = temp;
-        if (displacement <= Mathf.Epsilon)
+        if (!disableFriction)
         {
-            temp = rb.velocity;
-            temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * staticFriction);
+            //deccelerate to 0
+            Vector3 temp = rb.velocity;
+            temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * kineticFriction);
             temp.y = rb.velocity.y;
             rb.velocity = temp;
+            if (displacement <= Mathf.Epsilon)
+            {
+                temp = rb.velocity;
+                temp = Vector3.Lerp(temp, Vector3.zero, Time.deltaTime * staticFriction);
+                temp.y = rb.velocity.y;
+                rb.velocity = temp;
+            }
         }
     }
 
@@ -244,5 +248,10 @@ public class CharTPController : MonoBehaviourPun
     {
         Debug.LogFormat("Disabled movement : {0}", b);
         disableMovement = b;
+    }
+    public void DisableFriction(bool b)
+    {
+        Debug.LogFormat("Disabled friction : {0}", b);
+        disableFriction = b;
     }
 }

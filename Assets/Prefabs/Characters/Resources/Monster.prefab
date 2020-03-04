@@ -485,11 +485,11 @@ MonoBehaviour:
   ener: {fileID: 4943199071075631875}
   chargeChk: {fileID: 3353481281967616732}
   enerConsumption: 10
-  duration: 0.8
-  chargeDist: 100
+  duration: 2
+  speed: 200
   delay: 0.3
-  acceleration: 0.5
-  cameraDist: 12
+  acceleration: 5
+  cameraDist: 15
   cooldown: 1
   attackColl: {fileID: 2592693972958539280}
   vfx: {fileID: 4206094659610911450}
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControl: {fileID: 9117360599836359451}
-  attackDuration: 0.3
+  attackDuration: 1
   attackCooldown: 0.5
   attackColl: {fileID: 2592693972958539280}
   monsterAnim: {fileID: 6066984036327698655}
