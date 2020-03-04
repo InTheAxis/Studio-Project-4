@@ -141,7 +141,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3390994345465803435}
   - {fileID: 6130105337991262222}
-  - {fileID: 6067244967677252256}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -190,7 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 1
-  autoSetNotDamaging: 1
 --- !u!114 &5074650906135388511
 MonoBehaviour:
   m_ObjectHideFlags: 0

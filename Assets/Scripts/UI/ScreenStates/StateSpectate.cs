@@ -93,7 +93,9 @@ public class StateSpectate : State
         }
         while (!checkMonster(currIndex));
 
-        GameManager.setCamera(CharTPController.PlayerControllerRefs[currIndex].controller);
+        CharTPController controller = CharTPController.PlayerControllerRefs[currIndex].controller;
+        GameManager.setCamera(controller);
+        tmUsername.text = "Spectating: " + controller.photonView.Owner.NickName;
     }
 
     private IEnumerator registerCallbacks()
