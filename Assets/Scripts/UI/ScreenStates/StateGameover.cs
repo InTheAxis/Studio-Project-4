@@ -47,6 +47,7 @@ public class StateGameover : State
 
     public void backToLobby()
     {
+        ScoreCounter.Reset();
         StateController.showNext("Mainmenu");
     }
 
