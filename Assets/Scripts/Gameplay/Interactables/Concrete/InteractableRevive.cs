@@ -66,9 +66,7 @@ public class InteractableRevive : InteractableBase
         if (!BloodBootstrap.Instance.isEmitting)
             thisView.RPC("playEcsVfx", RpcTarget.All, true);
 
-        timeoutCounter = 0;
-
-
+        thisView.RPC("resetTimeoutTimer", RpcTarget.All, true);
     }
 
     private void Update()
@@ -233,5 +231,11 @@ public class InteractableRevive : InteractableBase
         { 
             BloodBootstrap.Instance.StopEmit();
         }
+    }
+
+    [PunRPC]
+    private void resetTimeoutTimer()
+    {
+        timeoutCounter = 0;
     }
 }
