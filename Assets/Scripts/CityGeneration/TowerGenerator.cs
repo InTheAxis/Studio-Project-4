@@ -48,7 +48,7 @@ public class TowerGenerator : Generator
         foreach (PoissonPoint point in poisson.GetPoints(1))
         {
             Vector3 pos = point.pos;
-            pos.y += 3;
+            pos.y += 0.1f;
             towers.Add(InstantiateHandler.mInstantiate(towerRef[counter], pos, Quaternion.identity, transform));
             counter++;
         }
