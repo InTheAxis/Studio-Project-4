@@ -16,24 +16,24 @@ MonoBehaviour:
   - go: {fileID: 7098931322866199806, guid: 768b5e53a5366ae45866f5e143f0a6f4, type: 3}
     weight: 13
     chance: 0.037463978
+  - go: {fileID: 4717264211973084059, guid: 8d11fcddf11712f40a263945c9ffafbe, type: 3}
+    weight: 20
+    chance: 0.057636887
+  - go: {fileID: 102298922851625452, guid: 11e189635717b8846afdce1bd2497cc3, type: 3}
+    weight: 33
+    chance: 0.095100865
+  - go: {fileID: 141756311558996259, guid: 6dbbd5251c55516469c3f1ab4f9a8854, type: 3}
+    weight: 35
+    chance: 0.10086455
   - go: {fileID: 9218352340817308100, guid: 3a72f0412facf0741b5674c31ac21459, type: 3}
     weight: 55
     chance: 0.15850145
   - go: {fileID: 1389937738123996914, guid: 70acdfec197ddbc4bacf786dbb1e2aaf, type: 3}
     weight: 57
     chance: 0.16426513
-  - go: {fileID: 141756311558996259, guid: 6dbbd5251c55516469c3f1ab4f9a8854, type: 3}
-    weight: 35
-    chance: 0.10086455
-  - go: {fileID: 7004277075182819476, guid: d82796f33a3b2134eacabcd5f49b9742, type: 3}
-    weight: 70
-    chance: 0.2017291
   - go: {fileID: 7073769449221674024, guid: ca1a0fccfe6e38c40830082f6f02bbdd, type: 3}
     weight: 64
     chance: 0.18443803
-  - go: {fileID: 102298922851625452, guid: 11e189635717b8846afdce1bd2497cc3, type: 3}
-    weight: 33
-    chance: 0.095100865
-  - go: {fileID: 4062964256427729744, guid: 8d11fcddf11712f40a263945c9ffafbe, type: 3}
-    weight: 20
-    chance: 0.057636887
+  - go: {fileID: 7004277075182819476, guid: d82796f33a3b2134eacabcd5f49b9742, type: 3}
+    weight: 70
+    chance: 0.2017291
