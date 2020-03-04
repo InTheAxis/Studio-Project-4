@@ -122,9 +122,13 @@ public class InteractableTower : InteractableBase
                 MonsterEnergy recharge = GameManager.playerObj.GetComponent<MonsterEnergy>();
                 if (unlock) // Is Human
                 {
+                    ScoreCounter.addInteractionScore(200);
+
                     // Advance stage
                     if (++currStage >= interactStagesLights.Count) // Finished all stages. Destroy
                     {
+                        ScoreCounter.addInteractionScore(500);
+
                         isDestroyed = true;
 
                         unlock.Unlock(HumanUnlockTool.TYPE.RANDOM);
@@ -147,6 +151,8 @@ public class InteractableTower : InteractableBase
                 }
                 else if (recharge) // Is Monster
                 {
+                    ScoreCounter.addInteractionScore(200);
+
                     if (monsterAnim)
                         monsterAnim.SabotagingDone(true);
                     recharge.RechargePercent(interactTime / timeToFinishInteraction);

@@ -105,6 +105,8 @@ public class InteractableRevive : InteractableBase
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
+                ScoreCounter.addReviveScore(500);
+
                 if (BloodBootstrap.Instance.isEmitting)
                     BloodBootstrap.Instance.StopEmit();
                 interactTime = timeToFinishInteraction;

@@ -9,6 +9,8 @@ public class InteractableBandage : InteractableBase
     public override void interact()
     {
         Debug.Log("Interacted with bandage interactable");
+        ScoreCounter.addItemScore(50);
+
         GameManager.playerObj.GetComponent<CharHealth>().Heal(1);
         destroyThis();
     }
