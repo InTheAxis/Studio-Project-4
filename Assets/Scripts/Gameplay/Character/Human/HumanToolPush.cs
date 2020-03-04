@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+
 public class HumanToolPush : MonoBehaviour
 {
     [Header("References")]
@@ -11,21 +12,23 @@ public class HumanToolPush : MonoBehaviour
     [Header("VFX")]
     [SerializeField]
     private GameObject vfx = null;
-    
+
     [Header("Tool Settings")]
     [SerializeField]
     private float cooldownTime;
+
     [SerializeField]
     private float forceMagnitude;
 
     [Header("Overlap Detection Settings")]
     [SerializeField]
     private float range;
+
     [SerializeField]
     private float radius;
+
     [SerializeField]
     private LayerMask include;
-
 
     private bool pressed;
     private float cooldown;
@@ -37,6 +40,7 @@ public class HumanToolPush : MonoBehaviour
         cooldown = 0;
         pressed = false;
     }
+
     private void Update()
     {
         if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
@@ -48,7 +52,6 @@ public class HumanToolPush : MonoBehaviour
             //playVFX = true;
             charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, true);
         }
-        
     }
 
     private void FixedUpdate()
@@ -83,11 +86,12 @@ public class HumanToolPush : MonoBehaviour
     private void playVfxRpcPush(bool b)
     {
         playVFX = b;
+        GetComponent<PlayerAudioContoller>().Play("push0");
     }
-
 
 #if UNITY_EDITOR
     public bool drawDebug = false;
+
     private void OnDrawGizmos()
     {
         if (!drawDebug)
@@ -96,5 +100,6 @@ public class HumanToolPush : MonoBehaviour
         Gizmos.DrawWireSphere(charControl.position + lookDir * radius, radius);
         Gizmos.DrawWireSphere(charControl.position + lookDir * (radius + range), radius);
     }
+
 #endif
 }

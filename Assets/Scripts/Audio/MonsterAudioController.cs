@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MonsterAudioController : AudioController
 {
+    private void Start()
+    {
+        SetSFX();
+    }
+
     public void Charge()
     {
         Play("charge0");
