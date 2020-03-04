@@ -12,6 +12,8 @@ public class MonsterEnergy : MonoBehaviour
     [SerializeField] [Tooltip("How many seconds it takes to lose 1 energy")]
     private float decayRate = 0.01f;
 
+    private IEnumerator decayCour = null;
+
     private float energy;
 
     private void OnEnable()
@@ -28,7 +30,9 @@ public class MonsterEnergy : MonoBehaviour
     {
         RechargeFull();
         health.SetInvulnerable(true);
-        StartCoroutine(Decay());
+
+        decayCour = Decay();
+        StartCoroutine(decayCour);
     }
 
     private IEnumerator Decay()
@@ -52,7 +56,7 @@ public class MonsterEnergy : MonoBehaviour
     }
     public bool UseUp(float amt)
     {
-        if (energy < amt)
+        if (energy <= 0)
             return false;
 
         energy -= amt;
@@ -68,6 +72,12 @@ public class MonsterEnergy : MonoBehaviour
         energy += amt;
         if (energy > maxEnergy)
             energy = maxEnergy;
+        health.SetInvulnerable(true);
+
+        if (decayCour != null)
+            StopCoroutine(decayCour);
+        decayCour = Decay();
+        StartCoroutine(decayCour);
     }
     public void RechargePercent(float percent) //0 to 1
     {

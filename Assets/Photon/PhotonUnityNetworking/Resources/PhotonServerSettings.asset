@@ -73,5 +73,9 @@ MonoBehaviour:
   - revivePlayer
   - setPlayerID
   - playVFX
+  - playVfxRpc
+  - playVfxRpcPull
+  - playVfxRpcPush
+  - takeDmgRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0

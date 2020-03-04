@@ -95,7 +95,7 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
 
     public void releaseOwnership(PhotonView obj, System.Action<PhotonView> successCallback, System.Action<PhotonView> failCallback)
     {
-        Debug.Log("Release of ownership of PhotonView " + obj.ViewID + " dispatched by Player " + PhotonNetwork.LocalPlayer.ActorNumber);
+        //Debug.Log("Release of ownership of PhotonView " + obj.ViewID + " dispatched by Player " + PhotonNetwork.LocalPlayer.ActorNumber);
         
         // Make sure this object is actually owned by this client
         if (obj.Owner == null || obj.Owner.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber)
@@ -107,7 +107,7 @@ public class NetworkOwnership : MonoBehaviourPunCallbacks
 
         if (obj.IsSceneView) // Scene Object
         {
-            Debug.Log("Released to scene");
+            //Debug.Log("Released to scene");
             obj.TransferOwnership(0);
             successCallback?.Invoke(obj);
             return;

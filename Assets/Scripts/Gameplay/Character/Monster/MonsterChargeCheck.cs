@@ -9,7 +9,7 @@ public class MonsterChargeCheck : MonoBehaviour
     public System.Action Collided;
     private void OnTriggerEnter(Collider other)
     {
-        if (LayerMaskExt.CheckIfNotIgnored(ignore, other.gameObject.layer))
+        if (LayerMaskExt.CheckIfNotInMask(ignore, other.gameObject.layer))
             Collided();
     }
 }

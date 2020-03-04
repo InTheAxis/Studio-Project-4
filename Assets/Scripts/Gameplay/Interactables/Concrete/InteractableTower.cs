@@ -72,8 +72,8 @@ public class InteractableTower : InteractableBase
         wasInteracting = true;
         Debug.Log("Interact");
 
-        if (!sparks.isEmitting)
-            sparks.Play();
+        if(!sparks.isEmitting)
+            thisView.RPC("playVFX", RpcTarget.All, true);
     }
 
     private void Update()
@@ -165,11 +165,16 @@ public class InteractableTower : InteractableBase
         {
             if (interactedOnce)
             {
+
+                if (sparks.isEmitting)
+                    thisView.RPC("playVFX", RpcTarget.All, false);
+
                 interactedOnce = false;
 
                 if (GameManager.playerObj)
                 { 
                     GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
+
                 }
                 if (humanAnim)
                     humanAnim.SabotagingDone(false);
@@ -180,9 +185,6 @@ public class InteractableTower : InteractableBase
             // Stopped interacting. Set light back to current stage
             if (interactTime > 0.0f)
                 turnOnLight(currStage, currStage);
-
-            if (sparks.isEmitting)
-                sparks.Stop();
 
             interactTime = 0.0f;
             interactDone = false;
@@ -278,5 +280,14 @@ public class InteractableTower : InteractableBase
             return beingInteractedWithSurvivorLight;
         else
             return null;
+    }
+
+    [PunRPC]
+    private void playVFX(bool b)
+    {
+        if (b && !sparks.isEmitting)
+            sparks.Play();
+        else if (!b && sparks.isEmitting)
+            sparks.Stop();
     }
 }

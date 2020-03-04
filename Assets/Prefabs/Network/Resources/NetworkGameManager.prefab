@@ -94,17 +94,17 @@ MonoBehaviour:
   heldMask:
     serializedVersion: 2
     m_Bits: 524288
-  holdPosTolerance: 2.5
+  holdPosTolerance: 3
   holdRotateSpeed: 5
   holdPosOffsetX: {x: -0.25, y: 0.9}
   holdPosOffsetY: {x: -0.1, y: 0.8}
-  throwForce: 90
+  throwForce: 50
   enableAimAssist: 1
   aimMask:
     serializedVersion: 2
-    m_Bits: 435473
-  aimAssistOffsetMin: {x: -0.3, y: -0.35, z: -0.3}
-  aimAssistOffsetMax: {x: 0.3, y: 0.35, z: -0.3}
+    m_Bits: 34006289
+  aimAssistOffsetMin: {x: -0.15, y: -0.2, z: -0.15}
+  aimAssistOffsetMax: {x: 0.15, y: 0.2, z: 0.15}
   highlightMaterial: {fileID: 2100000, guid: 06c53990ebf61d54e85a9510511540a5, type: 2}
 --- !u!114 &5967938285904950349
 MonoBehaviour:

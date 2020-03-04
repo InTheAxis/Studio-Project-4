@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class HumanToolPush : MonoBehaviour
 {
     [Header("References")]
@@ -44,7 +44,10 @@ public class HumanToolPush : MonoBehaviour
         pressed = Input.GetAxisRaw("Fire2") != 0;
 
         if (Input.GetButtonDown("Fire2"))
-            playVFX = true;
+        {
+            //playVFX = true;
+            charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, true);
+        }
         
     }
 
@@ -62,7 +65,8 @@ public class HumanToolPush : MonoBehaviour
                 clone.transform.localPosition = Vector3.zero;
                 clone.transform.forward = Camera.main.transform.forward;
                 Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
-                playVFX = false;
+                charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, false);
+                //playVFX = false;
             }
 
             cooldown = cooldownTime;
@@ -74,6 +78,13 @@ public class HumanToolPush : MonoBehaviour
         }
         cooldown -= Time.deltaTime;
     }
+
+    [PunRPC]
+    private void playVfxRpcPush(bool b)
+    {
+        playVFX = b;
+    }
+
 
 #if UNITY_EDITOR
     public bool drawDebug = false;

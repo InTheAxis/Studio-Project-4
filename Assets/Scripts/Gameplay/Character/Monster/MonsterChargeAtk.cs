@@ -28,6 +28,8 @@ public class MonsterChargeAtk : MonoBehaviour
     private float cooldown = 1;
     //[SerializeField]
     //private TrailRenderer trail;
+    [SerializeField]
+    private Collider attackColl;
 
     [Header("VFX")]
     [SerializeField]
@@ -45,6 +47,7 @@ public class MonsterChargeAtk : MonoBehaviour
         //trail.emitting = false;
 
         thisView = PhotonView.Get(this);
+        attackColl.enabled = false;               
     }
 
     private void OnEnable()
@@ -82,6 +85,8 @@ public class MonsterChargeAtk : MonoBehaviour
         chargeCorr = null;
         charControl.disableMovement = false;
         isCharging = false;
+        //atkData.SetNotDamaging();
+        attackColl.enabled = false;
         //trail.emitting = false;
         CharTPCamera.Instance.LookAtPlayer();
     }
@@ -95,6 +100,8 @@ public class MonsterChargeAtk : MonoBehaviour
             charControl.disableMovement = true;
             //trail.emitting = true;
             isCharging = true;
+            //atkData.SetIsDamaging(gameObject);
+            attackColl.enabled = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);
             float timer = 0;
             Vector3 dir = charControl.forward + Vector3.down * 0.1f;
@@ -114,6 +121,8 @@ public class MonsterChargeAtk : MonoBehaviour
 
         chargeCorr = null;
         isCharging = false;
+        //atkData.SetNotDamaging();
+        attackColl.enabled = false;
         yield return new WaitForSeconds(0.1f);
         //trail.emitting = false;
     }

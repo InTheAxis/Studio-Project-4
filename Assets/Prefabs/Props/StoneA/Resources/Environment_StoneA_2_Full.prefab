@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 9061297854268748034}
   - component: {fileID: 3385786666994716155}
   - component: {fileID: 6917832599854501181}
-  - component: {fileID: 6035307205064786061}
   - component: {fileID: 8998259830091109693}
-  - component: {fileID: 6854465613132311854}
+  - component: {fileID: 6035307205064786061}
   - component: {fileID: 7354851993455462825}
   - component: {fileID: 4423256778007691973}
   - component: {fileID: 4679600340087717825}
@@ -104,28 +103,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6035307205064786061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3945273138713688359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &8998259830091109693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +134,7 @@ MonoBehaviour:
   maxExplosionDir: {x: 1, y: 1, z: 1}
   minExplosionForce: {x: 1, y: 1, z: 1}
   maxExplosionForce: {x: 2, y: 2, z: 2}
---- !u!114 &6854465613132311854
+--- !u!114 &6035307205064786061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +149,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 7354851993455462825}

@@ -50,6 +50,11 @@ public class Destructible : MonoBehaviourPun
             sqrBreakForce = -1.0f;
         else
             sqrBreakForce = breakForce * breakForce;
+
+        if (GetComponents<PhotonView>().Length > 1)
+        {
+            Debug.LogError("Multiple Photon Views: " + gameObject.name);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

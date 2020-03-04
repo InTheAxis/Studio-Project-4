@@ -3,7 +3,7 @@
 public class CharHitBox : MonoBehaviour
 {
     public System.Action<int, float> OnHit; //damage, dot product of angle
-    public bool hit { private set; get; }
+    //public bool hit { private set; get; }
 
     private void Update()
     {

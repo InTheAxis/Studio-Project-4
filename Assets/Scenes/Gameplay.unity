@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41518888, g: 0.20504811, b: 0.19856757, a: 1}
+  m_IndirectSpecularColor: {r: 0.41518906, g: 0.20504808, b: 0.19856745, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14966,7 +14966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1184fac2030a5446851dc4eab229873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5720360889423278249, guid: 9f2ef2f5a8c49304bac28526d88a044c, type: 3}
+  prefab: {fileID: 5720360889423278249, guid: 388b4b807d9077146b08cfc09dd72ed4, type: 3}
 --- !u!4 &1424456342
 Transform:
   m_ObjectHideFlags: 0
@@ -15412,6 +15412,9 @@ MonoBehaviour:
   tmResolution: {fileID: 908698381}
   vSyncOn: {fileID: 1568570072}
   vSyncOff: {fileID: 1401880011}
+  sliderMaster: {fileID: 1585440916}
+  sliderEffects: {fileID: 1794127607}
+  sliderMusic: {fileID: 25269995}
   tmMasterVolume: {fileID: 85607079}
   tmEffectVolume: {fileID: 237709455}
   tmMusicVolume: {fileID: 1778835397}
@@ -17927,7 +17930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerators:
-  - {fileID: 6059220141556989297, guid: 541f675711a01c04787e7d16797af83f, type: 3}
+  - {fileID: 6059220141556989297, guid: 43d381a4676e757408cbe06108b5c38e, type: 3}
   - {fileID: 1632007519578326019, guid: 85a8fb60e3e19374496e51e78b162c0b, type: 3}
   - {fileID: 4105684848861817808, guid: bd8feaafa8229044f833b3204aacb50d, type: 3}
   map: 0
@@ -21596,7 +21599,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sysObj: {fileID: 11400000, guid: 91fedc655b91e8c48a6f80e83e479ade, type: 2}
   entityObj: {fileID: 11400000, guid: d5e9b95395d5dcc4ba76b9183f158143, type: 2}
-  emitter: {fileID: 0}
 --- !u!4 &2120301745
 Transform:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 9047037811769558579}
@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 1
+  autoSetNotDamaging: 1
 --- !u!114 &7271535166368762685
 MonoBehaviour:
   m_ObjectHideFlags: 0
