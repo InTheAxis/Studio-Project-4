@@ -90,7 +90,7 @@ Material:
     - _Cull: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortionBlend: 1
+    - _DistortionBlend: 0.765
     - _DistortionEnabled: 1
     - _DistortionStrength: 10
     - _DistortionStrengthScaled: 1
@@ -122,7 +122,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.3254902}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.54509807}
     - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}

@@ -62,8 +62,8 @@ public class HumanToolPush : MonoBehaviour
             {
                 GameObject clone = Instantiate(vfx);
                 clone.transform.SetParent(Camera.main.transform);
-                clone.transform.localPosition = Vector3.zero;
-                clone.transform.forward = Camera.main.transform.forward;
+                clone.transform.forward = -Camera.main.transform.forward;
+                clone.transform.localPosition = new Vector3(0.0f, 0.0f, charControl.targetCamDist * 0.5f);
                 Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
                 charControl.photonView.RPC("playVfxRpcPush", RpcTarget.All, false);
                 //playVFX = false;

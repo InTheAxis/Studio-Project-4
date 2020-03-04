@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf91cea39876bb45a0a04a2827c8539, type: 3}
+  m_Name: Lights
+  m_EditorClassIdentifier: 
+  meshList:
+  - go: {fileID: 102738179353515281, guid: f3230e800c4daa140bff5f4417ce280e, type: 3}
+    weight: 8
+    chance: 0.027777778
+  - go: {fileID: 703753134186425350, guid: 6f1b459942ace8e4b8bfbc220f4e513d, type: 3}
+    weight: 52
+    chance: 0.18055555
+  - go: {fileID: 102738179353515281, guid: e1016d61c3c266c4a99233c8701cd49e, type: 3}
+    weight: 100
+    chance: 0.3472222
+  - go: {fileID: 102738179353515281, guid: 8b7aea878c04e244790ce8a21a859be8, type: 3}
+    weight: 28
+    chance: 0.097222224
+  - go: {fileID: 102738179353515281, guid: e118748df1a9dfa4ab65a811aa83df11, type: 3}
+    weight: 100
+    chance: 0.3472222

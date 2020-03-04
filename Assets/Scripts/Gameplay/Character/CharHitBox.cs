@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
 public class CharHitBox : MonoBehaviour
 {
     public System.Action<int, float> OnHit; //damage, dot product of angle
     //public bool hit { private set; get; }
+    private PhotonView photonView;
+
+    private void Start()
+    {
+        photonView = transform.root.GetComponent<CharTPController>()?.photonView;
+        OnHit += onHitVFX;
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (photonView.IsMine && Input.GetKeyDown(KeyCode.Alpha0))
         { 
             OnHit?.Invoke(1, -1);
         }
     }
 
+    private void onHitVFX(int damage, float dotProduct)
+    {
+
+    }
     //private void Start()
     //{
     //    Collider[] otherCollsOnThisPlayer = transform.root.GetComponentsInChildren<Collider>();

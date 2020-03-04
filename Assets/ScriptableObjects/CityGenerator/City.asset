@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: City
   m_EditorClassIdentifier: 
   meshList:
-  - go: {fileID: 1963157592565098159, guid: e39f74782461e9041bcfee74f23fe4fc, type: 3}
+  - go: {fileID: 7098931322866199806, guid: 768b5e53a5366ae45866f5e143f0a6f4, type: 3}
+    weight: 13
+    chance: 0.046263345
+  - go: {fileID: 7073769449221674024, guid: 54e1f47010f88f344aa8a8a490559427, type: 3}
+    weight: 19
+    chance: 0.06761566
+  - go: {fileID: 4717264211973084059, guid: 8d11fcddf11712f40a263945c9ffafbe, type: 3}
     weight: 21
-    chance: 0.04347826
-  - go: {fileID: 7098931322866199806, guid: 80bad517df1dc694db4d01079de3da61, type: 3}
-    weight: 21
-    chance: 0.04347826
-  - go: {fileID: 7004277075182819476, guid: 08f6656e179340f499e05e4955cd6b7e, type: 3}
-    weight: 41
-    chance: 0.084886126
-  - go: {fileID: 4506293217939224818, guid: 0d2ba450282f3984f92a4313a72cdc9e, type: 3}
-    weight: 100
-    chance: 0.20703934
-  - go: {fileID: 7073769449221674024, guid: e39f74782461e9041bcfee74f23fe4fc, type: 3}
-    weight: 100
-    chance: 0.20703934
-  - go: {fileID: 102298922851625452, guid: e4ac73c5f9e2d764b86cdf6406805ba5, type: 3}
-    weight: 100
-    chance: 0.20703934
-  - go: {fileID: 141756311558996259, guid: 45948751c6ba7e2429013a22b9a80c51, type: 3}
-    weight: 100
-    chance: 0.20703934
+    chance: 0.07473309
+  - go: {fileID: 141756311558996259, guid: 6dbbd5251c55516469c3f1ab4f9a8854, type: 3}
+    weight: 35
+    chance: 0.12455516
+  - go: {fileID: 7004277075182819476, guid: d82796f33a3b2134eacabcd5f49b9742, type: 3}
+    weight: 62
+    chance: 0.22064057
+  - go: {fileID: 7073769449221674024, guid: ca1a0fccfe6e38c40830082f6f02bbdd, type: 3}
+    weight: 63
+    chance: 0.2241993
+  - go: {fileID: 102298922851625452, guid: 11e189635717b8846afdce1bd2497cc3, type: 3}
+    weight: 68
+    chance: 0.24199288

@@ -50,7 +50,9 @@ public class NetworkRigidbodyController : MonoBehaviourPun
         else
         {
             Debug.LogWarning("NetworkRigidbodyController: No PhotonView found for obj " + rb.gameObject.name + "! Setting value locally...");
-            rb.AddForce(f, mode);
+            // Old: rb.AddForce(f, mode);
+            //rb.velocity += f;
+            rb.AddForce(f * rb.mass * 0.40f, mode);
         }
     }
     [PunRPC]
@@ -58,7 +60,12 @@ public class NetworkRigidbodyController : MonoBehaviourPun
     {
         PhotonView view = PhotonView.Find(photonViewID);
         if (view.IsMine || (view.Owner == null && PhotonNetwork.IsMasterClient))
-            view.GetComponent<Rigidbody>().AddForce(f, (ForceMode)mode);
+        {
+            Rigidbody rb = view.GetComponent<Rigidbody>();
+            rb.AddForce(f * rb.mass * 0.40f, (ForceMode)mode);
+        }
+            //view.GetComponent<Rigidbody>().velocity += f;
+        //Old: view.GetComponent<Rigidbody>().AddForce(f * rb., (ForceMode)mode);
         else
         {
             if (view.Owner != null)

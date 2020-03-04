@@ -85,7 +85,10 @@
 			  float CloudScaleB;
 			  float DensityThresholdB;
 			  float DensityMultiplierB;
-
+			  float random(float2 uv)
+			  {
+				  return frac(sin(dot(uv, float2(17.512868, 78.233))) * 92391.673903);
+			  }
 			  float sampleDensity(float3 position) {
 				  float3 uvw = position * CloudScale * 0.001 + CloudOffset * 0.01;
 				  float4 shape = ShapeNoise.SampleLevel(samplerShapeNoise, uvw, 0);
@@ -110,6 +113,7 @@
 				  col = (_MainColor);
 				   float3 rayOrigin = _WorldSpaceCameraPos;
 				   float3 rayDir = normalize(i.viewVector);
+
 				   //
 				   float nonLinearDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv);
 				   float depth = LinearEyeDepth(nonLinearDepth) * length(i.viewVector);
@@ -132,12 +136,16 @@
 					   float stepSize = dstInsideBox / NumSteps;
 					   float dstLimit = dstInsideBox;
 					   // march
+					   float3 dir = rayDir;
 					   float totalDensity = 0;
 					   while (dstTravelled < dstLimit) {
 						   float3 rayPos = rayOrigin + rayDir * (dstToBox + dstTravelled);
 						   totalDensity += sampleDensity(rayPos) * stepSize;
 						   totalDensity += sampleDensityB(rayPos) * stepSize;
 						   dstTravelled += stepSize;
+						   dir = float3(random(float2(dir.x, dir.z)), random(float2(dir.y, dir.z)), random(float2(dir.z, dir.x)));
+						   dir.y = abs(dir.y);
+						   dir = (rayDir + dir) * 0.5f;
 					   }
 
 					   float transmittance = exp(-totalDensity);

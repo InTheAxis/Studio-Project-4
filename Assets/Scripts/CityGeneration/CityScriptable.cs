@@ -57,6 +57,11 @@ public class CityScriptable : ScriptableObject
         {
             if (meshData.go == null)
                 continue;
+            if (!meshData.go.GetComponent<ProceduralBuilding>())
+            {
+                Debug.LogError("not PB");
+                continue;
+            }
             float currentRange = meshData.go.GetComponent<ProceduralBuilding>().GetRadius();
             if (currentRange > range)
                 continue;

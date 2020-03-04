@@ -13,39 +13,21 @@ MonoBehaviour:
   m_Name: CityRockPile
   m_EditorClassIdentifier: 
   meshList:
-  - go: {fileID: 579254461299767444, guid: e916b1640b08deb419ead3bb24dc1e61, type: 3}
-    weight: 25
-    chance: 0.0287687
-  - go: {fileID: 6990274515055898977, guid: 14a8836d4a722404690ebb99a7b3ae75, type: 3}
-    weight: 46
-    chance: 0.05293441
-  - go: {fileID: 5152396125636253989, guid: 0ab196057a76ba847a11a8c627760d95, type: 3}
-    weight: 48
-    chance: 0.055235904
-  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
-    weight: 49
-    chance: 0.05638665
-  - go: {fileID: 3202216801028584327, guid: d4da86894e463254a8c533c8a59e93a4, type: 3}
-    weight: 49
-    chance: 0.05638665
-  - go: {fileID: 7597255723837619399, guid: 5c8715d44a9321e4b888a85117d1f2b6, type: 3}
-    weight: 52
-    chance: 0.059838895
   - go: {fileID: 7991573148552811218, guid: 144a1325d391c1b40bd8c3df8d668c90, type: 3}
     weight: 100
-    chance: 0.1150748
+    chance: 0.20790021
   - go: {fileID: 3945273138713688359, guid: 765df7fa8fa52e64eac49fec7f968888, type: 3}
     weight: 100
-    chance: 0.1150748
+    chance: 0.20790021
   - go: {fileID: 5561624350111665149, guid: 194f1f81bb08cae4d930308a8d62c32e, type: 3}
     weight: 100
-    chance: 0.1150748
+    chance: 0.20790021
   - go: {fileID: 8159327852960417195, guid: 3c998800ad54c1c43b066d12a0021e33, type: 3}
     weight: 100
-    chance: 0.1150748
-  - go: {fileID: 3711397206209767995, guid: 009ff2026fac1b6409dadb798c5716b4, type: 3}
-    weight: 100
-    chance: 0.1150748
+    chance: 0.20790021
   - go: {fileID: 3762170171003902730, guid: 3e0a4a30b20ef91479f085d95c41d463, type: 3}
-    weight: 100
-    chance: 0.1150748
+    weight: 29
+    chance: 0.06029106
+  - go: {fileID: 3711397206209767995, guid: 009ff2026fac1b6409dadb798c5716b4, type: 3}
+    weight: 52
+    chance: 0.10810811
