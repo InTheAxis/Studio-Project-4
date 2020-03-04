@@ -599,21 +599,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - clip: {fileID: 8300000, guid: 0f2757d8c31d9f5469d0b4367f95d6e2, type: 3}
-    volume: 0.19
+    volume: 0.1
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 405099c5ec01fdd47a52f9dc5db6c01b, type: 3}
-    volume: 0.287
+    volume: 0.1
     pitch: 1
     loop: 0
     playOnAwake: 0
     sfx: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: c054f0f096e721d4c8ae3d417807583a, type: 3}
-    volume: 0.625
+    volume: 0.8
     pitch: 1
     loop: 1
     playOnAwake: 0
