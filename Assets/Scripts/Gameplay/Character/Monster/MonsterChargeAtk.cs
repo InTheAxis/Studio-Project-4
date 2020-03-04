@@ -126,7 +126,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 timer += Time.deltaTime;
                 speed += acceleration * Time.deltaTime;
                 charControl.rb.AddForce(dir * speed, ForceMode.Acceleration);
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
             charControl.DisableMovement(false);
             charControl.DisableFriction(false);
