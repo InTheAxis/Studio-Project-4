@@ -13,17 +13,18 @@ public class DebugFlyCam : MonoBehaviour
     [SerializeField]
     private float scrollScale = 0.2f;
 
-
     private float speed;
     private Camera cam;
-    private bool isEnabled = false;
+    private bool isEnabled;
     private Vector3 lookDir;
+
     private float mouseX, mouseY;
 
     private void Awake()
     {
-        cam = GetComponent<Camera>();
         speed = startSpeed;
+        cam = GetComponent<Camera>();
+        cam.enabled = isEnabled = false;
         lookDir = transform.forward;
     }
 
@@ -36,8 +37,8 @@ public class DebugFlyCam : MonoBehaviour
             if (tpCam)
             { 
                 tpCam.gameObject.SetActive(!isEnabled);
-                tpCam.charControl.disableKeyInput = isEnabled;
-                tpCam.charControl.disableMouseInput = isEnabled;
+                tpCam.charControl.DisableKeyInput(isEnabled);
+                tpCam.charControl.DisableMouseInput(isEnabled);
             }
         }
 

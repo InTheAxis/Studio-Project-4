@@ -90,8 +90,6 @@ public class InteractableTower : InteractableBase
 
     private void LateUpdate()
     {
-        if (GameManager.playerObj)
-            GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = wasInteracting;
         if (isDestroyed)
             return;
 
@@ -106,7 +104,7 @@ public class InteractableTower : InteractableBase
 
             if (GameManager.playerObj)
             { 
-                GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = true;
+                GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(true);
             }
 
             if (humanAnim)
@@ -172,9 +170,8 @@ public class InteractableTower : InteractableBase
                 interactedOnce = false;
 
                 if (GameManager.playerObj)
-                { 
-                    GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
-
+                {
+                    GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(false);
                 }
                 if (humanAnim)
                     humanAnim.SabotagingDone(false);

@@ -83,7 +83,7 @@ public class MonsterChargeAtk : MonoBehaviour
         if (chargeCorr != null)
             StopCoroutine(chargeCorr);
         chargeCorr = null;
-        charControl.disableMovement = false;
+        charControl.DisableMovement(false);
         isCharging = false;
         //atkData.SetNotDamaging();
         attackColl.enabled = false;
@@ -97,7 +97,7 @@ public class MonsterChargeAtk : MonoBehaviour
         {
             yield return new WaitForSeconds(delay);
             thisView.RPC("playVFX", RpcTarget.All, true);
-            charControl.disableMovement = true;
+            charControl.DisableMovement(true);
             //trail.emitting = true;
             isCharging = true;
             //atkData.SetIsDamaging(gameObject);
@@ -115,7 +115,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 charControl.rb.AddForce(dir * speed, ForceMode.Acceleration);
                 yield return null;
             }
-            charControl.disableMovement = false;
+            charControl.DisableMovement(false);
             CharTPCamera.Instance.LookAtPlayer();
         }
 

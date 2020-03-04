@@ -92,7 +92,7 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
         dead = false;
         Heal(999);
         OnRespawn?.Invoke();
-        charControl.disableMovement = dead;
+        charControl.DisableMovement(dead);
         charControl.rb.isKinematic = false;
         SetInvulnerableTime(invulTime);
     }
@@ -139,7 +139,7 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
 
     private void Die()
     {
-        charControl.disableMovement = dead;
+        charControl.DisableMovement(dead);
         charControl.rb.isKinematic = true;
 
         if (autoRespawnTime > 0)
@@ -191,12 +191,12 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
 
     private IEnumerator HitStun()
     {
-        charControl.disableMovement = true;
+        charControl.DisableMovement(true);
         charControl.rb.isKinematic = true;
         yield return new WaitForSeconds(1f);
         if (!dead)
         {
-            charControl.disableMovement = false;
+            charControl.DisableMovement(false);
             charControl.rb.isKinematic = false;
         }
     }

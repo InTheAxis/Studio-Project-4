@@ -51,9 +51,9 @@ public class StateGamePause : State
 
         if (GameManager.playerObj != null)
         {
-            GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = true;
-            GameManager.playerObj.GetComponent<CharTPController>().disableMouseInput = true;
-            GameManager.playerObj.GetComponent<CharTPController>().disableMovement = true;
+            GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(true);
+            GameManager.playerObj.GetComponent<CharTPController>().DisableMouseInput(true);
+            GameManager.playerObj.GetComponent<CharTPController>().DisableMovement(true);
         }
         base.onShow();
     }

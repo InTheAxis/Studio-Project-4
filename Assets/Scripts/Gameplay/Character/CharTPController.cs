@@ -55,17 +55,9 @@ public class CharTPController : MonoBehaviourPun
     [Tooltip("Starting y-axis look direction, from -1 to 1")]
     private float initialLookY = -0.5f;
 
-
-    //NOTE, These are set true and false by other scripts, so if it doesn't work may be because some other script is setting to false/true every frame!!!
-
-    [HideInInspector]
-    public bool disableMovement;
-
-    [HideInInspector]
-    public bool disableKeyInput;
-
-    [HideInInspector]
-    public bool disableMouseInput;
+    public bool disableMovement { private set; get; }
+    public bool disableKeyInput { private set; get; }
+    public bool disableMouseInput { private set; get; }
 
     public Vector3 position { get { return transform.position; } }
     public Vector3 forward { get { return transform.forward; } }
@@ -141,7 +133,7 @@ public class CharTPController : MonoBehaviourPun
         pforward.Normalize();
 
         currSpeed = moveSpeed;
-        disableMovement = false;
+        disableMouseInput = disableKeyInput = disableMovement = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -235,5 +227,22 @@ public class CharTPController : MonoBehaviourPun
             temp.y = rb.velocity.y;
             rb.velocity = temp;
         }
+    }
+
+    public void DisableKeyInput(bool b)
+    {
+        Debug.LogFormat("Disabled key input : {0}", b);
+        disableKeyInput = b;
+    }
+
+    public void DisableMouseInput(bool b)
+    {
+        Debug.LogFormat("Disabled mouse input : {0}", b);
+        disableMouseInput = b;
+    }
+    public void DisableMovement(bool b)
+    {
+        Debug.LogFormat("Disabled movement : {0}", b);
+        disableMovement = b;
     }
 }

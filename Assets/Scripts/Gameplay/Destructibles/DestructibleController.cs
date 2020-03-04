@@ -157,7 +157,7 @@ public class DestructibleController : MonoBehaviourPun
             {
                 // Reset player states
                 isPulling = false;
-                playerController.disableKeyInput = false;
+                playerController.DisableKeyInput(false);
                 canThrow = false;
             }
         }
@@ -237,7 +237,7 @@ public class DestructibleController : MonoBehaviourPun
                             setupThrowable(throwables[i]);
 
                         isPulling = true;
-                        playerController.disableKeyInput = true;
+                        playerController.DisableKeyInput(true);
                         pullStatus?.Invoke(isPulling);
                         // audio
                         playerController.GetComponent<PlayerAudioContoller>()?.PickUpDebris();
@@ -335,7 +335,7 @@ public class DestructibleController : MonoBehaviourPun
                     // audio
                     playerController.GetComponent<PlayerAudioContoller>()?.LaunchDebris();
                 }
-                playerController.disableKeyInput = false;
+                playerController.DisableKeyInput(false);
             }
         }
 

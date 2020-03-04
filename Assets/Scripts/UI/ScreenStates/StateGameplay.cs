@@ -43,9 +43,9 @@ public class StateGameplay : State
 
         if (GameManager.playerObj != null)
         {
-            GameManager.playerObj.GetComponent<CharTPController>().disableKeyInput = false;
-            GameManager.playerObj.GetComponent<CharTPController>().disableMouseInput = false;
-            GameManager.playerObj.GetComponent<CharTPController>().disableMovement = false;
+            GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(false);
+            GameManager.playerObj.GetComponent<CharTPController>().DisableMouseInput(false);
+            GameManager.playerObj.GetComponent<CharTPController>().DisableMovement(false);
         }
         hud.SetActive(true);
 
