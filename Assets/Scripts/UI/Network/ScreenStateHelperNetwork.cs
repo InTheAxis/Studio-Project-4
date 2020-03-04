@@ -10,12 +10,14 @@ public class ScreenStateHelperNetwork : MonoBehaviourPun
 
     #region StartGame
 
+    [PunRPC]
     public void startGame(Player masterPlayer)
     {
         Debug.Log("startGame");
         if (!PhotonNetwork.IsMasterClient)
         {
-            Debug.LogError("Called startGame as non-master client!");
+            Debug.Log("Not master client. Sending start game msg to master client");
+            photonView.RPC("startGame", RpcTarget.MasterClient, masterPlayer);
             return;
         }
 
