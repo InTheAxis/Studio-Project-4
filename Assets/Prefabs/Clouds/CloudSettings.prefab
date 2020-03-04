@@ -142,21 +142,21 @@ MonoBehaviour:
   container: {fileID: 3439353843307518999}
   sprite: {fileID: 0}
   layer: 0
-  numSteps: 100
-  resolutionA: 40
+  numSteps: 69
+  resolutionA: 30
   generateScaleA: 3.27
   numGridA: 39
-  densityThresholdA: 0.35
-  cloudScaleA: 1.08
-  densityMultiplierA: 0.02
-  offsetA: {x: 0, y: 0, z: 0}
+  densityThresholdA: 0.61
+  cloudScaleA: -0.71
+  densityMultiplierA: 0.09
+  offsetA: {x: 131.37067, y: 0, z: 75.64415}
   resolutionB: 30
   generateScaleB: 4.7
   numGridB: 31
-  densityThresholdB: 0.47
+  densityThresholdB: 0.37
   cloudScaleB: 1.38
-  densityMultiplierB: 0.03
-  offsetB: {x: 0, y: 0, z: 0}
+  densityMultiplierB: 0.09
+  offsetB: {x: 341.0505, y: 9.21764, z: 98.04195}
 --- !u!114 &3439353843980447286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,5 +170,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudScript: {fileID: 3439353843980447284}
-  moveRateA: {x: 1.5, y: 0.36, z: -0.18}
-  moveRateB: {x: -3.8, y: 0.72, z: 1.66}
+  moveRateA: {x: 1, y: 0, z: 2}
+  moveRateB: {x: 4.07, y: 0.11, z: 1.17}
