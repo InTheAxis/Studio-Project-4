@@ -50,8 +50,10 @@ public class MonsterMeleeAtk : MonoBehaviour
     {
         attackColl.enabled = true;
         monsterAnim.AttackHold(true);
+        charControl.DisableMovement(true);
         yield return new WaitForSeconds(attackDuration);
         attackColl.enabled = false;
         monsterAnim.AttackRelease();
+        charControl.DisableMovement(false);
     }
 }

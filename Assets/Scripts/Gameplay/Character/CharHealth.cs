@@ -11,11 +11,13 @@ public class CharHealth : MonoBehaviour, IPunObservable
     [SerializeField]
     private int maxHp = 3;
     [SerializeField]
-    private float autoRespawnTime = 3; //set to negative if dont want auto
+    private float autoRespawnTime = -1; //set to negative if dont want auto
     [SerializeField]
     private float respawnInvulTime = 1; //default invul time when respawn
+    [SerializeField]
+    private float hitstunTime = 1; //default invul time when respawn
 
-public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow, bool isInvulnerable);
+    public delegate void OnHealthChangeCallback(CharTPController playerController, int amtNow, bool isInvulnerable);
     public delegate void OnDeadCallback(int viewId);
     public delegate void OnRespawnCallback();
 
@@ -103,13 +105,17 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
 
     public void TakeDmg(int dmg, float dot)
     {
-        if (dead || invulnerable)
+        if (dead)
             return;
 
         if (charControl.photonView.IsMine && PhotonNetwork.IsConnected)
+        { 
             CharTPCamera.Instance.Shake();
+            StartCoroutine(HitStun());
+        }
 
-        StartCoroutine(HitStun());
+        if (invulnerable)
+            return;
 
         hp -= dmg;
 
@@ -193,7 +199,7 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
     {
         charControl.DisableMovement(true);
         charControl.rb.isKinematic = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(hitstunTime);
         if (!dead)
         {
             charControl.DisableMovement(false);

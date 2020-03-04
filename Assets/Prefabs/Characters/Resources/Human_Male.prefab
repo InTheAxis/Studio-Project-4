@@ -327,8 +327,8 @@ MonoBehaviour:
   jumpChk: {fileID: 9117360599767537174}
   crouchChk: {fileID: 9117360600064986967}
   targetCamDist: 1.4
-  cameraBobAmt: 0.015
-  cameraBobFreq: 6
+  cameraBobAmt: 0.8
+  cameraBobFreq: 12
   moveSpeed: 16
   kineticFriction: 1.4
   staticFriction: 10
@@ -338,9 +338,6 @@ MonoBehaviour:
   mouseSens: 2
   maxLookY: 0.9
   initialLookY: -0.5
-  disableMovement: 0
-  disableKeyInput: 0
-  disableMouseInput: 0
   rb: {fileID: 0}
 --- !u!114 &5071471449440821494
 MonoBehaviour:
@@ -359,6 +356,7 @@ MonoBehaviour:
   maxHp: 3
   autoRespawnTime: -1
   respawnInvulTime: 1
+  hitstunTime: 1
 --- !u!114 &4390699988826743754
 MonoBehaviour:
   m_ObjectHideFlags: 0
