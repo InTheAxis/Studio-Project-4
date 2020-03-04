@@ -52,10 +52,7 @@ public class InteractableRevive : InteractableBase
         //    vfx.Play();
 
         if (!BloodBootstrap.Instance.isEmitting)
-        { 
-            BloodBootstrap.Instance.SetEmitterSource(transform.position, transform.forward);
-            BloodBootstrap.Instance.Emit();
-        }
+            thisView.RPC("playEcsVfx", RpcTarget.All, true);
     }
 
     private void Update()
@@ -105,8 +102,9 @@ public class InteractableRevive : InteractableBase
 
             if (interactTime >= timeToFinishInteraction) // Done interacting
             {
-                if (BloodBootstrap.Instance.isEmitting)
-                    BloodBootstrap.Instance.StopEmit();
+                if (BloodBootstrap.Instance.isEmitting) 
+                    thisView.RPC("playEcsVfx", RpcTarget.All, false);
+
                 interactTime = timeToFinishInteraction;
                 Debug.Log("Revive interaction finished!");
                 if (humanAnim)
@@ -138,7 +136,7 @@ public class InteractableRevive : InteractableBase
                     humanAnim.SabotagingDone(false);
 
                 if (BloodBootstrap.Instance.isEmitting)
-                    BloodBootstrap.Instance.StopEmit();
+                    thisView.RPC("playEcsVfx", RpcTarget.All, false);
             }
 
             //if (vfx.isEmitting)
@@ -194,5 +192,19 @@ public class InteractableRevive : InteractableBase
         }
         else
             Debug.Log("cant find player");
+    }
+
+    [PunRPC]
+    private void playEcsVfx(bool b)
+    {
+        if (b)
+        {
+            BloodBootstrap.Instance.SetEmitterSource(transform.position, transform.forward);
+            BloodBootstrap.Instance.Emit();
+        }
+        else 
+        { 
+            BloodBootstrap.Instance.StopEmit();
+        }
     }
 }
