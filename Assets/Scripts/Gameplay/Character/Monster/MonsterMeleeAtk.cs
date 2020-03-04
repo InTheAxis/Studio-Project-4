@@ -7,12 +7,16 @@ public class MonsterMeleeAtk : MonoBehaviour
 {
     [SerializeField]
     private CharTPController charControl;
+
     [SerializeField]
     private float attackDuration = 0.1f;
+
     [SerializeField]
     private float attackCooldown = 0.3f;
+
     [SerializeField]
     private Collider attackColl;
+
     [SerializeField]
     private MonsterAnimationSM monsterAnim;
 
@@ -39,6 +43,7 @@ public class MonsterMeleeAtk : MonoBehaviour
         if (pressed && timer >= attackCooldown + attackDuration)
         {
             timer = 0;
+            GetComponent<MonsterAudioController>()?.Attack();
             if (corr != null)
                 StopCoroutine(corr);
             corr = StartDmg();
