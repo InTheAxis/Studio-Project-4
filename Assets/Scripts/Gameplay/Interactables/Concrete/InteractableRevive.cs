@@ -113,6 +113,13 @@ public class InteractableRevive : InteractableBase
                     humanAnim.SabotagingDone(true);
                 thisView.RPC("revivePlayer", RpcTarget.All, playerViewId);
                 destroyThis(); // Can only be called inside interact
+
+                if (GameManager.playerObj)
+                {
+                    CharTPController cc = GameManager.playerObj.GetComponent<CharTPController>();
+                    cc.DisableKeyInput(false);
+                    cc.DisableMouseInput(false);
+                }
             }
         }
         else // Reset timer

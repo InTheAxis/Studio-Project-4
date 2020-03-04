@@ -11,6 +11,8 @@ public class MonsterEnergy : MonoBehaviour
     private float maxEnergy = 100;
     [SerializeField] [Tooltip("How many seconds it takes to lose 1 energy")]
     private float decayRate = 0.01f;
+    [SerializeField]
+    private Material modelMat;
 
     private IEnumerator decayCour = null;
 
@@ -40,6 +42,8 @@ public class MonsterEnergy : MonoBehaviour
         if (PhotonView.Get(this).IsMine && PhotonNetwork.IsConnected)
             if (Input.GetKeyDown(KeyCode.Alpha7))
                 RechargeFull();
+
+        modelMat.SetFloat("Vector1_9495DC1A", energy / maxEnergy + 0.1f);
     }
 
     private IEnumerator Decay()

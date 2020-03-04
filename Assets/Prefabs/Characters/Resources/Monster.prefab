@@ -367,7 +367,7 @@ Transform:
   - {fileID: 3283994638826096461}
   - {fileID: 7568851054981347502}
   - {fileID: 6723694920928197127}
-  - {fileID: 463937934800390037}
+  - {fileID: 6862646314395203483}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -596,6 +596,7 @@ MonoBehaviour:
   health: {fileID: 5071471449440821494}
   maxEnergy: 100
   decayRate: 1
+  modelMat: {fileID: 2100000, guid: b63d1d027e544f9419b79c9eb05afb62, type: 2}
 --- !u!114 &3023660623748070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +620,7 @@ MonoBehaviour:
   cameraDist: 12
   cooldown: 1
   attackColl: {fileID: 2592693972958539280}
-  vfx: {fileID: 463937934800390016}
+  vfx: {fileID: 4206094659610911450}
 --- !u!114 &3519577131178216787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,13 +896,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78a2fa57bfc8aa14a9c52ee3217f3684, type: 3}
---- !u!4 &463937934800390037 stripped
+--- !u!4 &6862646314395203483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6434862533323026467, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}
   m_PrefabInstance: {fileID: 463937934800390072}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &463937934800390016 stripped
+--- !u!198 &4206094659610911450 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4336739774868858210, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}

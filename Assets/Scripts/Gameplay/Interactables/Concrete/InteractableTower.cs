@@ -153,6 +153,13 @@ public class InteractableTower : InteractableBase
                     interactDone = true;
                     Debug.Log("Recharged");
                 }
+
+                if (GameManager.playerObj)
+                {
+                    CharTPController cc = GameManager.playerObj.GetComponent<CharTPController>();
+                    cc.DisableKeyInput(false);
+                    cc.DisableMouseInput(false);
+                }
             }
             else // Not done interacting
             {
