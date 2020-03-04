@@ -8,6 +8,8 @@ public class InteractableRevive : InteractableBase
 {
     [SerializeField]
     private float timeToFinishInteraction = 2.0f;
+    [SerializeField]
+    private float timeout = 5;
 
     private bool wasInteracting = false;
     private float interactTime = 0.0f;
@@ -27,6 +29,7 @@ public class InteractableRevive : InteractableBase
     private MonsterAnimationSM monsterAnim = null;
     
     private int playerViewId = -1;
+    private float timer;
 
     private void Start()
     {
@@ -65,12 +68,21 @@ public class InteractableRevive : InteractableBase
                 monsterAnim = GameManager.playerObj.GetComponent<MonsterAnimationSM>();
             }
         }
+        timer += Time.deltaTime;
+        
+        if (timer > timeout)
+        {
+            //REVIVE GUNNA DISAPPEAR HERE ELSON
+            destroyThis(); 
+        }
     }
 
     private void LateUpdate()
     {
         if (isDestroyed)
             return;
+
+
 
         // Is interacting this frame
         if (wasInteracting)
@@ -147,6 +159,7 @@ public class InteractableRevive : InteractableBase
     {
         //might not have thisView yet
         PhotonView.Get(this).RPC("setPlayerID", RpcTarget.All, _viewId);
+        timer = 0;
     }
 
     [PunRPC]
