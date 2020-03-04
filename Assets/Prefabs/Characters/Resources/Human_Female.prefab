@@ -458,7 +458,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   vfx: {fileID: 8048343591809281217, guid: 8ed3e21ceb60eb24eaa3870039402e2a, type: 3}
   cooldownTime: 1
-  forceMagnitude: 20
+  forceMagnitude: 3
   range: 10
   radius: 3
   include:
@@ -480,7 +480,7 @@ MonoBehaviour:
   charControl: {fileID: 9117360599836359451}
   vfx: {fileID: 3158346633907567993, guid: f0c16511ffaf4b248901948128ec6e1c, type: 3}
   cooldownTime: 1
-  forceMagnitude: 20
+  forceMagnitude: 3
   radius: 5
   include:
     serializedVersion: 2

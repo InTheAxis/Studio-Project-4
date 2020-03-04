@@ -72,7 +72,7 @@ public class HumanToolPull : MonoBehaviour
 
             cooldown = cooldownTime;
             Rigidbody[] rbs = RigidBodyExt.GetRigiBodiesInSphere(charControl.position, radius, include);
-            RigidBodyExt.PullTowards(rbs, charControl.position, forceMagnitude);
+            RigidBodyExt.PullTowards(rbs, charControl.position, forceMagnitude, ForceMode.VelocityChange);
         }
         cooldown -= Time.deltaTime;
     }
