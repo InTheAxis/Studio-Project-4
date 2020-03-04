@@ -8,24 +8,34 @@ public class MonsterChargeAtk : MonoBehaviour
     [Header("General")]
     [SerializeField]
     private CharTPController charControl;
+
     [SerializeField]
     private MonsterEnergy ener;
+
     [SerializeField]
     private MonsterChargeCheck chargeChk;
+
     [SerializeField]
     private float enerConsumption = 10;
+
     [SerializeField]
     private float duration = 2;
+
     [SerializeField]
-    private float speed = 10;   
+    private float speed = 10;
+
     [SerializeField]
     private float delay = 0.5f;
+
     [SerializeField]
     private float acceleration = 0.05f;
+
     [SerializeField]
     private float cameraDist = 12;
+
     [SerializeField]
     private float cooldown = 1;
+
     //[SerializeField]
     //private TrailRenderer trail;
     [SerializeField]
@@ -40,6 +50,7 @@ public class MonsterChargeAtk : MonoBehaviour
     private PhotonView thisView;
 
     public bool isCharging { private set; get; }
+
     private void Start()
     {
         timer = cooldown + duration;
@@ -57,7 +68,7 @@ public class MonsterChargeAtk : MonoBehaviour
 
     private void OnDisable()
     {
-        chargeChk.Collided -= HitObstacle;        
+        chargeChk.Collided -= HitObstacle;
     }
 
     private void Update()
@@ -74,6 +85,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 timer = 0;
                 chargeCorr = Charge();
                 StartCoroutine(chargeCorr);
+               
             }
         }
     }
@@ -93,7 +105,7 @@ public class MonsterChargeAtk : MonoBehaviour
     }
 
     private IEnumerator Charge()
-    {        
+    {
         if (ener.UseUp(enerConsumption))
         {
             yield return new WaitForSeconds(delay);
@@ -102,6 +114,7 @@ public class MonsterChargeAtk : MonoBehaviour
             charControl.DisableFriction(true);
             //trail.emitting = true;
             isCharging = true;
+            GetComponent<MonsterAudioController>()?.Charge();
             //atkData.SetIsDamaging(gameObject);
             attackColl.enabled = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);

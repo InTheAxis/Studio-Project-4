@@ -112,6 +112,7 @@ MonoBehaviour:
   allowConstantInteraction: 0
   lenientInteraction: 1
   canCarry: 1
+  monsterCanInteract: 1
   interactDone: 0
   positionOffsetWhileCarry: {x: 1, y: 0, z: 0}
 --- !u!114 &-3715255290989037327
