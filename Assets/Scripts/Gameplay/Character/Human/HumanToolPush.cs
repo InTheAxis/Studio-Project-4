@@ -77,7 +77,7 @@ public class HumanToolPush : MonoBehaviour
             Vector3 origin = charControl.position + lookDir * radius;
             Vector3 dest = origin + lookDir * range;
             Rigidbody[] rbs = RigidBodyExt.GetRigiBodiesInCapsule(origin, dest, radius, include);
-            RigidBodyExt.PushInDirection(rbs, forceMagnitude * lookDir);
+            RigidBodyExt.PushInDirection(rbs, forceMagnitude * lookDir, ForceMode.VelocityChange);
         }
         cooldown -= Time.deltaTime;
     }
