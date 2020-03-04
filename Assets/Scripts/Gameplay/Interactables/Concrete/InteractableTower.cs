@@ -136,6 +136,8 @@ public class InteractableTower : InteractableBase
                             thisDestuctibleComp.Destruct(null);
                         else
                             destroyThis(); // Can only be called inside interact
+                        thisView.RPC("explodeVFX", RpcTarget.All);
+
                     }
                     else // Has more stages. Go to next stage
                     {
@@ -290,5 +292,14 @@ public class InteractableTower : InteractableBase
             sparks.Play();
         else if (!b && sparks.isEmitting)
             sparks.Stop();
+    }
+
+    [PunRPC]
+    private void explodeVFX()
+    {
+        GameObject explode = Instantiate(HitEffects.instance.towerExplosion);
+        explode.transform.position = transform.position;
+        explode.transform.forward = transform.forward;
+        Destroy(explode, explode.GetComponent<ParticleSystem>().main.duration);
     }
 }

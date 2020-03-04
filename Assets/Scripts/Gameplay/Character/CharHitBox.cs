@@ -7,6 +7,7 @@ public class CharHitBox : MonoBehaviour
     //public bool hit { private set; get; }
     private PhotonView photonView;
 
+
     private void Start()
     {
         photonView = transform.root.GetComponent<CharTPController>()?.photonView;
@@ -23,7 +24,13 @@ public class CharHitBox : MonoBehaviour
 
     private void onHitVFX(int damage, float dotProduct)
     {
-
+        if (HitEffects.instance != null && damage > 0)
+        {
+            GameObject particles = Instantiate(HitEffects.instance.playerBleed);
+            particles.transform.position = transform.root.position;
+            particles.transform.forward = transform.root.forward;
+            Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
+        }
     }
     //private void Start()
     //{

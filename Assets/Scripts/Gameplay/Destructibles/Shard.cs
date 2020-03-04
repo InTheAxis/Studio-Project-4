@@ -18,11 +18,7 @@ public class Shard : MonoBehaviour
     private float shardSettleVelocityThreshold = 0.1f;
     private bool shouldDespawn = false;
 
-    [Header("VFX")]
-    [SerializeField]
-    private GameObject monsterHit = null;
-    [SerializeField]
-    private GameObject survivorHit = null;
+
 
 
     private List<Rigidbody> smallShards = new List<Rigidbody>();
@@ -58,30 +54,21 @@ public class Shard : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.sqrMagnitude < 6.0f) return;
+        if (collision.relativeVelocity.sqrMagnitude < 4.0f) return;
+
+        if(HitEffects.instance == null)
+            Debug.LogError("HitEffects does not exist!");
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            if (monsterHit == null)
-            {
-                Debug.LogWarning("Add monsterHit particle to this shard: " + gameObject.name);
-                return;
-            }
-
-            GameObject clone = Instantiate(monsterHit);
+            GameObject clone = Instantiate(HitEffects.instance.monsterCollide);
             clone.transform.position = collision.contacts[0].point;
             clone.transform.forward = collision.contacts[0].normal;
             Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
         }
         else if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Human"))
-        {
-            if (survivorHit == null)
-            {
-                Debug.LogWarning("Add survivorHit particle to this shard: " + gameObject.name);
-                return;
-            }
-
-            GameObject clone = Instantiate(survivorHit);
+        { 
+            GameObject clone = Instantiate(HitEffects.instance.survivorCollide);
             clone.transform.position = collision.contacts[0].point;
             clone.transform.forward = collision.contacts[0].normal;
             Destroy(clone, clone.GetComponent<ParticleSystem>().main.duration);
