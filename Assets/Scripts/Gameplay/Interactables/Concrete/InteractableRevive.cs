@@ -31,14 +31,14 @@ public class InteractableRevive : InteractableBase
     
     private int playerViewId = -1;
     private float timeoutCounter;
-    private bool isLocalDead = false;
+    //private bool isLocalDead = false;
 
     private TextMeshProUGUI tmCountdown = null;
 
     private void Start()
     {
         thisView = PhotonView.Get(this);
-        isLocalDead = (playerViewId == GameManager.playerObj.GetPhotonView().ViewID);
+        //isLocalDead = (playerViewId == GameManager.playerObj.GetPhotonView().ViewID);
         tmCountdown = StateController.getState("Death").transform.Find("Countdown").GetComponent<TextMeshProUGUI>();
 
         if(tmCountdown == null)
@@ -84,7 +84,7 @@ public class InteractableRevive : InteractableBase
 
         if (timeoutCounter > timeout)
         {
-            if(isLocalDead)
+            if (playerViewId == GameManager.playerObj.GetPhotonView().ViewID)
             {
                 int timer = (int)timeoutCounter;
                 timer = Mathf.Max(0, timer);
