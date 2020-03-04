@@ -79,8 +79,8 @@ public delegate void OnHealthChangeCallback(CharTPController playerController, i
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //    Respawn(1);
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            Respawn(1);
     }
 
     public void Respawn(float invulTime)
