@@ -16,7 +16,7 @@ public class CharHitBox : MonoBehaviour
     private void Update()
     {
         if (photonView.IsMine && Input.GetKeyDown(KeyCode.Alpha0))
-        { 
+        {
             OnHit?.Invoke(1, -1);
         }
     }

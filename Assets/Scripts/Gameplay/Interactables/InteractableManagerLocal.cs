@@ -61,7 +61,9 @@ public class InteractableManagerLocal : MonoBehaviour
         // Time-out with last seen interactable, if not looking at an interactable
         if (lastCollidedTimer > interactRaycastLostTimeout)
             lastCollidedInteractable = null;
-
+        // Disallow interactable if we're the monster and the interactable disallows monster interaction
+        if (lastCollidedInteractable != null && !lastCollidedInteractable.MonsterCanInteract && PhotonNetwork.IsMasterClient)
+            lastCollidedInteractable = null;
 
         // Pickup/Use looked at interactable
 

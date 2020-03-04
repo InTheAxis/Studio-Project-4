@@ -17,6 +17,10 @@ public abstract class InteractableBase : MonoBehaviour
     private bool canCarry = false;
     public bool CanCarry { get => canCarry; }
 
+    [SerializeField]
+    private bool monsterCanInteract = true;
+    public bool MonsterCanInteract { get => monsterCanInteract; }
+
     public bool interactDone = false;
 
 
