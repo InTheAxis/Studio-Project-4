@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment_CoolingTowerBB
       objectReference: {fileID: 0}
+    - target: {fileID: 4360690057225199928, guid: c5218fb6a6a41294da55661f6ffdc68c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4843455771062167158, guid: c5218fb6a6a41294da55661f6ffdc68c,
         type: 3}
       propertyPath: breakForce
@@ -145,6 +150,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589770846584302800, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199999524633463875, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8725049969056834168, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
