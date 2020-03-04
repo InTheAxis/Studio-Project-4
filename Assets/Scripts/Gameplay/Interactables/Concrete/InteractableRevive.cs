@@ -9,7 +9,7 @@ public class InteractableRevive : InteractableBase
     [SerializeField]
     private float timeToFinishInteraction = 2.0f;
     [SerializeField]
-    private float timeout = 5;
+    private float timeout = 30;
 
     private bool wasInteracting = false;
     private float interactTime = 0.0f;

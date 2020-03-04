@@ -170,6 +170,7 @@ MonoBehaviour:
   interactDone: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
   timeToFinishInteraction: 2
+  timeout: 30
 --- !u!1 &3251071315449172671
 GameObject:
   m_ObjectHideFlags: 0
