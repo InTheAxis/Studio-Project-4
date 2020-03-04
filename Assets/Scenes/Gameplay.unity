@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -13549,6 +13549,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1250995689}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250995694 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6705662069046097736, guid: 7e0c9158f36a4bf48a3876ead07c70a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1250995689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd65fd6150696e429d4164765f67c9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1266647037
 GameObject:
   m_ObjectHideFlags: 0
@@ -14133,6 +14145,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4863530578331260268, guid: 884ee249c5d6495429526a16f8b1e2ec,
+        type: 3}
+      propertyPath: tpCam
+      value: 
+      objectReference: {fileID: 1250995694}
     - target: {fileID: 4863530578331260272, guid: 884ee249c5d6495429526a16f8b1e2ec,
         type: 3}
       propertyPath: m_Name
