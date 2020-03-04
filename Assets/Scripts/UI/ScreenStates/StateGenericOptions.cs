@@ -93,6 +93,7 @@ public abstract class StateGenericOptions : State
         selectNavButton(go);
         /* Find target sub menu */
         GameObject nextMenu = subMenuHolder.Find(go.name).gameObject;
+        if (nextMenu == currentSubMenu) return;
 
         /* Hide current sub menu if I pressed on another item's sub menu */
         if (currentSubMenu != null && currentSubMenu != nextMenu)
@@ -197,6 +198,7 @@ public abstract class StateGenericOptions : State
         tmMusicVolume.text = ((int)(settings.musicVol * 100.0f)).ToString() + "%";
 
         base.onShow();
+        selectNavButton(buttonHolder.GetChild(0).gameObject);
     }
 }
 
