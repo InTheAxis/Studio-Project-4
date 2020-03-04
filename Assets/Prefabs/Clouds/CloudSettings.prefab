@@ -146,16 +146,16 @@ MonoBehaviour:
   resolutionA: 30
   generateScaleA: 3.27
   numGridA: 39
-  densityThresholdA: 0.61
+  densityThresholdA: 0.29
   cloudScaleA: -0.71
-  densityMultiplierA: 0.09
+  densityMultiplierA: 0.01
   offsetA: {x: 131.37067, y: 0, z: 75.64415}
-  resolutionB: 30
+  resolutionB: 20
   generateScaleB: 4.7
   numGridB: 31
-  densityThresholdB: 0.37
+  densityThresholdB: 0.22
   cloudScaleB: 1.38
-  densityMultiplierB: 0.09
+  densityMultiplierB: 0.03
   offsetB: {x: 341.0505, y: 9.21764, z: 98.04195}
 --- !u!114 &3439353843980447286
 MonoBehaviour:

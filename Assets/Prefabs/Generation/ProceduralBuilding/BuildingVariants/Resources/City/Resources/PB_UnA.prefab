@@ -889,6 +889,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7195ccc266d9b324287bfb72a31f10d3, type: 3}
+--- !u!1 &7843075793851420627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 86984277070623943, guid: 7195ccc266d9b324287bfb72a31f10d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7921044891389147924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8710529188228932443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -919,12 +925,17 @@ PrefabInstance:
     - target: {fileID: 4985674206888800058, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
       propertyPath: breakForce
-      value: 5190.42
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4985674206888800058, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
       propertyPath: attachGo
       value: 
+      objectReference: {fileID: 7843075793851420627}
+    - target: {fileID: 4985674206888800058, guid: 737e7c27e0b0f014b8fafcabf93865a7,
+        type: 3}
+      propertyPath: unbreakableAttachments
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6338421826290787504, guid: 737e7c27e0b0f014b8fafcabf93865a7,
         type: 3}
