@@ -39,6 +39,7 @@ public class DebugFlyCam : MonoBehaviour
                 tpCam.gameObject.SetActive(!isEnabled);
                 tpCam.charControl.DisableKeyInput(isEnabled);
                 tpCam.charControl.DisableMouseInput(isEnabled);
+                transform.position = tpCam.transform.position;
             }
         }
 

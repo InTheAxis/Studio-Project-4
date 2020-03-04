@@ -486,10 +486,10 @@ MonoBehaviour:
   chargeChk: {fileID: 3353481281967616732}
   enerConsumption: 10
   duration: 2
-  speed: 200
+  speed: 60
   delay: 0.3
-  acceleration: 5
-  cameraDist: 15
+  acceleration: 2
+  cameraDist: 12
   cooldown: 1
   attackColl: {fileID: 2592693972958539280}
   vfx: {fileID: 4206094659610911450}
