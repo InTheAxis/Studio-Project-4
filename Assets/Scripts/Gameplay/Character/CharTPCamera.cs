@@ -101,7 +101,7 @@ public class CharTPCamera : MonoBehaviour
         defaultCamDist = targetCamDist = cc.targetCamDist;
         cameraBobAmt = cc.cameraBobAmt;
         cameraBobFreq = cc.cameraBobFreq;
-        Debug.LogErrorFormat("NOT AN ERROR, CameraBobAmt {0}, CameraBobFreq {1}, set by {2}", cameraBobAmt, cameraBobFreq, cc.gameObject.name);
+        Debug.LogFormat("CameraBobAmt {0}, CameraBobFreq {1}, set by {2}", cameraBobAmt, cameraBobFreq, cc.gameObject.name);
     }
 
     //use me to look at the transform at index of the target array
