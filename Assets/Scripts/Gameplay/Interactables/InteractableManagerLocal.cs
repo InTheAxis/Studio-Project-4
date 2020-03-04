@@ -69,7 +69,7 @@ public class InteractableManagerLocal : MonoBehaviour
         {
             if (!hasStoppedUsingInteractable) // Don't send release request more than once
             {
-                if (interactDown && !usingInteractable.interactDone) // Player is still interacting
+                if (interactDown && !usingInteractable.interactDone && lastCollidedInteractable != null && (usingInteractable.LenientInteraction || lastCollidedInteractable == usingInteractable)) // Player is still interacting
                     usingInteractable.interact();
                 else
                 {
