@@ -24,7 +24,12 @@ public class StateMatchLobby : State
     [SerializeField]
     [Tooltip("The sliding indicator that shows what sub-menu is opened at the moment.")]
     private RectTransform indicator = null;
-    
+    [SerializeField]
+    [Tooltip("The dialog that shows when unable to start a match")]
+    private GameObject statusOverlay = null;
+    [SerializeField]
+    [Tooltip("The status message")]
+    private TextMeshProUGUI tmStatus = null;
 
     [SerializeField]
     private StateMatchLobbyCharacter stateLobbyChar;
@@ -42,6 +47,7 @@ public class StateMatchLobby : State
     {
         StateController.Register(this);
 
+        stateLobbyChar.eventModelSelect += onModelSelect;
         worldCanvas.SetActive(false);
 
         if (!toReturnToThis)
@@ -119,6 +125,7 @@ public class StateMatchLobby : State
             string chkValidMsg = checkValidCharSelection(out toBeMasterClient);
             if (chkValidMsg.Length != 0)
             {
+                statusOverlay.SetActive(true);
                 Debug.Log(chkValidMsg);
                 return;
             }
@@ -141,10 +148,10 @@ public class StateMatchLobby : State
                 if (monsterPlayer == null)
                     monsterPlayer = p;
                 else
-                    return "Only 1 Player may be the Monster";
+                    return "There can only be 1 monster.";
 
         if (monsterPlayer == null)
-            return "There must be 1 Player who is the Monster";
+            return "There must be at least 1 player who is the Monster";
         else
         {
             playerToBeMaster = monsterPlayer;
@@ -229,6 +236,65 @@ public class StateMatchLobby : State
         base.onHide();
     }
 
+    private string quickCheckValidSelection()
+    {
+        bool foundMonster = false;
+        foreach (var p in PhotonNetwork.PlayerList)
+            if ((int)NetworkClient.getPlayerProperty(p, "charModel") == 0)
+                if (!foundMonster)
+                    foundMonster = true;
+                else
+                    return "There can only be one Monster.";
+
+        if (!foundMonster)
+            return "There must be at least one player who is the Monster.";
+        return "";
+    }
+
+    private void onModelSelect(int index, bool isSelf)
+    {
+
+        if (isSelf)
+        {
+            /* I am now the monster*/
+            if (index == 0)
+            {
+                mapMenuButton.SetActive(true);
+                tmReady.text = "Start";
+
+            }
+            /* I am no longer the monster */
+            else
+            {
+                mapMenuButton.SetActive(false);
+                tmReady.text = "Ready";
+            }
+            mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
+        }
+
+        string result = quickCheckValidSelection();
+        if(result.Length != 0)
+        {
+            statusOverlay.SetActive(true);
+            tmStatus.text = result;
+            btnReady.enabled = false;
+            tmReady.GetComponent<TextMeshProUGUI>().color = ThemeColors.neutral;
+            mapMenuButton.GetComponent<TextMeshProUGUI>().color = ThemeColors.neutral;
+        }
+        else
+        {
+            statusOverlay.SetActive(false);
+
+            if (index != 0)
+            {
+                btnReady.enabled = true;
+                tmReady.GetComponent<TextMeshProUGUI>().color = Color.white;
+                mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
+            }
+
+        }
+    }
+
     /* NETWORKING */
 
     #region Network Callbacks
@@ -304,6 +370,9 @@ public class StateMatchLobby : State
     public void receivedCharModelChange(string playerName, int modelIndex)
     {
         stateLobbyChar.setModel(playerIDs[playerName], modelIndex);
+
+        onModelSelect(modelIndex, false);
+
     }
 
 }

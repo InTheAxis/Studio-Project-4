@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
+using UnityEditor;
 
 public class StateGameover : State
 {
@@ -51,7 +52,11 @@ public class StateGameover : State
 
     public void Quit()
     {
-
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private IEnumerator countScore(TextMeshProUGUI tmp, int targetScore, float delay=0.0f)

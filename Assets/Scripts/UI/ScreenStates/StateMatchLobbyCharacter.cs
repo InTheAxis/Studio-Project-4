@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ public class StateMatchLobbyCharacter : State
     private GameObject playerContainerRef;
 
     public override string Name { get { return "LobbyCharacter"; } }
+
+    public event Action<int, bool> eventModelSelect;
+
 
     public void selectCharacter(GameObject go)
     {
@@ -32,6 +36,7 @@ public class StateMatchLobbyCharacter : State
             NetworkClient.setPlayerProperty("charModel", modelIndex);
             ScreenStateHelperNetwork.instance.sendModelChange(modelIndex);
             setModel(0, modelIndex);
+            eventModelSelect?.Invoke(modelIndex, true);
         }
     }
 
