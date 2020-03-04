@@ -35,6 +35,13 @@ public class MonsterEnergy : MonoBehaviour
         StartCoroutine(decayCour);
     }
 
+    private void Update()
+    {
+        if (PhotonView.Get(this).IsMine && PhotonNetwork.IsConnected)
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+                RechargeFull();
+    }
+
     private IEnumerator Decay()
     {
         while (!health.dead && energy > 0)
