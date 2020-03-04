@@ -896,6 +896,7 @@ GameObject:
   - component: {fileID: -1308369214344310058}
   - component: {fileID: 6826552010628832027}
   - component: {fileID: 42309553004755760}
+  - component: {fileID: 1913300821338998618}
   m_Layer: 13
   m_Name: Interactable_SignalTower
   m_TagString: Untagged
@@ -977,6 +978,7 @@ MonoBehaviour:
   allowConstantInteraction: 1
   lenientInteraction: 0
   canCarry: 0
+  monsterCanInteract: 1
   interactDone: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
   timeToFinishInteractionMonster: 10
@@ -1019,6 +1021,18 @@ MonoBehaviour:
   maxExplosionDir: {x: 1, y: 0, z: 1}
   minExplosionForce: {x: 0.01, y: 0.01, z: 0.01}
   maxExplosionForce: {x: 0.2, y: 0.2, z: 0.2}
+--- !u!114 &1913300821338998618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7438366991310282751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda17c5a86d1db34691457076664aaa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7490352769829733426
 GameObject:
   m_ObjectHideFlags: 0

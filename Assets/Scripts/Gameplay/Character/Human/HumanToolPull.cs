@@ -16,15 +16,16 @@ public class HumanToolPull : MonoBehaviour
     [Header("Tool Settings")]
     [SerializeField]
     private float cooldownTime;
+
     [SerializeField]
     private float forceMagnitude;
 
     [Header("Overlap Detection Settings")]
     [SerializeField]
     private float radius;
+
     [SerializeField]
     private LayerMask include;
-
 
     private bool pressed;
     private float cooldown;
@@ -36,6 +37,7 @@ public class HumanToolPull : MonoBehaviour
         cooldown = 0;
         pressed = false;
     }
+
     private void Update()
     {
         if (!charControl.photonView.IsMine && Photon.Pun.PhotonNetwork.IsConnected)
@@ -44,7 +46,7 @@ public class HumanToolPull : MonoBehaviour
         pressed = Input.GetAxisRaw("Fire2") != 0;
 
         if (Input.GetButtonDown("Fire2"))
-        { 
+        {
             //playVFX = true;
             charControl.photonView.RPC("playVfxRpcPull", RpcTarget.All, true);
         }
@@ -79,17 +81,19 @@ public class HumanToolPull : MonoBehaviour
     private void playVfxRpcPull(bool b)
     {
         playVFX = b;
+        GetComponent<AudioController>().Play("push0");
     }
-
 
 #if UNITY_EDITOR
 
     public bool drawDebug = false;
+
     private void OnDrawGizmos()
     {
         if (!drawDebug)
             return;
         Gizmos.DrawWireSphere(charControl.position, radius);
     }
+
 #endif
 }
