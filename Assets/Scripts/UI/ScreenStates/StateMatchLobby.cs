@@ -268,6 +268,7 @@ public class StateMatchLobby : State
             {
                 mapMenuButton.SetActive(false);
                 tmReady.text = "Ready";
+                btnReady.enabled = true;
             }
             mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
         }
@@ -287,11 +288,11 @@ public class StateMatchLobby : State
 
             if (index != 0)
             {
-                btnReady.enabled = true;
+
                 tmReady.GetComponent<TextMeshProUGUI>().color = Color.white;
                 mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
             }
-
+            btnReady.enabled = true;
         }
     }
 

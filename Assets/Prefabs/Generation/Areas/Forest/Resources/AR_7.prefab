@@ -12241,6 +12241,7 @@ MonoBehaviour:
   allowConstantInteraction: 1
   lenientInteraction: 0
   canCarry: 0
+  monsterCanInteract: 1
   interactDone: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
   timeToFinishInteractionMonster: 10
@@ -12385,6 +12386,7 @@ MonoBehaviour:
   allowConstantInteraction: 1
   lenientInteraction: 0
   canCarry: 0
+  monsterCanInteract: 1
   interactDone: 0
   positionOffsetWhileCarry: {x: 0, y: 0, z: 0}
   timeToFinishInteractionMonster: 10
