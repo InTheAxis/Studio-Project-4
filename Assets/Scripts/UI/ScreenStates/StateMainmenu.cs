@@ -42,7 +42,7 @@ public class StateMainmenu : State
     public void Logout()
     {
         PlayerSettings.playerName = null;
-        StateController.showPrevious();
+        StateController.showNext("Login");
     }
 
     /* Slides the indicator up and down based on the nav button pressed */

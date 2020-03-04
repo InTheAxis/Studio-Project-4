@@ -40,7 +40,10 @@ public class GameplaySettings : DoNotDestroySingleton<GameplaySettings>
 
             if (PlayerPrefs.HasKey("settings-resindex"))
             {
-                currentResIndex = PlayerPrefs.GetInt("settings-resindex");
+                int preferred = PlayerPrefs.GetInt("settings-resindex");
+                if (preferred >= 0 && preferred < resolutions.Length)
+                    currentResIndex = preferred;
+
                 Debug.Log("Found preferred settings: " + currentResIndex);
             }
             else

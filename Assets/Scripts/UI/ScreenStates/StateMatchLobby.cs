@@ -43,6 +43,8 @@ public class StateMatchLobby : State
 
     public override string Name { get { return "MatchLobby"; } }
 
+    private Player monsterPlayer = null;
+
     private void Awake()
     {
         StateController.Register(this);
@@ -101,7 +103,7 @@ public class StateMatchLobby : State
                 players[playerIDs[name]].setReady(NetworkClient.instance.isReady(name));
         }
 
-        if (PhotonNetwork.IsMasterClient && btnReady != null)
+        if (monsterPlayer == PhotonNetwork.LocalPlayer && btnReady != null)
         {
             if (NetworkClient.instance.areAllReady())
             {
@@ -119,7 +121,7 @@ public class StateMatchLobby : State
 
     public void Ready()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (monsterPlayer == PhotonNetwork.LocalPlayer)
         {
             Player toBeMasterClient;
             string chkValidMsg = checkValidCharSelection(out toBeMasterClient);
@@ -129,7 +131,6 @@ public class StateMatchLobby : State
                 Debug.Log(chkValidMsg);
                 return;
             }
-
 
             ScreenStateHelperNetwork.instance.modelChangeCallback -= receivedCharModelChange;
             ScreenStateHelperNetwork.instance.startGame(toBeMasterClient);
@@ -215,6 +216,8 @@ public class StateMatchLobby : State
         StateController.Hide("LobbyCharacter");
         StateController.Hide("LobbyMap");
 
+        if(PhotonNetwork.IsMasterClient)
+            monsterPlayer = PhotonNetwork.LocalPlayer;
         base.onShow();
 
         StartCoroutine(registerCallbackCour());
@@ -239,21 +242,37 @@ public class StateMatchLobby : State
     private string quickCheckValidSelection()
     {
         bool foundMonster = false;
+
+        monsterPlayer = null;
+        Player tempMonster = null;
         foreach (var p in PhotonNetwork.PlayerList)
+        {
             if ((int)NetworkClient.getPlayerProperty(p, "charModel") == 0)
+            {
                 if (!foundMonster)
+                {
+                    tempMonster = p;
                     foundMonster = true;
+                }
                 else
+                {
                     return "There can only be one Monster.";
+                }
+            }
+        }
+
+        monsterPlayer = tempMonster;
 
         if (!foundMonster)
             return "There must be at least one player who is the Monster.";
         return "";
     }
 
+    /* Called by local model select and remote model select */
     private void onModelSelect(int index, bool isSelf)
     {
 
+        /* LOCAL SELECTION */
         if (isSelf)
         {
             /* I am now the monster*/
@@ -268,10 +287,12 @@ public class StateMatchLobby : State
             {
                 mapMenuButton.SetActive(false);
                 tmReady.text = "Ready";
+                btnReady.enabled = true;
             }
             mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
         }
 
+        /* VALIDITY CHECK */
         string result = quickCheckValidSelection();
         if(result.Length != 0)
         {
@@ -287,11 +308,11 @@ public class StateMatchLobby : State
 
             if (index != 0)
             {
-                btnReady.enabled = true;
+
                 tmReady.GetComponent<TextMeshProUGUI>().color = Color.white;
                 mapMenuButton.GetComponent<TextMeshProUGUI>().color = Color.white;
             }
-
+            btnReady.enabled = true;
         }
     }
 
@@ -370,7 +391,6 @@ public class StateMatchLobby : State
     public void receivedCharModelChange(string playerName, int modelIndex)
     {
         stateLobbyChar.setModel(playerIDs[playerName], modelIndex);
-
         onModelSelect(modelIndex, false);
 
     }

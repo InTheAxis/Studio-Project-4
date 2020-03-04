@@ -30,9 +30,12 @@ public class StateLogin : State
 
     private void Start()
     {
-        tmStatus.text = "Connecting to Photon Servers...";
-        NetworkClient.instance.masterServerConnectedCallback = onConnectedToPhotonServers;
-        NetworkClient.instance.connectToMasterServer();
+        if (!PhotonNetwork.IsConnected)
+        {
+            tmStatus.text = "Connecting to Photon Servers...";
+            NetworkClient.instance.masterServerConnectedCallback = onConnectedToPhotonServers;
+            NetworkClient.instance.connectToMasterServer();
+        }
     }
 
     private void Update()
@@ -107,7 +110,10 @@ public class StateLogin : State
 
     public override void onHide()
     {
-        StartCoroutine(StateController.fadeCanvasGroupAndHide(gameObject, loginOverlay, false, 8.0f));
+        tmUsername.text = "";
+        tmStatus.text = "";
+        tmPassword.text = "";
+        gameObject.SetActive(false);
     }
 
 

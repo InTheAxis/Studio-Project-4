@@ -105,6 +105,11 @@ public class InteractableRevive : InteractableBase
                 if (BloodBootstrap.Instance.isEmitting) 
                     thisView.RPC("playEcsVfx", RpcTarget.All, false);
 
+                ScoreCounter.addReviveScore(500);
+
+                if (BloodBootstrap.Instance.isEmitting)
+                    BloodBootstrap.Instance.StopEmit();
+
                 interactTime = timeToFinishInteraction;
                 Debug.Log("Revive interaction finished!");
                 if (humanAnim)
