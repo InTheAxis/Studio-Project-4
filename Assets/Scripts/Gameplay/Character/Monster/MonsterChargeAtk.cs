@@ -85,7 +85,7 @@ public class MonsterChargeAtk : MonoBehaviour
                 timer = 0;
                 chargeCorr = Charge();
                 StartCoroutine(chargeCorr);
-                GetComponent<MonsterAudioController>()?.Charge();
+               
             }
         }
     }
@@ -114,6 +114,7 @@ public class MonsterChargeAtk : MonoBehaviour
             charControl.DisableFriction(true);
             //trail.emitting = true;
             isCharging = true;
+            GetComponent<MonsterAudioController>()?.Charge();
             //atkData.SetIsDamaging(gameObject);
             attackColl.enabled = true;
             CharTPCamera.Instance.LookAt(0, cameraDist);

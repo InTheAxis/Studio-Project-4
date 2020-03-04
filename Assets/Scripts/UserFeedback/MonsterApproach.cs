@@ -23,15 +23,18 @@ public class MonsterApproach : MonoBehaviour
     private AudioController audioController;
     private bool flickering;
     private Minimap3D minimap;
+    private bool layer0;
+    private bool layer1;
+    private bool layer2;
 
     private void Awake()
     {
         audioController = BGAudioController.instance;
         offsetRange = outerRange - innerRange;
         minimap = GetComponentInChildren<Minimap3D>();
+        audioController.SetMusic();
         if (PhotonNetwork.IsMasterClient)
             enabled = false;
-        audioController.SetMusic();
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class MonsterApproach : MonoBehaviour
         }
 
         Vector3 monsterPos = monsterObj.transform.position;
+        //Vector3 monsterPos = Vector3.zero;
         float distFromMonster = Vector3.Distance(monsterPos, transform.position);
         if (distFromMonster < outerRange)
         {
@@ -71,6 +75,8 @@ public class MonsterApproach : MonoBehaviour
         float currVol = audioController.GetVol();
         currVol = Mathf.Lerp(currVol, 0, 0.1f);
         audioController.SetVol(currVol);
+        audioController.SetVol(currVol, 1);
+        audioController.SetVol(currVol, 2);
         if (currVol < 0.01)
         {
             audioController.Stop();
@@ -82,7 +88,32 @@ public class MonsterApproach : MonoBehaviour
     {
         float intensity = Mathf.Clamp(1 - (currRange - innerRange) / offsetRange, 0.1f, 1); // range of 0 - 1
         audioController.SetVol(intensity, 0);
-        // TO DO: add overlay second track
+        // add overlay second track
+        if (intensity > 0.4 && !layer1)
+        {
+            Debug.Log("Layer1");
+            layer1 = true;
+            audioController.Play("approach1", 1);
+        }
+        if (intensity < 0.4)
+        {
+            layer1 = false;
+            layer2 = false;
+            audioController.Stop(1);
+            audioController.Stop(2);
+        }
+        if (intensity < 0.8)
+        {
+            layer2 = false;
+            audioController.Stop(2);
+        }
+        // add overlay third track
+        if (intensity > 0.8 && !layer2)
+        {
+            Debug.Log("Layer2");
+            layer2 = true;
+            audioController.Play("approach2", 2);
+        }
         // flicker
         if (!flickering)
         {
@@ -110,7 +141,8 @@ public class MonsterApproach : MonoBehaviour
     {
         inRange = true;
         fadeOut = false;
-        audioController.Play("jaws0");
+        layer0 = true;
+        audioController.Play("approach0");
     }
 
     private void OnDrawGizmos()
