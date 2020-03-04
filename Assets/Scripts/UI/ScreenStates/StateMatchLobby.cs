@@ -49,6 +49,8 @@ public class StateMatchLobby : State
     {
         StateController.Register(this);
 
+        btnReady = tmReady.GetComponent<Button>();
+
         stateLobbyChar.eventModelSelect += onModelSelect;
         worldCanvas.SetActive(false);
 
@@ -212,6 +214,7 @@ public class StateMatchLobby : State
             NetworkClient.instance.playerLeftCallback = onPlayerLeave;
         }
 
+        btnReady.enabled = !PhotonNetwork.IsMasterClient;
         mapMenuButton.SetActive(PhotonNetwork.IsMasterClient);
         worldCanvas.SetActive(true);
         StateController.Hide("LobbyCharacter");
@@ -324,7 +327,6 @@ public class StateMatchLobby : State
     public void onJoinRoom(List<string> playersInLobby)
     {
         playerIDs.Clear();
-        btnReady = tmReady.GetComponent<Button>();
 
         string playerName = PhotonNetwork.LocalPlayer.NickName;
         // Set this client as Model 0
