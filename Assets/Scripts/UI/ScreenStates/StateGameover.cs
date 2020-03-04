@@ -83,9 +83,9 @@ public class StateGameover : State
     {
         base.onShow();
 
-        StartCoroutine(countScore(tmInteraction, 3000));
-        StartCoroutine(countScore(tmItems, 500));
-        StartCoroutine(countScore(tmRevives, 1200));
-        StartCoroutine(countScore(tmTotalScore, 3000+500+1200, 1.8f));
+        StartCoroutine(countScore(tmInteraction, ScoreCounter.interactionScore));
+        StartCoroutine(countScore(tmItems, ScoreCounter.itemScore));
+        StartCoroutine(countScore(tmRevives, ScoreCounter.reviveScore));
+        StartCoroutine(countScore(tmTotalScore, ScoreCounter.total, 1.8f));
     }
 }
