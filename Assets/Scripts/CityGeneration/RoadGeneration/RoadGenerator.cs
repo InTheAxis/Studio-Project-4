@@ -461,8 +461,8 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadInnerPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.2f + yoffset;
-            yoffset += 0.01f;
+            pos.y += yoffset;
+            yoffset += 0.001f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
@@ -472,7 +472,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadOuterPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.15f;
+            pos.y += 0.015f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform) as GameObject;
@@ -482,7 +482,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadSubPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.1f;
+            pos.y += 0.01f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);
@@ -492,7 +492,7 @@ public class RoadGenerator : Generator
         foreach (RoadPath path in roadMinorPaths)
         {
             Vector3 pos = (path.start + path.end) / 2;
-            pos.y += 0.05f;
+            pos.y += 0.011f;
             //Gizmos.DrawLine(path.start, path.end);
             Quaternion rot = Quaternion.LookRotation(path.dir, Vector3.up);
             GameObject road = InstantiateHandler.mInstantiate(RoadRef, pos, rot, transform);

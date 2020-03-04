@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 8904501055139698201}
   - component: {fileID: 8657217375370955262}
   - component: {fileID: 2307675176757107167}
+  - component: {fileID: 4478492131482166247}
   m_Layer: 0
   m_Name: GroundCollider
   m_TagString: Untagged
@@ -463,11 +464,24 @@ MeshCollider:
   m_GameObject: {fileID: 2207645554790539730}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &4478492131482166247
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207645554790539730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1.6586237, z: 10}
+  m_Center: {x: 0, y: -0.82931185, z: 0}
 --- !u!1 &4426278858588160164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,15 +1643,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff0c36dcfa827df44bc8b95a8448349a, type: 3}
---- !u!4 &7557592366435728699 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ff0c36dcfa827df44bc8b95a8448349a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3286293993113212449}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6825961629638463272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ff0c36dcfa827df44bc8b95a8448349a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3286293993113212449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7557592366435728699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ff0c36dcfa827df44bc8b95a8448349a,
     type: 3}
   m_PrefabInstance: {fileID: 3286293993113212449}
   m_PrefabAsset: {fileID: 0}
