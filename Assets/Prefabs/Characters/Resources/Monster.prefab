@@ -240,7 +240,7 @@ Transform:
   - {fileID: 3283994638826096461}
   - {fileID: 7568851054981347502}
   - {fileID: 6723694920928197127}
-  - {fileID: 6862646314395203483}
+  - {fileID: 463937934800390037}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -492,7 +492,7 @@ MonoBehaviour:
   cameraDist: 12
   cooldown: 1
   attackColl: {fileID: 2592693972958539280}
-  vfx: {fileID: 4206094659610911450}
+  vfx: {fileID: 463937934800390016}
 --- !u!114 &3519577131178216787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7572ef3342169f54380866204b08d743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightBehind: {fileID: 2100000, guid: 7fe290f32d9cec74e9271a8b36bebf3f, type: 2}
+  highlightBehind: {fileID: 0}
   highlightLayer: HighlightBehind
   humanLayer: Human
   range: 40
@@ -748,13 +748,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78a2fa57bfc8aa14a9c52ee3217f3684, type: 3}
---- !u!4 &6862646314395203483 stripped
+--- !u!4 &463937934800390037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6434862533323026467, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}
   m_PrefabInstance: {fileID: 463937934800390072}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &4206094659610911450 stripped
+--- !u!198 &463937934800390016 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4336739774868858210, guid: 78a2fa57bfc8aa14a9c52ee3217f3684,
     type: 3}

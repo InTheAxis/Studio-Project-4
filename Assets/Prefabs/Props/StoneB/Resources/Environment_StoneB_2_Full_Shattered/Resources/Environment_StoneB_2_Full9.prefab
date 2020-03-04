@@ -203,8 +203,6 @@ MonoBehaviour:
   timeBeforeDespawn: 20
   smallShardScaleThreshold: 1
   shardSettleVelocityThreshold: 0.1
-  monsterHit: {fileID: 0}
-  survivorHit: {fileID: 0}
 --- !u!82 &437401334239523103
 AudioSource:
   m_ObjectHideFlags: 0
