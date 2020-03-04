@@ -311,8 +311,7 @@ public class Minimap3D : MonoBehaviour
     public void Hide()
     {
         /* Shrink the object down to zero as it disappears */
-        if (gameObject.activeSelf)
-            StartCoroutine(shrinkHolograms());
+        StartCoroutine(shrinkHolograms());
     }
 
     private IEnumerator shrinkHolograms()
