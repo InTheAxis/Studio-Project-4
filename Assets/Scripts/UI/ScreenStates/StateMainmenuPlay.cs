@@ -13,6 +13,12 @@ public class StateMainmenuPlay : State
     [SerializeField]
     [Tooltip("The status message for joining a room.")]
     private TextMeshProUGUI tmJoinStatus = null;
+    [SerializeField]
+    [Tooltip("Host Room Dialog")]
+    private GameObject hostRoomDialog = null;
+    [SerializeField]
+    [Tooltip("Join Room Dialog")]
+    private GameObject joinRoomDialog = null;
 
     [Header("Inputs")]
     [SerializeField]
@@ -74,7 +80,12 @@ public class StateMainmenuPlay : State
             NetworkClient.instance.randomRoomJoinFailedCallback = onJoinRandomRoomFailed;
             NetworkClient.instance.roomJoinedCallback = onJoinRoomSuccess;
         }
+        
         isConnecting = false;
+        hostRoomDialog.SetActive(false);
+        joinRoomDialog.SetActive(false);
+        tmHostStatus.text = "";
+        tmJoinStatus.text = "";
         base.onShow();
         StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
     }

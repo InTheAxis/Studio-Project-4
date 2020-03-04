@@ -45,7 +45,6 @@ public class StateMatchLobbyMap : State
     {
         mapDisplayImage.sprite = mapImages[currentMapIndex];
         tmMapTitle.text = mapTitles[currentMapIndex];
-
         MapSelector.SelectMap((MapSelector.Maps)currentMapIndex);
     }
 
@@ -57,7 +56,7 @@ public class StateMatchLobbyMap : State
     public override void onShow()
     {
         currentMapIndex = 0;
-        selectMap();
+        selectPrevious();
         base.onShow();
         StartCoroutine(StateController.fadeCanvasGroup(GetComponent<CanvasGroup>(), true, 10.0f));
     }
