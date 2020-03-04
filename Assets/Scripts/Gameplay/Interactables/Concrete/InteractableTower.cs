@@ -103,8 +103,10 @@ public class InteractableTower : InteractableBase
             interactedOnce = true;
 
             if (GameManager.playerObj)
-            { 
-                GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(true);
+            {
+                CharTPController cc = GameManager.playerObj.GetComponent<CharTPController>();
+                cc.DisableKeyInput(true);
+                cc.DisableMouseInput(true);
             }
 
             if (humanAnim)
@@ -171,7 +173,9 @@ public class InteractableTower : InteractableBase
 
                 if (GameManager.playerObj)
                 {
-                    GameManager.playerObj.GetComponent<CharTPController>().DisableKeyInput(false);
+                    CharTPController cc = GameManager.playerObj.GetComponent<CharTPController>();
+                    cc.DisableKeyInput(false);
+                    cc.DisableMouseInput(false);
                 }
                 if (humanAnim)
                     humanAnim.SabotagingDone(false);
